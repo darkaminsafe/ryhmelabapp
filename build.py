@@ -110,6 +110,14 @@ def build_words():
         words = [w for w in words
                  if w["word"] not in has_stressed or any(s[-1] in "12" for s in w["raw"])]
 
+    # Main pronunciation only, except the real double words (see rules.py)
+    seen_spelling, main_only = set(), []
+    for w in words:
+        if w["word"] in rules.REAL_DOUBLE_WORDS or w["word"] not in seen_spelling:
+            main_only.append(w)
+        seen_spelling.add(w["word"])
+    words = main_only
+
     # Remove exact duplicate pronunciations of the same spelling
     seen, unique = set(), []
     for w in words:

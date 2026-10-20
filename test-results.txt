@@ -1,5 +1,5 @@
 RHYME LAB - TEST RESULTS
-Words checked: 3147 one-syllable words (top 3000). Most common first in every list.
+Words checked: 3013 one-syllable words (top 3000). Most common first in every list.
 Each rhyme shows: word, sounds, Mouth, Ends on, Soft/Sharp, and the reason.
 
 ======================================================================
@@ -14,116 +14,92 @@ GOD   sounds: G AA D   rhyme part: AA D
     nod                  N AA D         Open, ends on Consonant, Soft        same vowel AA, same ending D
     sod                  S AA D         Open, ends on Consonant, Sharp       same vowel AA, same ending D
 
-  NEAR: 87
+  NEAR: 62
     not                  N AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
     got                  G AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
     stop                 S T AA P       Open, ends on Consonant, Sharp       same vowel AA, ending D vs P, same family (stops)
-    lot (L AA T)         L AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
-    job (JH AA B)        JH AA B        Open, ends on Consonant, Sharp       same vowel AA, ending D vs B, same family (stops)
-    hard                 HH AA R D      Open, ends on Consonant, Soft        same vowel AA, ending D vs R D, one extra sound R
-    ah                   AA             Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
+    lot                  L AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
+    job                  JH AA B        Open, ends on Consonant, Sharp       same vowel AA, ending D vs B, same family (stops)
     shot                 SH AA T        Open, ends on Consonant, Sharp       same vowel AA, ending D vs T, voiced/unvoiced twins
-    walk (W AA K)        W AA K         Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
     hot                  HH AA T        Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
-    ma                   M AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
-    ha                   HH AA          Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
-    top (T AA P)         T AA P         Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
-    drop (D R AA P)      D R AA P       Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
-    law (L AA)           L AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
-    ya                   Y AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
-    caught (K AA T)      K AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
+    top                  T AA P         Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
+    drop                 D R AA P       Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
+    caught               K AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
     rock                 R AA K         Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
-    bought (B AA T)      B AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
-    card                 K AA R D       Open, ends on Consonant, Soft        same vowel AA, ending D vs R D, one extra sound R
-    la                   L AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
+    bought               B AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
     cop                  K AA P         Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
     shop                 SH AA P        Open, ends on Consonant, Sharp       same vowel AA, ending D vs P, same family (stops)
     knock                N AA K         Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
-    guard                G AA R D       Open, ends on Consonant, Soft        same vowel AA, ending D vs R D, one extra sound R
     spot                 S P AA T       Open, ends on Consonant, Sharp       same vowel AA, ending D vs T, voiced/unvoiced twins
     lock                 L AA K         Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
     pop                  P AA P         Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
     doc                  D AA K         Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
-    nah                  N AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
     block                B L AA K       Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
-    caused (K AA Z D)    K AA Z D       Open, ends on Consonant, Sharp       same vowel AA, ending D vs Z D, one extra sound Z
+    caused               K AA Z D       Open, ends on Consonant, Sharp       same vowel AA, ending D vs Z D, one extra sound Z
     clock                K L AA K       Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
     shock                SH AA K        Open, ends on Consonant, Sharp       same vowel AA, ending D vs K, same family (stops)
     gods                 G AA D Z       Open, ends on Consonant, Sharp       same vowel AA, ending D vs D Z, one extra sound Z
     rob                  R AA B         Open, ends on Consonant, Soft        same vowel AA, ending D vs B, same family (stops)
-    ahh                  AA             Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
     pot                  P AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
     stock                S T AA K       Open, ends on Consonant, Sharp       same vowel AA, ending D vs K, same family (stops)
-    yard                 Y AA R D       Open, ends on Consonant, Soft        same vowel AA, ending D vs R D, one extra sound R
-    pa                   P AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
     bond                 B AA N D       Open, ends on Consonant, Soft        same vowel AA, ending D vs N D, one extra sound N
     cock                 K AA K         Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
-    na                   N AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
     robbed               R AA B D       Open, ends on Consonant, Soft        same vowel AA, ending D vs B D, one extra sound B
     odds                 AA D Z         Open, ends on Consonant, Sharp       same vowel AA, ending D vs D Z, one extra sound Z
-    blah                 B L AA         Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
     chop                 CH AA P        Open, ends on Consonant, Sharp       same vowel AA, ending D vs P, same family (stops)
     hop                  HH AA P        Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
-    raw                  R AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
     blonde               B L AA N D     Open, ends on Consonant, Soft        same vowel AA, ending D vs N D, one extra sound N
     fond                 F AA N D       Open, ends on Consonant, Soft        same vowel AA, ending D vs N D, one extra sound N
     plot                 P L AA T       Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
     mob                  M AA B         Open, ends on Consonant, Soft        same vowel AA, ending D vs B, same family (stops)
     frog                 F R AA G       Open, ends on Consonant, Soft        same vowel AA, ending D vs G, same family (stops)
-    bra                  B R AA         Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
     rot                  R AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
     dock                 D AA K         Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
     pond                 P AA N D       Open, ends on Consonant, Soft        same vowel AA, ending D vs N D, one extra sound N
-    fog (F AA G)         F AA G         Open, ends on Consonant, Soft        same vowel AA, ending D vs G, same family (stops)
+    fog                  F AA G         Open, ends on Consonant, Soft        same vowel AA, ending D vs G, same family (stops)
     dot                  D AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
     blond                B L AA N D     Open, ends on Consonant, Soft        same vowel AA, ending D vs N D, one extra sound N
-    cha                  CH AA          Open, ends on Vowel, Sharp           same vowel AA, ending D vs (vowel), one extra sound D
     sock                 S AA K         Open, ends on Consonant, Sharp       same vowel AA, ending D vs K, same family (stops)
-    hah                  HH AA          Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
     yacht                Y AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
-    yah                  Y AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
-    spa                  S P AA         Open, ends on Vowel, Sharp           same vowel AA, ending D vs (vowel), one extra sound D
     mock                 M AA K         Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
     swap                 S W AA P       Open, ends on Consonant, Sharp       same vowel AA, ending D vs P, same family (stops)
     crop                 K R AA P       Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
     knot                 N AA T         Open, ends on Consonant, Soft        same vowel AA, ending D vs T, voiced/unvoiced twins
     jock                 JH AA K        Open, ends on Consonant, Sharp       same vowel AA, ending D vs K, same family (stops)
     flock                F L AA K       Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
-    wah                  W AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
     slot                 S L AA T       Open, ends on Consonant, Sharp       same vowel AA, ending D vs T, voiced/unvoiced twins
     hog                  HH AA G        Open, ends on Consonant, Soft        same vowel AA, ending D vs G, same family (stops)
-    op (AA P)            AA P           Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
+    op                   AA P           Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
     mop                  M AA P         Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
-    chalk (CH AA K)      CH AA K        Open, ends on Consonant, Sharp       same vowel AA, ending D vs K, same family (stops)
-    ca (K AA)            K AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
+    chalk                CH AA K        Open, ends on Consonant, Sharp       same vowel AA, ending D vs K, same family (stops)
     swat                 S W AA T       Open, ends on Consonant, Sharp       same vowel AA, ending D vs T, voiced/unvoiced twins
     prop                 P R AA P       Open, ends on Consonant, Soft        same vowel AA, ending D vs P, same family (stops)
     bombed               B AA M D       Open, ends on Consonant, Soft        same vowel AA, ending D vs M D, one extra sound M
     brock                B R AA K       Open, ends on Consonant, Soft        same vowel AA, ending D vs K, same family (stops)
     squat                S K W AA T     Open, ends on Consonant, Sharp       same vowel AA, ending D vs T, voiced/unvoiced twins
-    bah                  B AA           Open, ends on Vowel, Soft            same vowel AA, ending D vs (vowel), one extra sound D
 
-  BEND CANDIDATES (suggestions only): 170 - showing top 30
-    on (AA N)            AA N           Open, ends on Consonant, Soft        same vowel AA, different ending (D vs N)
+  BEND CANDIDATES (suggestions only): 183 - showing top 30
+    on                   AA N           Open, ends on Consonant, Soft        same vowel AA, different ending (D vs N)
     was                  W AA Z         Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs Z)
     are                  AA R           Open, ends on Consonant, Soft        same vowel AA, different ending (D vs R)
-    want (W AA N T)      W AA N T       Open, ends on Consonant, Soft        same vowel AA, different ending (D vs N T)
-    our (AA R)           AA R           Open, ends on Consonant, Soft        same vowel AA, different ending (D vs R)
-    won (W AA N)         W AA N         Open, ends on Consonant, Soft        same vowel AA, different ending (D vs N)
+    want                 W AA N T       Open, ends on Consonant, Soft        same vowel AA, different ending (D vs N T)
     car                  K AA R         Open, ends on Consonant, Soft        same vowel AA, different ending (D vs R)
     mom                  M AA M         Open, ends on Consonant, Soft        same vowel AA, different ending (D vs M)
     start                S T AA R T     Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs R T)
-    wants (W AA N T S)   W AA N T S     Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs N T S)
+    hard                 HH AA R D      Open, ends on Consonant, Soft        same vowel AA, different ending (D vs R D)
+    ah                   AA             Open, ends on Vowel, Soft            same vowel AA, different ending (D vs (vowel))
+    wants                W AA N T S     Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs N T S)
     heart                HH AA R T      Open, ends on Consonant, Soft        same vowel AA, different ending (D vs R T)
-    watch (W AA CH)      W AA CH        Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs CH)
+    watch                W AA CH        Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs CH)
     part                 P AA R T       Open, ends on Consonant, Soft        same vowel AA, different ending (D vs R T)
     far                  F AA R         Open, ends on Consonant, Soft        same vowel AA, different ending (D vs R)
     aren't               AA R N T       Open, ends on Consonant, Soft        same vowel AA, different ending (D vs R N T)
-    cause (K AA Z)       K AA Z         Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs Z)
-    boss (B AA S)        B AA S         Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs S)
-    fall (F AA L)        F AA L         Open, ends on Consonant, Soft        same vowel AA, different ending (D vs L)
-    calm (K AA L M)      K AA L M       Open, ends on Consonant, Soft        same vowel AA, different ending (D vs L M)
-    calm (K AA M)        K AA M         Open, ends on Consonant, Soft        same vowel AA, different ending (D vs M)
+    cause                K AA Z         Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs Z)
+    boss                 B AA S         Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs S)
+    ma                   M AA           Open, ends on Vowel, Soft            same vowel AA, different ending (D vs (vowel))
+    ha                   HH AA          Open, ends on Vowel, Soft            same vowel AA, different ending (D vs (vowel))
+    calm                 K AA M         Open, ends on Consonant, Soft        same vowel AA, different ending (D vs M)
+    ya                   Y AA           Open, ends on Vowel, Soft            same vowel AA, different ending (D vs (vowel))
     ya'll                Y AA L         Open, ends on Consonant, Soft        same vowel AA, different ending (D vs L)
     dark                 D AA R K       Open, ends on Consonant, Soft        same vowel AA, different ending (D vs R K)
     box                  B AA K S       Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs K S)
@@ -133,7 +109,6 @@ GOD   sounds: G AA D   rhyme part: AA D
     star                 S T AA R       Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs R)
     smart                S M AA R T     Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs R T)
     stopped              S T AA P T     Open, ends on Consonant, Sharp       same vowel AA, different ending (D vs P T)
-    park                 P AA R K       Open, ends on Consonant, Soft        same vowel AA, different ending (D vs R K)
 
   BEND: empty (only pairs you choose yourself, from Step 3)
 
@@ -146,95 +121,66 @@ LIFE   sounds: L AY F   rhyme part: AY F
     wife                 W AY F         Open, ends on Consonant, Soft        same vowel AY, same ending F
     knife                N AY F         Open, ends on Consonant, Soft        same vowel AY, same ending F
 
-  NEAR: 69
-    i                    AY             Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    my                   M AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
+  NEAR: 34
     i've                 AY V           Open, ends on Consonant, Soft        same vowel AY, ending F vs V, voiced/unvoiced twins
-    why (HH W AY)        HH W AY        Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    why (W AY)           W AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    by                   B AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
     guys                 G AY Z         Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
-    guy                  G AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    nice (N AY S)        N AY S         Open, ends on Consonant, Sharp       same vowel AY, ending F vs S, same family (fricatives)
-    try                  T R AY         Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    hi                   HH AY          Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
+    nice                 N AY S         Open, ends on Consonant, Sharp       same vowel AY, ending F vs S, same family (fricatives)
     live (L AY V)        L AY V         Open, ends on Consonant, Soft        same vowel AY, ending F vs V, voiced/unvoiced twins
-    die                  D AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
     five                 F AY V         Open, ends on Consonant, Soft        same vowel AY, ending F vs V, voiced/unvoiced twins
     eyes                 AY Z           Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
-    high                 HH AY          Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    bye                  B AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    buy                  B AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
     sighs                S AY Z         Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     drive                D R AY V       Open, ends on Consonant, Soft        same vowel AY, ending F vs V, voiced/unvoiced twins
-    lie                  L AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    eye                  AY             Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
     ice                  AY S           Open, ends on Consonant, Sharp       same vowel AY, ending F vs S, same family (fricatives)
-    fly                  F L AY         Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    cry                  K R AY         Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
     price                P R AY S       Open, ends on Consonant, Sharp       same vowel AY, ending F vs S, same family (fricatives)
     twice                T W AY S       Open, ends on Consonant, Sharp       same vowel AY, ending F vs S, same family (fricatives)
-    sky                  S K AY         Open, ends on Vowel, Sharp           same vowel AY, ending F vs (vowel), one extra sound F
     lies                 L AY Z         Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     size                 S AY Z         Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
-    dry                  D R AY         Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    aye                  AY             Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    tie                  T AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
     rise                 R AY Z         Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     dies                 D AY Z         Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     wise                 W AY Z         Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     rice                 R AY S         Open, ends on Consonant, Sharp       same vowel AY, ending F vs S, same family (fricatives)
-    thy                  DH AY          Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    pie                  P AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    spy                  S P AY         Open, ends on Vowel, Sharp           same vowel AY, ending F vs (vowel), one extra sound F
     prize                P R AY Z       Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
-    shy                  SH AY          Open, ends on Vowel, Sharp           same vowel AY, ending F vs (vowel), one extra sound F
     vice                 V AY S         Open, ends on Consonant, Sharp       same vowel AY, ending F vs S, same family (fricatives)
     tries                T R AY Z       Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     flies                F L AY Z       Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     cries                K R AY Z       Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     dive                 D AY V         Open, ends on Consonant, Soft        same vowel AY, ending F vs V, voiced/unvoiced twins
-    ay (AY)              AY             Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
     ties                 T AY Z         Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
-    fry                  F R AY         Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    chi                  K AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
     slice                S L AY S       Open, ends on Consonant, Sharp       same vowel AY, ending F vs S, same family (fricatives)
-    sigh                 S AY           Open, ends on Vowel, Sharp           same vowel AY, ending F vs (vowel), one extra sound F
     fries                F R AY Z       Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     skies                S K AY Z       Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     dice                 D AY S         Open, ends on Consonant, Sharp       same vowel AY, ending F vs S, same family (fricatives)
     buys                 B AY Z         Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     spies                S P AY Z       Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
     mice                 M AY S         Open, ends on Consonant, Sharp       same vowel AY, ending F vs S, same family (fricatives)
-    thai                 T AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
     spice                S P AY S       Open, ends on Consonant, Sharp       same vowel AY, ending F vs S, same family (fricatives)
-    ai                   AY             Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    sly                  S L AY         Open, ends on Vowel, Sharp           same vowel AY, ending F vs (vowel), one extra sound F
     pies                 P AY Z         Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
-    fi (F AY)            F AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
     thighs               TH AY Z        Open, ends on Consonant, Sharp       same vowel AY, ending F vs Z, same family (fricatives)
-    mai                  M AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    dye                  D AY           Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
-    thigh                TH AY          Open, ends on Vowel, Soft            same vowel AY, ending F vs (vowel), one extra sound F
 
-  BEND CANDIDATES (suggestions only): 162 - showing top 30
+  BEND CANDIDATES (suggestions only): 189 - showing top 30
+    i                    AY             Open, ends on Vowel, Soft            same vowel AY, different ending (F vs (vowel))
+    my                   M AY           Open, ends on Vowel, Soft            same vowel AY, different ending (F vs (vowel))
     i'm                  AY M           Open, ends on Consonant, Soft        same vowel AY, different ending (F vs M)
     like                 L AY K         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs K)
     i'll                 AY L           Open, ends on Consonant, Soft        same vowel AY, different ending (F vs L)
     right                R AY T         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs T)
+    why                  W AY           Open, ends on Vowel, Soft            same vowel AY, different ending (F vs (vowel))
     time                 T AY M         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs M)
     i'd                  AY D           Open, ends on Consonant, Soft        same vowel AY, different ending (F vs D)
-    why'd (HH W AY D)    HH W AY D      Open, ends on Consonant, Soft        same vowel AY, different ending (F vs D)
-    why'd (W AY D)       W AY D         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs D)
+    why'd                W AY D         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs D)
+    by                   B AY           Open, ends on Vowel, Soft            same vowel AY, different ending (F vs (vowel))
     find                 F AY N D       Open, ends on Consonant, Soft        same vowel AY, different ending (F vs N D)
     night                N AY T         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs T)
+    guy                  G AY           Open, ends on Vowel, Soft            same vowel AY, different ending (F vs (vowel))
     fine                 F AY N         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs N)
     kind                 K AY N D       Open, ends on Consonant, Soft        same vowel AY, different ending (F vs N D)
     might                M AY T         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs T)
+    try                  T R AY         Open, ends on Vowel, Soft            same vowel AY, different ending (F vs (vowel))
+    hi                   HH AY          Open, ends on Vowel, Soft            same vowel AY, different ending (F vs (vowel))
     mind                 M AY N D       Open, ends on Consonant, Soft        same vowel AY, different ending (F vs N D)
     trying               T R AY NG      Open, ends on Consonant, Soft        same vowel AY, different ending (F vs NG)
-    while (HH W AY L)    HH W AY L      Open, ends on Consonant, Soft        same vowel AY, different ending (F vs L)
-    while (W AY L)       W AY L         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs L)
+    while                W AY L         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs L)
+    die                  D AY           Open, ends on Vowel, Soft            same vowel AY, different ending (F vs (vowel))
     times                T AY M Z       Open, ends on Consonant, Sharp       same vowel AY, different ending (F vs M Z)
     mine                 M AY N         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs N)
     quite                K W AY T       Open, ends on Consonant, Soft        same vowel AY, different ending (F vs T)
@@ -242,12 +188,6 @@ LIFE   sounds: L AY F   rhyme part: AY F
     fire                 F AY R         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs R)
     side                 S AY D         Open, ends on Consonant, Sharp       same vowel AY, different ending (F vs D)
     child                CH AY L D      Open, ends on Consonant, Sharp       same vowel AY, different ending (F vs L D)
-    died                 D AY D         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs D)
-    tried                T R AY D       Open, ends on Consonant, Soft        same vowel AY, different ending (F vs D)
-    line                 L AY N         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs N)
-    light                L AY T         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs T)
-    white (HH W AY T)    HH W AY T      Open, ends on Consonant, Soft        same vowel AY, different ending (F vs T)
-    white (W AY T)       W AY T         Open, ends on Consonant, Soft        same vowel AY, different ending (F vs T)
 
   BEND: empty (only pairs you choose yourself, from Step 3)
 
@@ -256,7 +196,7 @@ NEED   sounds: N IY D   rhyme part: IY D
     Closed, ends on Consonant, Soft   (common rank 136)
 ======================================================================
 
-  TWIN: 18
+  TWIN: 17
     he'd                 HH IY D        Closed, ends on Consonant, Soft      same vowel IY, same ending D
     she'd                SH IY D        Closed, ends on Consonant, Sharp     same vowel IY, same ending D
     we'd                 W IY D         Closed, ends on Consonant, Soft      same vowel IY, same ending D
@@ -265,7 +205,6 @@ NEED   sounds: N IY D   rhyme part: IY D
     speed                S P IY D       Closed, ends on Consonant, Sharp     same vowel IY, same ending D
     feed                 F IY D         Closed, ends on Consonant, Soft      same vowel IY, same ending D
     weed                 W IY D         Closed, ends on Consonant, Soft      same vowel IY, same ending D
-    fried (F R IY D)     F R IY D       Closed, ends on Consonant, Soft      same vowel IY, same ending D
     bleed                B L IY D       Closed, ends on Consonant, Soft      same vowel IY, same ending D
     reed                 R IY D         Closed, ends on Consonant, Soft      same vowel IY, same ending D
     seed                 S IY D         Closed, ends on Consonant, Sharp     same vowel IY, same ending D
@@ -276,36 +215,23 @@ NEED   sounds: N IY D   rhyme part: IY D
     greed                G R IY D       Closed, ends on Consonant, Soft      same vowel IY, same ending D
     steed                S T IY D       Closed, ends on Consonant, Sharp     same vowel IY, same ending D
 
-  NEAR: 94
-    we                   W IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
-    me                   M IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
-    he                   HH IY          Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
-    be                   B IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
-    she                  SH IY          Closed, ends on Vowel, Sharp         same vowel IY, ending D vs (vowel), one extra sound D
-    see                  S IY           Closed, ends on Vowel, Sharp         same vowel IY, ending D vs (vowel), one extra sound D
+  NEAR: 64
     keep                 K IY P         Closed, ends on Consonant, Soft      same vowel IY, ending D vs P, same family (stops)
-    three                TH R IY        Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     meet                 M IY T         Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
     eat                  IY T           Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
     sleep                S L IY P       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs P, same family (stops)
     week                 W IY K         Closed, ends on Consonant, Soft      same vowel IY, ending D vs K, same family (stops)
     speak                S P IY K       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs K, same family (stops)
-    free                 F R IY         Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     needs                N IY D Z       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs D Z, one extra sound Z
     street               S T R IY T     Closed, ends on Consonant, Sharp     same vowel IY, ending D vs T, voiced/unvoiced twins
     sweet                S W IY T       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs T, voiced/unvoiced twins
     beat                 B IY T         Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
     feet                 F IY T         Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
-    key                  K IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     deep                 D IY P         Closed, ends on Consonant, Soft      same vowel IY, ending D vs P, same family (stops)
-    sea                  S IY           Closed, ends on Vowel, Sharp         same vowel IY, ending D vs (vowel), one extra sound D
-    tea                  T IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     seat                 S IY T         Closed, ends on Consonant, Sharp     same vowel IY, ending D vs T, voiced/unvoiced twins
     field                F IY L D       Closed, ends on Consonant, Soft      same vowel IY, ending D vs L D, one extra sound L
-    tree                 T R IY         Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     seemed               S IY M D       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs M D, one extra sound M
     treat                T R IY T       Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
-    lee                  L IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     meat                 M IY T         Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
     heat                 HH IY T        Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
     weak                 W IY K         Closed, ends on Consonant, Soft      same vowel IY, ending D vs K, same family (stops)
@@ -315,47 +241,34 @@ NEED   sounds: N IY D   rhyme part: IY D
     freak                F R IY K       Closed, ends on Consonant, Soft      same vowel IY, ending D vs K, same family (stops)
     leads                L IY D Z       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs D Z, one extra sound Z
     seek                 S IY K         Closed, ends on Consonant, Sharp     same vowel IY, ending D vs K, same family (stops)
-    thee                 DH IY          Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
-    gee                  JH IY          Closed, ends on Vowel, Sharp         same vowel IY, ending D vs (vowel), one extra sound D
     league               L IY G         Closed, ends on Consonant, Soft      same vowel IY, ending D vs G, same family (stops)
-    pee                  P IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     cheat                CH IY T        Closed, ends on Consonant, Sharp     same vowel IY, ending D vs T, voiced/unvoiced twins
     sheep                SH IY P        Closed, ends on Consonant, Sharp     same vowel IY, ending D vs P, same family (stops)
     cleaned              K L IY N D     Closed, ends on Consonant, Soft      same vowel IY, ending D vs N D, one extra sound N
     beep                 B IY P         Closed, ends on Consonant, Soft      same vowel IY, ending D vs P, same family (stops)
     greek                G R IY K       Closed, ends on Consonant, Soft      same vowel IY, ending D vs K, same family (stops)
     sneak                S N IY K       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs K, same family (stops)
-    ye (Y IY)            Y IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
-    knee                 N IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     dreamed              D R IY M D     Closed, ends on Consonant, Soft      same vowel IY, ending D vs M D, one extra sound M
-    bee                  B IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     leak                 L IY K         Closed, ends on Consonant, Soft      same vowel IY, ending D vs K, same family (stops)
     fleet                F L IY T       Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
     sealed               S IY L D       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs L D, one extra sound L
     sheet                SH IY T        Closed, ends on Consonant, Sharp     same vowel IY, ending D vs T, voiced/unvoiced twins
-    fee                  F IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     shield               SH IY L D      Closed, ends on Consonant, Sharp     same vowel IY, ending D vs L D, one extra sound L
     suite                S W IY T       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs T, voiced/unvoiced twins
-    wee                  W IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     neat                 N IY T         Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
     sweep                S W IY P       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs P, same family (stops)
     creep                K R IY P       Closed, ends on Consonant, Soft      same vowel IY, ending D vs P, same family (stops)
-    hee                  HH IY          Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     cheek                CH IY K        Closed, ends on Consonant, Sharp     same vowel IY, ending D vs K, same family (stops)
     greet                G R IY T       Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
     leap                 L IY P         Closed, ends on Consonant, Soft      same vowel IY, ending D vs P, same family (stops)
     creek                K R IY K       Closed, ends on Consonant, Soft      same vowel IY, ending D vs K, same family (stops)
     reads                R IY D Z       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs D Z, one extra sound Z
     seeds                S IY D Z       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs D Z, one extra sound Z
-    flee                 F L IY         Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     deeds                D IY D Z       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs D Z, one extra sound Z
-    plea                 P L IY         Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     jeep                 JH IY P        Closed, ends on Consonant, Sharp     same vowel IY, ending D vs P, same family (stops)
-    ski                  S K IY         Closed, ends on Vowel, Sharp         same vowel IY, ending D vs (vowel), one extra sound D
     peak                 P IY K         Closed, ends on Consonant, Soft      same vowel IY, ending D vs K, same family (stops)
     healed               HH IY L D      Closed, ends on Consonant, Soft      same vowel IY, ending D vs L D, one extra sound L
-    wheat (HH W IY T)    HH W IY T      Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
-    wheat (W IY T)       W IY T         Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
+    wheat                W IY T         Closed, ends on Consonant, Soft      same vowel IY, ending D vs T, voiced/unvoiced twins
     weep                 W IY P         Closed, ends on Consonant, Soft      same vowel IY, ending D vs P, same family (stops)
     seized               S IY Z D       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs Z D, one extra sound Z
     screamed             S K R IY M D   Closed, ends on Consonant, Sharp     same vowel IY, ending D vs M D, one extra sound M
@@ -364,29 +277,31 @@ NEED   sounds: N IY D   rhyme part: IY D
     yield                Y IY L D       Closed, ends on Consonant, Soft      same vowel IY, ending D vs L D, one extra sound L
     streak               S T R IY K     Closed, ends on Consonant, Sharp     same vowel IY, ending D vs K, same family (stops)
     geek                 G IY K         Closed, ends on Consonant, Soft      same vowel IY, ending D vs K, same family (stops)
-    fi (F IY)            F IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     heap                 HH IY P        Closed, ends on Consonant, Soft      same vowel IY, ending D vs P, same family (stops)
-    dea                  D IY           Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
     peep                 P IY P         Closed, ends on Consonant, Soft      same vowel IY, ending D vs P, same family (stops)
-    shi                  SH IY          Closed, ends on Vowel, Sharp         same vowel IY, ending D vs (vowel), one extra sound D
     steep                S T IY P       Closed, ends on Consonant, Sharp     same vowel IY, ending D vs P, same family (stops)
-    glee                 G L IY         Closed, ends on Vowel, Soft          same vowel IY, ending D vs (vowel), one extra sound D
 
-  BEND CANDIDATES (suggestions only): 153 - showing top 30
+  BEND CANDIDATES (suggestions only): 177 - showing top 30
+    we                   W IY           Closed, ends on Vowel, Soft          same vowel IY, different ending (D vs (vowel))
+    me                   M IY           Closed, ends on Vowel, Soft          same vowel IY, different ending (D vs (vowel))
+    he                   HH IY          Closed, ends on Vowel, Soft          same vowel IY, different ending (D vs (vowel))
     he's                 HH IY Z        Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs Z)
-    we're (W IY R)       W IY R         Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs R)
+    be                   B IY           Closed, ends on Vowel, Soft          same vowel IY, different ending (D vs (vowel))
+    we're                W IY R         Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs R)
     here                 HH IY R        Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs R)
     he'll                HH IY L        Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs L)
-    we'll (W IY L)       W IY L         Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs L)
+    we'll                W IY L         Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs L)
+    she                  SH IY          Closed, ends on Vowel, Sharp         same vowel IY, different ending (D vs (vowel))
     she'll               SH IY L        Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs L)
     she's                SH IY Z        Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs Z)
     we've                W IY V         Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs V)
+    see                  S IY           Closed, ends on Vowel, Sharp         same vowel IY, different ending (D vs (vowel))
     please               P L IY Z       Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs Z)
     mean                 M IY N         Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs N)
     these                DH IY Z        Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs Z)
     leave                L IY V         Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs V)
     feel                 F IY L         Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs L)
-    nice (N IY S)        N IY S         Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs S)
+    three                TH R IY        Closed, ends on Vowel, Soft          same vowel IY, different ending (D vs (vowel))
     hear                 HH IY R        Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs R)
     real                 R IY L         Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs L)
     seen                 S IY N         Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs N)
@@ -394,15 +309,9 @@ NEED   sounds: N IY D   rhyme part: IY D
     deal                 D IY L         Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs L)
     means                M IY N Z       Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs N Z)
     least                L IY S T       Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs S T)
+    free                 F R IY         Closed, ends on Vowel, Soft          same vowel IY, different ending (D vs (vowel))
     seems                S IY M Z       Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs M Z)
     team                 T IY M         Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs M)
-    seem                 S IY M         Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs M)
-    dream                D R IY M       Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs M)
-    weeks                W IY K S       Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs K S)
-    clean                K L IY N       Closed, ends on Consonant, Soft      same vowel IY, different ending (D vs N)
-    piece                P IY S         Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs S)
-    chief                CH IY F        Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs F)
-    peace                P IY S         Closed, ends on Consonant, Sharp     same vowel IY, different ending (D vs S)
 
   BEND: empty (only pairs you choose yourself, from Step 3)
 
@@ -420,95 +329,60 @@ HOPE   sounds: HH OW P   rhyme part: OW P
     cope                 K OW P         Middle, ends on Consonant, Soft      same vowel OW, same ending P
     scope                S K OW P       Middle, ends on Consonant, Sharp     same vowel OW, same ending P
 
-  NEAR: 76
-    no                   N OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    know                 N OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    so                   S OW           Middle, ends on Vowel, Sharp         same vowel OW, ending P vs (vowel), one extra sound P
-    go                   G OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    oh                   OW             Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    show                 SH OW          Middle, ends on Vowel, Sharp         same vowel OW, ending P vs (vowel), one extra sound P
-    job (JH OW B)        JH OW B        Middle, ends on Consonant, Sharp     same vowel OW, ending P vs B, voiced/unvoiced twins
-    though               DH OW          Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    whoa (HH OW)         HH OW          Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    whoa (HH W OW)       HH W OW        Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    whoa (W OW)          W OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
+  NEAR: 37
     road                 R OW D         Middle, ends on Consonant, Soft      same vowel OW, ending P vs D, same family (stops)
-    throw                TH R OW        Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     broke                B R OW K       Middle, ends on Consonant, Soft      same vowel OW, ending P vs K, same family (stops)
     boat                 B OW T         Middle, ends on Consonant, Soft      same vowel OW, ending P vs T, same family (stops)
-    blow                 B L OW         Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     joke                 JH OW K        Middle, ends on Consonant, Sharp     same vowel OW, ending P vs K, same family (stops)
     wrote                R OW T         Middle, ends on Consonant, Soft      same vowel OW, ending P vs T, same family (stops)
-    slow                 S L OW         Middle, ends on Vowel, Sharp         same vowel OW, ending P vs (vowel), one extra sound P
-    yo                   Y OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    owe                  OW             Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    grow                 G R OW         Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    ow (OW)              OW             Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     smoke                S M OW K       Middle, ends on Consonant, Sharp     same vowel OW, ending P vs K, same family (stops)
-    low                  L OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     throat               TH R OW T      Middle, ends on Consonant, Soft      same vowel OW, ending P vs T, same family (stops)
     showed               SH OW D        Middle, ends on Consonant, Sharp     same vowel OW, ending P vs D, same family (stops)
     code                 K OW D         Middle, ends on Consonant, Soft      same vowel OW, ending P vs D, same family (stops)
     note                 N OW T         Middle, ends on Consonant, Soft      same vowel OW, ending P vs T, same family (stops)
     spoke                S P OW K       Middle, ends on Consonant, Sharp     same vowel OW, ending P vs K, same family (stops)
     vote                 V OW T         Middle, ends on Consonant, Soft      same vowel OW, ending P vs T, same family (stops)
-    bro                  B R OW         Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    ho                   HH OW          Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    snow                 S N OW         Middle, ends on Vowel, Sharp         same vowel OW, ending P vs (vowel), one extra sound P
-    ohh                  OW             Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     coat                 K OW T         Middle, ends on Consonant, Soft      same vowel OW, ending P vs T, same family (stops)
     load                 L OW D         Middle, ends on Consonant, Soft      same vowel OW, ending P vs D, same family (stops)
     woke                 W OW K         Middle, ends on Consonant, Soft      same vowel OW, ending P vs K, same family (stops)
-    row                  R OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    bow (B OW)           B OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    jo                   JH OW          Middle, ends on Vowel, Sharp         same vowel OW, ending P vs (vowel), one extra sound P
-    flow                 F L OW         Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     hopes                HH OW P S      Middle, ends on Consonant, Sharp     same vowel OW, ending P vs P S, one extra sound S
     hoped                HH OW P T      Middle, ends on Consonant, Soft      same vowel OW, ending P vs P T, one extra sound T
     coke                 K OW K         Middle, ends on Consonant, Soft      same vowel OW, ending P vs K, same family (stops)
     goat                 G OW T         Middle, ends on Consonant, Soft      same vowel OW, ending P vs T, same family (stops)
-    pro                  P R OW         Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     stroke               S T R OW K     Middle, ends on Consonant, Sharp     same vowel OW, ending P vs K, same family (stops)
     bloke                B L OW K       Middle, ends on Consonant, Soft      same vowel OW, ending P vs K, same family (stops)
-    dough                D OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    lo                   L OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     quote                K W OW T       Middle, ends on Consonant, Soft      same vowel OW, ending P vs T, same family (stops)
     folk                 F OW K         Middle, ends on Consonant, Soft      same vowel OW, ending P vs K, same family (stops)
-    toe                  T OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     float                F L OW T       Middle, ends on Consonant, Soft      same vowel OW, ending P vs T, same family (stops)
     rode                 R OW D         Middle, ends on Consonant, Soft      same vowel OW, ending P vs D, same family (stops)
     mode                 M OW D         Middle, ends on Consonant, Soft      same vowel OW, ending P vs D, same family (stops)
     owed                 OW D           Middle, ends on Consonant, Soft      same vowel OW, ending P vs D, same family (stops)
     oak                  OW K           Middle, ends on Consonant, Soft      same vowel OW, ending P vs K, same family (stops)
-    crow                 K R OW         Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     rogue                R OW G         Middle, ends on Consonant, Soft      same vowel OW, ending P vs G, same family (stops)
     globe                G L OW B       Middle, ends on Consonant, Soft      same vowel OW, ending P vs B, voiced/unvoiced twins
     choke                CH OW K        Middle, ends on Consonant, Sharp     same vowel OW, ending P vs K, same family (stops)
     ropes                R OW P S       Middle, ends on Consonant, Sharp     same vowel OW, ending P vs P S, one extra sound S
-    doe                  D OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     robe                 R OW B         Middle, ends on Consonant, Soft      same vowel OW, ending P vs B, voiced/unvoiced twins
-    glow                 G L OW         Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     poke                 P OW K         Middle, ends on Consonant, Soft      same vowel OW, ending P vs K, same family (stops)
     probe                P R OW B       Middle, ends on Consonant, Soft      same vowel OW, ending P vs B, voiced/unvoiced twins
-    sew                  S OW           Middle, ends on Vowel, Sharp         same vowel OW, ending P vs (vowel), one extra sound P
-    tow                  T OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     toad                 T OW D         Middle, ends on Consonant, Soft      same vowel OW, ending P vs D, same family (stops)
-    beau                 B OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    ko                   K OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
-    woe                  W OW           Middle, ends on Vowel, Soft          same vowel OW, ending P vs (vowel), one extra sound P
     cloak                K L OW K       Middle, ends on Consonant, Soft      same vowel OW, ending P vs K, same family (stops)
 
-  BEND CANDIDATES (suggestions only): 134 - showing top 30
-    don't (D OW N)       D OW N         Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs N)
-    don't (D OW N T)     D OW N T       Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs N T)
+  BEND CANDIDATES (suggestions only): 166 - showing top 30
+    no                   N OW           Middle, ends on Vowel, Soft          same vowel OW, different ending (P vs (vowel))
+    don't                D OW N T       Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs N T)
+    know                 N OW           Middle, ends on Vowel, Soft          same vowel OW, different ending (P vs (vowel))
+    so                   S OW           Middle, ends on Vowel, Sharp         same vowel OW, different ending (P vs (vowel))
+    go                   G OW           Middle, ends on Vowel, Soft          same vowel OW, different ending (P vs (vowel))
+    oh                   OW             Middle, ends on Vowel, Soft          same vowel OW, different ending (P vs (vowel))
     won't                W OW N T       Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs N T)
     home                 HH OW M        Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs M)
     those                DH OW Z        Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs Z)
     told                 T OW L D       Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs L D)
     old                  OW L D         Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs L D)
     own                  OW N           Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs N)
-    most (M OW S)        M OW S         Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs S)
-    most (M OW S T)      M OW S T       Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs S T)
+    show                 SH OW          Middle, ends on Vowel, Sharp         same vowel OW, different ending (P vs (vowel))
+    most                 M OW S T       Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs S T)
     both                 B OW TH        Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs TH)
     hold                 HH OW L D      Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs L D)
     whole                HH OW L        Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs L)
@@ -516,19 +390,15 @@ HOPE   sounds: HH OW P   rhyme part: OW P
     knows                N OW Z         Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs Z)
     close (K L OW S)     K L OW S       Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs S)
     close (K L OW Z)     K L OW Z       Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs Z)
+    though               DH OW          Middle, ends on Vowel, Soft          same vowel OW, different ending (P vs (vowel))
     goes                 G OW Z         Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs Z)
+    whoa                 W OW           Middle, ends on Vowel, Soft          same vowel OW, different ending (P vs (vowel))
     cold                 K OW L D       Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs L D)
     known                N OW N         Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs N)
-    clothes (K L OW DH Z) K L OW DH Z    Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs DH Z)
-    clothes (K L OW Z)   K L OW Z       Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs Z)
+    throw                TH R OW        Middle, ends on Vowel, Soft          same vowel OW, different ending (P vs (vowel))
+    clothes              K L OW DH Z    Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs DH Z)
     gold                 G OW L D       Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs L D)
     soul                 S OW L         Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs L)
-    closed               K L OW Z D     Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs Z D)
-    sold                 S OW L D       Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs L D)
-    hole                 HH OW L        Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs L)
-    stole                S T OW L       Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs L)
-    roll                 R OW L         Middle, ends on Consonant, Soft      same vowel OW, different ending (P vs L)
-    nose                 N OW Z         Middle, ends on Consonant, Sharp     same vowel OW, different ending (P vs Z)
 
   BEND: empty (only pairs you choose yourself, from Step 3)
 
@@ -540,10 +410,10 @@ HOT   sounds: HH AA T   rhyme part: AA T
   TWIN: 16
     not                  N AA T         Open, ends on Consonant, Soft        same vowel AA, same ending T
     got                  G AA T         Open, ends on Consonant, Soft        same vowel AA, same ending T
-    lot (L AA T)         L AA T         Open, ends on Consonant, Soft        same vowel AA, same ending T
+    lot                  L AA T         Open, ends on Consonant, Soft        same vowel AA, same ending T
     shot                 SH AA T        Open, ends on Consonant, Sharp       same vowel AA, same ending T
-    caught (K AA T)      K AA T         Open, ends on Consonant, Soft        same vowel AA, same ending T
-    bought (B AA T)      B AA T         Open, ends on Consonant, Soft        same vowel AA, same ending T
+    caught               K AA T         Open, ends on Consonant, Soft        same vowel AA, same ending T
+    bought               B AA T         Open, ends on Consonant, Soft        same vowel AA, same ending T
     spot                 S P AA T       Open, ends on Consonant, Sharp       same vowel AA, same ending T
     pot                  P AA T         Open, ends on Consonant, Soft        same vowel AA, same ending T
     plot                 P L AA T       Open, ends on Consonant, Soft        same vowel AA, same ending T
@@ -555,77 +425,51 @@ HOT   sounds: HH AA T   rhyme part: AA T
     swat                 S W AA T       Open, ends on Consonant, Sharp       same vowel AA, same ending T
     squat                S K W AA T     Open, ends on Consonant, Sharp       same vowel AA, same ending T
 
-  NEAR: 91
-    want (W AA N T)      W AA N T       Open, ends on Consonant, Soft        same vowel AA, ending T vs N T, one extra sound N
+  NEAR: 61
+    want                 W AA N T       Open, ends on Consonant, Soft        same vowel AA, ending T vs N T, one extra sound N
     god                  G AA D         Open, ends on Consonant, Soft        same vowel AA, ending T vs D, voiced/unvoiced twins
     stop                 S T AA P       Open, ends on Consonant, Sharp       same vowel AA, ending T vs P, same family (stops)
-    job (JH AA B)        JH AA B        Open, ends on Consonant, Sharp       same vowel AA, ending T vs B, same family (stops)
-    start                S T AA R T     Open, ends on Consonant, Sharp       same vowel AA, ending T vs R T, one extra sound R
-    ah                   AA             Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
-    heart                HH AA R T      Open, ends on Consonant, Soft        same vowel AA, ending T vs R T, one extra sound R
-    part                 P AA R T       Open, ends on Consonant, Soft        same vowel AA, ending T vs R T, one extra sound R
-    walk (W AA K)        W AA K         Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
-    ma                   M AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
-    ha                   HH AA          Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
-    top (T AA P)         T AA P         Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
-    drop (D R AA P)      D R AA P       Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
-    law (L AA)           L AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
-    ya                   Y AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
+    job                  JH AA B        Open, ends on Consonant, Sharp       same vowel AA, ending T vs B, same family (stops)
+    top                  T AA P         Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
+    drop                 D R AA P       Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
     rock                 R AA K         Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
-    smart                S M AA R T     Open, ends on Consonant, Sharp       same vowel AA, ending T vs R T, one extra sound R
     stopped              S T AA P T     Open, ends on Consonant, Sharp       same vowel AA, ending T vs P T, one extra sound P
-    art                  AA R T         Open, ends on Consonant, Soft        same vowel AA, ending T vs R T, one extra sound R
-    la                   L AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
     cop                  K AA P         Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
     shop                 SH AA P        Open, ends on Consonant, Sharp       same vowel AA, ending T vs P, same family (stops)
     lots                 L AA T S       Open, ends on Consonant, Sharp       same vowel AA, ending T vs T S, one extra sound S
     knock                N AA K         Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
     locked               L AA K T       Open, ends on Consonant, Soft        same vowel AA, ending T vs K T, one extra sound K
     lock                 L AA K         Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
-    cost (K AA S T)      K AA S T       Open, ends on Consonant, Sharp       same vowel AA, ending T vs S T, one extra sound S
+    cost                 K AA S T       Open, ends on Consonant, Sharp       same vowel AA, ending T vs S T, one extra sound S
     pop                  P AA P         Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
     dropped              D R AA P T     Open, ends on Consonant, Soft        same vowel AA, ending T vs P T, one extra sound P
     doc                  D AA K         Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
-    soft (S AA F T)      S AA F T       Open, ends on Consonant, Sharp       same vowel AA, ending T vs F T, one extra sound F
-    nah                  N AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
+    soft                 S AA F T       Open, ends on Consonant, Sharp       same vowel AA, ending T vs F T, one extra sound F
     block                B L AA K       Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
     clock                K L AA K       Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
     odd                  AA D           Open, ends on Consonant, Soft        same vowel AA, ending T vs D, voiced/unvoiced twins
     shock                SH AA K        Open, ends on Consonant, Sharp       same vowel AA, ending T vs K, same family (stops)
-    watched (W AA CH T)  W AA CH T      Open, ends on Consonant, Sharp       same vowel AA, ending T vs CH T, one extra sound CH
+    watched              W AA CH T      Open, ends on Consonant, Sharp       same vowel AA, ending T vs CH T, one extra sound CH
     shots                SH AA T S      Open, ends on Consonant, Sharp       same vowel AA, ending T vs T S, one extra sound S
     rob                  R AA B         Open, ends on Consonant, Soft        same vowel AA, ending T vs B, same family (stops)
-    ahh                  AA             Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
     squad                S K W AA D     Open, ends on Consonant, Sharp       same vowel AA, ending T vs D, voiced/unvoiced twins
     stock                S T AA K       Open, ends on Consonant, Sharp       same vowel AA, ending T vs K, same family (stops)
     knocked              N AA K T       Open, ends on Consonant, Soft        same vowel AA, ending T vs K T, one extra sound K
-    pa                   P AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
     cock                 K AA K         Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
-    na                   N AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
-    blah                 B L AA         Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
     chop                 CH AA P        Open, ends on Consonant, Sharp       same vowel AA, ending T vs P, same family (stops)
     shocked              SH AA K T      Open, ends on Consonant, Sharp       same vowel AA, ending T vs K T, one extra sound K
     hop                  HH AA P        Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
     washed               W AA SH T      Open, ends on Consonant, Sharp       same vowel AA, ending T vs SH T, one extra sound SH
-    raw                  R AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
-    cart                 K AA R T       Open, ends on Consonant, Soft        same vowel AA, ending T vs R T, one extra sound R
     mob                  M AA B         Open, ends on Consonant, Soft        same vowel AA, ending T vs B, same family (stops)
     frog                 F R AA G       Open, ends on Consonant, Soft        same vowel AA, ending T vs G, same family (stops)
     spots                S P AA T S     Open, ends on Consonant, Sharp       same vowel AA, ending T vs T S, one extra sound S
     blocked              B L AA K T     Open, ends on Consonant, Soft        same vowel AA, ending T vs K T, one extra sound K
-    bra                  B R AA         Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
     dock                 D AA K         Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
-    fog (F AA G)         F AA G         Open, ends on Consonant, Soft        same vowel AA, ending T vs G, same family (stops)
+    fog                  F AA G         Open, ends on Consonant, Soft        same vowel AA, ending T vs G, same family (stops)
     font                 F AA N T       Open, ends on Consonant, Soft        same vowel AA, ending T vs N T, one extra sound N
-    fart                 F AA R T       Open, ends on Consonant, Soft        same vowel AA, ending T vs R T, one extra sound R
     popped               P AA P T       Open, ends on Consonant, Soft        same vowel AA, ending T vs P T, one extra sound P
-    chart                CH AA R T      Open, ends on Consonant, Sharp       same vowel AA, ending T vs R T, one extra sound R
-    cha                  CH AA          Open, ends on Vowel, Sharp           same vowel AA, ending T vs (vowel), one extra sound T
     sock                 S AA K         Open, ends on Consonant, Sharp       same vowel AA, ending T vs K, same family (stops)
-    hah                  HH AA          Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
     pod                  P AA D         Open, ends on Consonant, Soft        same vowel AA, ending T vs D, voiced/unvoiced twins
-    yah                  Y AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
-    spa                  S P AA         Open, ends on Vowel, Sharp           same vowel AA, ending T vs (vowel), one extra sound T
     mock                 M AA K         Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
     swap                 S W AA P       Open, ends on Consonant, Sharp       same vowel AA, ending T vs P, same family (stops)
     crop                 K R AA P       Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
@@ -633,39 +477,38 @@ HOT   sounds: HH AA T   rhyme part: AA T
     flock                F L AA K       Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
     chopped              CH AA P T      Open, ends on Consonant, Sharp       same vowel AA, ending T vs P T, one extra sound P
     knots                N AA T S       Open, ends on Consonant, Sharp       same vowel AA, ending T vs T S, one extra sound S
-    wah                  W AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
     hog                  HH AA G        Open, ends on Consonant, Soft        same vowel AA, ending T vs G, same family (stops)
-    op (AA P)            AA P           Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
+    op                   AA P           Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
     mop                  M AA P         Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
     pots                 P AA T S       Open, ends on Consonant, Sharp       same vowel AA, ending T vs T S, one extra sound S
     nod                  N AA D         Open, ends on Consonant, Soft        same vowel AA, ending T vs D, voiced/unvoiced twins
-    chalk (CH AA K)      CH AA K        Open, ends on Consonant, Sharp       same vowel AA, ending T vs K, same family (stops)
-    tart                 T AA R T       Open, ends on Consonant, Soft        same vowel AA, ending T vs R T, one extra sound R
+    chalk                CH AA K        Open, ends on Consonant, Sharp       same vowel AA, ending T vs K, same family (stops)
     dots                 D AA T S       Open, ends on Consonant, Sharp       same vowel AA, ending T vs T S, one extra sound S
-    ca (K AA)            K AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
     prop                 P R AA P       Open, ends on Consonant, Soft        same vowel AA, ending T vs P, same family (stops)
     sod                  S AA D         Open, ends on Consonant, Sharp       same vowel AA, ending T vs D, voiced/unvoiced twins
     brock                B R AA K       Open, ends on Consonant, Soft        same vowel AA, ending T vs K, same family (stops)
-    bah                  B AA           Open, ends on Vowel, Soft            same vowel AA, ending T vs (vowel), one extra sound T
 
-  BEND CANDIDATES (suggestions only): 155 - showing top 30
-    on (AA N)            AA N           Open, ends on Consonant, Soft        same vowel AA, different ending (T vs N)
+  BEND CANDIDATES (suggestions only): 173 - showing top 30
+    on                   AA N           Open, ends on Consonant, Soft        same vowel AA, different ending (T vs N)
     was                  W AA Z         Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs Z)
     are                  AA R           Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R)
-    our (AA R)           AA R           Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R)
-    won (W AA N)         W AA N         Open, ends on Consonant, Soft        same vowel AA, different ending (T vs N)
     car                  K AA R         Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R)
     mom                  M AA M         Open, ends on Consonant, Soft        same vowel AA, different ending (T vs M)
+    start                S T AA R T     Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs R T)
     hard                 HH AA R D      Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R D)
-    wants (W AA N T S)   W AA N T S     Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs N T S)
-    watch (W AA CH)      W AA CH        Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs CH)
+    ah                   AA             Open, ends on Vowel, Soft            same vowel AA, different ending (T vs (vowel))
+    wants                W AA N T S     Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs N T S)
+    heart                HH AA R T      Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R T)
+    watch                W AA CH        Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs CH)
+    part                 P AA R T       Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R T)
     far                  F AA R         Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R)
     aren't               AA R N T       Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R N T)
-    cause (K AA Z)       K AA Z         Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs Z)
-    boss (B AA S)        B AA S         Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs S)
-    fall (F AA L)        F AA L         Open, ends on Consonant, Soft        same vowel AA, different ending (T vs L)
-    calm (K AA L M)      K AA L M       Open, ends on Consonant, Soft        same vowel AA, different ending (T vs L M)
-    calm (K AA M)        K AA M         Open, ends on Consonant, Soft        same vowel AA, different ending (T vs M)
+    cause                K AA Z         Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs Z)
+    boss                 B AA S         Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs S)
+    ma                   M AA           Open, ends on Vowel, Soft            same vowel AA, different ending (T vs (vowel))
+    ha                   HH AA          Open, ends on Vowel, Soft            same vowel AA, different ending (T vs (vowel))
+    calm                 K AA M         Open, ends on Consonant, Soft        same vowel AA, different ending (T vs M)
+    ya                   Y AA           Open, ends on Vowel, Soft            same vowel AA, different ending (T vs (vowel))
     ya'll                Y AA L         Open, ends on Consonant, Soft        same vowel AA, different ending (T vs L)
     dark                 D AA R K       Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R K)
     box                  B AA K S       Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs K S)
@@ -673,12 +516,9 @@ HOT   sounds: HH AA T   rhyme part: AA T
     bar                  B AA R         Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R)
     mark                 M AA R K       Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R K)
     star                 S T AA R       Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs R)
+    smart                S M AA R T     Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs R T)
     park                 P AA R K       Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R K)
     card                 K AA R D       Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R D)
-    cops                 K AA P S       Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs P S)
-    arms                 AA R M Z       Open, ends on Consonant, Sharp       same vowel AA, different ending (T vs R M Z)
-    guard                G AA R D       Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R D)
-    arm                  AA R M         Open, ends on Consonant, Soft        same vowel AA, different ending (T vs R M)
 
   BEND: empty (only pairs you choose yourself, from Step 3)
 
@@ -699,7 +539,7 @@ HOLD   sounds: HH OW L D   rhyme part: OW L D
     mold                 M OW L D       Middle, ends on Consonant, Soft      same vowel OW, same ending L D
     scold                S K OW L D     Middle, ends on Consonant, Sharp     same vowel OW, same ending L D
 
-  NEAR: 29
+  NEAR: 28
     whole                HH OW L        Middle, ends on Consonant, Soft      same vowel OW, ending L D vs L, one extra sound D
     road                 R OW D         Middle, ends on Consonant, Soft      same vowel OW, ending L D vs D, one extra sound L
     soul                 S OW L         Middle, ends on Consonant, Sharp     same vowel OW, ending L D vs L, one extra sound D
@@ -726,14 +566,12 @@ HOLD   sounds: HH OW L D   rhyme part: OW L D
     stroll               S T R OW L     Middle, ends on Consonant, Sharp     same vowel OW, ending L D vs L, one extra sound D
     toad                 T OW D         Middle, ends on Consonant, Soft      same vowel OW, ending L D vs D, one extra sound L
     colt                 K OW L T       Middle, ends on Consonant, Soft      same vowel OW, ending D vs T, voiced/unvoiced twins
-    sol (S OW L)         S OW L         Middle, ends on Consonant, Sharp     same vowel OW, ending L D vs L, one extra sound D
     troll                T R OW L       Middle, ends on Consonant, Soft      same vowel OW, ending L D vs L, one extra sound D
     ole                  OW L           Middle, ends on Consonant, Soft      same vowel OW, ending L D vs L, one extra sound D
 
-  BEND CANDIDATES (suggestions only): 178 - showing top 30
+  BEND CANDIDATES (suggestions only): 172 - showing top 30
     no                   N OW           Middle, ends on Vowel, Soft          same vowel OW, different ending (L D vs (vowel))
-    don't (D OW N)       D OW N         Middle, ends on Consonant, Soft      same vowel OW, different ending (L D vs N)
-    don't (D OW N T)     D OW N T       Middle, ends on Consonant, Soft      same vowel OW, different ending (L D vs N T)
+    don't                D OW N T       Middle, ends on Consonant, Soft      same vowel OW, different ending (L D vs N T)
     know                 N OW           Middle, ends on Vowel, Soft          same vowel OW, different ending (L D vs (vowel))
     so                   S OW           Middle, ends on Vowel, Sharp         same vowel OW, different ending (L D vs (vowel))
     go                   G OW           Middle, ends on Vowel, Soft          same vowel OW, different ending (L D vs (vowel))
@@ -743,9 +581,7 @@ HOLD   sounds: HH OW L D   rhyme part: OW L D
     those                DH OW Z        Middle, ends on Consonant, Sharp     same vowel OW, different ending (L D vs Z)
     own                  OW N           Middle, ends on Consonant, Soft      same vowel OW, different ending (L D vs N)
     show                 SH OW          Middle, ends on Vowel, Sharp         same vowel OW, different ending (L D vs (vowel))
-    job (JH OW B)        JH OW B        Middle, ends on Consonant, Sharp     same vowel OW, different ending (L D vs B)
-    most (M OW S)        M OW S         Middle, ends on Consonant, Sharp     same vowel OW, different ending (L D vs S)
-    most (M OW S T)      M OW S T       Middle, ends on Consonant, Sharp     same vowel OW, different ending (L D vs S T)
+    most                 M OW S T       Middle, ends on Consonant, Sharp     same vowel OW, different ending (L D vs S T)
     both                 B OW TH        Middle, ends on Consonant, Soft      same vowel OW, different ending (L D vs TH)
     phone                F OW N         Middle, ends on Consonant, Soft      same vowel OW, different ending (L D vs N)
     hope                 HH OW P        Middle, ends on Consonant, Soft      same vowel OW, different ending (L D vs P)
@@ -754,13 +590,16 @@ HOLD   sounds: HH OW L D   rhyme part: OW L D
     close (K L OW Z)     K L OW Z       Middle, ends on Consonant, Sharp     same vowel OW, different ending (L D vs Z)
     though               DH OW          Middle, ends on Vowel, Soft          same vowel OW, different ending (L D vs (vowel))
     goes                 G OW Z         Middle, ends on Consonant, Sharp     same vowel OW, different ending (L D vs Z)
-    whoa (HH OW)         HH OW          Middle, ends on Vowel, Soft          same vowel OW, different ending (L D vs (vowel))
-    whoa (HH W OW)       HH W OW        Middle, ends on Vowel, Soft          same vowel OW, different ending (L D vs (vowel))
-    whoa (W OW)          W OW           Middle, ends on Vowel, Soft          same vowel OW, different ending (L D vs (vowel))
+    whoa                 W OW           Middle, ends on Vowel, Soft          same vowel OW, different ending (L D vs (vowel))
     known                N OW N         Middle, ends on Consonant, Soft      same vowel OW, different ending (L D vs N)
     throw                TH R OW        Middle, ends on Vowel, Soft          same vowel OW, different ending (L D vs (vowel))
-    clothes (K L OW DH Z) K L OW DH Z    Middle, ends on Consonant, Sharp     same vowel OW, different ending (L D vs DH Z)
-    clothes (K L OW Z)   K L OW Z       Middle, ends on Consonant, Sharp     same vowel OW, different ending (L D vs Z)
+    clothes              K L OW DH Z    Middle, ends on Consonant, Sharp     same vowel OW, different ending (L D vs DH Z)
+    broke                B R OW K       Middle, ends on Consonant, Soft      same vowel OW, different ending (L D vs K)
+    boat                 B OW T         Middle, ends on Consonant, Soft      same vowel OW, different ending (L D vs T)
+    blow                 B L OW         Middle, ends on Vowel, Soft          same vowel OW, different ending (L D vs (vowel))
+    joke                 JH OW K        Middle, ends on Consonant, Sharp     same vowel OW, different ending (L D vs K)
+    wrote                R OW T         Middle, ends on Consonant, Soft      same vowel OW, different ending (L D vs T)
+    slow                 S L OW         Middle, ends on Vowel, Sharp         same vowel OW, different ending (L D vs (vowel))
 
   BEND: empty (only pairs you choose yourself, from Step 3)
 
@@ -777,57 +616,46 @@ DOWN   sounds: D AW N   rhyme part: AW N
     drown                D R AW N       Open, ends on Consonant, Soft        same vowel AW, same ending N
     gown                 G AW N         Open, ends on Consonant, Soft        same vowel AW, same ending N
 
-  NEAR: 31
-    now                  N AW           Open, ends on Vowel, Soft            same vowel AW, ending N vs (vowel), one extra sound N
-    how                  HH AW          Open, ends on Vowel, Soft            same vowel AW, ending N vs (vowel), one extra sound N
+  NEAR: 16
     found                F AW N D       Open, ends on Consonant, Soft        same vowel AW, ending N vs N D, one extra sound D
-    wow                  W AW           Open, ends on Vowel, Soft            same vowel AW, ending N vs (vowel), one extra sound N
-    sounds (S AW N Z)    S AW N Z       Open, ends on Consonant, Sharp       same vowel AW, ending N vs N Z, one extra sound Z
     sound                S AW N D       Open, ends on Consonant, Sharp       same vowel AW, ending N vs N D, one extra sound D
     round                R AW N D       Open, ends on Consonant, Soft        same vowel AW, ending N vs N D, one extra sound D
     ground               G R AW N D     Open, ends on Consonant, Soft        same vowel AW, ending N vs N D, one extra sound D
     count                K AW N T       Open, ends on Consonant, Soft        same vowel AW, ending N vs N T, one extra sound T
-    ow (AW)              AW             Open, ends on Vowel, Soft            same vowel AW, ending N vs (vowel), one extra sound N
-    pounds (P AW N Z)    P AW N Z       Open, ends on Consonant, Sharp       same vowel AW, ending N vs N Z, one extra sound Z
     wound (W AW N D)     W AW N D       Open, ends on Consonant, Soft        same vowel AW, ending N vs N D, one extra sound D
-    thou                 DH AW          Open, ends on Vowel, Soft            same vowel AW, ending N vs (vowel), one extra sound N
-    cow                  K AW           Open, ends on Vowel, Soft            same vowel AW, ending N vs (vowel), one extra sound N
-    bow (B AW)           B AW           Open, ends on Vowel, Soft            same vowel AW, ending N vs (vowel), one extra sound N
     bound                B AW N D       Open, ends on Consonant, Soft        same vowel AW, ending N vs N D, one extra sound D
     mount                M AW N T       Open, ends on Consonant, Soft        same vowel AW, ending N vs N T, one extra sound T
     pound                P AW N D       Open, ends on Consonant, Soft        same vowel AW, ending N vs N D, one extra sound D
-    rounds (R AW N Z)    R AW N Z       Open, ends on Consonant, Sharp       same vowel AW, ending N vs N Z, one extra sound Z
-    grounds (G R AW N Z) G R AW N Z     Open, ends on Consonant, Sharp       same vowel AW, ending N vs N Z, one extra sound Z
     drowned              D R AW N D     Open, ends on Consonant, Soft        same vowel AW, ending N vs N D, one extra sound D
     bounce               B AW N S       Open, ends on Consonant, Sharp       same vowel AW, ending N vs N S, one extra sound S
-    ciao                 CH AW          Open, ends on Vowel, Sharp           same vowel AW, ending N vs (vowel), one extra sound N
     lounge               L AW N JH      Open, ends on Consonant, Sharp       same vowel AW, ending N vs N JH, one extra sound JH
-    vow                  V AW           Open, ends on Vowel, Soft            same vowel AW, ending N vs (vowel), one extra sound N
     towns                T AW N Z       Open, ends on Consonant, Sharp       same vowel AW, ending N vs N Z, one extra sound Z
-    chow                 CH AW          Open, ends on Vowel, Sharp           same vowel AW, ending N vs (vowel), one extra sound N
     clowns               K L AW N Z     Open, ends on Consonant, Sharp       same vowel AW, ending N vs N Z, one extra sound Z
-    pow                  P AW           Open, ends on Vowel, Soft            same vowel AW, ending N vs (vowel), one extra sound N
     ounce                AW N S         Open, ends on Consonant, Sharp       same vowel AW, ending N vs N S, one extra sound S
     hound                HH AW N D      Open, ends on Consonant, Soft        same vowel AW, ending N vs N D, one extra sound D
 
-  BEND CANDIDATES (suggestions only): 46 - showing top 30
+  BEND CANDIDATES (suggestions only): 53 - showing top 30
     out                  AW T           Open, ends on Consonant, Soft        same vowel AW, different ending (N vs T)
+    now                  N AW           Open, ends on Vowel, Soft            same vowel AW, different ending (N vs (vowel))
+    how                  HH AW          Open, ends on Vowel, Soft            same vowel AW, different ending (N vs (vowel))
     how's                HH AW Z        Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs Z)
-    our (AW R)           AW R           Open, ends on Consonant, Soft        same vowel AW, different ending (N vs R)
+    our                  AW R           Open, ends on Consonant, Soft        same vowel AW, different ending (N vs R)
     how'd                HH AW D        Open, ends on Consonant, Soft        same vowel AW, different ending (N vs D)
     house                HH AW S        Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs S)
     hours                AW R Z         Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs R Z)
+    wow                  W AW           Open, ends on Vowel, Soft            same vowel AW, different ending (N vs (vowel))
     hour                 AW R           Open, ends on Consonant, Soft        same vowel AW, different ending (N vs R)
-    sounds (S AW N D Z)  S AW N D Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs N D Z)
+    sounds               S AW N D Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs N D Z)
     mouth                M AW TH        Open, ends on Consonant, Soft        same vowel AW, different ending (N vs TH)
     proud                P R AW D       Open, ends on Consonant, Soft        same vowel AW, different ending (N vs D)
     doubt                D AW T         Open, ends on Consonant, Soft        same vowel AW, different ending (N vs T)
     south                S AW TH        Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs TH)
     crowd                K R AW D       Open, ends on Consonant, Soft        same vowel AW, different ending (N vs D)
     loud                 L AW D         Open, ends on Consonant, Soft        same vowel AW, different ending (N vs D)
-    ours (AW R Z)        AW R Z         Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs R Z)
-    pounds (P AW N D Z)  P AW N D Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs N D Z)
-    route (R AW T)       R AW T         Open, ends on Consonant, Soft        same vowel AW, different ending (N vs T)
+    pounds               P AW N D Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs N D Z)
+    thou                 DH AW          Open, ends on Vowel, Soft            same vowel AW, different ending (N vs (vowel))
+    cow                  K AW           Open, ends on Vowel, Soft            same vowel AW, different ending (N vs (vowel))
+    bow (B AW)           B AW           Open, ends on Vowel, Soft            same vowel AW, different ending (N vs (vowel))
     couch                K AW CH        Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs CH)
     shout                SH AW T        Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs T)
     ouch                 AW CH          Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs CH)
@@ -837,10 +665,6 @@ DOWN   sounds: D AW N   rhyme part: AW N
     counts               K AW N T S     Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs N T S)
     growls               G R AW L Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs L Z)
     bout                 B AW T         Open, ends on Consonant, Soft        same vowel AW, different ending (N vs T)
-    rounds (R AW N D Z)  R AW N D Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs N D Z)
-    towel                T AW L         Open, ends on Consonant, Soft        same vowel AW, different ending (N vs L)
-    grounds (G R AW N D Z) G R AW N D Z   Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs N D Z)
-    shouts               SH AW T S      Open, ends on Consonant, Sharp       same vowel AW, different ending (N vs T S)
 
   BEND: empty (only pairs you choose yourself, from Step 3)
 
@@ -855,22 +679,14 @@ PROUD   sounds: P R AW D   rhyme part: AW D
     loud                 L AW D         Open, ends on Consonant, Soft        same vowel AW, same ending D
     cloud                K L AW D       Open, ends on Consonant, Soft        same vowel AW, same ending D
 
-  NEAR: 29
+  NEAR: 17
     out                  AW T           Open, ends on Consonant, Soft        same vowel AW, ending D vs T, voiced/unvoiced twins
-    now                  N AW           Open, ends on Vowel, Soft            same vowel AW, ending D vs (vowel), one extra sound D
-    how                  HH AW          Open, ends on Vowel, Soft            same vowel AW, ending D vs (vowel), one extra sound D
     found                F AW N D       Open, ends on Consonant, Soft        same vowel AW, ending D vs N D, one extra sound N
-    wow                  W AW           Open, ends on Vowel, Soft            same vowel AW, ending D vs (vowel), one extra sound D
     sound                S AW N D       Open, ends on Consonant, Sharp       same vowel AW, ending D vs N D, one extra sound N
     round                R AW N D       Open, ends on Consonant, Soft        same vowel AW, ending D vs N D, one extra sound N
     ground               G R AW N D     Open, ends on Consonant, Soft        same vowel AW, ending D vs N D, one extra sound N
     doubt                D AW T         Open, ends on Consonant, Soft        same vowel AW, ending D vs T, voiced/unvoiced twins
-    ow (AW)              AW             Open, ends on Vowel, Soft            same vowel AW, ending D vs (vowel), one extra sound D
     wound (W AW N D)     W AW N D       Open, ends on Consonant, Soft        same vowel AW, ending D vs N D, one extra sound N
-    thou                 DH AW          Open, ends on Vowel, Soft            same vowel AW, ending D vs (vowel), one extra sound D
-    cow                  K AW           Open, ends on Vowel, Soft            same vowel AW, ending D vs (vowel), one extra sound D
-    route (R AW T)       R AW T         Open, ends on Consonant, Soft        same vowel AW, ending D vs T, voiced/unvoiced twins
-    bow (B AW)           B AW           Open, ends on Vowel, Soft            same vowel AW, ending D vs (vowel), one extra sound D
     bound                B AW N D       Open, ends on Consonant, Soft        same vowel AW, ending D vs N D, one extra sound N
     shout                SH AW T        Open, ends on Consonant, Sharp       same vowel AW, ending D vs T, voiced/unvoiced twins
     clouds               K L AW D Z     Open, ends on Consonant, Sharp       same vowel AW, ending D vs D Z, one extra sound Z
@@ -878,31 +694,30 @@ PROUD   sounds: P R AW D   rhyme part: AW D
     pound                P AW N D       Open, ends on Consonant, Soft        same vowel AW, ending D vs N D, one extra sound N
     scout                S K AW T       Open, ends on Consonant, Sharp       same vowel AW, ending D vs T, voiced/unvoiced twins
     drowned              D R AW N D     Open, ends on Consonant, Soft        same vowel AW, ending D vs N D, one extra sound N
-    ciao                 CH AW          Open, ends on Vowel, Sharp           same vowel AW, ending D vs (vowel), one extra sound D
-    vow                  V AW           Open, ends on Vowel, Soft            same vowel AW, ending D vs (vowel), one extra sound D
-    chow                 CH AW          Open, ends on Vowel, Sharp           same vowel AW, ending D vs (vowel), one extra sound D
     crowds               K R AW D Z     Open, ends on Consonant, Sharp       same vowel AW, ending D vs D Z, one extra sound Z
-    pow                  P AW           Open, ends on Vowel, Soft            same vowel AW, ending D vs (vowel), one extra sound D
     hound                HH AW N D      Open, ends on Consonant, Soft        same vowel AW, ending D vs N D, one extra sound N
     trout                T R AW T       Open, ends on Consonant, Soft        same vowel AW, ending D vs T, voiced/unvoiced twins
 
-  BEND CANDIDATES (suggestions only): 50 - showing top 30
+  BEND CANDIDATES (suggestions only): 54 - showing top 30
+    now                  N AW           Open, ends on Vowel, Soft            same vowel AW, different ending (D vs (vowel))
+    how                  HH AW          Open, ends on Vowel, Soft            same vowel AW, different ending (D vs (vowel))
     how's                HH AW Z        Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs Z)
-    our (AW R)           AW R           Open, ends on Consonant, Soft        same vowel AW, different ending (D vs R)
+    our                  AW R           Open, ends on Consonant, Soft        same vowel AW, different ending (D vs R)
     down                 D AW N         Open, ends on Consonant, Soft        same vowel AW, different ending (D vs N)
     house                HH AW S        Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs S)
     hours                AW R Z         Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs R Z)
     town                 T AW N         Open, ends on Consonant, Soft        same vowel AW, different ending (D vs N)
+    wow                  W AW           Open, ends on Vowel, Soft            same vowel AW, different ending (D vs (vowel))
     hour                 AW R           Open, ends on Consonant, Soft        same vowel AW, different ending (D vs R)
-    sounds (S AW N D Z)  S AW N D Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N D Z)
-    sounds (S AW N Z)    S AW N Z       Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N Z)
+    sounds               S AW N D Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N D Z)
     mouth                M AW TH        Open, ends on Consonant, Soft        same vowel AW, different ending (D vs TH)
     count                K AW N T       Open, ends on Consonant, Soft        same vowel AW, different ending (D vs N T)
     south                S AW TH        Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs TH)
     brown                B R AW N       Open, ends on Consonant, Soft        same vowel AW, different ending (D vs N)
-    ours (AW R Z)        AW R Z         Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs R Z)
-    pounds (P AW N D Z)  P AW N D Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N D Z)
-    pounds (P AW N Z)    P AW N Z       Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N Z)
+    pounds               P AW N D Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N D Z)
+    thou                 DH AW          Open, ends on Vowel, Soft            same vowel AW, different ending (D vs (vowel))
+    cow                  K AW           Open, ends on Vowel, Soft            same vowel AW, different ending (D vs (vowel))
+    bow (B AW)           B AW           Open, ends on Vowel, Soft            same vowel AW, different ending (D vs (vowel))
     crown                K R AW N       Open, ends on Consonant, Soft        same vowel AW, different ending (D vs N)
     couch                K AW CH        Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs CH)
     ouch                 AW CH          Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs CH)
@@ -911,12 +726,9 @@ PROUD   sounds: P R AW D   rhyme part: AW D
     counts               K AW N T S     Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N T S)
     growls               G R AW L Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs L Z)
     mount                M AW N T       Open, ends on Consonant, Soft        same vowel AW, different ending (D vs N T)
-    rounds (R AW N D Z)  R AW N D Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N D Z)
-    rounds (R AW N Z)    R AW N Z       Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N Z)
+    rounds               R AW N D Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N D Z)
     towel                T AW L         Open, ends on Consonant, Soft        same vowel AW, different ending (D vs L)
-    grounds (G R AW N D Z) G R AW N D Z   Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N D Z)
-    grounds (G R AW N Z) G R AW N Z     Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N Z)
-    shouts               SH AW T S      Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs T S)
+    grounds              G R AW N D Z   Open, ends on Consonant, Sharp       same vowel AW, different ending (D vs N D Z)
 
   BEND: empty (only pairs you choose yourself, from Step 3)
 
@@ -929,61 +741,50 @@ LONG   sounds: L AO NG   rhyme part: AO NG
     wrong                R AO NG        Middle, ends on Consonant, Soft      same vowel AO, same ending NG
     song                 S AO NG        Middle, ends on Consonant, Sharp     same vowel AO, same ending NG
     strong               S T R AO NG    Middle, ends on Consonant, Sharp     same vowel AO, same ending NG
-    dong (D AO NG)       D AO NG        Middle, ends on Consonant, Soft      same vowel AO, same ending NG
+    dong                 D AO NG        Middle, ends on Consonant, Soft      same vowel AO, same ending NG
     gong                 G AO NG        Middle, ends on Consonant, Soft      same vowel AO, same ending NG
     tong                 T AO NG        Middle, ends on Consonant, Soft      same vowel AO, same ending NG
 
-  NEAR: 18
-    on (AO N)            AO N           Middle, ends on Consonant, Soft      same vowel AO, ending NG vs N, same family (nasals)
-    saw                  S AO           Middle, ends on Vowel, Sharp         same vowel AO, ending NG vs (vowel), one extra sound NG
+  NEAR: 7
     gone                 G AO N         Middle, ends on Consonant, Soft      same vowel AO, ending NG vs N, same family (nasals)
-    law (L AO)           L AO           Middle, ends on Vowel, Soft          same vowel AO, ending NG vs (vowel), one extra sound NG
-    bomb (B AO M)        B AO M         Middle, ends on Consonant, Soft      same vowel AO, ending NG vs M, same family (nasals)
-    aw                   AO             Middle, ends on Vowel, Soft          same vowel AO, ending NG vs (vowel), one extra sound NG
-    draw                 D R AO         Middle, ends on Vowel, Soft          same vowel AO, ending NG vs (vowel), one extra sound NG
     dawn                 D AO N         Middle, ends on Consonant, Soft      same vowel AO, ending NG vs N, same family (nasals)
     songs                S AO NG Z      Middle, ends on Consonant, Sharp     same vowel AO, ending NG vs NG Z, one extra sound Z
     drawn                D R AO N       Middle, ends on Consonant, Soft      same vowel AO, ending NG vs N, same family (nasals)
-    dong (D AO NG G)     D AO NG G      Middle, ends on Consonant, Soft      same vowel AO, ending NG vs NG G, one extra sound G
     lawn                 L AO N         Middle, ends on Consonant, Soft      same vowel AO, ending NG vs N, same family (nasals)
-    straw                S T R AO       Middle, ends on Vowel, Sharp         same vowel AO, ending NG vs (vowel), one extra sound NG
-    jaw                  JH AO          Middle, ends on Vowel, Sharp         same vowel AO, ending NG vs (vowel), one extra sound NG
-    swan (S W AO N)      S W AO N       Middle, ends on Consonant, Sharp     same vowel AO, ending NG vs N, same family (nasals)
     pawn                 P AO N         Middle, ends on Consonant, Soft      same vowel AO, ending NG vs N, same family (nasals)
-    claw                 K L AO         Middle, ends on Vowel, Soft          same vowel AO, ending NG vs (vowel), one extra sound NG
     vaughn               V AO N         Middle, ends on Consonant, Soft      same vowel AO, ending NG vs N, same family (nasals)
 
-  BEND CANDIDATES (suggestions only): 196 - showing top 30
+  BEND CANDIDATES (suggestions only): 176 - showing top 30
     for                  F AO R         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R)
-    your (Y AO R)        Y AO R         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R)
+    your                 Y AO R         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R)
     all                  AO L           Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs L)
-    want (W AO N T)      W AO N T       Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs N T)
     or                   AO R           Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R)
     more                 M AO R         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R)
     off                  AO F           Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs F)
     call                 K AO L         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs L)
     talk                 T AO K         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs K)
     thought              TH AO T        Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs T)
-    lot (L AO T)         L AO T         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs T)
     course               K AO R S       Middle, ends on Consonant, Sharp     same vowel AO, different ending (NG vs R S)
+    saw                  S AO           Middle, ends on Vowel, Sharp         same vowel AO, different ending (NG vs (vowel))
     called               K AO L D       Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs L D)
     door                 D AO R         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R)
     lost                 L AO S T       Middle, ends on Consonant, Sharp     same vowel AO, different ending (NG vs S T)
-    wants (W AO N T S)   W AO N T S     Middle, ends on Consonant, Sharp     same vowel AO, different ending (NG vs N T S)
-    watch (W AO CH)      W AO CH        Middle, ends on Consonant, Sharp     same vowel AO, different ending (NG vs CH)
     four                 F AO R         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R)
     war                  W AO R         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R)
-    walk (W AO K)        W AO K         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs K)
+    walk                 W AO K         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs K)
     brought              B R AO T       Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs T)
-    yours (Y AO R Z)     Y AO R Z       Middle, ends on Consonant, Sharp     same vowel AO, different ending (NG vs R Z)
     dog                  D AO G         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs G)
     lord                 L AO R D       Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R D)
-    cause (K AO Z)       K AO Z         Middle, ends on Consonant, Sharp     same vowel AO, different ending (NG vs Z)
     sort                 S AO R T       Middle, ends on Consonant, Sharp     same vowel AO, different ending (NG vs R T)
-    boss (B AO S)        B AO S         Middle, ends on Consonant, Sharp     same vowel AO, different ending (NG vs S)
     small                S M AO L       Middle, ends on Consonant, Sharp     same vowel AO, different ending (NG vs L)
-    top (T AO P)         T AO P         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs P)
-    fall (F AO L)        F AO L         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs L)
+    fall                 F AO L         Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs L)
+    fault                F AO L T       Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs L T)
+    law                  L AO           Middle, ends on Vowel, Soft          same vowel AO, different ending (NG vs (vowel))
+    court                K AO R T       Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R T)
+    born                 B AO R N       Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R N)
+    talked               T AO K T       Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs K T)
+    floor                F L AO R       Middle, ends on Consonant, Soft      same vowel AO, different ending (NG vs R)
+    force                F AO R S       Middle, ends on Consonant, Sharp     same vowel AO, different ending (NG vs R S)
 
   BEND: empty (only pairs you choose yourself, from Step 3)
 
@@ -1010,12 +811,9 @@ DEAD   sounds: D EH D   rhyme part: EH D
     bled                 B L EH D       Middle, ends on Consonant, Soft      same vowel EH, same ending D
     tread                T R EH D       Middle, ends on Consonant, Soft      same vowel EH, same ending D
 
-  NEAR: 63
-    get (G EH T)         G EH T         Middle, ends on Consonant, Soft      same vowel EH, ending D vs T, voiced/unvoiced twins
+  NEAR: 52
+    get                  G EH T         Middle, ends on Consonant, Soft      same vowel EH, ending D vs T, voiced/unvoiced twins
     let                  L EH T         Middle, ends on Consonant, Soft      same vowel EH, ending D vs T, voiced/unvoiced twins
-    there'd              DH EH R D      Middle, ends on Consonant, Soft      same vowel EH, ending D vs R D, one extra sound R
-    where'd (HH W EH R D) HH W EH R D    Middle, ends on Consonant, Soft      same vowel EH, ending D vs R D, one extra sound R
-    where'd (W EH R D)   W EH R D       Middle, ends on Consonant, Soft      same vowel EH, ending D vs R D, one extra sound R
     friend               F R EH N D     Middle, ends on Consonant, Soft      same vowel EH, ending D vs N D, one extra sound N
     yet                  Y EH T         Middle, ends on Consonant, Soft      same vowel EH, ending D vs T, voiced/unvoiced twins
     end                  EH N D         Middle, ends on Consonant, Soft      same vowel EH, ending D vs N D, one extra sound N
@@ -1023,10 +821,8 @@ DEAD   sounds: D EH D   rhyme part: EH D
     set                  S EH T         Middle, ends on Consonant, Sharp     same vowel EH, ending D vs T, voiced/unvoiced twins
     met                  M EH T         Middle, ends on Consonant, Soft      same vowel EH, ending D vs T, voiced/unvoiced twins
     send                 S EH N D       Middle, ends on Consonant, Sharp     same vowel EH, ending D vs N D, one extra sound N
-    scared               S K EH R D     Middle, ends on Consonant, Sharp     same vowel EH, ending D vs R D, one extra sound R
     bet                  B EH T         Middle, ends on Consonant, Soft      same vowel EH, ending D vs T, voiced/unvoiced twins
     step                 S T EH P       Middle, ends on Consonant, Sharp     same vowel EH, ending D vs P, same family (stops)
-    eh                   EH             Middle, ends on Vowel, Soft          same vowel EH, ending D vs (vowel), one extra sound D
     spend                S P EH N D     Middle, ends on Consonant, Sharp     same vowel EH, ending D vs N D, one extra sound N
     yep                  Y EH P         Middle, ends on Consonant, Soft      same vowel EH, ending D vs P, same family (stops)
     leg                  L EH G         Middle, ends on Consonant, Soft      same vowel EH, ending D vs G, same family (stops)
@@ -1036,7 +832,6 @@ DEAD   sounds: D EH D   rhyme part: EH D
     heads                HH EH D Z      Middle, ends on Consonant, Sharp     same vowel EH, ending D vs D Z, one extra sound Z
     wet                  W EH T         Middle, ends on Consonant, Soft      same vowel EH, ending D vs T, voiced/unvoiced twins
     threat               TH R EH T      Middle, ends on Consonant, Soft      same vowel EH, ending D vs T, voiced/unvoiced twins
-    heh                  HH EH          Middle, ends on Vowel, Soft          same vowel EH, ending D vs (vowel), one extra sound D
     egg                  EH G           Middle, ends on Consonant, Soft      same vowel EH, ending D vs G, same family (stops)
     debt                 D EH T         Middle, ends on Consonant, Soft      same vowel EH, ending D vs T, voiced/unvoiced twins
     sec                  S EH K         Middle, ends on Consonant, Sharp     same vowel EH, ending D vs K, same family (stops)
@@ -1045,9 +840,6 @@ DEAD   sounds: D EH D   rhyme part: EH D
     heck                 HH EH K        Middle, ends on Consonant, Soft      same vowel EH, ending D vs K, same family (stops)
     pet                  P EH T         Middle, ends on Consonant, Soft      same vowel EH, ending D vs T, voiced/unvoiced twins
     lend                 L EH N D       Middle, ends on Consonant, Soft      same vowel EH, ending D vs N D, one extra sound N
-    cared                K EH R D       Middle, ends on Consonant, Soft      same vowel EH, ending D vs R D, one extra sound R
-    shared               SH EH R D      Middle, ends on Consonant, Sharp     same vowel EH, ending D vs R D, one extra sound R
-    ye (Y EH)            Y EH           Middle, ends on Vowel, Soft          same vowel EH, ending D vs (vowel), one extra sound D
     jet                  JH EH T        Middle, ends on Consonant, Sharp     same vowel EH, ending D vs T, voiced/unvoiced twins
     tend                 T EH N D       Middle, ends on Consonant, Soft      same vowel EH, ending D vs N D, one extra sound N
     bend                 B EH N D       Middle, ends on Consonant, Soft      same vowel EH, ending D vs N D, one extra sound N
@@ -1064,8 +856,6 @@ DEAD   sounds: D EH D   rhyme part: EH D
     smelled              S M EH L D     Middle, ends on Consonant, Sharp     same vowel EH, ending D vs L D, one extra sound L
     cheque               CH EH K        Middle, ends on Consonant, Sharp     same vowel EH, ending D vs K, same family (stops)
     yelled               Y EH L D       Middle, ends on Consonant, Soft      same vowel EH, ending D vs L D, one extra sound L
-    dared                D EH R D       Middle, ends on Consonant, Soft      same vowel EH, ending D vs R D, one extra sound R
-    spared               S P EH R D     Middle, ends on Consonant, Sharp     same vowel EH, ending D vs R D, one extra sound R
     beck                 B EH K         Middle, ends on Consonant, Soft      same vowel EH, ending D vs K, same family (stops)
     blend                B L EH N D     Middle, ends on Consonant, Soft      same vowel EH, ending D vs N D, one extra sound N
     chet                 CH EH T        Middle, ends on Consonant, Sharp     same vowel EH, ending D vs T, voiced/unvoiced twins
@@ -1075,37 +865,37 @@ DEAD   sounds: D EH D   rhyme part: EH D
     peck                 P EH K         Middle, ends on Consonant, Soft      same vowel EH, ending D vs K, same family (stops)
     trek                 T R EH K       Middle, ends on Consonant, Soft      same vowel EH, ending D vs K, same family (stops)
 
-  BEND CANDIDATES (suggestions only): 217 - showing top 30
+  BEND CANDIDATES (suggestions only): 216 - showing top 30
     there                DH EH R        Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs R)
     there's              DH EH R Z      Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs R Z)
     they're              DH EH R        Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs R)
     well                 W EH L         Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs L)
     there've             DH EH R V      Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs R V)
-    as (EH Z)            EH Z           Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs Z)
     let's                L EH T S       Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs T S)
     yes                  Y EH S         Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs S)
-    when (HH W EH N)     HH W EH N      Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs N)
-    when (W EH N)        W EH N         Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs N)
+    when                 W EH N         Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs N)
     them                 DH EH M        Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs M)
-    where (HH W EH R)    HH W EH R      Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs R)
-    where (W EH R)       W EH R         Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs R)
-    where's (HH W EH R Z) HH W EH R Z    Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs R Z)
-    where's (W EH R Z)   W EH R Z       Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs R Z)
+    where                W EH R         Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs R)
+    where's              W EH R Z       Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs R Z)
     then                 DH EH N        Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs N)
     tell                 T EH L         Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs L)
+    there'd              DH EH R D      Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs R D)
+    where'd              W EH R D       Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs R D)
     help                 HH EH L P      Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs L P)
     their                DH EH R        Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs R)
     left                 L EH F T       Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs F T)
     else                 EH L S         Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs L S)
-    next (N EH K S)      N EH K S       Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs K S)
-    next (N EH K S T)    N EH K S T     Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs K S T)
+    next                 N EH K S T     Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs K S T)
     care                 K EH R         Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs R)
     went                 W EH N T       Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs N T)
     best                 B EH S T       Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs S T)
     hell                 HH EH L        Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs L)
     men                  M EH N         Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs N)
     guess                G EH S         Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs S)
-    friends (F R EH N D Z) F R EH N D Z   Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs N D Z)
+    friends              F R EH N D Z   Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs N D Z)
+    says                 S EH Z         Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs Z)
+    death                D EH TH        Middle, ends on Consonant, Soft      same vowel EH, different ending (D vs TH)
+    rest                 R EH S T       Middle, ends on Consonant, Sharp     same vowel EH, different ending (D vs S T)
 
   BEND: empty (only pairs you choose yourself, from Step 3)
 

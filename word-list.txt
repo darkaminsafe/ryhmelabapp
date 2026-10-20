@@ -1,4 +1,4 @@
-RHYME LAB - ALL KEPT WORDS (3147 entries, top 3000 one-syllable words)
+RHYME LAB - ALL KEPT WORDS (3013 entries, top 3000 one-syllable words)
 Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
 
     1  you                    Y UW             Closed  Vowel      Soft
@@ -14,10 +14,8 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
    11  of                     AH V             Open    Consonant  Soft
    12  is                     IH Z             Closed  Consonant  Sharp
    13  in                     IH N             Closed  Consonant  Soft
-   14  what (HH W AH T)       HH W AH T        Open    Consonant  Soft
-   14  what (W AH T)          W AH T           Open    Consonant  Soft
-   15  what's (HH W AH T S)   HH W AH T S      Open    Consonant  Sharp
-   15  what's (W AH T S)      W AH T S         Open    Consonant  Sharp
+   14  what                   W AH T           Open    Consonant  Soft
+   15  what's                 W AH T S         Open    Consonant  Sharp
    16  we                     W IY             Closed  Vowel      Soft
    17  me                     M IY             Closed  Vowel      Soft
    18  this                   DH IH S          Closed  Consonant  Sharp
@@ -25,11 +23,9 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
    20  he's                   HH IY Z          Closed  Consonant  Sharp
    21  for                    F AO R           Middle  Consonant  Soft
    22  my                     M AY             Open    Vowel      Soft
-   23  on (AA N)              AA N             Open    Consonant  Soft
-   23  on (AO N)              AO N             Middle  Consonant  Soft
+   23  on                     AA N             Open    Consonant  Soft
    24  have                   HH AE V          Open    Consonant  Soft
-   25  your (Y AO R)          Y AO R           Middle  Consonant  Soft
-   25  your (Y UH R)          Y UH R           Closed  Consonant  Soft
+   25  your                   Y AO R           Middle  Consonant  Soft
    26  do                     D UW             Closed  Vowel      Soft
    27  was                    W AA Z           Open    Consonant  Sharp
    28  i'm                    AY M             Open    Consonant  Soft
@@ -37,18 +33,13 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
    30  not                    N AA T           Open    Consonant  Soft
    31  be                     B IY             Closed  Vowel      Soft
    32  are                    AA R             Open    Consonant  Soft
-   33  don't (D OW N)         D OW N           Middle  Consonant  Soft
-   33  don't (D OW N T)       D OW N T         Middle  Consonant  Soft
-   34  we're (W ER)           W ER             Middle  Vowel      Soft
-   34  we're (W IH R)         W IH R           Closed  Consonant  Soft
-   34  we're (W IY R)         W IY R           Closed  Consonant  Soft
-   35  you're (Y UH R)        Y UH R           Closed  Consonant  Soft
-   35  you're (Y UW R)        Y UW R           Closed  Consonant  Soft
+   33  don't                  D OW N T         Middle  Consonant  Soft
+   34  we're                  W IY R           Closed  Consonant  Soft
+   35  you're                 Y UH R           Closed  Consonant  Soft
    36  know                   N OW             Middle  Vowel      Soft
    37  can                    K AE N           Open    Consonant  Soft
    38  can't                  K AE N T         Open    Consonant  Soft
-   39  with (W IH DH)         W IH DH          Closed  Consonant  Soft
-   39  with (W IH TH)         W IH TH          Closed  Consonant  Soft
+   39  with                   W IH DH          Closed  Consonant  Soft
    40  but                    B AH T           Open    Consonant  Soft
    41  all                    AO L             Middle  Consonant  Soft
    42  so                     S OW             Middle  Vowel      Sharp
@@ -64,11 +55,9 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
    52  i'll                   AY L             Open    Consonant  Soft
    53  it'll                  IH T L           Closed  Consonant  Soft
    54  they'll                DH EY L          Middle  Consonant  Soft
-   55  we'll (W IH L)         W IH L           Closed  Consonant  Soft
-   55  we'll (W IY L)         W IY L           Closed  Consonant  Soft
+   55  we'll                  W IY L           Closed  Consonant  Soft
    56  you'll                 Y UW L           Closed  Consonant  Soft
-   57  get (G EH T)           G EH T           Middle  Consonant  Soft
-   57  get (G IH T)           G IH T           Closed  Consonant  Soft
+   57  get                    G EH T           Middle  Consonant  Soft
    58  she                    SH IY            Closed  Vowel      Sharp
    59  she'll                 SH IY L          Closed  Consonant  Sharp
    60  she's                  SH IY Z          Closed  Consonant  Sharp
@@ -95,11 +84,9 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
    81  you've                 Y UW V           Closed  Consonant  Soft
    82  will                   W IH L           Closed  Consonant  Soft
    83  got                    G AA T           Open    Consonant  Soft
-   84  want (W AA N T)        W AA N T         Open    Consonant  Soft
-   84  want (W AO N T)        W AO N T         Middle  Consonant  Soft
+   84  want                   W AA N T         Open    Consonant  Soft
    85  think                  TH IH NG K       Closed  Consonant  Soft
-   86  as (AE Z)              AE Z             Open    Consonant  Sharp
-   86  as (EH Z)              EH Z             Middle  Consonant  Sharp
+   86  as                     AE Z             Open    Consonant  Sharp
    87  see                    S IY             Closed  Vowel      Sharp
    88  did                    D IH D           Closed  Consonant  Soft
    89  good                   G UH D           Closed  Consonant  Soft
@@ -107,17 +94,13 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
    91  who'll                 HH UW L          Closed  Consonant  Soft
    92  who's                  HH UW Z          Closed  Consonant  Sharp
    93  who've                 HH UW V          Closed  Consonant  Soft
-   94  why (HH W AY)          HH W AY          Open    Vowel      Soft
-   94  why (W AY)             W AY             Open    Vowel      Soft
+   94  why                    W AY             Open    Vowel      Soft
    95  from                   F R AH M         Open    Consonant  Soft
    96  let                    L EH T           Middle  Consonant  Soft
    97  let's                  L EH T S         Middle  Consonant  Sharp
    98  his                    HH IH Z          Closed  Consonant  Sharp
    99  yes                    Y EH S           Middle  Consonant  Sharp
-  100  when (HH W EH N)       HH W EH N        Middle  Consonant  Soft
-  100  when (HH W IH N)       HH W IH N        Closed  Consonant  Soft
-  100  when (W EH N)          W EH N           Middle  Consonant  Soft
-  100  when (W IH N)          W IH N           Closed  Consonant  Soft
+  100  when                   W EH N           Middle  Consonant  Soft
   101  time                   T AY M           Open    Consonant  Soft
   102  an                     AE N             Open    Consonant  Soft
   103  back                   B AE K           Open    Consonant  Soft
@@ -125,18 +108,15 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   105  us                     AH S             Open    Consonant  Sharp
   106  would                  W UH D           Closed  Consonant  Soft
   107  them                   DH EH M          Middle  Consonant  Soft
-  108  where (HH W EH R)      HH W EH R        Middle  Consonant  Soft
-  108  where (W EH R)         W EH R           Middle  Consonant  Soft
-  109  where's (HH W EH R Z)  HH W EH R Z      Middle  Consonant  Sharp
-  109  where's (W EH R Z)     W EH R Z         Middle  Consonant  Sharp
+  108  where                  W EH R           Middle  Consonant  Soft
+  109  where's                W EH R Z         Middle  Consonant  Sharp
   110  were                   W ER             Middle  Vowel      Soft
   111  take                   T EY K           Middle  Consonant  Soft
   112  then                   DH EH N          Middle  Consonant  Soft
   113  had                    HH AE D          Open    Consonant  Soft
   114  or                     AO R             Middle  Consonant  Soft
   115  been                   B IH N           Closed  Consonant  Soft
-  116  our (AA R)             AA R             Open    Consonant  Soft
-  116  our (AW R)             AW R             Open    Consonant  Soft
+  116  our                    AW R             Open    Consonant  Soft
   117  tell                   T EH L           Middle  Consonant  Soft
   118  man                    M AE N           Open    Consonant  Soft
   119  some                   S AH M           Open    Consonant  Sharp
@@ -150,15 +130,11 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   127  there'd                DH EH R D        Middle  Consonant  Soft
   128  they'd                 DH EY D          Middle  Consonant  Soft
   129  we'd                   W IY D           Closed  Consonant  Soft
-  130  where'd (HH W EH R D)  HH W EH R D      Middle  Consonant  Soft
-  130  where'd (W EH R D)     W EH R D         Middle  Consonant  Soft
+  130  where'd                W EH R D         Middle  Consonant  Soft
   131  who'd                  HH UW D          Closed  Consonant  Soft
-  132  why'd (HH W AY D)      HH W AY D        Open    Consonant  Soft
-  132  why'd (W AY D)         W AY D           Open    Consonant  Soft
-  133  you'd (Y UH D)         Y UH D           Closed  Consonant  Soft
-  133  you'd (Y UW D)         Y UW D           Closed  Consonant  Soft
-  134  didn't (D IH D N T)    D IH D N T       Closed  Consonant  Soft
-  134  didn't (D IH N T)      D IH N T         Closed  Consonant  Soft
+  132  why'd                  W AY D           Open    Consonant  Soft
+  133  you'd                  Y UW D           Closed  Consonant  Soft
+  134  didn't                 D IH D N T       Closed  Consonant  Soft
   135  by                     B AY             Open    Vowel      Soft
   136  need                   N IY D           Closed  Consonant  Soft
   137  has                    HH AE Z          Open    Consonant  Sharp
@@ -195,8 +171,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   168  wait                   W EY T           Middle  Consonant  Soft
   169  stop                   S T AA P         Open    Consonant  Sharp
   170  call                   K AO L           Middle  Consonant  Soft
-  171  won (W AA N)           W AA N           Open    Consonant  Soft
-  171  won (W AH N)           W AH N           Open    Consonant  Soft
+  171  won                    W AH N           Open    Consonant  Soft
   172  won't                  W OW N T         Middle  Consonant  Soft
   173  talk                   T AO K           Middle  Consonant  Soft
   174  than                   DH AE N          Open    Consonant  Soft
@@ -206,11 +181,9 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   178  put                    P UH T           Closed  Consonant  Soft
   179  great                  G R EY T         Middle  Consonant  Soft
   180  those                  DH OW Z          Middle  Consonant  Sharp
-  181  last (L AE S)          L AE S           Open    Consonant  Sharp
-  181  last (L AE S T)        L AE S T         Open    Consonant  Sharp
+  181  last                   L AE S T         Open    Consonant  Sharp
   182  told                   T OW L D         Middle  Consonant  Soft
-  183  new (N UW)             N UW             Closed  Vowel      Soft
-  183  new (N Y UW)           N Y UW           Closed  Vowel      Soft
+  183  new                    N UW             Closed  Vowel      Soft
   184  things                 TH IH NG Z       Closed  Consonant  Sharp
   185  keep                   K IY P           Closed  Consonant  Soft
   186  long                   L AO NG          Middle  Consonant  Soft
@@ -224,14 +197,11 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   194  guy                    G AY             Open    Vowel      Soft
   195  made                   M EY D           Middle  Consonant  Soft
   196  old                    OW L D           Middle  Consonant  Soft
-  197  which (HH W IH CH)     HH W IH CH       Closed  Consonant  Sharp
-  197  which (W IH CH)        W IH CH          Closed  Consonant  Sharp
+  197  which                  W IH CH          Closed  Consonant  Sharp
   198  big                    B IH G           Closed  Consonant  Soft
-  199  lot (L AA T)           L AA T           Open    Consonant  Soft
-  199  lot (L AO T)           L AO T           Middle  Consonant  Soft
+  199  lot                    L AA T           Open    Consonant  Soft
   200  done                   D AH N           Open    Consonant  Soft
-  201  nice (N AY S)          N AY S           Open    Consonant  Sharp
-  201  nice (N IY S)          N IY S           Closed  Consonant  Sharp
+  201  nice                   N AY S           Open    Consonant  Sharp
   202  girl                   G ER L           Middle  Consonant  Soft
   203  fine                   F AY N           Open    Consonant  Soft
   204  thanks                 TH AE NG K S     Open    Consonant  Sharp
@@ -257,8 +227,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   224  else                   EH L S           Middle  Consonant  Sharp
   225  kill                   K IH L           Closed  Consonant  Soft
   226  found                  F AW N D         Open    Consonant  Soft
-  227  next (N EH K S)        N EH K S         Middle  Consonant  Sharp
-  227  next (N EH K S T)      N EH K S T       Middle  Consonant  Sharp
+  227  next                   N EH K S T       Middle  Consonant  Sharp
   228  care                   K EH R           Middle  Consonant  Soft
   229  car                    K AA R           Open    Consonant  Soft
   230  son                    S AH N           Open    Consonant  Sharp
@@ -273,14 +242,12 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   239  hell                   HH EH L          Middle  Consonant  Soft
   240  trying                 T R AY NG        Open    Consonant  Soft
   241  boy                    B OY             Middle  Vowel      Soft
-  242  job (JH AA B)          JH AA B          Open    Consonant  Sharp
-  242  job (JH OW B)          JH OW B          Middle  Consonant  Sharp
+  242  job                    JH AA B          Open    Consonant  Sharp
   243  saw                    S AO             Middle  Vowel      Sharp
   244  real                   R IY L           Closed  Consonant  Soft
   245  room                   R UW M           Closed  Consonant  Soft
   246  move                   M UW V           Closed  Consonant  Soft
-  247  most (M OW S)          M OW S           Middle  Consonant  Sharp
-  247  most (M OW S T)        M OW S T         Middle  Consonant  Sharp
+  247  most                   M OW S T         Middle  Consonant  Sharp
   248  seen                   S IY N           Closed  Consonant  Sharp
   249  live (L AY V)          L AY V           Open    Consonant  Soft
   249  live (L IH V)          L IH V           Closed  Consonant  Soft
@@ -293,8 +260,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   256  head                   HH EH D          Middle  Consonant  Soft
   257  called                 K AO L D         Middle  Consonant  Soft
   258  used                   Y UW Z D         Closed  Consonant  Sharp
-  259  knew (N UW)            N UW             Closed  Vowel      Soft
-  259  knew (N Y UW)          N Y UW           Closed  Vowel      Soft
+  259  knew                   N UW             Closed  Vowel      Soft
   260  hold                   HH OW L D        Middle  Consonant  Soft
   261  door                   D AO R           Middle  Consonant  Soft
   262  such                   S AH CH          Open    Consonant  Sharp
@@ -307,8 +273,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   269  start                  S T AA R T       Open    Consonant  Sharp
   270  use (Y UW S)           Y UW S           Closed  Consonant  Sharp
   270  use (Y UW Z)           Y UW Z           Closed  Consonant  Sharp
-  271  while (HH W AY L)      HH W AY L        Open    Consonant  Soft
-  271  while (W AY L)         W AY L           Open    Consonant  Soft
+  271  while                  W AY L           Open    Consonant  Soft
   272  since                  S IH N S         Closed  Consonant  Sharp
   273  wife                   W AY F           Open    Consonant  Soft
   274  days                   D EY Z           Middle  Consonant  Sharp
@@ -325,26 +290,22 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   285  play                   P L EY           Middle  Vowel      Soft
   286  looks                  L UH K S         Closed  Consonant  Sharp
   287  few                    F Y UW           Closed  Vowel      Soft
-  288  friends (F R EH N D Z) F R EH N D Z     Middle  Consonant  Sharp
-  288  friends (F R EH N Z)   F R EH N Z       Middle  Consonant  Sharp
+  288  friends                F R EH N D Z     Middle  Consonant  Sharp
   289  killed                 K IH L D         Closed  Consonant  Soft
   290  hope                   HH OW P          Middle  Consonant  Soft
   291  face                   F EY S           Middle  Consonant  Sharp
   292  lost                   L AO S T         Middle  Consonant  Sharp
   293  turn                   T ER N           Middle  Consonant  Soft
   294  case                   K EY S           Middle  Consonant  Sharp
-  295  wants (W AA N T S)     W AA N T S       Open    Consonant  Sharp
-  295  wants (W AO N T S)     W AO N T S       Middle  Consonant  Sharp
-  296  says (S EH Z)          S EH Z           Middle  Consonant  Sharp
-  296  says (S IH Z)          S IH Z           Closed  Consonant  Sharp
+  295  wants                  W AA N T S       Open    Consonant  Sharp
+  296  says                   S EH Z           Middle  Consonant  Sharp
   297  true                   T R UW           Closed  Vowel      Soft
   298  die                    D AY             Open    Vowel      Soft
   299  heart                  HH AA R T        Open    Consonant  Soft
   300  soon                   S UW N           Closed  Consonant  Sharp
   301  each                   IY CH            Closed  Consonant  Sharp
   302  year                   Y IH R           Closed  Consonant  Soft
-  303  watch (W AA CH)        W AA CH          Open    Consonant  Sharp
-  303  watch (W AO CH)        W AO CH          Middle  Consonant  Sharp
+  303  watch                  W AA CH          Open    Consonant  Sharp
   304  hand                   HH AE N D        Open    Consonant  Soft
   305  sit                    S IH T           Closed  Consonant  Sharp
   306  eat                    IY T             Closed  Consonant  Soft
@@ -370,14 +331,12 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   326  hit                    HH IH T          Closed  Consonant  Soft
   327  times                  T AY M Z         Open    Consonant  Sharp
   328  check                  CH EH K          Middle  Consonant  Sharp
-  329  hands (HH AE N D Z)    HH AE N D Z      Open    Consonant  Sharp
-  329  hands (HH AE N Z)      HH AE N Z        Open    Consonant  Sharp
+  329  hands                  HH AE N D Z      Open    Consonant  Sharp
   330  deal                   D IY L           Closed  Consonant  Soft
   331  means                  M IY N Z         Closed  Consonant  Sharp
   332  point                  P OY N T         Middle  Consonant  Soft
   333  makes                  M EY K S         Middle  Consonant  Sharp
-  334  asked (AE S K T)       AE S K T         Open    Consonant  Sharp
-  334  asked (AE S T)         AE S T           Open    Consonant  Sharp
+  334  asked                  AE S K T         Open    Consonant  Sharp
   335  mine                   M AY N           Open    Consonant  Soft
   336  sleep                  S L IY P         Closed  Consonant  Sharp
   337  chance                 CH AE N S        Open    Consonant  Sharp
@@ -413,19 +372,16 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   365  speak                  S P IY K         Closed  Consonant  Sharp
   366  truth                  T R UW TH        Closed  Consonant  Soft
   367  blood                  B L AH D         Open    Consonant  Soft
-  368  gets (G EH T S)        G EH T S         Middle  Consonant  Sharp
-  368  gets (G IH T S)        G IH T S         Closed  Consonant  Sharp
+  368  gets                   G EH T S         Middle  Consonant  Sharp
   369  shot                   SH AA T          Open    Consonant  Sharp
   370  break                  B R EY K         Middle  Consonant  Soft
   371  war                    W AO R           Middle  Consonant  Soft
-  372  walk (W AA K)          W AA K           Open    Consonant  Soft
-  372  walk (W AO K)          W AO K           Middle  Consonant  Soft
+  372  walk                   W AO K           Middle  Consonant  Soft
   373  town                   T AW N           Open    Consonant  Soft
   374  trust                  T R AH S T       Open    Consonant  Sharp
   375  met                    M EH T           Middle  Consonant  Soft
   376  brought                B R AO T         Middle  Consonant  Soft
-  377  yours (Y AO R Z)       Y AO R Z         Middle  Consonant  Sharp
-  377  yours (Y UH R Z)       Y UH R Z         Closed  Consonant  Sharp
+  377  yours                  Y UH R Z         Closed  Consonant  Sharp
   378  high                   HH AY            Open    Vowel      Soft
   379  wow                    W AW             Open    Vowel      Soft
   380  half                   HH AE F          Open    Consonant  Soft
@@ -433,9 +389,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   382  cool                   K UW L           Closed  Consonant  Soft
   383  free                   F R IY           Closed  Vowel      Soft
   384  seems                  S IY M Z         Closed  Consonant  Sharp
-  385  whoa (HH OW)           HH OW            Middle  Vowel      Soft
-  385  whoa (HH W OW)         HH W OW          Middle  Vowel      Soft
-  385  whoa (W OW)            W OW             Middle  Vowel      Soft
+  385  whoa                   W OW             Middle  Vowel      Soft
   386  bye                    B AY             Open    Vowel      Soft
   387  buy                    B AY             Open    Vowel      Soft
   388  tried                  T R AY D         Open    Consonant  Soft
@@ -445,8 +399,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   392  boys                   B OY Z           Middle  Consonant  Sharp
   393  line                   L AY N           Open    Consonant  Soft
   394  send                   S EH N D         Middle  Consonant  Sharp
-  395  news (N UW Z)          N UW Z           Closed  Consonant  Sharp
-  395  news (N Y UW Z)        N Y UW Z         Closed  Consonant  Sharp
+  395  news                   N UW Z           Closed  Consonant  Sharp
   396  bed                    B EH D           Middle  Consonant  Soft
   397  full                   F UH L           Closed  Consonant  Soft
   398  months                 M AH N TH S      Open    Consonant  Sharp
@@ -464,28 +417,24 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   410  hot                    HH AA T          Open    Consonant  Soft
   411  black                  B L AE K         Open    Consonant  Soft
   412  pick                   P IH K           Closed  Consonant  Soft
-  413  cause (K AA Z)         K AA Z           Open    Consonant  Sharp
-  413  cause (K AO Z)         K AO Z           Middle  Consonant  Sharp
+  413  cause                  K AA Z           Open    Consonant  Sharp
   414  lose                   L UW Z           Closed  Consonant  Sharp
   415  king                   K IH NG          Closed  Consonant  Soft
   416  plan                   P L AE N         Open    Consonant  Soft
   417  sighs                  S AY Z           Open    Consonant  Sharp
   418  sort                   S AO R T         Middle  Consonant  Sharp
-  419  boss (B AA S)          B AA S           Open    Consonant  Sharp
-  419  boss (B AO S)          B AO S           Middle  Consonant  Sharp
+  419  boss                   B AA S           Open    Consonant  Sharp
   420  safe                   S EY F           Middle  Consonant  Sharp
   421  ma                     M AA             Open    Vowel      Soft
   422  book                   B UH K           Closed  Consonant  Soft
   423  sent                   S EH N T         Middle  Consonant  Sharp
-  424  white (HH W AY T)      HH W AY T        Open    Consonant  Soft
-  424  white (W AY T)         W AY T           Open    Consonant  Soft
+  424  white                  W AY T           Open    Consonant  Soft
   425  hour                   AW R             Open    Consonant  Soft
   426  small                  S M AO L         Middle  Consonant  Sharp
   427  'cause                 K AH Z           Open    Consonant  Sharp
   428  lives (L AY V Z)       L AY V Z         Open    Consonant  Sharp
   428  lives (L IH V Z)       L IH V Z         Closed  Consonant  Sharp
-  429  sounds (S AW N D Z)    S AW N D Z       Open    Consonant  Sharp
-  429  sounds (S AW N Z)      S AW N Z         Open    Consonant  Sharp
+  429  sounds                 S AW N D Z       Open    Consonant  Sharp
   430  sick                   S IH K           Closed  Consonant  Sharp
   431  ha                     HH AA            Open    Vowel      Soft
   432  scared                 S K EH R D       Middle  Consonant  Sharp
@@ -496,8 +445,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   437  shoot                  SH UW T          Closed  Consonant  Sharp
   438  touch                  T AH CH          Open    Consonant  Sharp
   439  sound                  S AW N D         Open    Consonant  Sharp
-  440  top (T AA P)           T AA P           Open    Consonant  Soft
-  440  top (T AO P)           T AO P           Middle  Consonant  Soft
+  440  top                    T AA P           Open    Consonant  Soft
   441  ass                    AE S             Open    Consonant  Sharp
   442  laughs                 L AE F S         Open    Consonant  Sharp
   443  win                    W IH N           Closed  Consonant  Soft
@@ -537,8 +485,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   477  weeks                  W IY K S         Closed  Consonant  Sharp
   478  weren't                W ER N T         Middle  Consonant  Soft
   479  date                   D EY T           Middle  Consonant  Soft
-  480  fall (F AA L)          F AA L           Open    Consonant  Soft
-  480  fall (F AO L)          F AO L           Middle  Consonant  Soft
+  480  fall                   F AO L           Middle  Consonant  Soft
   481  ooh                    UW               Closed  Vowel      Soft
   482  fault                  F AO L T         Middle  Consonant  Soft
   483  straight               S T R EY T       Middle  Consonant  Sharp
@@ -547,12 +494,10 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   486  loved                  L AH V D         Open    Consonant  Soft
   487  changed                CH EY N JH D     Middle  Consonant  Sharp
   488  road                   R OW D           Middle  Consonant  Soft
-  489  calm (K AA L M)        K AA L M         Open    Consonant  Soft
-  489  calm (K AA M)          K AA M           Open    Consonant  Soft
+  489  calm                   K AA M           Open    Consonant  Soft
   490  mad                    M AE D           Open    Consonant  Soft
   491  turned                 T ER N D         Middle  Consonant  Soft
-  492  drop (D R AA P)        D R AA P         Open    Consonant  Soft
-  492  drop (D R AO P)        D R AO P         Middle  Consonant  Soft
+  492  drop                   D R AA P         Open    Consonant  Soft
   493  learn                  L ER N           Middle  Consonant  Soft
   494  step                   S T EH P         Middle  Consonant  Sharp
   495  clean                  K L IY N         Closed  Consonant  Soft
@@ -571,8 +516,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   508  works                  W ER K S         Middle  Consonant  Sharp
   509  act                    AE K T           Open    Consonant  Soft
   510  weird                  W IH R D         Closed  Consonant  Soft
-  511  law (L AA)             L AA             Open    Vowel      Soft
-  511  law (L AO)             L AO             Middle  Vowel      Soft
+  511  law                    L AO             Middle  Vowel      Soft
   512  choice                 CH OY S          Middle  Consonant  Sharp
   513  chief                  CH IY F          Closed  Consonant  Sharp
   514  strange                S T R EY N JH    Middle  Consonant  Sharp
@@ -581,8 +525,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   517  ya'll                  Y AA L           Open    Consonant  Soft
   518  pass                   P AE S           Open    Consonant  Sharp
   519  class                  K L AE S         Open    Consonant  Sharp
-  520  kept (K AE P T)        K AE P T         Open    Consonant  Soft
-  520  kept (K EH P T)        K EH P T         Middle  Consonant  Soft
+  520  kept                   K EH P T         Middle  Consonant  Soft
   521  wake                   W EY K           Middle  Consonant  Soft
   522  worse                  W ER S           Middle  Consonant  Sharp
   523  eh                     EH               Middle  Vowel      Soft
@@ -590,8 +533,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   525  court                  K AO R T         Middle  Consonant  Soft
   526  age                    EY JH            Middle  Consonant  Sharp
   527  ship                   SH IH P          Closed  Consonant  Sharp
-  528  caught (K AA T)        K AA T           Open    Consonant  Soft
-  528  caught (K AO T)        K AO T           Middle  Consonant  Soft
+  528  caught                 K AA T           Open    Consonant  Soft
   529  meant                  M EH N T         Middle  Consonant  Soft
   530  sell                   S EH L           Middle  Consonant  Sharp
   531  dark                   D AA R K         Open    Consonant  Soft
@@ -602,8 +544,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   536  month                  M AH N TH        Open    Consonant  Soft
   537  train                  T R EY N         Middle  Consonant  Soft
   538  wear                   W EH R           Middle  Consonant  Soft
-  539  clothes (K L OW DH Z)  K L OW DH Z      Middle  Consonant  Sharp
-  539  clothes (K L OW Z)     K L OW Z         Middle  Consonant  Sharp
+  539  clothes                K L OW DH Z      Middle  Consonant  Sharp
   540  round                  R AW N D         Open    Consonant  Soft
   541  sing                   S IH NG          Closed  Consonant  Sharp
   542  bag                    B AE G           Open    Consonant  Soft
@@ -623,8 +564,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   556  bill                   B IH L           Closed  Consonant  Soft
   557  lead (L EH D)          L EH D           Middle  Consonant  Soft
   557  lead (L IY D)          L IY D           Closed  Consonant  Soft
-  558  bought (B AA T)        B AA T           Open    Consonant  Soft
-  558  bought (B AO T)        B AO T           Middle  Consonant  Soft
+  558  bought                 B AA T           Open    Consonant  Soft
   559  fair                   F EH R           Middle  Consonant  Soft
   560  sun                    S AH N           Open    Consonant  Sharp
   561  fool                   F UW L           Closed  Consonant  Soft
@@ -702,8 +642,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   633  art                    AA R T           Open    Consonant  Soft
   634  french                 F R EH N CH      Middle  Consonant  Sharp
   635  cry                    K R AY           Open    Vowel      Soft
-  636  lived (L AY V D)       L AY V D         Open    Consonant  Soft
-  636  lived (L IH V D)       L IH V D         Closed  Consonant  Soft
+  636  lived                  L IH V D         Closed  Consonant  Soft
   637  queen                  K W IY N         Closed  Consonant  Soft
   638  cops                   K AA P S         Open    Consonant  Sharp
   639  sake                   S EY K           Middle  Consonant  Sharp
@@ -715,8 +654,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   645  cute                   K Y UW T         Closed  Consonant  Soft
   646  joke                   JH OW K          Middle  Consonant  Sharp
   647  cop                    K AA P           Open    Consonant  Soft
-  648  huge (HH Y UW JH)      HH Y UW JH       Closed  Consonant  Sharp
-  648  huge (Y UW JH)         Y UW JH          Closed  Consonant  Sharp
+  648  huge                   HH Y UW JH       Closed  Consonant  Sharp
   649  store                  S T AO R         Middle  Consonant  Sharp
   650  jail                   JH EY L          Middle  Consonant  Sharp
   651  likes                  L AY K S         Open    Consonant  Sharp
@@ -764,15 +702,13 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   692  owe                    OW               Middle  Vowel      Soft
   693  grow                   G R OW           Middle  Vowel      Soft
   694  worst                  W ER S T         Middle  Consonant  Sharp
-  695  aunt (AE N T)          AE N T           Open    Consonant  Soft
-  695  aunt (AO N T)          AO N T           Middle  Consonant  Soft
+  695  aunt                   AE N T           Open    Consonant  Soft
   696  fat                    F AE T           Open    Consonant  Soft
   697  passed                 P AE S T         Open    Consonant  Sharp
   698  moon                   M UW N           Closed  Consonant  Soft
   699  arms                   AA R M Z         Open    Consonant  Sharp
   700  turns                  T ER N Z         Middle  Consonant  Sharp
-  701  ow (AW)                AW               Open    Vowel      Soft
-  701  ow (OW)                OW               Middle  Vowel      Soft
+  701  ow                     OW               Middle  Vowel      Soft
   702  match                  M AE CH          Open    Consonant  Sharp
   703  gasps                  G AE S P S       Open    Consonant  Sharp
   704  grand                  G R AE N D       Open    Consonant  Soft
@@ -840,8 +776,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   766  crowd                  K R AW D         Open    Consonant  Soft
   767  treat                  T R IY T         Closed  Consonant  Soft
   768  roll                   R OW L           Middle  Consonant  Soft
-  769  cost (K AA S T)        K AA S T         Open    Consonant  Sharp
-  769  cost (K AO S T)        K AO S T         Middle  Consonant  Sharp
+  769  cost                   K AA S T         Open    Consonant  Sharp
   770  nose                   N OW Z           Middle  Consonant  Sharp
   771  plans                  P L AE N Z       Open    Consonant  Sharp
   772  built                  B IH L T         Closed  Consonant  Soft
@@ -851,13 +786,11 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   776  flight                 F L AY T         Open    Consonant  Soft
   777  raise                  R EY Z           Middle  Consonant  Sharp
   778  pop                    P AA P           Open    Consonant  Soft
-  779  bomb (B AA M)          B AA M           Open    Consonant  Soft
-  779  bomb (B AO M)          B AO M           Middle  Consonant  Soft
+  779  bomb                   B AA M           Open    Consonant  Soft
   780  neck                   N EH K           Middle  Consonant  Soft
   781  warm                   W AO R M         Middle  Consonant  Soft
   782  van                    V AE N           Open    Consonant  Soft
-  783  dogs (D AA G Z)        D AA G Z         Open    Consonant  Sharp
-  783  dogs (D AO G Z)        D AO G Z         Middle  Consonant  Sharp
+  783  dogs                   D AA G Z         Open    Consonant  Sharp
   784  wild                   W AY L D         Open    Consonant  Soft
   785  lee                    L IY             Closed  Vowel      Soft
   786  showed                 SH OW D          Middle  Consonant  Sharp
@@ -890,11 +823,9 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   813  hat                    HH AE T          Open    Consonant  Soft
   814  code                   K OW D           Middle  Consonant  Soft
   815  note                   N OW T           Middle  Consonant  Soft
-  816  due (D UW)             D UW             Closed  Vowel      Soft
-  816  due (D Y UW)           D Y UW           Closed  Vowel      Soft
+  816  due                    D UW             Closed  Vowel      Soft
   817  stars                  S T AA R Z       Open    Consonant  Sharp
-  818  cars (K AA R Z)        K AA R Z         Open    Consonant  Sharp
-  818  cars (K AA Z)          K AA Z           Open    Consonant  Sharp
+  818  cars                   K AA R Z         Open    Consonant  Sharp
   819  folks                  F OW K S         Middle  Consonant  Sharp
   820  shows                  SH OW Z          Middle  Consonant  Sharp
   821  leaves                 L IY V Z         Closed  Consonant  Sharp
@@ -929,8 +860,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   850  towards                T AO R D Z       Middle  Consonant  Sharp
   851  dropped                D R AA P T       Open    Consonant  Soft
   852  lied                   L AY D           Open    Consonant  Soft
-  853  strength (S T R EH NG K TH) S T R EH NG K TH Middle  Consonant  Sharp
-  853  strength (S T R EH NG TH) S T R EH NG TH   Middle  Consonant  Sharp
+  853  strength               S T R EH NG K TH Middle  Consonant  Sharp
   854  breathe                B R IY DH        Closed  Consonant  Soft
   855  size                   S AY Z           Open    Consonant  Sharp
   856  loud                   L AW D           Open    Consonant  Soft
@@ -984,8 +914,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   904  nuts                   N AH T S         Open    Consonant  Sharp
   905  birds                  B ER D Z         Middle  Consonant  Sharp
   906  tie                    T AY             Open    Vowel      Soft
-  907  ours (AA R Z)          AA R Z           Open    Consonant  Sharp
-  907  ours (AW R Z)          AW R Z           Open    Consonant  Sharp
+  907  ours                   AA R Z           Open    Consonant  Sharp
   908  bucks                  B AH K S         Open    Consonant  Sharp
   909  draw                   D R AO           Middle  Vowel      Soft
   910  stayed                 S T EY D         Middle  Consonant  Sharp
@@ -1018,8 +947,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   937  screw                  S K R UW         Closed  Vowel      Sharp
   938  cares                  K EH R Z         Middle  Consonant  Sharp
   939  path                   P AE TH          Open    Consonant  Soft
-  940  soft (S AA F T)        S AA F T         Open    Consonant  Sharp
-  940  soft (S AO F T)        S AO F T         Middle  Consonant  Sharp
+  940  soft                   S AA F T         Open    Consonant  Sharp
   941  harm                   HH AA R M        Open    Consonant  Soft
   942  style                  S T AY L         Open    Consonant  Sharp
   943  sees                   S IY Z           Closed  Consonant  Sharp
@@ -1031,8 +959,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   949  snow                   S N OW           Middle  Vowel      Sharp
   950  lake                   L EY K           Middle  Consonant  Soft
   951  bright                 B R AY T         Open    Consonant  Soft
-  952  roof (R UH F)          R UH F           Closed  Consonant  Soft
-  952  roof (R UW F)          R UW F           Closed  Consonant  Soft
+  952  roof                   R UW F           Closed  Consonant  Soft
   953  ohh                    OW               Middle  Vowel      Soft
   954  paint                  P EY N T         Middle  Consonant  Soft
   955  pal                    P AE L           Open    Consonant  Soft
@@ -1055,8 +982,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   972  cheese                 CH IY Z          Closed  Consonant  Sharp
   973  spring                 S P R IH NG      Closed  Consonant  Sharp
   974  page                   P EY JH          Middle  Consonant  Sharp
-  975  ears (IH R Z)          IH R Z           Closed  Consonant  Sharp
-  975  ears (IY R Z)          IY R Z           Closed  Consonant  Sharp
+  975  ears                   IH R Z           Closed  Consonant  Sharp
   976  storm                  S T AO R M       Middle  Consonant  Sharp
   977  cos                    K AO S           Middle  Consonant  Sharp
   978  hill                   HH IH L          Closed  Consonant  Soft
@@ -1065,8 +991,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
   981  bread                  B R EH D         Middle  Consonant  Soft
   982  ill                    IH L             Closed  Consonant  Soft
   983  mood                   M UW D           Closed  Consonant  Soft
-  984  caused (K AA Z D)      K AA Z D         Open    Consonant  Sharp
-  984  caused (K AO Z D)      K AO Z D         Middle  Consonant  Sharp
+  984  caused                 K AA Z D         Open    Consonant  Sharp
   985  points                 P OY N T S       Middle  Consonant  Sharp
   986  loss                   L AO S           Middle  Consonant  Sharp
   987  rent                   R EH N T         Middle  Consonant  Soft
@@ -1116,8 +1041,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1030  horn                   HH AO R N        Middle  Consonant  Soft
  1031  rise                   R AY Z           Open    Consonant  Sharp
  1032  fixed                  F IH K S T       Closed  Consonant  Sharp
- 1033  pounds (P AW N D Z)    P AW N D Z       Open    Consonant  Sharp
- 1033  pounds (P AW N Z)      P AW N Z         Open    Consonant  Sharp
+ 1033  pounds                 P AW N D Z       Open    Consonant  Sharp
  1034  per                    P ER             Middle  Vowel      Soft
  1035  walls                  W AO L Z         Middle  Consonant  Sharp
  1036  grant                  G R AE N T       Open    Consonant  Soft
@@ -1133,8 +1057,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1046  shock                  SH AA K          Open    Consonant  Sharp
  1047  raised                 R EY Z D         Middle  Consonant  Sharp
  1048  clears                 K L IH R Z       Closed  Consonant  Sharp
- 1049  watched (W AA CH T)    W AA CH T        Open    Consonant  Sharp
- 1049  watched (W AO CH T)    W AO CH T        Middle  Consonant  Sharp
+ 1049  watched                W AA CH T        Open    Consonant  Sharp
  1050  plate                  P L EY T         Middle  Consonant  Soft
  1051  shots                  SH AA T S        Open    Consonant  Sharp
  1052  trap                   T R AE P         Open    Consonant  Soft
@@ -1182,8 +1105,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1093  burned                 B ER N D         Middle  Consonant  Soft
  1094  smells                 S M EH L Z       Middle  Consonant  Sharp
  1095  hook                   HH UH K          Closed  Consonant  Soft
- 1096  ear (IH R)             IH R             Closed  Consonant  Soft
- 1096  ear (IY R)             IY R             Closed  Consonant  Soft
+ 1096  ear                    IY R             Closed  Consonant  Soft
  1097  laid                   L EY D           Middle  Consonant  Soft
  1098  guards                 G AA R D Z       Open    Consonant  Sharp
  1099  text                   T EH K S T       Middle  Consonant  Sharp
@@ -1252,8 +1174,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1161  grade                  G R EY D         Middle  Consonant  Soft
  1162  juice                  JH UW S          Closed  Consonant  Sharp
  1163  wide                   W AY D           Open    Consonant  Soft
- 1164  wheel (HH W IY L)      HH W IY L        Closed  Consonant  Soft
- 1164  wheel (W IY L)         W IY L           Closed  Consonant  Soft
+ 1164  wheel                  W IY L           Closed  Consonant  Soft
  1165  fruit                  F R UW T         Closed  Consonant  Soft
  1166  blew                   B L UW           Closed  Vowel      Soft
  1167  talks                  T AO K S         Middle  Consonant  Sharp
@@ -1267,8 +1188,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1175  mass                   M AE S           Open    Consonant  Sharp
  1176  trapped                T R AE P T       Open    Consonant  Soft
  1177  helps                  HH EH L P S      Middle  Consonant  Sharp
- 1178  route (R AW T)         R AW T           Open    Consonant  Soft
- 1178  route (R UW T)         R UW T           Closed  Consonant  Soft
+ 1178  route                  R UW T           Closed  Consonant  Soft
  1179  trace                  T R EY S         Middle  Consonant  Sharp
  1180  tests                  T EH S T S       Middle  Consonant  Sharp
  1181  rocks                  R AA K S         Open    Consonant  Sharp
@@ -1283,8 +1203,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1190  sharp                  SH AA R P        Open    Consonant  Sharp
  1191  squad                  S K W AA D       Open    Consonant  Sharp
  1192  wave                   W EY V           Middle  Consonant  Soft
- 1193  kinds (K AY N D Z)     K AY N D Z       Open    Consonant  Sharp
- 1193  kinds (K AY N Z)       K AY N Z         Open    Consonant  Sharp
+ 1193  kinds                  K AY N D Z       Open    Consonant  Sharp
  1194  sucks                  S AH K S         Open    Consonant  Sharp
  1195  screen                 S K R IY N       Closed  Consonant  Sharp
  1196  bored                  B AO R D         Middle  Consonant  Soft
@@ -1311,8 +1230,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1217  wire                   W AY R           Open    Consonant  Soft
  1218  thee                   DH IY            Closed  Vowel      Soft
  1219  stock                  S T AA K         Open    Consonant  Sharp
- 1220  facts (F AE K S)       F AE K S         Open    Consonant  Sharp
- 1220  facts (F AE K T S)     F AE K T S       Open    Consonant  Sharp
+ 1220  facts                  F AE K T S       Open    Consonant  Sharp
  1221  tail                   T EY L           Middle  Consonant  Soft
  1222  joined                 JH OY N D        Middle  Consonant  Sharp
  1223  rape                   R EY P           Middle  Consonant  Soft
@@ -1405,8 +1323,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1309  blast                  B L AE S T       Open    Consonant  Sharp
  1310  league                 L IY G           Closed  Consonant  Soft
  1311  bars                   B AA R Z         Open    Consonant  Sharp
- 1312  fifth (F IH F TH)      F IH F TH        Closed  Consonant  Soft
- 1312  fifth (F IH TH)        F IH TH          Closed  Consonant  Soft
+ 1312  fifth                  F IH F TH        Closed  Consonant  Soft
  1313  term                   T ER M           Middle  Consonant  Soft
  1314  self                   S EH L F         Middle  Consonant  Sharp
  1315  bud                    B AH D           Open    Consonant  Soft
@@ -1415,8 +1332,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1318  sweat                  S W EH T         Middle  Consonant  Sharp
  1319  ghosts                 G OW S T S       Middle  Consonant  Sharp
  1320  crimes                 K R AY M Z       Open    Consonant  Sharp
- 1321  costs (K AA S T S)     K AA S T S       Open    Consonant  Sharp
- 1321  costs (K AO S T S)     K AO S T S       Middle  Consonant  Sharp
+ 1321  costs                  K AA S T S       Open    Consonant  Sharp
  1322  bust                   B AH S T         Open    Consonant  Sharp
  1323  gym                    JH IH M          Closed  Consonant  Sharp
  1324  crush                  K R AH SH        Open    Consonant  Sharp
@@ -1429,8 +1345,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1331  tricks                 T R IH K S       Closed  Consonant  Sharp
  1332  launch                 L AO N CH        Middle  Consonant  Sharp
  1333  mix                    M IH K S         Closed  Consonant  Sharp
- 1334  golf (G AA L F)        G AA L F         Open    Consonant  Soft
- 1334  golf (G AO L F)        G AO L F         Middle  Consonant  Soft
+ 1334  golf                   G AA L F         Open    Consonant  Soft
  1335  fox                    F AA K S         Open    Consonant  Sharp
  1336  tax                    T AE K S         Open    Consonant  Sharp
  1337  gross                  G R OW S         Middle  Consonant  Sharp
@@ -1553,8 +1468,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1454  punk                   P AH NG K        Open    Consonant  Soft
  1455  sink                   S IH NG K        Closed  Consonant  Sharp
  1456  yay                    Y EY             Middle  Vowel      Soft
- 1457  gifts (G IH F S)       G IH F S         Closed  Consonant  Sharp
- 1457  gifts (G IH F T S)     G IH F T S       Closed  Consonant  Sharp
+ 1457  gifts                  G IH F T S       Closed  Consonant  Sharp
  1458  na                     N AA             Open    Vowel      Soft
  1459  greek                  G R IY K         Closed  Consonant  Soft
  1460  earned                 ER N D           Middle  Consonant  Soft
@@ -1617,14 +1531,12 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1517  grabbed                G R AE B D       Open    Consonant  Soft
  1518  pigs                   P IH G Z         Closed  Consonant  Sharp
  1519  chop                   CH AA P          Open    Consonant  Sharp
- 1520  wheels (HH W IY L Z)   HH W IY L Z      Closed  Consonant  Sharp
- 1520  wheels (W IY L Z)      W IY L Z         Closed  Consonant  Sharp
+ 1520  wheels                 W IY L Z         Closed  Consonant  Sharp
  1521  shocked                SH AA K T        Open    Consonant  Sharp
  1522  corpse                 K AO R P S       Middle  Consonant  Sharp
  1523  scale                  S K EY L         Middle  Consonant  Sharp
  1524  beats                  B IY T S         Closed  Consonant  Sharp
- 1525  acts (AE K S)          AE K S           Open    Consonant  Sharp
- 1525  acts (AE K T S)        AE K T S         Open    Consonant  Sharp
+ 1525  acts                   AE K T S         Open    Consonant  Sharp
  1526  hop                    HH AA P          Open    Consonant  Soft
  1527  shared                 SH EH R D        Middle  Consonant  Sharp
  1528  schools                S K UW L Z       Closed  Consonant  Sharp
@@ -1635,8 +1547,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1533  groups                 G R UW P S       Closed  Consonant  Sharp
  1534  pin                    P IH N           Closed  Consonant  Soft
  1535  drill                  D R IH L         Closed  Consonant  Soft
- 1536  ye (Y EH)              Y EH             Middle  Vowel      Soft
- 1536  ye (Y IY)              Y IY             Closed  Vowel      Soft
+ 1536  ye                     Y IY             Closed  Vowel      Soft
  1537  junk                   JH AH NG K       Open    Consonant  Sharp
  1538  cries                  K R AY Z         Open    Consonant  Sharp
  1539  blocks                 B L AA K S       Open    Consonant  Sharp
@@ -1714,8 +1625,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1611  stepped                S T EH P T       Middle  Consonant  Sharp
  1612  toys                   T OY Z           Middle  Consonant  Sharp
  1613  steak                  S T EY K         Middle  Consonant  Sharp
- 1614  tube (T UW B)          T UW B           Closed  Consonant  Soft
- 1614  tube (T Y UW B)        T Y UW B         Closed  Consonant  Soft
+ 1614  tube                   T UW B           Closed  Consonant  Soft
  1615  pan                    P AE N           Open    Consonant  Soft
  1616  throne                 TH R OW N        Middle  Consonant  Soft
  1617  bee                    B IY             Closed  Vowel      Soft
@@ -1761,8 +1671,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1657  twist                  T W IH S T       Closed  Consonant  Sharp
  1658  leak                   L IY K           Closed  Consonant  Soft
  1659  kings                  K IH NG Z        Closed  Consonant  Sharp
- 1660  cents (S EH N S)       S EH N S         Middle  Consonant  Sharp
- 1660  cents (S EH N T S)     S EH N T S       Middle  Consonant  Sharp
+ 1660  cents                  S EH N T S       Middle  Consonant  Sharp
  1661  patch                  P AE CH          Open    Consonant  Sharp
  1662  drops                  D R AA P S       Open    Consonant  Sharp
  1663  booked                 B UH K T         Closed  Consonant  Soft
@@ -1779,8 +1688,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1674  bid                    B IH D           Closed  Consonant  Soft
  1675  dope                   D OW P           Middle  Consonant  Soft
  1676  nest                   N EH S T         Middle  Consonant  Sharp
- 1677  palm (P AA L M)        P AA L M         Open    Consonant  Soft
- 1677  palm (P AA M)          P AA M           Open    Consonant  Soft
+ 1677  palm                   P AA M           Open    Consonant  Soft
  1678  boo                    B UW             Closed  Vowel      Soft
  1679  booze                  B UW Z           Closed  Consonant  Sharp
  1680  cuts                   K AH T S         Open    Consonant  Sharp
@@ -1795,12 +1703,10 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1689  prom                   P R AA M         Open    Consonant  Soft
  1690  fleet                  F L IY T         Closed  Consonant  Soft
  1691  lame                   L EY M           Middle  Consonant  Soft
- 1692  whip (HH W IH P)       HH W IH P        Closed  Consonant  Soft
- 1692  whip (W IH P)          W IH P           Closed  Consonant  Soft
+ 1692  whip                   W IH P           Closed  Consonant  Soft
  1693  smash                  S M AE SH        Open    Consonant  Sharp
  1694  wrapped                R AE P T         Open    Consonant  Soft
- 1695  rounds (R AW N D Z)    R AW N D Z       Open    Consonant  Sharp
- 1695  rounds (R AW N Z)      R AW N Z         Open    Consonant  Sharp
+ 1695  rounds                 R AW N D Z       Open    Consonant  Sharp
  1696  uhh                    AH               Open    Vowel      Soft
  1697  yells                  Y EH L Z         Middle  Consonant  Sharp
  1698  nut                    N AH T           Open    Consonant  Soft
@@ -1819,8 +1725,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1711  scenes                 S IY N Z         Closed  Consonant  Sharp
  1712  prayers                P R EH R Z       Middle  Consonant  Sharp
  1713  sheet                  SH IY T          Closed  Consonant  Sharp
- 1714  fried (F R AY D)       F R AY D         Open    Consonant  Soft
- 1714  fried (F R IY D)       F R IY D         Closed  Consonant  Soft
+ 1714  fried                  F R AY D         Open    Consonant  Soft
  1715  ford                   F AO R D         Middle  Consonant  Soft
  1716  grows                  G R OW Z         Middle  Consonant  Sharp
  1717  tag                    T AE G           Open    Consonant  Soft
@@ -1831,8 +1736,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1722  worn                   W AO R N         Middle  Consonant  Soft
  1723  lands                  L AE N D Z       Open    Consonant  Sharp
  1724  ash                    AE SH            Open    Consonant  Sharp
- 1725  grounds (G R AW N D Z) G R AW N D Z     Open    Consonant  Sharp
- 1725  grounds (G R AW N Z)   G R AW N Z       Open    Consonant  Sharp
+ 1725  grounds                G R AW N D Z     Open    Consonant  Sharp
  1726  nails                  N EY L Z         Middle  Consonant  Sharp
  1727  yen                    Y EH N           Middle  Consonant  Soft
  1728  boats                  B OW T S         Middle  Consonant  Sharp
@@ -1894,8 +1798,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1784  suite                  S W IY T         Closed  Consonant  Sharp
  1785  beam                   B IY M           Closed  Consonant  Soft
  1786  fooled                 F UW L D         Closed  Consonant  Soft
- 1787  ay (AY)                AY               Open    Vowel      Soft
- 1787  ay (EY)                EY               Middle  Vowel      Soft
+ 1787  ay                     EY               Middle  Vowel      Soft
  1788  shave                  SH EY V          Middle  Consonant  Sharp
  1789  toss                   T AO S           Middle  Consonant  Sharp
  1790  lip                    L IH P           Closed  Consonant  Soft
@@ -1927,8 +1830,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1816  crashed                K R AE SH T      Open    Consonant  Sharp
  1817  keen                   K IY N           Closed  Consonant  Soft
  1818  formed                 F AO R M D       Middle  Consonant  Soft
- 1819  hon (HH AA N)          HH AA N          Open    Consonant  Soft
- 1819  hon (HH AH N)          HH AH N          Open    Consonant  Soft
+ 1819  hon                    HH AA N          Open    Consonant  Soft
  1820  pale                   P EY L           Middle  Consonant  Soft
  1821  clubs                  K L AH B Z       Open    Consonant  Sharp
  1822  fame                   F EY M           Middle  Consonant  Soft
@@ -1975,8 +1877,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1863  wiped                  W AY P T         Open    Consonant  Soft
  1864  bold                   B OW L D         Middle  Consonant  Soft
  1865  threats                TH R EH T S      Middle  Consonant  Sharp
- 1866  whale (HH W EY L)      HH W EY L        Middle  Consonant  Soft
- 1866  whale (W EY L)         W EY L           Middle  Consonant  Soft
+ 1866  whale                  W EY L           Middle  Consonant  Soft
  1867  dial                   D AY L           Open    Consonant  Soft
  1868  lung                   L AH NG          Open    Consonant  Soft
  1869  coal                   K OW L           Middle  Consonant  Soft
@@ -2013,8 +1914,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1900  deer                   D IH R           Closed  Consonant  Soft
  1901  cunt                   K AH N T         Open    Consonant  Soft
  1902  thrilled               TH R IH L D      Closed  Consonant  Soft
- 1903  bass (B AE S)          B AE S           Open    Consonant  Sharp
- 1903  bass (B EY S)          B EY S           Middle  Consonant  Sharp
+ 1903  bass                   B AE S           Open    Consonant  Sharp
  1904  trucks                 T R AH K S       Open    Consonant  Sharp
  1905  rank                   R AE NG K        Open    Consonant  Soft
  1906  blocked                B L AA K T       Open    Consonant  Soft
@@ -2054,8 +1954,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1939  stores                 S T AO R Z       Middle  Consonant  Sharp
  1940  plague                 P L EY G         Middle  Consonant  Soft
  1941  breeze                 B R IY Z         Closed  Consonant  Sharp
- 1942  dong (D AO NG)         D AO NG          Middle  Consonant  Soft
- 1942  dong (D AO NG G)       D AO NG G        Middle  Consonant  Soft
+ 1942  dong                   D AO NG          Middle  Consonant  Soft
  1943  hush                   HH AH SH         Open    Consonant  Sharp
  1944  wrist                  R IH S T         Closed  Consonant  Sharp
  1945  coins                  K OY N Z         Middle  Consonant  Sharp
@@ -2086,8 +1985,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  1970  mole                   M OW L           Middle  Consonant  Soft
  1971  rang                   R AE NG          Open    Consonant  Soft
  1972  heir                   EH R             Middle  Consonant  Soft
- 1973  length (L EH NG K TH)  L EH NG K TH     Middle  Consonant  Soft
- 1973  length (L EH NG TH)    L EH NG TH       Middle  Consonant  Soft
+ 1973  length                 L EH NG K TH     Middle  Consonant  Soft
  1974  roast                  R OW S T         Middle  Consonant  Sharp
  1975  flood                  F L AH D         Open    Consonant  Soft
  1976  smashed                S M AE SH T      Open    Consonant  Sharp
@@ -2146,8 +2044,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2029  fries                  F R AY Z         Open    Consonant  Sharp
  2030  chains                 CH EY N Z        Middle  Consonant  Sharp
  2031  ruled                  R UW L D         Closed  Consonant  Soft
- 2032  cough (K AA F)         K AA F           Open    Consonant  Soft
- 2032  cough (K AO F)         K AO F           Middle  Consonant  Soft
+ 2032  cough                  K AA F           Open    Consonant  Soft
  2033  drums                  D R AH M Z       Open    Consonant  Sharp
  2034  mouths                 M AW DH Z        Open    Consonant  Sharp
  2035  bees                   B IY Z           Closed  Consonant  Sharp
@@ -2162,10 +2059,8 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2044  glove                  G L AH V         Open    Consonant  Soft
  2045  begged                 B EH G D         Middle  Consonant  Soft
  2046  guessed                G EH S T         Middle  Consonant  Sharp
- 2047  corps (K AO R)         K AO R           Middle  Consonant  Soft
- 2047  corps (K AO R Z)       K AO R Z         Middle  Consonant  Sharp
- 2048  fog (F AA G)           F AA G           Open    Consonant  Soft
- 2048  fog (F AO G)           F AO G           Middle  Consonant  Soft
+ 2047  corps                  K AO R           Middle  Consonant  Soft
+ 2048  fog                    F AA G           Open    Consonant  Soft
  2049  flu                    F L UW           Closed  Vowel      Soft
  2050  hint                   HH IH N T        Closed  Consonant  Soft
  2051  stark                  S T AA R K       Open    Consonant  Sharp
@@ -2192,9 +2087,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2072  bam                    B AE M           Open    Consonant  Soft
  2073  gasp                   G AE S P         Open    Consonant  Sharp
  2074  draft                  D R AE F T       Open    Consonant  Soft
- 2075  whew (HH W UW)         HH W UW          Closed  Vowel      Soft
- 2075  whew (HH Y UW)         HH Y UW          Closed  Vowel      Soft
- 2075  whew (W UW)            W UW             Closed  Vowel      Soft
+ 2075  whew                   W UW             Closed  Vowel      Soft
  2076  font                   F AA N T         Open    Consonant  Soft
  2077  learnt                 L ER N T         Middle  Consonant  Soft
  2078  shirts                 SH ER T S        Middle  Consonant  Sharp
@@ -2203,8 +2096,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2081  stressed               S T R EH S T     Middle  Consonant  Sharp
  2082  spoon                  S P UW N         Closed  Consonant  Sharp
  2083  breach                 B R IY CH        Closed  Consonant  Sharp
- 2084  swamp (S W AA M P)     S W AA M P       Open    Consonant  Sharp
- 2084  swamp (S W AO M P)     S W AO M P       Middle  Consonant  Sharp
+ 2084  swamp                  S W AA M P       Open    Consonant  Sharp
  2085  scares                 S K EH R Z       Middle  Consonant  Sharp
  2086  serves                 S ER V Z         Middle  Consonant  Sharp
  2087  dreamt                 D R EH M T       Middle  Consonant  Soft
@@ -2412,8 +2304,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2289  gown                   G AW N           Open    Consonant  Soft
  2290  smelled                S M EH L D       Middle  Consonant  Sharp
  2291  ducks                  D AH K S         Open    Consonant  Sharp
- 2292  swan (S W AA N)        S W AA N         Open    Consonant  Sharp
- 2292  swan (S W AO N)        S W AO N         Middle  Consonant  Sharp
+ 2292  swan                   S W AA N         Open    Consonant  Sharp
  2293  ropes                  R OW P S         Middle  Consonant  Sharp
  2294  punched                P AH N CH T      Open    Consonant  Sharp
  2295  prayed                 P R EY D         Middle  Consonant  Soft
@@ -2424,8 +2315,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2300  pressed                P R EH S T       Middle  Consonant  Sharp
  2301  blunt                  B L AH N T       Open    Consonant  Soft
  2302  hah                    HH AA            Open    Vowel      Soft
- 2303  paths (P AE DH Z)      P AE DH Z        Open    Consonant  Sharp
- 2303  paths (P AE TH S)      P AE TH S        Open    Consonant  Sharp
+ 2303  paths                  P AE DH Z        Open    Consonant  Sharp
  2304  rides                  R AY D Z         Open    Consonant  Sharp
  2305  tray                   T R EY           Middle  Vowel      Soft
  2306  hunch                  HH AH N CH       Open    Consonant  Sharp
@@ -2447,11 +2337,9 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2322  baked                  B EY K T         Middle  Consonant  Soft
  2323  cheque                 CH EH K          Middle  Consonant  Sharp
  2324  sought                 S AO T           Middle  Consonant  Sharp
- 2325  eighth (EY T TH)       EY T TH          Middle  Consonant  Soft
- 2325  eighth (EY TH)         EY TH            Middle  Consonant  Soft
+ 2325  eighth                 EY T TH          Middle  Consonant  Soft
  2326  stack                  S T AE K         Open    Consonant  Sharp
- 2327  wheat (HH W IY T)      HH W IY T        Closed  Consonant  Soft
- 2327  wheat (W IY T)         W IY T           Closed  Consonant  Soft
+ 2327  wheat                  W IY T           Closed  Consonant  Soft
  2328  finch                  F IH N CH        Closed  Consonant  Sharp
  2329  kin                    K IH N           Closed  Consonant  Soft
  2330  klaus                  K L AW S         Open    Consonant  Sharp
@@ -2462,8 +2350,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2335  yah                    Y AA             Open    Vowel      Soft
  2336  hay                    HH EY            Middle  Vowel      Soft
  2337  scored                 S K AO R D       Middle  Consonant  Sharp
- 2338  whack (HH W AE K)      HH W AE K        Open    Consonant  Soft
- 2338  whack (W AE K)         W AE K           Open    Consonant  Soft
+ 2338  whack                  W AE K           Open    Consonant  Soft
  2339  framed                 F R EY M D       Middle  Consonant  Soft
  2340  masks                  M AE S K S       Open    Consonant  Sharp
  2341  robe                   R OW B           Middle  Consonant  Soft
@@ -2487,8 +2374,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2359  fade                   F EY D           Middle  Consonant  Soft
  2360  parks                  P AA R K S       Open    Consonant  Sharp
  2361  fees                   F IY Z           Closed  Consonant  Sharp
- 2362  spends (S P EH N D Z)  S P EH N D Z     Middle  Consonant  Sharp
- 2362  spends (S P EH N Z)    S P EH N Z       Middle  Consonant  Sharp
+ 2362  spends                 S P EH N D Z     Middle  Consonant  Sharp
  2363  pier                   P IH R           Closed  Consonant  Soft
  2364  grudge                 G R AH JH        Open    Consonant  Sharp
  2365  lid                    L IH D           Closed  Consonant  Soft
@@ -2498,8 +2384,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2369  spilled                S P IH L D       Closed  Consonant  Sharp
  2370  hose                   HH OW Z          Middle  Consonant  Sharp
  2371  breathes               B R IY DH Z      Closed  Consonant  Sharp
- 2372  whoops (HH W UW P S)   HH W UW P S      Closed  Consonant  Sharp
- 2372  whoops (W UW P S)      W UW P S         Closed  Consonant  Sharp
+ 2372  whoops                 W UW P S         Closed  Consonant  Sharp
  2373  porch                  P AO R CH        Middle  Consonant  Sharp
  2374  boil                   B OY L           Middle  Consonant  Soft
  2375  kneel                  N IY L           Closed  Consonant  Soft
@@ -2589,8 +2474,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2459  tramp                  T R AE M P       Open    Consonant  Soft
  2460  veil                   V EY L           Middle  Consonant  Soft
  2461  steed                  S T IY D         Closed  Consonant  Sharp
- 2462  whipped (HH W IH P T)  HH W IH P T      Closed  Consonant  Soft
- 2462  whipped (W IH P T)     W IH P T         Closed  Consonant  Soft
+ 2462  whipped                W IH P T         Closed  Consonant  Soft
  2463  pause                  P AO Z           Middle  Consonant  Sharp
  2464  rail                   R EY L           Middle  Consonant  Soft
  2465  tossed                 T AO S T         Middle  Consonant  Sharp
@@ -2617,8 +2501,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2485  grunt                  G R AH N T       Open    Consonant  Soft
  2486  knot                   N AA T           Open    Consonant  Soft
  2487  hairs                  HH EH R Z        Middle  Consonant  Sharp
- 2488  herb (ER B)            ER B             Middle  Consonant  Soft
- 2488  herb (HH ER B)         HH ER B          Middle  Consonant  Soft
+ 2488  herb                   ER B             Middle  Consonant  Soft
  2489  stakes                 S T EY K S       Middle  Consonant  Sharp
  2490  monks                  M AH NG K S      Open    Consonant  Sharp
  2491  clowns                 K L AW N Z       Open    Consonant  Sharp
@@ -2667,8 +2550,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2534  jumps                  JH AH M P S      Open    Consonant  Sharp
  2535  screamed               S K R IY M D     Closed  Consonant  Sharp
  2536  snuck                  S N AH K         Open    Consonant  Sharp
- 2537  whales (HH W EY L Z)   HH W EY L Z      Middle  Consonant  Sharp
- 2537  whales (W EY L Z)      W EY L Z         Middle  Consonant  Sharp
+ 2537  whales                 W EY L Z         Middle  Consonant  Sharp
  2538  dwarf                  D W AO R F       Middle  Consonant  Soft
  2539  lump                   L AH M P         Open    Consonant  Soft
  2540  mam                    M AA M           Open    Consonant  Soft
@@ -2702,8 +2584,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2568  ping                   P IH NG          Closed  Consonant  Soft
  2569  zoom                   Z UW M           Closed  Consonant  Sharp
  2570  slit                   S L IH T         Closed  Consonant  Sharp
- 2571  waltz (W AO L S)       W AO L S         Middle  Consonant  Sharp
- 2571  waltz (W AO L T S)     W AO L T S       Middle  Consonant  Sharp
+ 2571  waltz                  W AO L T S       Middle  Consonant  Sharp
  2572  gag                    G AE G           Open    Consonant  Soft
  2573  verse                  V ER S           Middle  Consonant  Sharp
  2574  wit                    W IH T           Closed  Consonant  Soft
@@ -2711,8 +2592,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2576  hides                  HH AY D Z        Open    Consonant  Sharp
  2577  tipped                 T IH P T         Closed  Consonant  Soft
  2578  turf                   T ER F           Middle  Consonant  Soft
- 2579  tang (T AA NG)         T AA NG          Open    Consonant  Soft
- 2579  tang (T AE NG)         T AE NG          Open    Consonant  Soft
+ 2579  tang                   T AE NG          Open    Consonant  Soft
  2580  duh                    D AH             Open    Vowel      Soft
  2581  jock                   JH AA K          Open    Consonant  Sharp
  2582  wrath                  R AE TH          Open    Consonant  Soft
@@ -2767,12 +2647,10 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2631  knots                  N AA T S         Open    Consonant  Sharp
  2632  curve                  K ER V           Middle  Consonant  Soft
  2633  app                    AE P             Open    Consonant  Soft
- 2634  whites (HH W AY T S)   HH W AY T S      Open    Consonant  Sharp
- 2634  whites (W AY T S)      W AY T S         Open    Consonant  Sharp
+ 2634  whites                 W AY T S         Open    Consonant  Sharp
  2635  blog                   B L AO G         Middle  Consonant  Soft
  2636  ox                     AA K S           Open    Consonant  Sharp
- 2637  vase (V AA Z)          V AA Z           Open    Consonant  Sharp
- 2637  vase (V EY S)          V EY S           Middle  Consonant  Sharp
+ 2637  vase                   V EY S           Middle  Consonant  Sharp
  2638  glance                 G L AE N S       Open    Consonant  Sharp
  2639  poles                  P OW L Z         Middle  Consonant  Sharp
  2640  mat                    M AE T           Open    Consonant  Soft
@@ -2824,16 +2702,14 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2686  ads                    AE D Z           Open    Consonant  Sharp
  2687  yield                  Y IY L D         Closed  Consonant  Soft
  2688  quiz                   K W IH Z         Closed  Consonant  Sharp
- 2689  mosque (M AA S K)      M AA S K         Open    Consonant  Sharp
- 2689  mosque (M AO S K)      M AO S K         Middle  Consonant  Sharp
+ 2689  mosque                 M AA S K         Open    Consonant  Sharp
  2690  frogs                  F R AA G Z       Open    Consonant  Sharp
  2691  roles                  R OW L Z         Middle  Consonant  Sharp
  2692  bun                    B AH N           Open    Consonant  Soft
  2693  sly                    S L AY           Open    Vowel      Sharp
  2694  moss                   M AO S           Middle  Consonant  Sharp
  2695  yum                    Y AH M           Open    Consonant  Soft
- 2696  midst (M IH D S T)     M IH D S T       Closed  Consonant  Sharp
- 2696  midst (M IH S T)       M IH S T         Closed  Consonant  Sharp
+ 2696  midst                  M IH D S T       Closed  Consonant  Sharp
  2697  tis                    T IH Z           Closed  Consonant  Sharp
  2698  tripped                T R IH P T       Closed  Consonant  Soft
  2699  cuff                   K AH F           Open    Consonant  Soft
@@ -2872,8 +2748,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2732  scope                  S K OW P         Middle  Consonant  Sharp
  2733  boiled                 B OY L D         Middle  Consonant  Soft
  2734  fades                  F EY D Z         Middle  Consonant  Sharp
- 2735  fi (F AY)              F AY             Open    Vowel      Soft
- 2735  fi (F IY)              F IY             Closed  Vowel      Soft
+ 2735  fi                     F AY             Open    Vowel      Soft
  2736  ops                    AA P S           Open    Consonant  Sharp
  2737  shoo                   SH UW            Closed  Vowel      Sharp
  2738  blacks                 B L AE K S       Open    Consonant  Sharp
@@ -2916,8 +2791,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2775  est                    EH S T           Middle  Consonant  Sharp
  2776  feng                   F EH NG          Middle  Consonant  Soft
  2777  disk                   D IH S K         Closed  Consonant  Sharp
- 2778  op (AA P)              AA P             Open    Consonant  Soft
- 2778  op (AO P)              AO P             Middle  Consonant  Soft
+ 2778  op                     AA P             Open    Consonant  Soft
  2779  ale                    EY L             Middle  Consonant  Soft
  2780  thug                   TH AH G          Open    Consonant  Soft
  2781  leaked                 L IY K T         Closed  Consonant  Soft
@@ -2935,8 +2809,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2793  wrists                 R IH S T S       Closed  Consonant  Sharp
  2794  banged                 B AE NG D        Open    Consonant  Soft
  2795  mop                    M AA P           Open    Consonant  Soft
- 2796  sol (S AA L)           S AA L           Open    Consonant  Sharp
- 2796  sol (S OW L)           S OW L           Middle  Consonant  Sharp
+ 2796  sol                    S AA L           Open    Consonant  Sharp
  2797  heil                   HH AY L          Open    Consonant  Soft
  2798  rigged                 R IH G D         Closed  Consonant  Soft
  2799  thighs                 TH AY Z          Open    Consonant  Sharp
@@ -3001,8 +2874,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2858  drip                   D R IH P         Closed  Consonant  Soft
  2859  flint                  F L IH N T       Closed  Consonant  Soft
  2860  gale                   G EY L           Middle  Consonant  Soft
- 2861  chalk (CH AA K)        CH AA K          Open    Consonant  Sharp
- 2861  chalk (CH AO K)        CH AO K          Middle  Consonant  Sharp
+ 2861  chalk                  CH AA K          Open    Consonant  Sharp
  2862  clone                  K L OW N         Middle  Consonant  Soft
  2863  loot                   L UW T           Closed  Consonant  Soft
  2864  wretch                 R EH CH          Middle  Consonant  Sharp
@@ -3038,8 +2910,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2894  fists                  F IH S T S       Closed  Consonant  Sharp
  2895  klink                  K L IH NG K      Closed  Consonant  Soft
  2896  brag                   B R AE G         Open    Consonant  Soft
- 2897  ca (K AA)              K AA             Open    Vowel      Soft
- 2897  ca (K AH)              K AH             Open    Vowel      Soft
+ 2897  ca                     K AH             Open    Vowel      Soft
  2898  peep                   P IY P           Closed  Consonant  Soft
  2899  ache                   EY K             Middle  Consonant  Soft
  2900  swat                   S W AA T         Open    Consonant  Sharp
@@ -3053,8 +2924,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2908  drawers                D R AO R Z       Middle  Consonant  Sharp
  2909  bled                   B L EH D         Middle  Consonant  Soft
  2910  herbs                  ER B Z           Middle  Consonant  Sharp
- 2911  hwang (HH W AA NG)     HH W AA NG       Open    Consonant  Soft
- 2911  hwang (HH W AE NG)     HH W AE NG       Open    Consonant  Soft
+ 2911  hwang                  HH W AE NG       Open    Consonant  Soft
  2912  queue                  K Y UW           Closed  Vowel      Soft
  2913  sands                  S AE N D Z       Open    Consonant  Sharp
  2914  che                    CH EY            Middle  Vowel      Sharp
@@ -3077,8 +2947,7 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2931  dye                    D AY             Open    Vowel      Soft
  2932  damp                   D AE M P         Open    Consonant  Soft
  2933  thigh                  TH AY            Open    Vowel      Soft
- 2934  whats (HH W AH T S)    HH W AH T S      Open    Consonant  Sharp
- 2934  whats (W AH T S)       W AH T S         Open    Consonant  Sharp
+ 2934  whats                  W AH T S         Open    Consonant  Sharp
  2935  shades                 SH EY D Z        Middle  Consonant  Sharp
  2936  woe                    W OW             Middle  Vowel      Soft
  2937  squeaks                S K W IY K S     Closed  Consonant  Sharp
@@ -3110,13 +2979,10 @@ Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp
  2963  troll                  T R OW L         Middle  Consonant  Soft
  2964  tunes                  T UW N Z         Closed  Consonant  Sharp
  2965  notch                  N AA CH          Open    Consonant  Sharp
- 2966  routes (R AW T S)      R AW T S         Open    Consonant  Sharp
- 2966  routes (R UH T S)      R UH T S         Closed  Consonant  Sharp
- 2966  routes (R UW T S)      R UW T S         Closed  Consonant  Sharp
+ 2966  routes                 R UW T S         Closed  Consonant  Sharp
  2967  loaf                   L OW F           Middle  Consonant  Soft
  2968  plum                   P L AH M         Open    Consonant  Soft
- 2969  puss (P AH S)          P AH S           Open    Consonant  Sharp
- 2969  puss (P UH S)          P UH S           Closed  Consonant  Sharp
+ 2969  puss                   P UH S           Closed  Consonant  Sharp
  2970  ole                    OW L             Middle  Consonant  Soft
  2971  brock                  B R AA K         Open    Consonant  Soft
  2972  reich                  R AY K           Open    Consonant  Soft

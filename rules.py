@@ -124,9 +124,15 @@ SOUND_FAMILIES = {
 # BEND: starts empty. Only pairs YOU choose (comes in Step 3).
 
 # Rule (c) also applies when one word ends on the vowel and the other
-# has one consonant after it (die / dine, go / goat).
-# Set to False if you want those to be Bend candidates instead.
-NEAR_ALLOWS_ADDING_TO_OPEN_ENDING = True
+# has one consonant after it (die / dine, god / ma).
+# Set to True if you want those to be Near.
+# You chose False: they are Bend candidates.
+NEAR_ALLOWS_ADDING_TO_OPEN_ENDING = False
+
+# If the one added or dropped sound (rule c) is one of these, the pair is
+# a Bend candidate instead of Near.
+# You chose: an extra R is a Bend candidate (god / guard, god / card).
+EXTRA_SOUNDS_THAT_MAKE_BEND = ["R"]
 
 
 # ---------------------------------------------------------------------------
@@ -143,6 +149,15 @@ SHORT_FORM_ENDINGS = ["'t", "'m", "'re", "'ll", "'ve", "'d"]
 ALLOWED_S_SHORT_FORMS = [
     "it's", "he's", "she's", "that's", "what's", "there's", "here's",
     "who's", "where's", "how's", "let's",
+]
+
+# Two pronunciations: the dictionary sometimes lists strange second
+# pronunciations ("fried" also as "freed"). So every word keeps only its
+# main pronunciation, EXCEPT these real double words, which keep both:
+REAL_DOUBLE_WORDS = [
+    "read", "live", "lives", "lead", "leads", "wind", "winds", "tear",
+    "tears", "close", "use", "bow", "bows", "row", "rows", "wound", "dove",
+    "does",
 ]
 
 # Single letters are dropped, except these real words:
@@ -303,7 +318,7 @@ def compare(sounds_a, sounds_b):
         longer, shorter = (ea, eb) if len(ea) > len(eb) else (eb, ea)
         if shorter or NEAR_ALLOWS_ADDING_TO_OPEN_ENDING:
             for i in range(len(longer)):
-                if longer[:i] + longer[i + 1:] == shorter:
+                if longer[:i] + longer[i + 1:] == shorter and longer[i] not in EXTRA_SOUNDS_THAT_MAKE_BEND:
                     return "Near", "same vowel %s, ending %s vs %s, one extra sound %s" % (
                         v, _show(ea), _show(eb), longer[i])
 

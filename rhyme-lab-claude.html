@@ -134,6 +134,23 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .act.danger { color: #ff8c8c; }
 .settings { font-size: .88rem; color: var(--muted); }
 
+/* Quick add */
+.fab { position: fixed; right: max(18px, env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 25;
+       background: var(--accent); color: #121320; border: 0; border-radius: 99px; padding: 12px 18px; font-weight: 700; font-size: 1rem; box-shadow: 0 6px 18px rgba(0,0,0,.45); }
+.qa { position: fixed; right: max(18px, env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 35; width: min(420px, calc(100% - 24px));
+      background: var(--panel); border: 1px solid var(--accent); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+.qa-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.qa-head b { font-family: var(--display); font-size: 1.1rem; }
+.qa input { background: var(--raise); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 11px 14px; font-size: 1.15rem; font-family: var(--body); width: 100%; }
+.qa-cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.qa-cats button { background: var(--raise); border: 1px solid var(--line); border-radius: 8px; padding: 8px 4px; font-size: .92rem; -webkit-tap-highlight-color: transparent; }
+.qa-cats button[aria-pressed="true"] { border-color: currentColor; background: #2f3858; }
+.qa-row { display: flex; gap: 8px; align-items: center; }
+.qa-row .donebtn { padding: 10px 22px; font-size: 1rem; }
+.qa-hint { margin: 0; color: var(--faint); font-size: .82rem; }
+.chip.added { border-style: dotted; border-color: var(--accent); background: transparent; }
+.chip.added .w { font-weight: 400; font-style: italic; }
+
 /* Overlays */
 .toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 10px 18px; border-radius: 10px; font-weight: 700; font-size: .98rem; max-width: calc(100% - 32px); z-index: 40; }
 .confirm { position: fixed; left: 50%; top: calc(18px + env(safe-area-inset-top, 0px)); transform: translateX(-50%); background: var(--panel); border: 1px solid var(--accent); border-radius: 12px; padding: 14px 16px; z-index: 41; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; width: max-content; max-width: calc(100% - 32px); }
@@ -170,7 +187,11 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
   .chip { padding: 7px 11px; }
   .chip .w { font-size: 1.12rem; }
   .views button { padding: 7px 10px; }
-  main { padding-bottom: var(--sheet-h, 20px); }
+  main { padding-bottom: calc(var(--sheet-h, 20px) + 56px); }
+  .fab { bottom: calc(var(--sheet-h, 0px) + 10px + env(safe-area-inset-bottom, 0px)); }
+  body.has-sel .fab { bottom: calc(var(--sheet-h, 0px) - 6px); }
+  .qa { left: 12px; right: 12px; width: auto; bottom: auto; top: calc(10px + env(safe-area-inset-top, 0px)); }
+  body.qa-open .toast { top: var(--qa-bottom, 330px); }
   /* Buttons: bottom sheet */
   .right { position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 20; gap: 0; background: var(--panel); border-top: 1px solid var(--line);
            padding: 8px max(10px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(10px, env(safe-area-inset-left, 0px));
@@ -320,6 +341,19 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
   </aside>
 </div>
 
+<button class="fab" id="fab" hidden>+ Add</button>
+<div class="qa" id="qa" hidden>
+  <div class="qa-head"><b id="qaTitle">Add a rhyme</b><button class="ghost" id="qaClose">Close</button></div>
+  <input id="qaInput" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="done" placeholder="Type a word or phrase">
+  <div class="qa-cats">
+    <button data-qcat="twin" style="color:var(--twin)">Twin</button>
+    <button data-qcat="near" style="color:var(--near)">Near</button>
+    <button data-qcat="bend" style="color:var(--bend)">Bend</button>
+    <button data-qcat="consonant" style="color:var(--cons)">Consonant</button>
+  </div>
+  <div class="qa-row"><button class="donebtn" id="qaAdd">Add</button><button class="ghost" id="qaDelete" style="color:#ff8c8c" hidden>Delete</button></div>
+  <p class="qa-hint" id="qaHint">Enter adds it and keeps this box open for your next idea. No category = an idea to sort later.</p>
+</div>
 <div class="toast" id="toast" hidden></div>
 <div class="confirm" id="confirm" hidden></div>
 <div class="help-wrap" id="help" hidden>
@@ -462,14 +496,14 @@ const clone = o => JSON.parse(JSON.stringify(o));
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 // ---- Your decisions ----
-const emptyState = () => ({ pairs: {}, words: {}, mouth: {}, lastExport: null, changedSinceExport: false });
+const emptyState = () => ({ pairs: {}, words: {}, added: {}, mouth: {}, lastExport: null, changedSinceExport: false });
 let state = emptyState();
 
 // ---- Saving: Claude storage when the page runs inside Claude, else this browser ----
 const LOCAL_KEY = "rhymeLab.labels.v1";
 const PREFS_KEY = "rhymeLab.prefs.v1";
-const BUCKETS = { pairs: 64, words: 16 };   // labels are kept in a fixed number of storage boxes
-const store = { mode: "loading", db: null, dirty: new Set(), inflight: new Set(), timer: null, error: null, waiting: 3, savedAt: {} };
+const BUCKETS = { pairs: 64, words: 16, added: 8 };   // labels are kept in a fixed number of storage boxes
+const store = { mode: "loading", db: null, dirty: new Set(), inflight: new Set(), timer: null, error: null, waiting: 4, savedAt: {} };
 const IGNORE_REMOTE_MS = 20000;   // after saving a box, ignore older copies of it coming back for this long
 
 function bucketOf(key, n) {
@@ -487,7 +521,7 @@ function commit(before) {
     try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); store.error = null; }
     catch (e) { store.error = "This browser is not saving your labels. Use Export labels before you close the page."; }
   } else if (store.mode === "claude") {
-    for (const kind of ["pairs", "words"]) changedKeys(before[kind], state[kind]).forEach(k => store.dirty.add(kind + "/" + bucketOf(k, BUCKETS[kind])));
+    for (const kind of ["pairs", "words", "added"]) changedKeys(before[kind] || {}, state[kind]).forEach(k => store.dirty.add(kind + "/" + bucketOf(k, BUCKETS[kind])));
     if (JSON.stringify(before.mouth) !== JSON.stringify(state.mouth)) store.dirty.add("meta/mouth");
     if (before.lastExport !== state.lastExport || before.changedSinceExport !== state.changedSinceExport) store.dirty.add("meta/info");
     clearTimeout(store.timer);
@@ -547,7 +581,7 @@ function startClaude(db) {
   store.db = db;
   let renderTimer = null;
   const later = () => { clearTimeout(renderTimer); renderTimer = setTimeout(render, 60); };
-  for (const kind of ["pairs", "words", "meta"]) {
+  for (const kind of ["pairs", "words", "added", "meta"]) {
     let first = true;
     db.collection(kind).onSnapshot(snap => {
       snap.docChanges().forEach(ch => applyRemote(kind, ch.doc.id, ch.type === "removed" ? null : ch.doc.data()));
@@ -607,7 +641,7 @@ function setPair(w, fn) {
   p.cats = [...p.cats];
   fn(p);
   p.date = today();
-  if (!p.cats.length && !p.no) delete state.pairs[key]; else state.pairs[key] = p;
+  if (!p.cats.length && !p.no && !p.added) delete state.pairs[key]; else state.pairs[key] = p;
 }
 function setWord(w, fn) {
   const o = { ...word(w) };
@@ -635,6 +669,7 @@ function search(q, pickLabel) {
     start = null; results = []; current = null; multi.clear();
     el("startHead").innerHTML = "";
     el("viewbar").hidden = true;
+    el("fab").hidden = true;
     el("groups").innerHTML = `<p class="notfound">"${esc(q)}" is not in the word list. Version 1 only has common one-syllable words.</p>`;
     renderSide();
     return;
@@ -661,6 +696,7 @@ function placements(r) {
   const p = pair(r.x.label);
   if (p.cats.length) return p.cats.map(c => ({ g: c, mine: true }));
   if (p.no) return [{ g: "no", mine: true }];
+  if (p.added) return [{ g: "added", mine: true }];
   return [{ g: r.code, mine: false }];
 }
 function passes(r) {
@@ -718,13 +754,30 @@ function renderHead() {
     <div class="tags"><span class="tag">${mouthOf(s.v)}</span><span class="tag">ends on ${s.vowelEnd ? "Vowel" : "Consonant"}</span><span class="tag">${isSharp(s.label) ? "Sharp" : "Hard"}</span><span class="tag">1 syllable</span><span class="tag">rank ${s.rank}</span></div>
     <div class="progress">Reviewed ${done} of ${visible.length} · Starred ${starred} of ${visible.length}</div>`;
   el("viewbar").hidden = false;
+  el("fab").hidden = !el("qa").hidden;
   document.querySelectorAll("[data-view]").forEach(b => b.setAttribute("aria-pressed", b.dataset.view === view));
   el("selectBtn").setAttribute("aria-pressed", selectMode);
   el("selectBtn").textContent = selectMode ? (multi.size ? `Done (${multi.size})` : "Done") : "Select";
 }
+function addHandAddedResults() {
+  for (const [k, p] of Object.entries(state.pairs)) {
+    if (!p.added) continue;
+    const [a, b] = k.split("|");
+    const other = a === start.label ? b : b === start.label ? a : null;
+    if (other && BY[other] && !results.some(r => r.x.label === other)) results.push({ x: BY[other], code: null, why: "added by you" });
+  }
+}
+const addedFor = () => Object.entries(state.added).filter(([k, a]) => a.start === start.label);
+function renderAddedPhrases() {
+  const list = addedFor().filter(([k, a]) => !(view === "unreviewed" && a.cats.length));
+  if (!list.length) return "";
+  const chips = list.map(([k, a]) => `<button class="chip added" data-added="${esc(k)}" title="${esc(a.cats.map(c => CATS.find(x => x.id === c).title).join(" + ") || "idea, not sorted yet")}"><span class="w">${esc(a.text)}</span></button>`).join("");
+  return `<section class="group"><h2><span class="dot" style="background:var(--accent)"></span>Your phrases <span class="count">${list.length}</span><span class="hint">words and phrases not in the list · tap to edit</span></h2><div class="line"><div class="side">Ideas</div><div class="chips">${chips}</div></div></section>`;
+}
 function render() {
   order = []; groupStarts = []; groupMembers = {};
   if (start) {
+    addHandAddedResults();
     const buckets = {};
     for (const r of results) {
       if (!passes(r)) continue;
@@ -736,6 +789,8 @@ function render() {
       html += renderGroup(c.id, c.title, c.color, "", buckets[c.id] || [], false);
     }
     if (filters.cat === "any") {
+      if ((buckets.added || []).length) html += renderGroup("added", "Added by you", "var(--accent)", "no category yet", buckets.added, false);
+      html += renderAddedPhrases();
       for (const p of POOLS) {
         if (!el(p.toggle).checked) continue;
         html += renderGroup(p.id, p.title, "", p.hint + " · suggestions", buckets[p.id] || [], true);
@@ -784,7 +839,7 @@ function renderDetail() {
   let verdict;
   if (p.cats.length) verdict = `Your call: <b>${p.cats.map(c => CATS.find(k => k.id === c).title).join(" + ")}</b>`;
   else if (p.no) verdict = `Your call: <b>Not a rhyme</b>`;
-  else verdict = `Guess: ${GUESS_NAME[r.code]}`;
+  else verdict = r.code ? `Guess: ${GUESS_NAME[r.code]}` : "Added by you, no category yet";
   let warn = "";
   if (o.hs && (o.hs === "sharp") !== x.sharp) warn = `<div class="warn">⚠ You set ${hsLabel}, but the sounds say ${x.sharp ? "Sharp" : "Hard"}. Your choice is kept.</div>`;
   box.innerHTML = `
@@ -890,10 +945,10 @@ function act(a) {
     const todo = ts.filter(w => !reviewed(w));
     const ok = todo.filter(w => ACCEPT_AS[results.find(r => r.x.label === w).code]);
     if (!todo.length) return toast("Already reviewed. Change it with the category buttons");
-    if (!ok.length) return toast("Close vowel: pick the category yourself");
+    if (!ok.length) return toast("No guess to accept here: pick the category yourself");
     mutate(() => ok.forEach(w => setPair(w, p => { p.cats = [ACCEPT_AS[results.find(r => r.x.label === w).code]]; p.no = false; })), true);
     const skipped = todo.length - ok.length;
-    return toast(`Accepted ${ok.length}${skipped ? ` (${skipped} close-vowel left for you)` : ""}`);
+    return toast(`Accepted ${ok.length}${skipped ? ` (${skipped} left for you to pick)` : ""}`);
   }
   if (["twin", "near", "bend", "consonant"].includes(a)) {
     const turnOn = !ts.every(w => pair(w).cats.includes(a));
@@ -958,14 +1013,16 @@ const ABOUT = {
   mouth: "Mouth comes from the stressed vowel: Open (wide), Slight, Closed (narrow). Listed here only when the songwriter changed a vowel group.",
   explore: "Words bookmarked to study further.",
   hidden: "Words removed from all lists.",
+  added_by_hand: "Pairs and phrases the songwriter added personally. Phrases may be several words or longer words that are not in the one-syllable list.",
   syllables: "Version 1 has one-syllable words only.",
 };
 async function exportLabels() {
   const stamp = new Date().toISOString();
   const out = {
     format: "rhyme-lab-labels", version: 1, exported: stamp, about: ABOUT,
-    pairs: Object.entries(state.pairs).map(([k, p]) => ({ words: k.split("|"), categories: p.cats, not_a_rhyme: !!p.no, date: p.date })),
+    pairs: Object.entries(state.pairs).map(([k, p]) => ({ words: k.split("|"), categories: p.cats, not_a_rhyme: !!p.no, added_by_hand: !!p.added, date: p.date })),
     words: Object.entries(state.words).map(([w, o]) => ({ word: w, star: o.star || null, hard_sharp: o.hs ? (o.hs === "sharp" ? "Sharp" : "Hard") : null, explore: !!o.bookmark, hidden: !!o.hidden, date: o.date })),
+    added_phrases: Object.values(state.added).map(a => ({ word: a.start, rhyme: a.text, categories: a.cats, date: a.date })),
     vowel_mouth: Object.entries(state.mouth).map(([v, m]) => ({ vowel: v, example: S.vowelExamples[v], mouth: m.mouth, date: m.date })),
   };
   const text = JSON.stringify(out, null, 2);
@@ -998,7 +1055,8 @@ function importLabels(file) {
     if (!d || d.format !== "rhyme-lab-labels") return toast("That file is not a Rhyme Lab labels.json file");
     confirmBox(`Replace your current labels with this file? It has ${(d.pairs || []).length} pairs and ${(d.words || []).length} words, exported ${esc((d.exported || "").slice(0, 10))}.`, "Replace", () => {
       const ns = emptyState();
-      (d.pairs || []).forEach(p => { if (p.words && p.words.length === 2) ns.pairs[pk(p.words[0], p.words[1])] = { cats: p.categories || [], no: !!p.not_a_rhyme, date: p.date }; });
+      (d.pairs || []).forEach(p => { if (p.words && p.words.length === 2) ns.pairs[pk(p.words[0], p.words[1])] = { cats: p.categories || [], no: !!p.not_a_rhyme, ...(p.added_by_hand ? { added: true } : {}), date: p.date }; });
+      (d.added_phrases || []).forEach(a => { if (a.word && a.rhyme) ns.added[a.word + "|" + a.rhyme] = { start: a.word, text: a.rhyme, cats: a.categories || [], date: a.date }; });
       (d.words || []).forEach(o => { ns.words[o.word] = { star: o.star || 0, hs: o.hard_sharp ? o.hard_sharp.toLowerCase() : null, bookmark: !!o.explore, hidden: !!o.hidden, date: o.date }; });
       (d.vowel_mouth || []).forEach(m => { ns.mouth[m.vowel] = { mouth: m.mouth, date: m.date }; });
       mutate(() => { state = ns; }, false);
@@ -1011,6 +1069,74 @@ function importLabels(file) {
   reader.readAsText(file);
 }
 
+// ---- Quick add ----
+let qaCats = new Set();     // stays chosen between ideas
+let qaEditKey = null;       // editing an added phrase
+function openQuickAdd(editKey) {
+  if (!start) return;
+  qaEditKey = editKey || null;
+  const a = qaEditKey && state.added[qaEditKey];
+  el("qaTitle").textContent = a ? "Edit your phrase" : `Add a rhyme for ${start.word}`;
+  el("qaInput").value = a ? a.text : "";
+  el("qaInput").readOnly = !!a;
+  el("qaAdd").textContent = a ? "Done" : "Add";
+  el("qaDelete").hidden = !a;
+  el("qaHint").hidden = !!a;
+  if (a) qaCats = new Set(a.cats);
+  markQaCats();
+  el("qa").hidden = false;
+  el("fab").hidden = true;
+  document.body.classList.add("qa-open");
+  requestAnimationFrame(() => document.documentElement.style.setProperty("--qa-bottom", (el("qa").getBoundingClientRect().bottom + 10) + "px"));
+  if (!a) el("qaInput").focus();
+}
+function closeQuickAdd() {
+  el("qa").hidden = true;
+  document.body.classList.remove("qa-open");
+  if (qaEditKey) qaCats = new Set();
+  qaEditKey = null;
+  el("fab").hidden = !start;
+  el("qaInput").blur();
+}
+function markQaCats() { document.querySelectorAll("[data-qcat]").forEach(b => b.setAttribute("aria-pressed", qaCats.has(b.dataset.qcat))); }
+function quickAdd() {
+  if (!isReady()) return toast("Still loading your labels…");
+  if (qaEditKey) return closeQuickAdd();
+  const text = el("qaInput").value.trim().toLowerCase().replace(/\s+/g, " ");
+  if (!text) return;
+  const cats = [...qaCats];
+  const catText = cats.length ? cats.map(c => CATS.find(x => x.id === c).title).join(" + ") : "idea";
+  if (text === start.word) return toast("That is the word itself");
+  const known = BY[text] || (BY_WORD[text] || [])[0];
+  if (known) {
+    mutate(() => setPair(known.label, p => { p.added = true; cats.forEach(c => { if (!p.cats.includes(c)) p.cats.push(c); }); if (cats.length) p.no = false; }), false);
+  } else {
+    const key = start.label + "|" + text;
+    if (state.added[key]) return toast(`"${text}" is already added`);
+    mutate(() => { state.added[key] = { start: start.label, text, cats, date: today() }; }, false);
+  }
+  el("qaInput").value = "";
+  el("qaInput").focus();
+  toast(`Added "${text}" (${catText})`);
+}
+el("fab").addEventListener("click", () => openQuickAdd());
+el("qaClose").addEventListener("click", closeQuickAdd);
+el("qaAdd").addEventListener("click", quickAdd);
+el("qaDelete").addEventListener("click", () => {
+  const k = qaEditKey, a = state.added[k];
+  if (!a) return closeQuickAdd();
+  mutate(() => { delete state.added[k]; }, false);
+  toast(`Deleted "${a.text}". Undo brings it back`);
+  closeQuickAdd();
+});
+document.querySelectorAll("[data-qcat]").forEach(b => b.addEventListener("click", () => {
+  const c = b.dataset.qcat;
+  if (qaCats.has(c)) qaCats.delete(c); else qaCats.add(c);
+  markQaCats();
+  if (qaEditKey && state.added[qaEditKey]) mutate(() => { state.added[qaEditKey] = { ...state.added[qaEditKey], cats: [...qaCats], date: today() }; }, false);
+  else el("qaInput").focus();
+}));
+
 // ---- Events ----
 function openDrawer() { document.body.classList.add("drawer-open"); }
 function closeDrawer() { document.body.classList.remove("drawer-open"); }
@@ -1019,7 +1145,7 @@ el("closeDrawer").addEventListener("click", closeDrawer);
 // Long hold on a word (phone or mouse) switches on multi-select.
 let hold = null, swallowClick = false;
 el("groups").addEventListener("pointerdown", e => {
-  const b = e.target.closest(".chip"); if (!b) return;
+  const b = e.target.closest(".chip"); if (!b || b.dataset.added) return;
   const x0 = e.clientX, y0 = e.clientY, w = b.dataset.w;
   clearTimeout(hold && hold.t);
   hold = { x0, y0, t: setTimeout(() => {
@@ -1039,6 +1165,8 @@ el("groups").addEventListener("pointermove", e => { if (hold && Math.hypot(e.cli
 el("groups").addEventListener("pointerup", () => { if (swallowClick) setTimeout(() => { swallowClick = false; }, 350); });
 el("groups").addEventListener("contextmenu", e => { if (e.target.closest(".chip")) e.preventDefault(); });
 el("groups").addEventListener("click", e => {
+  const ad = e.target.closest(".chip[data-added]");
+  if (ad) return openQuickAdd(ad.dataset.added);
   const b = e.target.closest(".chip"); if (!b) return;
   if (swallowClick) { const same = swallowClick === b.dataset.w; swallowClick = false; if (same) return; }
   const w = b.dataset.w;
@@ -1053,7 +1181,7 @@ function clearSelection() { multi.clear(); current = null; selectMode = false; r
 el("selectBtn").addEventListener("click", () => { if (selectMode) return clearSelection(); selectMode = true; multi.clear(); current = null; render(); });
 document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => { view = b.dataset.view; savePrefs(); render(); }));
 document.querySelectorAll("[data-act]").forEach(b => b.addEventListener("click", () => act(b.dataset.act)));
-el("addPairBtn").addEventListener("click", () => toast("Adding a pair by hand comes in the next step"));
+el("addPairBtn").addEventListener("click", () => { closeDrawer(); openQuickAdd(); });
 el("exportBtn").addEventListener("click", exportLabels);
 el("importBtn").addEventListener("click", () => el("importFile").click());
 el("importFile").addEventListener("change", e => { if (e.target.files[0]) importLabels(e.target.files[0]); e.target.value = ""; });
@@ -1084,6 +1212,11 @@ document.addEventListener("keydown", e => {
   if (pending) { if (e.key === "Enter") { e.preventDefault(); confirmYes(); } else if (e.key === "Escape") confirmNo(); return; }
   const t = e.target;
   const typing = t.tagName === "INPUT" && !["checkbox", "range", "file"].includes(t.type);
+  if (typing && t.id === "qaInput") {
+    if (e.key === "Enter") { e.preventDefault(); quickAdd(); }
+    else if (e.key === "Escape") closeQuickAdd();
+    return;
+  }
   if (typing) {
     if (e.key === "Enter") { e.preventDefault(); search(t.value); t.blur(); }
     else if (e.key === "Escape") t.blur();

@@ -35,12 +35,21 @@ The "rhyme part" is VOWEL + ENDING          (life -> AY F)
 # (Counted AFTER removing names, letters, etc. Most common first.)
 COMMON_CUTOFF = 3000
 
-# For the web page later: how many words the page will hold, so the
-# "how rare" slider can go above the cutoff. Not used in Step 1.
+# How many words the web page holds, so the "how rare" slider can go
+# above the cutoff. (If fewer one-syllable words exist, it holds all of them.)
+# The slider starts at COMMON_CUTOFF.
 PAGE_MAX_WORDS = 10000
 
-# How many Bend candidates to list per word in test-results.txt
+# How many suggestions (Bend candidates, Close vowel, Consonant match)
+# to list per word in test-results.txt. The web page shows all of them.
 MAX_BEND_CANDIDATES_SHOWN = 30
+
+# Star colours on the page (P1 = best).
+STAR_COLOURS = {
+    1: "#ffd84a",   # yellow
+    2: "#ff9b3d",   # orange
+    3: "#e2cfa6",   # beige
+}
 
 
 # ---------------------------------------------------------------------------
@@ -50,20 +59,27 @@ MAX_BEND_CANDIDATES_SHOWN = 30
 
 MOUTH_GROUPS = {
     "Open":   ["AA", "AE", "AY", "AW", "AH"],        # not, map, life, now, cup
-    "Middle": ["EY", "OW", "EH", "ER", "OY", "AO"],  # day, go, bed, bird, boy, law
+    "Slight": ["EY", "OW", "EH", "ER", "OY", "AO"],  # day, go, bed, bird, boy, law
     "Closed": ["IY", "IH", "UW", "UH"],              # need, sit, you, book
 }
 
 VOWELS = [v for group in MOUTH_GROUPS.values() for v in group]
 
+# One example word per vowel, used on the page ("the 'god' vowel").
+VOWEL_EXAMPLES = {
+    "AA": "god", "AE": "cat", "AH": "cup", "AO": "law", "AW": "down",
+    "AY": "life", "EH": "bed", "ER": "bird", "EY": "day", "IH": "sit",
+    "IY": "need", "OW": "hope", "OY": "boy", "UH": "book", "UW": "you",
+}
+
 
 # ---------------------------------------------------------------------------
-# 3. SOFT / SHARP
+# 3. HARD / SHARP
 # ---------------------------------------------------------------------------
 # A word is SHARP if ANY of its sounds (start to end) is in this list.
-# Otherwise it is SOFT. This works on sounds, never spelling:
+# Otherwise it is HARD. This works on sounds, never spelling:
 #   city (S IH T IY)  -> Sharp, because the C sounds like S
-#   cat  (K AE T)     -> Soft,  because the C sounds like K
+#   cat  (K AE T)     -> Hard,  because the C sounds like K
 #   box  (B AA K S)   -> Sharp, the X contains an S sound
 
 SHARP_SOUNDS = [
@@ -133,6 +149,25 @@ NEAR_ALLOWS_ADDING_TO_OPEN_ENDING = False
 # a Bend candidate instead of Near.
 # You chose: an extra R is a Bend candidate (god / guard, god / card).
 EXTRA_SOUNDS_THAT_MAKE_BEND = ["R"]
+
+# CLOSE VOWEL (a suggestion pool): two vowels that sound alike in many
+# accents. A pair shows up here when the vowels are listed together below
+# AND the endings are Twin- or Near-close (god / dog, sheep / ship).
+CLOSE_VOWELS = [
+    ("AA", "AO"),   # god / law      (boss / loss)
+    ("IY", "IH"),   # need / sit     (sheep / ship)
+    ("UW", "UH"),   # you / book     (pool / pull)
+    ("EH", "AE"),   # bed / cat      (bed / bad)
+]
+
+# CONSONANT MATCH (a suggestion pool): DIFFERENT vowel, but the same
+# consonant sounds before and after it ("the consonant frame").
+#   god (G . D)  ->  good (G . D), guide (G . D)
+# At least this many consonants must be shared:
+CONSONANT_MATCH_MIN_SHARED = 2
+# How many extra (or missing) consonants are allowed, anywhere:
+#   god / gold (extra L), god / grade (extra R), hold / hole (missing D)
+CONSONANT_MATCH_MAX_EXTRA = 1
 
 
 # ---------------------------------------------------------------------------
@@ -263,8 +298,8 @@ def ends_on(sounds):
     return "Vowel" if plain(sounds)[-1] in VOWELS else "Consonant"
 
 
-def soft_or_sharp(sounds):
-    return "Sharp" if any(s in SHARP_SOUNDS for s in plain(sounds)) else "Soft"
+def hard_or_sharp(sounds):
+    return "Sharp" if any(s in SHARP_SOUNDS for s in plain(sounds)) else "Hard"
 
 
 def _twins(a, b):
@@ -282,25 +317,15 @@ def _show(ending):
     return " ".join(ending) if ending else "(vowel)"
 
 
-def compare(sounds_a, sounds_b):
+def _ending_match(ea, eb):
     """
-    Judge one pair. Returns (category, reason), where category is
-    "Twin", "Near", "Bend candidate", or None (different vowel).
-    The category is always the same no matter which word comes first.
+    Compare two endings (the sounds after the vowel).
+    Returns ("Twin", reason), ("Near", reason) or (None, None).
     """
-    _, va, ea = split_word(sounds_a)
-    _, vb, eb = split_word(sounds_b)
-    if va != vb:
-        return None, "different vowel"
-    v = va
-
-    # TWIN
     if ea == eb:
-        if plain(sounds_a) == plain(sounds_b):
-            return "Twin", "sounds identical (same-sound word)"
         if not ea:
-            return "Twin", "same vowel %s, both end on the vowel" % v
-        return "Twin", "same vowel %s, same ending %s" % (v, _show(ea))
+            return "Twin", "both end on the vowel"
+        return "Twin", "same ending %s" % _show(ea)
 
     # NEAR (a) and (b): same length, exactly one sound different
     if len(ea) == len(eb):
@@ -308,10 +333,10 @@ def compare(sounds_a, sounds_b):
         if len(diffs) == 1:
             x, y = diffs[0]
             if _twins(x, y):
-                return "Near", "same vowel %s, ending %s vs %s, voiced/unvoiced twins" % (v, x, y)
+                return "Near", "ending %s vs %s, voiced/unvoiced twins" % (x, y)
             fam = _family(x)
             if fam and fam == _family(y):
-                return "Near", "same vowel %s, ending %s vs %s, same family (%s)" % (v, x, y, fam)
+                return "Near", "ending %s vs %s, same family (%s)" % (x, y, fam)
 
     # NEAR (c): one sound added or dropped
     if abs(len(ea) - len(eb)) == 1:
@@ -319,8 +344,65 @@ def compare(sounds_a, sounds_b):
         if shorter or NEAR_ALLOWS_ADDING_TO_OPEN_ENDING:
             for i in range(len(longer)):
                 if longer[:i] + longer[i + 1:] == shorter and longer[i] not in EXTRA_SOUNDS_THAT_MAKE_BEND:
-                    return "Near", "same vowel %s, ending %s vs %s, one extra sound %s" % (
-                        v, _show(ea), _show(eb), longer[i])
+                    return "Near", "ending %s vs %s, one extra sound %s" % (_show(ea), _show(eb), longer[i])
+    return None, None
 
-    # BEND CANDIDATE
-    return "Bend candidate", "same vowel %s, different ending (%s vs %s)" % (v, _show(ea), _show(eb))
+
+def compare(sounds_a, sounds_b):
+    """
+    Judge one pair with the SAME-VOWEL rules. Returns (category, reason),
+    where category is "Twin", "Near", "Bend candidate", or None (different
+    vowel). The category is the same no matter which word comes first.
+    """
+    _, va, ea = split_word(sounds_a)
+    _, vb, eb = split_word(sounds_b)
+    if va != vb:
+        return None, "different vowel"
+    if ea == eb and plain(sounds_a) == plain(sounds_b):
+        return "Twin", "sounds identical (same-sound word)"
+    cat, why = _ending_match(ea, eb)
+    if cat:
+        return cat, "same vowel %s, %s" % (va, why)
+    return "Bend candidate", "same vowel %s, different ending (%s vs %s)" % (va, _show(ea), _show(eb))
+
+
+def _extra_count(a, b):
+    """0 if a and b are the same, 1 if one sound was added/dropped, else None."""
+    if a == b:
+        return 0
+    if abs(len(a) - len(b)) != 1:
+        return None
+    longer, shorter = (a, b) if len(a) > len(b) else (b, a)
+    for i in range(len(longer)):
+        if longer[:i] + longer[i + 1:] == shorter:
+            return 1
+    return None
+
+
+def classify(sounds_a, sounds_b):
+    """
+    Judge one pair with ALL rules. Returns (code, reason), where code is
+    "twin", "near", "bendc" (Bend candidate), "close" (Close vowel),
+    "consm" (Consonant match) or None (not shown).
+    """
+    sa, va, ea = split_word(sounds_a)
+    sb, vb, eb = split_word(sounds_b)
+    if va == vb:
+        cat, why = compare(sounds_a, sounds_b)
+        return {"Twin": "twin", "Near": "near", "Bend candidate": "bendc"}[cat], why
+
+    if (va, vb) in CLOSE_VOWELS or (vb, va) in CLOSE_VOWELS:
+        cat, why = _ending_match(ea, eb)
+        if cat:
+            return "close", "close vowels %s / %s, %s" % (va, vb, why)
+
+    x, y = _extra_count(sa, sb), _extra_count(ea, eb)
+    if x is not None and y is not None and x + y <= CONSONANT_MATCH_MAX_EXTRA:
+        shared = min(len(sa), len(sb)) + min(len(ea), len(eb))
+        if shared >= CONSONANT_MATCH_MIN_SHARED:
+            frame = "%s . %s" % (" ".join(sa) or "-", " ".join(ea) or "-")
+            if x + y == 0:
+                return "consm", "different vowel, same consonants (%s)" % frame
+            return "consm", "different vowel, consonants %s vs %s . %s, one extra" % (
+                frame, " ".join(sb) or "-", " ".join(eb) or "-")
+    return None, None

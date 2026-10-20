@@ -1,8 +1,9 @@
 """
-RHYME LAB - BUILD SCRIPT (Step 1)
+RHYME LAB - BUILD SCRIPT
 
 Downloads the two word lists (if not already downloaded), keeps the common
 one-syllable words, applies rules.py, and writes:
+    rhyme-lab.html         the page you open (made from page-template.html)
     word-list.txt          every word kept, with its labels
     test-results.txt       rhymes for the test words
     syllable-families.txt  all ending-sound families, biggest first
@@ -10,8 +11,13 @@ one-syllable words, applies rules.py, and writes:
 Run it with:  python build.py
 """
 
+import datetime
+import json
 import os
+import shutil
+import subprocess
 import sys
+import tempfile
 import urllib.request
 from collections import defaultdict
 
@@ -130,14 +136,14 @@ def build_words():
     freq_of = {w["word"]: w["freq"] for w in unique}
     spellings = sorted(freq_of, key=lambda s: -freq_of[s])
     rank = {s: i + 1 for i, s in enumerate(spellings)}
-    kept = [w for w in unique if rank[w["word"]] <= rules.COMMON_CUTOFF]
+    kept = [w for w in unique if rank[w["word"]] <= rules.PAGE_MAX_WORDS]
     for w in kept:
         w["rank"] = rank[w["word"]]
         start, vowel, ending = rules.split_word(w["raw"])
         w["vowel"], w["ending"] = vowel, ending
         w["mouth"] = rules.mouth_of(vowel)
         w["ends"] = rules.ends_on(w["raw"])
-        w["sharp"] = rules.soft_or_sharp(w["raw"])
+        w["sharp"] = rules.hard_or_sharp(w["raw"])
     kept.sort(key=lambda w: (w["rank"], w["sounds"]))
 
     # Words with two pronunciations get the sounds added to the name: read (R IY D)
@@ -170,20 +176,29 @@ def check_symmetry(words):
 def write_word_list(words):
     with open(os.path.join(HERE, "word-list.txt"), "w", encoding="utf-8") as f:
         f.write("RHYME LAB - ALL KEPT WORDS (%d entries, top %d one-syllable words)\n" % (len(words), rules.COMMON_CUTOFF))
-        f.write("Most common first. Rank / word / sounds / Mouth / Ends on / Soft-Sharp\n\n")
+        f.write("Most common first. Rank / word / sounds / Mouth / Ends on / Hard-Sharp\n\n")
         for w in words:
             f.write("%5d  %-22s %-16s %-7s %-10s %s\n" % (
                 w["rank"], w["label"], " ".join(w["sounds"]), w["mouth"], w["ends"], w["sharp"]))
 
 
+GROUP_TITLES = {
+    "twin": "TWIN",
+    "near": "NEAR",
+    "bendc": "BEND CANDIDATES (suggestions only)",
+    "close": "CLOSE VOWEL (suggestions, check by ear)",
+    "consm": "CONSONANT MATCH (suggestions: other vowel, same consonants)",
+}
+
+
 def rhymes_for(start, words):
-    groups = {"Twin": [], "Near": [], "Bend candidate": []}
+    groups = {code: [] for code in GROUP_TITLES}
     for w in words:
         if w["word"] == start["word"]:
             continue
-        cat, reason = rules.compare(start["raw"], w["raw"])
-        if cat:
-            groups[cat].append((w, reason))
+        code, reason = rules.classify(start["raw"], w["raw"])
+        if code:
+            groups[code].append((w, reason))
     return groups
 
 
@@ -191,7 +206,7 @@ def write_test_results(words):
     lines = []
     lines.append("RHYME LAB - TEST RESULTS")
     lines.append("Words checked: %d one-syllable words (top %d). Most common first in every list." % (len(words), rules.COMMON_CUTOFF))
-    lines.append("Each rhyme shows: word, sounds, Mouth, Ends on, Soft/Sharp, and the reason.")
+    lines.append("Each rhyme shows: word, sounds, Mouth, Ends on, Hard/Sharp, and the reason.")
     lines.append("")
     for t in TEST_WORDS:
         starts = [w for w in words if w["word"] == t]
@@ -207,10 +222,9 @@ def write_test_results(words):
             lines.append("    %s   (common rank %d)" % (labels(s), s["rank"]))
             lines.append("=" * 70)
             groups = rhymes_for(s, words)
-            for cat in ["Twin", "Near", "Bend candidate"]:
+            for cat, title in GROUP_TITLES.items():
                 items = groups[cat]
-                shown = items[:rules.MAX_BEND_CANDIDATES_SHOWN] if cat == "Bend candidate" else items
-                title = {"Twin": "TWIN", "Near": "NEAR", "Bend candidate": "BEND CANDIDATES (suggestions only)"}[cat]
+                shown = items if cat in ("twin", "near") else items[:rules.MAX_BEND_CANDIDATES_SHOWN]
                 extra = " - showing top %d" % len(shown) if len(shown) < len(items) else ""
                 lines.append("")
                 lines.append("  %s: %d%s" % (title, len(items), extra))
@@ -219,7 +233,7 @@ def write_test_results(words):
                 for w, reason in shown:
                     lines.append("    %-20s %-14s %-36s %s" % (w["label"], " ".join(w["sounds"]), labels(w), reason))
             lines.append("")
-            lines.append("  BEND: empty (only pairs you choose yourself, from Step 3)")
+            lines.append("  BEND and CONSONANT: empty here (only pairs you choose yourself on the page)")
             lines.append("")
     with open(os.path.join(HERE, "test-results.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
@@ -239,16 +253,104 @@ def write_families(words):
             f.write("%-14s %-14s %d\n" % (" ".join(key), members[0]["label"], len(members)))
 
 
+def page_settings():
+    """The rule settings from rules.py, handed to the page."""
+    return {
+        "vowels": rules.VOWELS,
+        "mouthGroups": rules.MOUTH_GROUPS,
+        "vowelExamples": rules.VOWEL_EXAMPLES,
+        "sharpSounds": rules.SHARP_SOUNDS,
+        "twins": rules.VOICED_UNVOICED_TWINS,
+        "families": rules.SOUND_FAMILIES,
+        "nearAllowsOpen": rules.NEAR_ALLOWS_ADDING_TO_OPEN_ENDING,
+        "extraBend": rules.EXTRA_SOUNDS_THAT_MAKE_BEND,
+        "closeVowels": rules.CLOSE_VOWELS,
+        "consMinShared": rules.CONSONANT_MATCH_MIN_SHARED,
+        "consMaxExtra": rules.CONSONANT_MATCH_MAX_EXTRA,
+        "starColours": rules.STAR_COLOURS,
+        "commonCutoff": rules.COMMON_CUTOFF,
+    }
+
+
+def write_page(words):
+    data = {
+        "built": datetime.date.today().isoformat(),
+        "settings": page_settings(),
+        "words": [[w["label"], w["word"], " ".join(w["sounds"]), w["rank"]] for w in words],
+    }
+    with open(os.path.join(HERE, "page-template.html"), encoding="utf-8") as f:
+        page = f.read()
+    page = page.replace("__RHYME_LAB_DATA__", json.dumps(data, separators=(",", ":")))
+    with open(os.path.join(HERE, "rhyme-lab.html"), "w", encoding="utf-8") as f:
+        f.write(page)
+
+
+CODE_LETTER = {"twin": "T", "near": "N", "bendc": "B", "close": "C", "consm": "M", None: "-"}
+
+
+def cross_check(words, how_many=400):
+    """
+    The page has its own copy of the rules (for the browser). Run that copy
+    with Node.js and compare it with rules.py: first `how_many` words
+    against all words. Returns a message. Skipped if Node.js is missing.
+    """
+    node = shutil.which("node")
+    if not node:
+        return "SKIPPED (Node.js not installed)"
+    with open(os.path.join(HERE, "page-template.html"), encoding="utf-8") as f:
+        page = f.read()
+    block = page.split("// RULES-START")[1].split("// RULES-END")[0]
+    script = block + """
+const fs = require("fs");
+const d = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
+const R = makeRules(d.settings);
+const P = d.sounds.map(R.parse);
+const L = {twin: "T", near: "N", bendc: "B", close: "C", consm: "M"};
+const out = [];
+for (let i = 0; i < d.n; i++) out.push(P.map(b => L[R.classify(P[i], b)[0]] || "-").join(""));
+fs.writeFileSync(process.argv[3], out.join("\\n"));
+"""
+    tmp = tempfile.mkdtemp()
+    try:
+        js, data_in, data_out = (os.path.join(tmp, n) for n in ("check.js", "in.json", "out.txt"))
+        with open(js, "w") as f:
+            f.write(script)
+        n = min(how_many, len(words))
+        with open(data_in, "w") as f:
+            json.dump({"settings": page_settings(), "sounds": [" ".join(w["sounds"]) for w in words], "n": n}, f)
+        subprocess.run([node, js, data_in, data_out], check=True)
+        with open(data_out) as f:
+            rows = f.read().split("\n")
+        problems = []
+        for i in range(n):
+            for j, b in enumerate(words):
+                py = CODE_LETTER[rules.classify(words[i]["raw"], b["raw"])[0]]
+                if rows[i][j] != py:
+                    problems.append("%s / %s: rules.py says %s, page says %s" % (words[i]["label"], b["label"], py, rows[i][j]))
+        if problems:
+            return "%d PROBLEMS, for example: %s" % (len(problems), "; ".join(problems[:5]))
+        return "OK (%d pairs compared)" % (n * len(words))
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
 def main():
     download()
-    words = build_words()
+    page_words = build_words()
+    words = [w for w in page_words if w["rank"] <= rules.COMMON_CUTOFF]
     problems = check_symmetry(words)
     write_word_list(words)
     write_test_results(words)
     write_families(words)
-    print("Kept %d entries (%d words)." % (len(words), len({w['word'] for w in words})))
+    write_page(page_words)
+    print("Kept %d entries (%d words) for the text files." % (len(words), len({w['word'] for w in words})))
+    print("The page holds %d entries (%d words)." % (len(page_words), len({w['word'] for w in page_words})))
     print("Symmetry check:", "OK" if problems == 0 else "%d PROBLEMS" % problems)
-    print("Wrote word-list.txt, test-results.txt, syllable-families.txt")
+    check = cross_check(words)
+    print("Page rules vs rules.py:", check)
+    print("Wrote rhyme-lab.html, word-list.txt, test-results.txt, syllable-families.txt")
+    if "PROBLEMS" in check:
+        sys.exit("STOPPED: the page and rules.py disagree. Do not use this rhyme-lab.html.")
 
 
 if __name__ == "__main__":

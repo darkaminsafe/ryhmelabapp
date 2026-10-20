@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rhyme Lab</title>
+<!--
+  RHYME LAB PAGE TEMPLATE
+  This is the design and behaviour of the page. build.py copies it into
+  rhyme-lab.html and puts the word data where it says __RHYME_LAB_DATA__.
+  Do not open this file directly; open rhyme-lab.html.
+-->
+<style>
+/* Layout: three-column mixing desk. Filters left, rhyme lists centre, big action panel right. Dark studio look. */
+:root {
+  color-scheme: dark;
+  --bg: #15161c;
+  --panel: #1d1f28;
+  --raise: #272a36;
+  --line: #343848;
+  --fg: #ecebf2;
+  --muted: #9a9cb0;
+  --faint: #6d7086;
+  --accent: #8ea6ff;
+  --twin: #7fb2ff;
+  --near: #5fd3c2;
+  --bend: #c39bff;
+  --cons: #ff8fb8;
+  --no: #8a8d9e;
+  --warn: #ffb35c;
+  --display: "Bahnschrift", "Segoe UI Semibold", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono: Consolas, "Cascadia Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.45;
+  padding: 14px 20px 40px;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mono { font-family: var(--mono); }
+
+/* Top bar */
+.top { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.brand { font-family: var(--display); font-weight: 700; font-size: 1.6rem; letter-spacing: -0.01em; }
+.search { display: flex; align-items: center; gap: 8px; flex: 1 1 260px; max-width: 460px; }
+.search input { flex: 1; min-width: 0; background: var(--raise); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px 14px; font-size: 1.15rem; font-family: var(--body); }
+.kbd { font-family: var(--mono); font-size: .78rem; background: var(--bg); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; color: var(--muted); white-space: nowrap; }
+.rarity { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .9rem; }
+.rarity input { accent-color: var(--accent); width: 170px; }
+.rarity output { font-variant-numeric: tabular-nums; color: var(--fg); min-width: 3.2em; }
+.topbtns { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.ghost { background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; color: var(--muted); font-size: .9rem; }
+.ghost:hover { color: var(--fg); border-color: var(--muted); }
+.lastexport { font-size: .8rem; color: var(--faint); }
+.lastexport.old { color: var(--warn); }
+.banner { background: #3a2a14; color: var(--warn); border: 1px solid var(--warn); border-radius: 10px; padding: 8px 14px; margin-bottom: 14px; }
+
+/* Columns */
+.desk { display: grid; grid-template-columns: 230px minmax(0, 1fr) 300px; gap: 18px; align-items: start; }
+@media (max-width: 1050px) { .desk { grid-template-columns: minmax(0, 1fr) 280px; } .left { grid-column: 1 / -1; order: 3; } }
+@media (max-width: 720px) { .desk { grid-template-columns: minmax(0, 1fr); } .right { order: -1; } }
+.left, .right { display: flex; flex-direction: column; gap: 16px; }
+.box { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.label { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.seg { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+.seg button { background: var(--raise); border: 1px solid transparent; border-radius: 7px; padding: 4px 9px; font-size: .88rem; color: var(--muted); }
+.seg button[aria-pressed="true"] { border-color: var(--accent); color: var(--fg); }
+.check { display: flex; align-items: center; gap: 8px; font-size: .92rem; margin-bottom: 6px; cursor: pointer; }
+.check input { accent-color: var(--accent); width: 16px; height: 16px; }
+.mini-list { display: flex; flex-direction: column; gap: 4px; max-height: 260px; overflow: auto; }
+.mini-list button { text-align: left; background: transparent; border: 0; padding: 3px 0; color: var(--fg); font-size: .98rem; }
+.mini-list button:hover { color: var(--accent); }
+.mini-list .empty { color: var(--faint); font-size: .88rem; }
+
+/* Centre */
+.head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin-bottom: 4px; }
+.head h1 { font-family: var(--display); font-weight: 700; font-size: 2.6rem; margin: 0; letter-spacing: -0.01em; }
+.head .mono { color: var(--muted); font-size: 1.05rem; }
+.prons { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+.prons button { background: var(--raise); border: 1px solid var(--line); border-radius: 7px; padding: 3px 10px; font-family: var(--mono); font-size: .9rem; color: var(--muted); }
+.prons button[aria-pressed="true"] { border-color: var(--accent); color: var(--fg); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.tag { font-size: .8rem; padding: 2px 9px; border-radius: 99px; background: var(--raise); color: var(--muted); }
+.progress { color: var(--muted); font-size: .9rem; margin-bottom: 14px; font-variant-numeric: tabular-nums; }
+.notfound { color: var(--muted); font-size: 1.05rem; padding: 20px 0; }
+.group { border-top: 1px solid var(--line); padding-block: 12px 6px; }
+.group h2 { font-family: var(--display); font-weight: 700; font-size: 1.15rem; margin: 0 0 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.group h2 .dot { width: 10px; height: 10px; border-radius: 50%; }
+.group h2 .count { font-family: var(--body); font-weight: 400; font-size: .85rem; color: var(--muted); }
+.group h2 .hint { font-family: var(--body); font-weight: 400; font-size: .78rem; color: var(--faint); }
+.group.pool h2 { color: var(--muted); }
+.line { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 10px; align-items: start; margin-bottom: 8px; }
+.line .side { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); padding-top: 11px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: flex; align-items: center; background: var(--raise); border: 2px solid transparent; border-radius: 9px; padding: 6px 12px; }
+.chip .w { font-size: 1.22rem; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+.chip.guess { background: transparent; border-style: dashed; border-color: var(--line); }
+.chip.guess .w { font-weight: 400; color: #c7c8d6; }
+.chip.sel { border-color: var(--accent); border-style: solid; box-shadow: 0 0 0 3px rgba(142,166,255,.18); }
+.chip.multi { border-color: var(--accent); border-style: solid; }
+.star { font-size: 1rem; line-height: 1; }
+.empty-group { color: var(--faint); font-size: .9rem; padding: 2px 0 8px 68px; }
+
+/* Right panel */
+.right { position: sticky; top: 12px; }
+.sel-word { font-family: var(--display); font-size: 2rem; font-weight: 700; line-height: 1.1; display: flex; align-items: center; gap: 8px; overflow-wrap: anywhere; }
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: .92rem; margin: 10px 0 4px; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; }
+.verdict { font-size: .9rem; color: var(--muted); margin: 8px 0 0; }
+.warn { color: var(--warn); font-size: .85rem; margin-top: 6px; }
+.btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.btns.three { grid-template-columns: 1fr 1fr 1fr; }
+.act { display: flex; justify-content: space-between; align-items: center; gap: 6px; background: var(--raise); border: 1px solid var(--line); border-radius: 9px; padding: 10px 11px; font-size: .98rem; text-align: left; min-height: 46px; }
+.act:hover { border-color: var(--muted); }
+.act[aria-pressed="true"] { border-color: currentColor; }
+.act .kbd { flex: none; }
+.act > span:first-child { white-space: nowrap; }
+.act.wide { grid-column: 1 / -1; }
+.act.danger { color: #ff8c8c; }
+.settings { font-size: .88rem; color: var(--muted); }
+
+/* Overlays */
+.toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 10px 18px; border-radius: 10px; font-weight: 700; font-size: .98rem; max-width: calc(100% - 32px); z-index: 20; }
+.confirm { position: fixed; left: 50%; top: 18px; transform: translateX(-50%); background: var(--panel); border: 1px solid var(--accent); border-radius: 12px; padding: 14px 16px; z-index: 21; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; max-width: calc(100% - 32px); }
+.confirm button { background: var(--raise); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; }
+.confirm .yes { border-color: var(--accent); }
+.help-wrap { position: fixed; inset: 0; background: rgba(8,8,12,.72); z-index: 30; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.help { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; max-width: 640px; width: 100%; max-height: 90%; overflow: auto; }
+.help h2 { font-family: var(--display); margin: 0 0 12px; }
+.help table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.help td { padding: 5px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.help td:first-child { white-space: nowrap; width: 1%; }
+.note { color: var(--muted); font-size: .88rem; margin-top: 12px; }
+[hidden] { display: none !important; }
+@media (prefers-reduced-motion: no-preference) { .chip { transition: border-color .12s, background .12s; } }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">Rhyme Lab</div>
+  <div class="search">
+    <input id="search" aria-label="Search word" autocomplete="off" spellcheck="false">
+    <span class="kbd">F</span>
+  </div>
+  <div class="rarity"><label for="rarity">How rare</label><input id="rarity" type="range" step="100"><output id="rarityOut"></output></div>
+  <div class="topbtns">
+    <button class="ghost" id="addPairBtn">+ Add pair</button>
+    <button class="ghost" id="exportBtn">Export labels</button>
+    <button class="ghost" id="importBtn">Import labels</button>
+    <span class="lastexport" id="lastExport"></span>
+    <button class="ghost" id="helpBtn">Keys <span class="kbd">?</span></button>
+    <input type="file" id="importFile" accept=".json,application/json" hidden>
+  </div>
+</div>
+<div class="banner" id="storageBanner" hidden>Chrome is not saving your labels on this page. Use Export labels before you close it.</div>
+
+<div class="desk">
+  <aside class="left">
+    <div class="box">
+      <div class="label">Category</div>
+      <div class="seg" data-filter="cat"></div>
+      <div class="label">Stars</div>
+      <div class="seg" data-filter="star"></div>
+      <div class="label">Hard / Sharp</div>
+      <div class="seg" data-filter="hs"></div>
+      <div class="label">Mouth</div>
+      <div class="seg" data-filter="mouth"></div>
+      <div class="label">Ends on</div>
+      <div class="seg" data-filter="ends"></div>
+      <div class="label">Suggestion pools</div>
+      <label class="check"><input type="checkbox" id="poolBend" checked> Bend candidates</label>
+      <label class="check"><input type="checkbox" id="poolClose" checked> Close vowel</label>
+      <label class="check"><input type="checkbox" id="poolCons" checked> Consonant match</label>
+      <label class="check" style="margin-top:8px"><input type="checkbox" id="unreviewed"> Not reviewed only</label>
+    </div>
+    <div class="box">
+      <div class="label">Explore (bookmarked)</div>
+      <div class="mini-list" id="exploreList"></div>
+    </div>
+    <div class="box">
+      <div class="label">Hidden words</div>
+      <div class="mini-list" id="hiddenList"></div>
+    </div>
+  </aside>
+
+  <main>
+    <div id="startHead"></div>
+    <div id="groups"></div>
+  </main>
+
+  <aside class="right">
+    <div class="box" id="detail"></div>
+    <div class="box">
+      <div class="label">Stars (the word, everywhere)</div>
+      <div class="btns three">
+        <button class="act" data-act="star1"><span data-star="1">★ P1</span><span class="kbd">1</span></button>
+        <button class="act" data-act="star2"><span data-star="2">★ P2</span><span class="kbd">2</span></button>
+        <button class="act" data-act="star3"><span data-star="3">★ P3</span><span class="kbd">3</span></button>
+      </div>
+    </div>
+    <div class="box">
+      <div class="label">Category (this pair)</div>
+      <div class="btns">
+        <button class="act" data-act="twin" style="color:var(--twin)">Twin<span class="kbd">A</span></button>
+        <button class="act" data-act="near" style="color:var(--near)">Near<span class="kbd">S</span></button>
+        <button class="act" data-act="bend" style="color:var(--bend)">Bend<span class="kbd">D</span></button>
+        <button class="act" data-act="consonant" style="color:var(--cons)">Consonant<span class="kbd">C</span></button>
+        <button class="act wide" data-act="no" style="color:var(--no)">Not a rhyme<span class="kbd">N</span></button>
+      </div>
+    </div>
+    <div class="box">
+      <div class="label">Word labels</div>
+      <div class="btns">
+        <button class="act" data-act="hard">Hard<span class="kbd">G</span></button>
+        <button class="act" data-act="sharp">Sharp<span class="kbd">H</span></button>
+      </div>
+      <div class="btns three" style="margin-top:6px">
+        <button class="act" data-act="closed">Closed<span class="kbd">T</span></button>
+        <button class="act" data-act="slight">Slight<span class="kbd">Y</span></button>
+        <button class="act" data-act="open">Open<span class="kbd">U</span></button>
+      </div>
+      <div class="btns" style="margin-top:6px">
+        <button class="act" data-act="bookmark">Explore<span class="kbd">B</span></button>
+        <button class="act danger" data-act="hide">Hide word<span class="kbd">4</span></button>
+        <button class="act" data-act="clear">Clear all<span class="kbd">X</span></button>
+        <button class="act" data-act="undo">Undo<span class="kbd">Z</span></button>
+      </div>
+    </div>
+    <div class="box settings">
+      <label class="check"><input type="checkbox" id="autoAdvance"> Move to the next word after filing</label>
+      Move: <span class="kbd">Q</span> up <span class="kbd">E</span> down · <span class="kbd">Ctrl+Q</span> / <span class="kbd">Ctrl+E</span> previous / next group · Ctrl+click to pick several
+    </div>
+  </aside>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+<div class="confirm" id="confirm" hidden></div>
+<div class="help-wrap" id="help" hidden>
+  <div class="help" role="dialog" aria-label="Keys">
+    <h2>Keys</h2>
+    <table>
+      <tr><td><span class="kbd">1</span> <span class="kbd">2</span> <span class="kbd">3</span></td><td>Star P1 / P2 / P3. Press the same key again to remove the star.</td></tr>
+      <tr><td><span class="kbd">4</span></td><td>Hide the word everywhere (Z brings it back)</td></tr>
+      <tr><td><span class="kbd">A</span> <span class="kbd">S</span> <span class="kbd">D</span> <span class="kbd">C</span></td><td>Twin / Near / Bend / Consonant. Each switches on or off, a pair can have several.</td></tr>
+      <tr><td><span class="kbd">N</span></td><td>Not a rhyme (for this pair)</td></tr>
+      <tr><td><span class="kbd">G</span> <span class="kbd">H</span></td><td>Hard / Sharp</td></tr>
+      <tr><td><span class="kbd">T</span> <span class="kbd">Y</span> <span class="kbd">U</span></td><td>Mouth: Closed / Slight / Open (changes the whole vowel group)</td></tr>
+      <tr><td><span class="kbd">B</span></td><td>Bookmark to Explore</td></tr>
+      <tr><td><span class="kbd">Q</span> <span class="kbd">E</span></td><td>Up / down (arrow keys work too)</td></tr>
+      <tr><td><span class="kbd">Ctrl+Q</span> <span class="kbd">Ctrl+E</span></td><td>Previous / next group</td></tr>
+      <tr><td><span class="kbd">X</span></td><td>Clear everything for this word</td></tr>
+      <tr><td><span class="kbd">Z</span></td><td>Undo</td></tr>
+      <tr><td><span class="kbd">F</span></td><td>Go to the search box (Enter searches, Esc leaves the box)</td></tr>
+      <tr><td><span class="kbd">?</span></td><td>Show or close this list</td></tr>
+    </table>
+    <p class="note">Keys do nothing while you are typing in the search box. Your labels are saved in Chrome after every change. Use Export labels now and then to keep a backup file.</p>
+  </div>
+</div>
+
+<script>
+const DATA = __RHYME_LAB_DATA__;
+
+// RULES-START
+// The same rules as rules.py, written for the browser. build.py checks
+// that both versions give the same answer for every pair it tests.
+function makeRules(S) {
+  const VOW = new Set(S.vowels);
+  const pairSet = list => { const s = new Set(); list.forEach(([a, b]) => { s.add(a + "|" + b); s.add(b + "|" + a); }); return s; };
+  const twinSet = pairSet(S.twins);
+  const closeSet = pairSet(S.closeVowels);
+  const famOf = {};
+  for (const [name, members] of Object.entries(S.families)) members.forEach(m => { famOf[m] = name; });
+  const sharpSet = new Set(S.sharpSounds);
+  const mouthOfVowel = {};
+  for (const [m, vs] of Object.entries(S.mouthGroups)) vs.forEach(v => { mouthOfVowel[v] = m; });
+  const eq = (a, b) => a.length === b.length && a.every((x, i) => x === b[i]);
+  const show = e => e.length ? e.join(" ") : "(vowel)";
+  const dropOne = (arr, i) => arr.slice(0, i).concat(arr.slice(i + 1));
+
+  function parse(sounds) {
+    const all = sounds.split(" ");
+    const i = all.findIndex(x => VOW.has(x));
+    return { all, start: all.slice(0, i), v: all[i], end: all.slice(i + 1) };
+  }
+
+  function endingMatch(ea, eb) {
+    if (eq(ea, eb)) return ea.length ? ["twin", "same ending " + show(ea)] : ["twin", "both end on the vowel"];
+    if (ea.length === eb.length) {
+      const d = [];
+      ea.forEach((x, i) => { if (x !== eb[i]) d.push([x, eb[i]]); });
+      if (d.length === 1) {
+        const [x, y] = d[0];
+        if (twinSet.has(x + "|" + y)) return ["near", `ending ${x} vs ${y}, voiced/unvoiced twins`];
+        if (famOf[x] && famOf[x] === famOf[y]) return ["near", `ending ${x} vs ${y}, same family (${famOf[x]})`];
+      }
+    }
+    if (Math.abs(ea.length - eb.length) === 1) {
+      const [L, Sh] = ea.length > eb.length ? [ea, eb] : [eb, ea];
+      if (Sh.length || S.nearAllowsOpen) {
+        for (let i = 0; i < L.length; i++) {
+          if (eq(dropOne(L, i), Sh) && !S.extraBend.includes(L[i])) return ["near", `ending ${show(ea)} vs ${show(eb)}, one extra sound ${L[i]}`];
+        }
+      }
+    }
+    return [null, null];
+  }
+
+  function extraCount(a, b) {
+    if (eq(a, b)) return 0;
+    if (Math.abs(a.length - b.length) !== 1) return null;
+    const [L, Sh] = a.length > b.length ? [a, b] : [b, a];
+    for (let i = 0; i < L.length; i++) if (eq(dropOne(L, i), Sh)) return 1;
+    return null;
+  }
+
+  // Returns [code, reason]. Codes: twin, near, bendc, close, consm, or null.
+  function classify(A, B) {
+    if (A.v === B.v) {
+      if (eq(A.all, B.all)) return ["twin", "sounds identical (same-sound word)"];
+      const [c, why] = endingMatch(A.end, B.end);
+      if (c) return [c, `same vowel ${A.v}, ${why}`];
+      return ["bendc", `same vowel ${A.v}, different ending (${show(A.end)} vs ${show(B.end)})`];
+    }
+    if (closeSet.has(A.v + "|" + B.v)) {
+      const [c, why] = endingMatch(A.end, B.end);
+      if (c) return ["close", `close vowels ${A.v} / ${B.v}, ${why}`];
+    }
+    const x = extraCount(A.start, B.start), y = extraCount(A.end, B.end);
+    if (x !== null && y !== null && x + y <= S.consMaxExtra) {
+      const shared = Math.min(A.start.length, B.start.length) + Math.min(A.end.length, B.end.length);
+      if (shared >= S.consMinShared) {
+        const frame = `${A.start.join(" ") || "-"} . ${A.end.join(" ") || "-"}`;
+        return ["consm", x + y === 0 ? `different vowel, same consonants (${frame})` : `different vowel, consonants ${frame} plus one extra`];
+      }
+    }
+    return [null, null];
+  }
+
+  const isSharp = P => P.all.some(x => sharpSet.has(x));
+  return { parse, classify, isSharp, mouthOfVowel };
+}
+// RULES-END
+
+const S = DATA.settings;
+const R = makeRules(S);
+const ENTRIES = DATA.words.map(([label, word, sounds, rank]) => {
+  const P = R.parse(sounds);
+  return { label, word, sounds, rank, P, v: P.v, sharp: R.isSharp(P), vowelEnd: P.end.length === 0 };
+});
+const BY = Object.fromEntries(ENTRIES.map(e => [e.label, e]));
+const BY_WORD = {};
+ENTRIES.forEach(e => (BY_WORD[e.word] = BY_WORD[e.word] || []).push(e));
+const MAX_RANK = Math.max(...ENTRIES.map(e => e.rank));
+
+const CATS = [
+  { id: "twin", title: "Twin", color: "var(--twin)" },
+  { id: "near", title: "Near", color: "var(--near)" },
+  { id: "bend", title: "Bend", color: "var(--bend)" },
+  { id: "consonant", title: "Consonant", color: "var(--cons)" },
+];
+const POOLS = [
+  { id: "bendc", title: "Bend candidates", hint: "same vowel, other ending", toggle: "poolBend" },
+  { id: "close", title: "Close vowel", hint: "check by ear", toggle: "poolClose" },
+  { id: "consm", title: "Consonant match", hint: "other vowel, same consonants (one extra allowed)", toggle: "poolCons" },
+];
+const GUESS_NAME = { twin: "Twin", near: "Near", bendc: "Bend candidate", close: "Close vowel", consm: "Consonant match" };
+const STAR_COLOR = S.starColours;
+const today = () => new Date().toISOString().slice(0, 10);
+
+// ---- Saved state (your decisions) ----
+const STORE_KEY = "rhymeLab.labels.v1";
+const PREFS_KEY = "rhymeLab.prefs.v1";
+const emptyState = () => ({ pairs: {}, words: {}, mouth: {}, lastExport: null, changedSinceExport: false });
+let state = emptyState();
+let storageOk = true;
+try { const raw = localStorage.getItem(STORE_KEY); if (raw) state = Object.assign(emptyState(), JSON.parse(raw)); } catch (e) { storageOk = false; }
+let prefs = {};
+try { prefs = JSON.parse(localStorage.getItem(PREFS_KEY) || "{}"); } catch (e) { prefs = {}; }
+
+function persist() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); storageOk = true; } catch (e) { storageOk = false; }
+  document.getElementById("storageBanner").hidden = storageOk;
+}
+function savePrefs() {
+  prefs = {
+    start: start && start.label, rarity: +rarity.value, autoAdvance: el("autoAdvance").checked,
+    poolBend: el("poolBend").checked, poolClose: el("poolClose").checked, poolCons: el("poolCons").checked,
+  };
+  try { localStorage.setItem(PREFS_KEY, JSON.stringify(prefs)); } catch (e) { /* not critical */ }
+}
+
+let history = [];
+let start = null;        // the searched word (entry)
+let results = [];        // [{x, code, why}] for the searched word
+let current = null;      // selected label
+let multi = new Set();
+const filters = { cat: "any", star: "any", hs: "any", mouth: "any", ends: "any" };
+let pending = null;      // in-page confirm action
+
+const el = id => document.getElementById(id);
+const rarity = el("rarity");
+const pk = (a, b) => [a, b].sort().join("|");
+const pair = w => state.pairs[pk(start.label, w)] || { cats: [], no: false };
+const word = w => state.words[w] || { star: 0, hs: null, bookmark: false, hidden: false };
+const mouthOf = v => state.mouth[v] ? state.mouth[v].mouth : R.mouthOfVowel[v];
+const isSharp = w => { const o = word(w).hs; return o ? o === "sharp" : BY[w].sharp; };
+const reviewed = w => pair(w).cats.length > 0 || pair(w).no;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function snapshot() { history.push(JSON.stringify(state)); if (history.length > 150) history.shift(); }
+function changed() { state.changedSinceExport = true; persist(); }
+function setPair(w, fn) {
+  const key = pk(start.label, w);
+  const p = { cats: [], no: false, ...(state.pairs[key] || {}) };
+  p.cats = [...p.cats];
+  fn(p);
+  p.date = today();
+  if (!p.cats.length && !p.no) delete state.pairs[key]; else state.pairs[key] = p;
+}
+function setWord(w, fn) {
+  const o = { ...word(w) };
+  fn(o);
+  o.date = today();
+  if (!o.star && !o.hs && !o.bookmark && !o.hidden) delete state.words[w]; else state.words[w] = o;
+}
+
+// ---- Search ----
+function search(q, pickLabel) {
+  q = (q || "").trim().toLowerCase();
+  const found = BY[q] ? [BY[q]] : (BY_WORD[q] || []);
+  if (!found.length) {
+    start = null; results = [];
+    el("startHead").innerHTML = "";
+    el("groups").innerHTML = `<p class="notfound">"${esc(q)}" is not in the word list. Version 1 only has common one-syllable words.</p>`;
+    renderSide();
+    return;
+  }
+  start = (pickLabel && BY[pickLabel]) || found[0];
+  el("search").value = start.word;
+  results = [];
+  for (const x of ENTRIES) {
+    if (x.word === start.word) continue;
+    const [code, why] = R.classify(start.P, x.P);
+    if (code) results.push({ x, code, why });
+  }
+  multi.clear();
+  current = null;
+  savePrefs();
+  render();
+  if (!current && order.length) { current = order[0]; render(); }
+}
+
+// ---- Rendering ----
+function placements(r) {
+  const p = pair(r.x.label);
+  if (p.cats.length) return p.cats.map(c => ({ g: c, mine: true }));
+  if (p.no) return [{ g: "no", mine: true }];
+  return [{ g: r.code, mine: false }];
+}
+
+function passes(r) {
+  const x = r.x, o = word(x.label);
+  if (o.hidden) return false;
+  if (x.rank > +rarity.value) return false;
+  if (filters.star !== "any" && String(o.star || 0) !== filters.star) return false;
+  if (filters.hs !== "any" && (isSharp(x.label) ? "sharp" : "hard") !== filters.hs) return false;
+  if (filters.mouth !== "any" && mouthOf(x.v) !== filters.mouth) return false;
+  if (filters.ends !== "any" && (x.vowelEnd ? "vowel" : "consonant") !== filters.ends) return false;
+  if (el("unreviewed").checked && reviewed(x.label)) return false;
+  return true;
+}
+
+const sortWords = (a, b) => ((word(a.label).star || 9) - (word(b.label).star || 9)) || a.rank - b.rank;
+
+let order = [];
+let groupStarts = [];
+
+function chip(x, mine) {
+  const st = word(x.label).star;
+  const cls = ["chip"];
+  if (!mine) cls.push("guess");
+  if (x.label === current) cls.push("sel");
+  if (multi.has(x.label)) cls.push("multi");
+  const star = st ? `<span class="star" style="color:${STAR_COLOR[st]}" aria-label="P${st}">★</span>` : "";
+  return `<button class="${cls.join(" ")}" data-w="${esc(x.label)}" title="${esc(x.sounds)}"><span class="w">${star}${esc(x.label)}</span></button>`;
+}
+
+function renderGroup(id, title, color, hint, items, isPool) {
+  const hard = items.filter(i => !isSharp(i.x.label)).sort((a, b) => sortWords(a.x, b.x));
+  const sharp = items.filter(i => isSharp(i.x.label)).sort((a, b) => sortWords(a.x, b.x));
+  groupStarts.push(order.length);
+  let html = `<section class="group${isPool ? " pool" : ""}"><h2>${color ? `<span class="dot" style="background:${color}"></span>` : ""}${title} <span class="count">${items.length}</span>${hint ? `<span class="hint">${hint}</span>` : ""}</h2>`;
+  if (!items.length) html += `<div class="empty-group">${id === "bend" || id === "consonant" ? "Empty until you assign words here" : "Nothing here with the current filters"}</div>`;
+  for (const [side, list] of [["Hard", hard], ["Sharp", sharp]]) {
+    if (!list.length) continue;
+    list.forEach(i => { if (!order.includes(i.x.label)) order.push(i.x.label); });
+    html += `<div class="line"><div class="side">${side}</div><div class="chips">${list.map(i => chip(i.x, i.mine)).join("")}</div></div>`;
+  }
+  return html + "</section>";
+}
+
+function renderHead() {
+  const s = start;
+  const prons = BY_WORD[s.word].length > 1
+    ? `<div class="prons">${BY_WORD[s.word].map(e => `<button data-pron="${esc(e.label)}" aria-pressed="${e.label === s.label}">${esc(e.sounds)}</button>`).join("")}</div>` : "";
+  const visible = results.filter(r => !word(r.x.label).hidden && r.x.rank <= +rarity.value);
+  const done = visible.filter(r => reviewed(r.x.label)).length;
+  el("startHead").innerHTML = `
+    <div class="head"><h1>${esc(s.word)}</h1><span class="mono">${esc(s.sounds)}</span></div>${prons}
+    <div class="tags"><span class="tag">${mouthOf(s.v)}</span><span class="tag">ends on ${s.vowelEnd ? "Vowel" : "Consonant"}</span><span class="tag">${isSharp(s.label) ? "Sharp" : "Hard"}</span><span class="tag">1 syllable</span><span class="tag">common rank ${s.rank}</span></div>
+    <div class="progress">Reviewed ${done} of ${visible.length} pairs for "${esc(s.word)}"</div>`;
+}
+
+function render() {
+  order = []; groupStarts = [];
+  if (start) {
+    const buckets = {};
+    for (const r of results) {
+      if (!passes(r)) continue;
+      for (const pl of placements(r)) (buckets[pl.g] = buckets[pl.g] || []).push({ x: r.x, mine: pl.mine });
+    }
+    let html = "";
+    for (const c of CATS) {
+      if (filters.cat !== "any" && filters.cat !== c.id) continue;
+      html += renderGroup(c.id, c.title, c.color, "", buckets[c.id] || [], false);
+    }
+    if (filters.cat === "any") {
+      for (const p of POOLS) {
+        if (!el(p.toggle).checked) continue;
+        html += renderGroup(p.id, p.title, "", p.hint + " · suggestions", buckets[p.id] || [], true);
+      }
+      if ((buckets.no || []).length) html += renderGroup("no", "Not a rhyme", "var(--no)", "you rejected these", buckets.no, true);
+    }
+    el("groups").innerHTML = html;
+    renderHead();
+  }
+  renderSide();
+}
+
+function renderSide() {
+  const ex = Object.keys(state.words).filter(w => state.words[w].bookmark && BY[w]);
+  el("exploreList").innerHTML = ex.length ? ex.map(w => `<button data-explore="${esc(w)}">${esc(w)}</button>`).join("") : `<span class="empty">Press B on a word to save it here</span>`;
+  const hid = Object.keys(state.words).filter(w => state.words[w].hidden && BY[w]);
+  el("hiddenList").innerHTML = hid.length ? hid.map(w => `<button data-unhide="${esc(w)}">${esc(w)} <span style="color:var(--faint)">· bring back</span></button>`).join("") : `<span class="empty">None</span>`;
+  renderDetail();
+  renderFilters();
+  renderExportInfo();
+  document.querySelectorAll("[data-star]").forEach(s => { s.style.color = STAR_COLOR[s.dataset.star]; });
+}
+
+function renderDetail() {
+  const box = el("detail");
+  const x = current && BY[current];
+  if (!start || !x || !order.includes(current)) { box.innerHTML = `<div class="label">Selected</div><p class="verdict">Click a word, or press E to start at the top.</p>`; markButtons(null); return; }
+  const o = word(x.label), p = pair(x.label);
+  const r = results.find(r => r.x.label === x.label);
+  const st = o.star ? `<span class="star" style="color:${STAR_COLOR[o.star]}">★</span>` : "";
+  const hsLabel = isSharp(x.label) ? "Sharp" : "Hard";
+  let verdict;
+  if (p.cats.length) verdict = `Your call: <b>${p.cats.map(c => CATS.find(k => k.id === c).title).join(" + ")}</b>`;
+  else if (p.no) verdict = `Your call: <b>Not a rhyme</b>`;
+  else verdict = `Computer guess: ${GUESS_NAME[r.code]}`;
+  let warn = "";
+  if (o.hs && (o.hs === "sharp") !== x.sharp) warn = `<div class="warn">⚠ You set ${hsLabel}, but the sounds say ${x.sharp ? "Sharp" : "Hard"}. Your choice is kept.</div>`;
+  box.innerHTML = `
+    <div class="label">Selected${multi.size > 1 ? ` · ${multi.size} words picked` : ""}</div>
+    <div class="sel-word">${st}${esc(x.label)}</div>
+    <dl class="facts">
+      <dt>Sounds</dt><dd class="mono">${esc(x.sounds)}</dd>
+      <dt>Mouth</dt><dd>${mouthOf(x.v)}</dd>
+      <dt>Ends on</dt><dd>${x.vowelEnd ? "Vowel" : "Consonant"}</dd>
+      <dt>Hard/Sharp</dt><dd>${hsLabel}${o.hs ? " (your fix)" : ""}</dd>
+      <dt>Common rank</dt><dd>${x.rank}</dd>
+    </dl>
+    <p class="verdict">${verdict}<br>${esc(r.why)}</p>${warn}`;
+  markButtons(x);
+}
+
+function markButtons(x) {
+  const o = x ? word(x.label) : {}, p = x ? pair(x.label) : { cats: [] };
+  const on = {
+    star1: o.star === 1, star2: o.star === 2, star3: o.star === 3,
+    twin: p.cats.includes("twin"), near: p.cats.includes("near"), bend: p.cats.includes("bend"), consonant: p.cats.includes("consonant"),
+    no: !!p.no, hard: !!x && !isSharp(x.label), sharp: !!x && isSharp(x.label),
+    closed: !!x && mouthOf(x.v) === "Closed", slight: !!x && mouthOf(x.v) === "Slight", open: !!x && mouthOf(x.v) === "Open",
+    bookmark: !!o.bookmark,
+  };
+  document.querySelectorAll("[data-act]").forEach(b => { if (b.dataset.act in on) b.setAttribute("aria-pressed", on[b.dataset.act] ? "true" : "false"); });
+}
+
+const FILTER_OPTS = {
+  cat: [["any", "Any"], ["twin", "Twin"], ["near", "Near"], ["bend", "Bend"], ["consonant", "Consonant"]],
+  star: [["any", "Any"], ["1", "★ P1"], ["2", "★ P2"], ["3", "★ P3"], ["0", "Unrated"]],
+  hs: [["any", "Any"], ["hard", "Hard"], ["sharp", "Sharp"]],
+  mouth: [["any", "Any"], ["Open", "Open"], ["Slight", "Slight"], ["Closed", "Closed"]],
+  ends: [["any", "Any"], ["vowel", "Vowel"], ["consonant", "Consonant"]],
+};
+function renderFilters() {
+  document.querySelectorAll("[data-filter]").forEach(seg => {
+    const f = seg.dataset.filter;
+    seg.innerHTML = FILTER_OPTS[f].map(([v, l]) => `<button data-fv="${v}" aria-pressed="${filters[f] === v}"${f === "star" && STAR_COLOR[v] ? ` style="color:${STAR_COLOR[v]}"` : ""}>${l}</button>`).join("");
+  });
+}
+
+function renderExportInfo() {
+  const box = el("lastExport");
+  const last = state.lastExport;
+  const days = last ? Math.floor((Date.now() - new Date(last).getTime()) / 86400000) : null;
+  const hasLabels = Object.keys(state.pairs).length + Object.keys(state.words).length + Object.keys(state.mouth).length > 0;
+  box.textContent = last ? `Last export: ${days === 0 ? "today" : days + (days === 1 ? " day ago" : " days ago")}` : (hasLabels ? "Not exported yet" : "");
+  box.classList.toggle("old", hasLabels && state.changedSinceExport && (days === null || days >= 3));
+}
+
+// ---- Actions ----
+let toastTimer;
+function toast(msg) { const t = el("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 2800); }
+const targets = () => multi.size ? [...multi] : (current && order.includes(current) ? [current] : []);
+
+function move(step) {
+  if (!order.length) return;
+  let i = order.indexOf(current);
+  i = i < 0 ? 0 : Math.max(0, Math.min(order.length - 1, i + step));
+  current = order[i]; multi.clear(); render(); scrollToCurrent();
+}
+function jumpGroup(dir) {
+  if (!order.length) return;
+  const i = Math.max(0, order.indexOf(current));
+  const starts = [...new Set(groupStarts.filter(s => s < order.length))];
+  let g = 0;
+  starts.forEach((s, k) => { if (s <= i) g = k; });
+  const ng = Math.max(0, Math.min(starts.length - 1, g + dir));
+  current = order[starts[ng]]; multi.clear(); render(); scrollToCurrent();
+}
+function scrollToCurrent() {
+  const c = [...document.querySelectorAll(".chip")].find(b => b.dataset.w === current);
+  if (c) c.scrollIntoView({ block: "nearest" });
+}
+
+function afterChange(advance) {
+  const idx = order.indexOf(current);
+  render();
+  if (!order.includes(current)) { current = order[Math.min(Math.max(idx, 0), order.length - 1)] || null; render(); }
+  else if (advance && el("autoAdvance").checked && multi.size === 0) move(1);
+}
+
+function act(a) {
+  if (!start) return;
+  if (a === "undo") {
+    if (!history.length) return toast("Nothing to undo");
+    state = JSON.parse(history.pop()); changed(); toast("Undone");
+    return afterChange(false);
+  }
+  const ts = targets();
+  if (!ts.length) return toast("Pick a word first");
+  if (["open", "slight", "closed"].includes(a)) return askMouth(a[0].toUpperCase() + a.slice(1), BY[ts[0]].v);
+  snapshot();
+  if (a.startsWith("star")) {
+    const n = +a.slice(4);
+    ts.forEach(w => setWord(w, o => { o.star = o.star === n ? 0 : n; }));
+  } else if (["twin", "near", "bend", "consonant"].includes(a)) {
+    const turnOn = !ts.every(w => pair(w).cats.includes(a));
+    ts.forEach(w => setPair(w, p => { p.cats = p.cats.filter(c => c !== a); if (turnOn) p.cats.push(a); p.no = false; }));
+    changed();
+    return afterChange(true);
+  } else if (a === "no") {
+    const turnOn = !ts.every(w => pair(w).no);
+    ts.forEach(w => setPair(w, p => { p.no = turnOn; if (turnOn) p.cats = []; }));
+    changed();
+    return afterChange(true);
+  } else if (a === "hard" || a === "sharp") {
+    ts.forEach(w => setWord(w, o => { o.hs = (a === "sharp") === BY[w].sharp ? null : a; }));
+  } else if (a === "bookmark") {
+    const turnOn = !ts.every(w => word(w).bookmark);
+    ts.forEach(w => setWord(w, o => { o.bookmark = turnOn; }));
+    toast(turnOn ? `${ts.join(", ")} added to Explore` : "Removed from Explore");
+  } else if (a === "hide") {
+    ts.forEach(w => setWord(w, o => { o.hidden = true; }));
+    multi.clear();
+    toast(`${ts.join(", ")} hidden. Press Z to undo`);
+  } else if (a === "clear") {
+    ts.forEach(w => { delete state.words[w]; delete state.pairs[pk(start.label, w)]; });
+    toast(`Cleared everything for ${ts.join(", ")}`);
+  }
+  changed();
+  afterChange(false);
+}
+
+function confirmBox(html, yesLabel, onYes) {
+  pending = onYes;
+  const c = el("confirm");
+  c.innerHTML = `<span>${html}</span><button class="yes" id="cYes">${yesLabel} <span class="kbd">Enter</span></button><button id="cNo">Cancel <span class="kbd">Esc</span></button>`;
+  c.hidden = false;
+  el("cYes").onclick = confirmYes;
+  el("cNo").onclick = confirmNo;
+}
+function confirmYes() { const f = pending; confirmNo(); if (f) f(); }
+function confirmNo() { pending = null; el("confirm").hidden = true; }
+
+function askMouth(label, v) {
+  const n = ENTRIES.filter(e => e.v === v).length;
+  const ex = S.vowelExamples[v];
+  confirmBox(`Change all ${n} words with the '${esc(ex)}' vowel to <b>${label}</b>?`, "Yes, change all", () => {
+    snapshot();
+    if (label === R.mouthOfVowel[v]) delete state.mouth[v];
+    else state.mouth[v] = { mouth: label, date: today() };
+    changed();
+    toast(`The '${ex}' vowel is now ${label}`);
+    afterChange(false);
+  });
+}
+
+// ---- Export / import (labels.json) ----
+const ABOUT = {
+  what: "Rhyme Lab labels: a songwriter's own rhyme decisions. These choices override the automatic rules.",
+  categories: {
+    twin: "Same stressed vowel and identical ending sounds (die / cry).",
+    near: "Same vowel, ending differs slightly (need / street, fat / fast).",
+    bend: "Only works if the pronunciation is bent or stretched. Chosen by the songwriter only.",
+    consonant: "Consonant match: different vowel, same consonants around it (god / good, hold / held).",
+    not_a_rhyme: "The songwriter rejected this pair. Never use it as a rhyme.",
+  },
+  stars: "Stars belong to a word everywhere. 1 = P1, preferred, use in songs. 2 = P2, backup. 3 = P3, last resort.",
+  hard_sharp: "Sharp = the word contains an S, Z, SH, ZH, CH or J sound anywhere. Hard = no sharp sound. Only corrections are listed here.",
+  mouth: "Mouth comes from the stressed vowel: Open (wide), Slight, Closed (narrow). Listed here only when the songwriter changed a vowel group.",
+  explore: "Words bookmarked to study further.",
+  hidden: "Words removed from all lists.",
+  syllables: "Version 1 has one-syllable words only.",
+};
+
+function exportLabels() {
+  const out = {
+    format: "rhyme-lab-labels", version: 1, exported: new Date().toISOString(), about: ABOUT,
+    pairs: Object.entries(state.pairs).map(([k, p]) => ({ words: k.split("|"), categories: p.cats, not_a_rhyme: !!p.no, date: p.date })),
+    words: Object.entries(state.words).map(([w, o]) => ({ word: w, star: o.star || null, hard_sharp: o.hs ? (o.hs === "sharp" ? "Sharp" : "Hard") : null, explore: !!o.bookmark, hidden: !!o.hidden, date: o.date })),
+    vowel_mouth: Object.entries(state.mouth).map(([v, m]) => ({ vowel: v, example: S.vowelExamples[v], mouth: m.mouth, date: m.date })),
+  };
+  const blob = new Blob([JSON.stringify(out, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "labels.json";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  state.lastExport = out.exported; state.changedSinceExport = false; persist();
+  renderExportInfo();
+  toast(`Exported labels.json (${out.pairs.length} pairs, ${out.words.length} words)`);
+}
+
+function importLabels(file) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    let d;
+    try { d = JSON.parse(reader.result); } catch (e) { return toast("That file is not a labels.json file (it could not be read)"); }
+    if (!d || d.format !== "rhyme-lab-labels") return toast("That file is not a Rhyme Lab labels.json file");
+    confirmBox(`Replace your current labels with this file? It has ${(d.pairs || []).length} pairs and ${(d.words || []).length} words, exported ${esc((d.exported || "").slice(0, 10))}.`, "Replace", () => {
+      snapshot();
+      const ns = emptyState();
+      (d.pairs || []).forEach(p => { if (p.words && p.words.length === 2) ns.pairs[pk(p.words[0], p.words[1])] = { cats: p.categories || [], no: !!p.not_a_rhyme, date: p.date }; });
+      (d.words || []).forEach(o => { ns.words[o.word] = { star: o.star || 0, hs: o.hard_sharp ? o.hard_sharp.toLowerCase() : null, bookmark: !!o.explore, hidden: !!o.hidden, date: o.date }; });
+      (d.vowel_mouth || []).forEach(m => { ns.mouth[m.vowel] = { mouth: m.mouth, date: m.date }; });
+      ns.lastExport = d.exported || null;
+      state = ns; persist();
+      toast("Labels imported. Z undoes the import");
+      afterChange(false);
+    });
+  };
+  reader.readAsText(file);
+}
+
+// ---- Events ----
+el("groups").addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  const w = b.dataset.w;
+  if (e.ctrlKey || e.metaKey) {
+    if (!multi.size && current && order.includes(current)) multi.add(current);
+    if (multi.has(w)) multi.delete(w); else multi.add(w);
+    current = w;
+  } else { multi.clear(); current = w; }
+  render();
+});
+document.querySelectorAll("[data-act]").forEach(b => b.addEventListener("click", () => act(b.dataset.act)));
+el("addPairBtn").addEventListener("click", () => toast("Adding a pair by hand comes in Step 3"));
+el("exportBtn").addEventListener("click", exportLabels);
+el("importBtn").addEventListener("click", () => el("importFile").click());
+el("importFile").addEventListener("change", e => { if (e.target.files[0]) importLabels(e.target.files[0]); e.target.value = ""; });
+document.addEventListener("click", e => {
+  const f = e.target.closest("[data-fv]");
+  if (f) { filters[f.parentElement.dataset.filter] = f.dataset.fv; render(); }
+  const ex = e.target.closest("[data-explore]");
+  if (ex) search(BY[ex.dataset.explore].word, ex.dataset.explore);
+  const uh = e.target.closest("[data-unhide]");
+  if (uh) { snapshot(); setWord(uh.dataset.unhide, o => { o.hidden = false; }); changed(); toast(`${uh.dataset.unhide} is back`); render(); }
+  const pr = e.target.closest("[data-pron]");
+  if (pr) search(start.word, pr.dataset.pron);
+});
+["poolBend", "poolClose", "poolCons", "unreviewed", "autoAdvance"].forEach(id => el(id).addEventListener("change", () => { savePrefs(); render(); }));
+rarity.addEventListener("input", () => { el("rarityOut").textContent = rarity.value; savePrefs(); render(); });
+el("helpBtn").addEventListener("click", () => { el("help").hidden = false; });
+el("help").addEventListener("click", e => { if (e.target.id === "help") e.currentTarget.hidden = true; });
+
+const KEYMAP = { "1": "star1", "2": "star2", "3": "star3", "4": "hide", a: "twin", s: "near", d: "bend", c: "consonant", n: "no", g: "hard", h: "sharp", t: "closed", y: "slight", u: "open", b: "bookmark", x: "clear", z: "undo" };
+document.addEventListener("keydown", e => {
+  const help = el("help");
+  if (!help.hidden) { if (e.key === "Escape" || e.key === "?") { help.hidden = true; e.preventDefault(); } return; }
+  if (pending) { if (e.key === "Enter") { e.preventDefault(); confirmYes(); } else if (e.key === "Escape") confirmNo(); return; }
+  const t = e.target;
+  const typing = t.tagName === "INPUT" && !["checkbox", "range", "file"].includes(t.type);
+  if (typing) {
+    if (e.key === "Enter") { e.preventDefault(); search(t.value); t.blur(); }
+    else if (e.key === "Escape") t.blur();
+    return;
+  }
+  const k = e.key.toLowerCase();
+  if (e.ctrlKey && (k === "q" || k === "e")) { e.preventDefault(); return jumpGroup(k === "q" ? -1 : 1); }
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === "?") { e.preventDefault(); help.hidden = false; return; }
+  if (k === "f") { e.preventDefault(); const s = el("search"); s.focus(); s.select(); return; }
+  if (k === "q" || e.key === "ArrowUp") { e.preventDefault(); return move(-1); }
+  if (k === "e" || e.key === "ArrowDown") { e.preventDefault(); return move(1); }
+  if (KEYMAP[k]) { e.preventDefault(); act(KEYMAP[k]); }
+});
+
+// ---- Start ----
+rarity.min = 500;
+rarity.max = Math.ceil(MAX_RANK / 100) * 100;
+rarity.value = prefs.rarity || S.commonCutoff;
+el("rarityOut").textContent = rarity.value;
+["poolBend", "poolClose", "poolCons"].forEach(id => { if (id in prefs) el(id).checked = prefs[id]; });
+el("autoAdvance").checked = !!prefs.autoAdvance;
+document.getElementById("storageBanner").hidden = storageOk;
+const first = prefs.start && BY[prefs.start] ? prefs.start : "god";
+search(BY[first] ? BY[first].word : ENTRIES[0].word, BY[first] ? first : null);
+</script>
+</body>
+</html>

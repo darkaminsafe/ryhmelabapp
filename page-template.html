@@ -7,11 +7,17 @@
 <!--
   RHYME LAB PAGE TEMPLATE
   This is the design and behaviour of the page. build.py copies it into
-  rhyme-lab.html and puts the word data where it says __RHYME_LAB_DATA__.
-  Do not open this file directly; open rhyme-lab.html.
+  rhyme-lab.html (the file you open on a computer) and rhyme-lab-claude.html
+  (the version published as a private Claude page), and puts the word data
+  where the script says DATA = ... Do not open this file directly.
+
+  Where labels are saved:
+  - inside Claude: in the page's private Claude storage (phone and PC share it)
+  - as a local file: in this browser only (use Export / Import to move them)
 -->
 <style>
-/* Layout: three-column mixing desk. Filters left, rhyme lists centre, big action panel right. Dark studio look. */
+/* Layout: PC = three-column mixing desk (tools left, lists centre, big buttons right).
+   Phone = one column, tools in a slide-in menu, buttons in a bottom sheet. Dark studio look. */
 :root {
   color-scheme: dark;
   --bg: #15161c;
@@ -22,57 +28,66 @@
   --muted: #9a9cb0;
   --faint: #6d7086;
   --accent: #8ea6ff;
+  --ok: #7ddc9a;
   --twin: #7fb2ff;
   --near: #5fd3c2;
   --bend: #c39bff;
   --cons: #ff8fb8;
   --no: #8a8d9e;
   --warn: #ffb35c;
-  --display: "Bahnschrift", "Segoe UI Semibold", "Segoe UI", system-ui, sans-serif;
-  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
-  --mono: Consolas, "Cascadia Mono", ui-monospace, monospace;
+  --display: "Bahnschrift", "Segoe UI Semibold", "Segoe UI", Roboto, system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", Roboto, system-ui, sans-serif;
+  --mono: Consolas, "Cascadia Mono", "Roboto Mono", ui-monospace, monospace;
 }
 * { box-sizing: border-box; }
+html, body { background: var(--bg); }
 body {
-  margin: 0; background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.45;
-  padding: 14px 20px 40px;
+  margin: 0; color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.45;
+  padding: 14px max(20px, env(safe-area-inset-right, 0px)) 40px max(20px, env(safe-area-inset-left, 0px));
 }
 button { font: inherit; color: inherit; cursor: pointer; }
-button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .mono { font-family: var(--mono); }
+[hidden] { display: none !important; }
 
 /* Top bar */
-.top { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.top { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
 .brand { font-family: var(--display); font-weight: 700; font-size: 1.6rem; letter-spacing: -0.01em; }
-.search { display: flex; align-items: center; gap: 8px; flex: 1 1 260px; max-width: 460px; }
+.search { display: flex; align-items: center; gap: 8px; flex: 1 1 240px; max-width: 460px; }
 .search input { flex: 1; min-width: 0; background: var(--raise); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px 14px; font-size: 1.15rem; font-family: var(--body); }
 .kbd { font-family: var(--mono); font-size: .78rem; background: var(--bg); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; color: var(--muted); white-space: nowrap; }
-.rarity { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .9rem; }
-.rarity input { accent-color: var(--accent); width: 170px; }
-.rarity output { font-variant-numeric: tabular-nums; color: var(--fg); min-width: 3.2em; }
-.topbtns { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.ghost { background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; color: var(--muted); font-size: .9rem; }
-.ghost:hover { color: var(--fg); border-color: var(--muted); }
-.lastexport { font-size: .8rem; color: var(--faint); }
-.lastexport.old { color: var(--warn); }
+.status { font-size: .82rem; color: var(--faint); white-space: nowrap; }
+.status.ok { color: var(--ok); }
+.status.busy { color: var(--muted); }
+.status.bad { color: var(--warn); }
+.menu-btn { display: none; background: var(--raise); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: 1rem; }
 .banner { background: #3a2a14; color: var(--warn); border: 1px solid var(--warn); border-radius: 10px; padding: 8px 14px; margin-bottom: 14px; }
 
 /* Columns */
-.desk { display: grid; grid-template-columns: 230px minmax(0, 1fr) 300px; gap: 18px; align-items: start; }
-@media (max-width: 1050px) { .desk { grid-template-columns: minmax(0, 1fr) 280px; } .left { grid-column: 1 / -1; order: 3; } }
-@media (max-width: 720px) { .desk { grid-template-columns: minmax(0, 1fr); } .right { order: -1; } }
+.desk { display: grid; grid-template-columns: 240px minmax(0, 1fr) 300px; gap: 18px; align-items: start; }
+@media (max-width: 1050px) and (min-width: 721px) { .desk { grid-template-columns: minmax(0, 1fr) 280px; } .left { grid-column: 1 / -1; order: 3; } }
 .left, .right { display: flex; flex-direction: column; gap: 16px; }
 .box { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
 .label { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
 .seg { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
-.seg button { background: var(--raise); border: 1px solid transparent; border-radius: 7px; padding: 4px 9px; font-size: .88rem; color: var(--muted); }
+.seg button { background: var(--raise); border: 1px solid transparent; border-radius: 7px; padding: 5px 10px; font-size: .9rem; color: var(--muted); }
 .seg button[aria-pressed="true"] { border-color: var(--accent); color: var(--fg); }
 .check { display: flex; align-items: center; gap: 8px; font-size: .92rem; margin-bottom: 6px; cursor: pointer; }
 .check input { accent-color: var(--accent); width: 16px; height: 16px; }
+.tools { display: flex; flex-direction: column; gap: 8px; }
+.tools .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ghost { background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; color: var(--muted); font-size: .9rem; }
+.ghost:hover { color: var(--fg); border-color: var(--muted); }
+.rarity { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .9rem; }
+.rarity input { accent-color: var(--accent); flex: 1; min-width: 0; }
+.rarity output { font-variant-numeric: tabular-nums; color: var(--fg); min-width: 3.2em; text-align: right; }
+.lastexport { font-size: .8rem; color: var(--faint); }
+.lastexport.old { color: var(--warn); }
 .mini-list { display: flex; flex-direction: column; gap: 4px; max-height: 260px; overflow: auto; }
-.mini-list button { text-align: left; background: transparent; border: 0; padding: 3px 0; color: var(--fg); font-size: .98rem; }
+.mini-list button { text-align: left; background: transparent; border: 0; padding: 4px 0; color: var(--fg); font-size: .98rem; }
 .mini-list button:hover { color: var(--accent); }
 .mini-list .empty { color: var(--faint); font-size: .88rem; }
+.drawer-head { display: none; }
 
 /* Centre */
 .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin-bottom: 4px; }
@@ -83,83 +98,149 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 .prons button[aria-pressed="true"] { border-color: var(--accent); color: var(--fg); }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
 .tag { font-size: .8rem; padding: 2px 9px; border-radius: 99px; background: var(--raise); color: var(--muted); }
-.progress { color: var(--muted); font-size: .9rem; margin-bottom: 14px; font-variant-numeric: tabular-nums; }
+.progress { color: var(--muted); font-size: .9rem; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+.viewbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.views { display: flex; background: var(--raise); border-radius: 10px; padding: 3px; gap: 2px; }
+.views button { background: transparent; border: 0; border-radius: 8px; padding: 7px 14px; color: var(--muted); font-size: .95rem; }
+.views button[aria-pressed="true"] { background: var(--accent); color: #121320; font-weight: 700; }
+.selbtn { background: var(--raise); border: 1px solid var(--line); border-radius: 10px; padding: 7px 14px; font-size: .95rem; color: var(--muted); }
+.selbtn[aria-pressed="true"] { border-color: var(--accent); color: var(--fg); }
 .notfound { color: var(--muted); font-size: 1.05rem; padding: 20px 0; }
 .group { border-top: 1px solid var(--line); padding-block: 12px 6px; }
 .group h2 { font-family: var(--display); font-weight: 700; font-size: 1.15rem; margin: 0 0 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .group h2 .dot { width: 10px; height: 10px; border-radius: 50%; }
 .group h2 .count { font-family: var(--body); font-weight: 400; font-size: .85rem; color: var(--muted); }
 .group h2 .hint { font-family: var(--body); font-weight: 400; font-size: .78rem; color: var(--faint); }
+.group h2 .selall { margin-left: auto; font-family: var(--body); font-weight: 400; font-size: .82rem; background: transparent; border: 1px solid var(--line); border-radius: 7px; padding: 2px 9px; color: var(--muted); }
 .group.pool h2 { color: var(--muted); }
 .line { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 10px; align-items: start; margin-bottom: 8px; }
 .line .side { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); padding-top: 11px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { display: flex; align-items: center; background: var(--raise); border: 2px solid transparent; border-radius: 9px; padding: 6px 12px; }
+.chip { display: flex; align-items: center; background: var(--raise); border: 2px solid transparent; border-radius: 9px; padding: 6px 12px; -webkit-tap-highlight-color: transparent; }
 .chip .w { font-size: 1.22rem; font-weight: 700; display: flex; align-items: center; gap: 5px; }
 .chip.guess { background: transparent; border-style: dashed; border-color: var(--line); }
 .chip.guess .w { font-weight: 400; color: #c7c8d6; }
 .chip.sel { border-color: var(--accent); border-style: solid; box-shadow: 0 0 0 3px rgba(142,166,255,.18); }
-.chip.multi { border-color: var(--accent); border-style: solid; }
+.chip.multi { border-color: var(--accent); border-style: solid; background: #2f3858; }
 .star { font-size: 1rem; line-height: 1; }
 .empty-group { color: var(--faint); font-size: .9rem; padding: 2px 0 8px 68px; }
 
-/* Right panel */
+/* Right panel (PC) / bottom sheet (phone) */
 .right { position: sticky; top: 12px; }
-.sel-word { font-family: var(--display); font-size: 2rem; font-weight: 700; line-height: 1.1; display: flex; align-items: center; gap: 8px; overflow-wrap: anywhere; }
+.sel-line { display: flex; align-items: center; gap: 8px; }
+.sel-word { font-family: var(--display); font-size: 2rem; font-weight: 700; line-height: 1.1; display: flex; align-items: center; gap: 8px; overflow-wrap: anywhere; flex: 1; min-width: 0; }
+.sheet-tools { display: none; gap: 6px; }
+.sheet-tools button { background: var(--raise); border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; font-size: .85rem; color: var(--muted); }
 .facts { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: .92rem; margin: 10px 0 4px; }
 .facts dt { color: var(--muted); }
 .facts dd { margin: 0; }
 .verdict { font-size: .9rem; color: var(--muted); margin: 8px 0 0; }
 .warn { color: var(--warn); font-size: .85rem; margin-top: 6px; }
+.actions { display: flex; flex-direction: column; gap: 14px; }
 .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .btns.three { grid-template-columns: 1fr 1fr 1fr; }
-.act { display: flex; justify-content: space-between; align-items: center; gap: 6px; background: var(--raise); border: 1px solid var(--line); border-radius: 9px; padding: 10px 11px; font-size: .98rem; text-align: left; min-height: 46px; }
+.act { display: flex; justify-content: space-between; align-items: center; gap: 6px; background: var(--raise); border: 1px solid var(--line); border-radius: 9px; padding: 10px 11px; font-size: .98rem; text-align: left; min-height: 46px; -webkit-tap-highlight-color: transparent; }
 .act:hover { border-color: var(--muted); }
 .act[aria-pressed="true"] { border-color: currentColor; }
 .act .kbd { flex: none; }
 .act > span:first-child { white-space: nowrap; }
 .act.wide { grid-column: 1 / -1; }
+.act.accept { color: var(--ok); }
 .act.danger { color: #ff8c8c; }
 .settings { font-size: .88rem; color: var(--muted); }
 
 /* Overlays */
-.toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 10px 18px; border-radius: 10px; font-weight: 700; font-size: .98rem; max-width: calc(100% - 32px); z-index: 20; }
-.confirm { position: fixed; left: 50%; top: 18px; transform: translateX(-50%); background: var(--panel); border: 1px solid var(--accent); border-radius: 12px; padding: 14px 16px; z-index: 21; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; max-width: calc(100% - 32px); }
-.confirm button { background: var(--raise); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; }
+.toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 10px 18px; border-radius: 10px; font-weight: 700; font-size: .98rem; max-width: calc(100% - 32px); z-index: 40; }
+.confirm { position: fixed; left: 50%; top: calc(18px + env(safe-area-inset-top, 0px)); transform: translateX(-50%); background: var(--panel); border: 1px solid var(--accent); border-radius: 12px; padding: 14px 16px; z-index: 41; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; width: max-content; max-width: calc(100% - 32px); }
+.confirm button { background: var(--raise); border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; }
 .confirm .yes { border-color: var(--accent); }
-.help-wrap { position: fixed; inset: 0; background: rgba(8,8,12,.72); z-index: 30; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.help-wrap { position: fixed; inset: 0; background: rgba(8,8,12,.72); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px; }
 .help { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; max-width: 640px; width: 100%; max-height: 90%; overflow: auto; }
 .help h2 { font-family: var(--display); margin: 0 0 12px; }
 .help table { width: 100%; border-collapse: collapse; font-size: .95rem; }
 .help td { padding: 5px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .help td:first-child { white-space: nowrap; width: 1%; }
 .note { color: var(--muted); font-size: .88rem; margin-top: 12px; }
-[hidden] { display: none !important; }
-@media (prefers-reduced-motion: no-preference) { .chip { transition: border-color .12s, background .12s; } }
+@media (prefers-reduced-motion: no-preference) { .chip { transition: border-color .12s, background .12s; } .left { transition: transform .18s; } }
+
+/* ---------- Phone ---------- */
+@media (max-width: 720px) {
+  body { font-size: 16px; padding: 10px max(12px, env(safe-area-inset-right, 0px)) 20px max(12px, env(safe-area-inset-left, 0px)); }
+  .top { gap: 8px; padding-bottom: 10px; margin-bottom: 10px; }
+  .brand { display: none; }
+  .search { max-width: none; }
+  .search .kbd, .kbd { display: none; }
+  .menu-btn { display: block; }
+  .status { width: 100%; order: 3; }
+  .desk { display: block; }
+  /* Tools: slide-in menu */
+  .left { position: fixed; inset: 0 auto 0 0; width: min(88vw, 360px); background: var(--bg); z-index: 30; overflow-y: auto;
+          padding: calc(12px + env(safe-area-inset-top, 0px)) 12px calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-105%); border-right: 1px solid var(--line); }
+  body.drawer-open .left { transform: none; box-shadow: 0 0 0 100vmax rgba(0,0,0,.55); }
+  .drawer-head { display: flex; justify-content: space-between; align-items: center; }
+  .drawer-head b { font-family: var(--display); font-size: 1.3rem; }
+  .head h1 { font-size: 2rem; }
+  .line { grid-template-columns: 44px minmax(0, 1fr); gap: 6px; }
+  .empty-group { padding-left: 50px; }
+  .chip { padding: 7px 11px; }
+  .chip .w { font-size: 1.12rem; }
+  .views button { padding: 7px 10px; }
+  main { padding-bottom: var(--sheet-h, 20px); }
+  /* Buttons: bottom sheet */
+  .right { position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 20; gap: 0; background: var(--panel); border-top: 1px solid var(--line);
+           padding: 8px max(10px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(10px, env(safe-area-inset-left, 0px));
+           max-height: 62vh; overflow-y: auto; box-shadow: 0 -10px 30px rgba(0,0,0,.4); }
+  body:not(.has-sel) .right { display: none; }
+  .right .box { background: transparent; border: 0; padding: 0; border-radius: 0; }
+  .right .label, .right .settings, .right .facts { display: none; }
+  .sheet-tools { display: flex; }
+  .sel-word { font-size: 1.35rem; }
+  .verdict { margin: 2px 0 8px; font-size: .85rem; }
+  .verdict br { display: none; }
+  .verdict .why::before { content: " · "; }
+  .toast { bottom: auto; top: calc(70px + env(safe-area-inset-top, 0px)); }
+  .actions { gap: 6px; }
+  .actions .btns { grid-template-columns: repeat(4, 1fr); gap: 5px; }
+  .act { min-height: 42px; padding: 8px 6px; justify-content: center; font-size: .92rem; }
+  .act.wide { grid-column: span 2; }
+  .cats .accept { order: 0; } .cats [data-act="no"] { order: 1; } .cats .cat { order: 2; }
+  .sec-row { display: grid; grid-template-columns: 3fr 2fr; gap: 5px; }
+  .sec-row .btns { grid-template-columns: repeat(3, 1fr); }
+  .sec-row .hs { grid-template-columns: repeat(2, 1fr); }
+  .right:not(.more-open) .more { display: none; }
+}
+@media (min-width: 721px) { .sec-row { display: flex; flex-direction: column; gap: 14px; } }
 </style>
 </head>
 <body>
 
 <div class="top">
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
   <div class="brand">Rhyme Lab</div>
   <div class="search">
-    <input id="search" aria-label="Search word" autocomplete="off" spellcheck="false">
+    <input id="search" aria-label="Search word" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="search" placeholder="Type a word">
     <span class="kbd">F</span>
   </div>
-  <div class="rarity"><label for="rarity">How rare</label><input id="rarity" type="range" step="100"><output id="rarityOut"></output></div>
-  <div class="topbtns">
-    <button class="ghost" id="addPairBtn">+ Add pair</button>
-    <button class="ghost" id="exportBtn">Export labels</button>
-    <button class="ghost" id="importBtn">Import labels</button>
-    <span class="lastexport" id="lastExport"></span>
-    <button class="ghost" id="helpBtn">Keys <span class="kbd">?</span></button>
-    <input type="file" id="importFile" accept=".json,application/json" hidden>
-  </div>
+  <span class="status" id="status"></span>
 </div>
-<div class="banner" id="storageBanner" hidden>Chrome is not saving your labels on this page. Use Export labels before you close it.</div>
+<div class="banner" id="banner" hidden></div>
 
 <div class="desk">
-  <aside class="left">
+  <aside class="left" id="drawer">
+    <div class="drawer-head"><b>Rhyme Lab</b><button class="ghost" id="closeDrawer">Close</button></div>
+    <div class="box tools">
+      <div class="rarity"><label for="rarity">How rare</label><input id="rarity" type="range" step="100"><output id="rarityOut"></output></div>
+      <div class="row">
+        <button class="ghost" id="addPairBtn">+ Add pair</button>
+        <button class="ghost" id="helpBtn">Keys</button>
+      </div>
+      <div class="row">
+        <button class="ghost" id="exportBtn">Export labels</button>
+        <button class="ghost" id="importBtn">Import labels</button>
+      </div>
+      <span class="lastexport" id="lastExport"></span>
+      <input type="file" id="importFile" accept=".json,application/json" hidden>
+    </div>
     <div class="box">
       <div class="label">Category</div>
       <div class="seg" data-filter="cat"></div>
@@ -175,7 +256,6 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
       <label class="check"><input type="checkbox" id="poolBend" checked> Bend candidates</label>
       <label class="check"><input type="checkbox" id="poolClose" checked> Close vowel</label>
       <label class="check"><input type="checkbox" id="poolCons" checked> Consonant match</label>
-      <label class="check" style="margin-top:8px"><input type="checkbox" id="unreviewed"> Not reviewed only</label>
     </div>
     <div class="box">
       <div class="label">Explore (bookmarked)</div>
@@ -189,45 +269,64 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
 
   <main>
     <div id="startHead"></div>
+    <div class="viewbar" id="viewbar" hidden>
+      <div class="views" role="group" aria-label="View">
+        <button data-view="all">All</button>
+        <button data-view="unreviewed">Not reviewed</button>
+        <button data-view="nostar">No star</button>
+      </div>
+      <button class="selbtn" id="selectBtn">Select</button>
+    </div>
     <div id="groups"></div>
   </main>
 
-  <aside class="right">
+  <aside class="right" id="sheet">
     <div class="box" id="detail"></div>
-    <div class="box">
-      <div class="label">Stars (the word, everywhere)</div>
-      <div class="btns three">
-        <button class="act" data-act="star1"><span data-star="1">★ P1</span><span class="kbd">1</span></button>
-        <button class="act" data-act="star2"><span data-star="2">★ P2</span><span class="kbd">2</span></button>
-        <button class="act" data-act="star3"><span data-star="3">★ P3</span><span class="kbd">3</span></button>
+    <div class="box actions">
+      <div>
+        <div class="label">Category (this pair)</div>
+        <div class="btns cats">
+          <button class="act wide accept" data-act="accept">✓ Accept<span class="kbd">Enter</span></button>
+          <button class="act cat" data-act="twin" style="color:var(--twin)">Twin<span class="kbd">A</span></button>
+          <button class="act cat" data-act="near" style="color:var(--near)">Near<span class="kbd">S</span></button>
+          <button class="act cat" data-act="bend" style="color:var(--bend)">Bend<span class="kbd">D</span></button>
+          <button class="act cat" data-act="consonant" style="color:var(--cons)">Consonant<span class="kbd">C</span></button>
+          <button class="act wide" data-act="no" style="color:var(--no)">Not a rhyme<span class="kbd">N</span></button>
+        </div>
       </div>
-    </div>
-    <div class="box">
-      <div class="label">Category (this pair)</div>
-      <div class="btns">
-        <button class="act" data-act="twin" style="color:var(--twin)">Twin<span class="kbd">A</span></button>
-        <button class="act" data-act="near" style="color:var(--near)">Near<span class="kbd">S</span></button>
-        <button class="act" data-act="bend" style="color:var(--bend)">Bend<span class="kbd">D</span></button>
-        <button class="act" data-act="consonant" style="color:var(--cons)">Consonant<span class="kbd">C</span></button>
-        <button class="act wide" data-act="no" style="color:var(--no)">Not a rhyme<span class="kbd">N</span></button>
+      <div class="sec-row">
+        <div>
+          <div class="label">Stars (the word, everywhere)</div>
+          <div class="btns three">
+            <button class="act" data-act="star1"><span data-star="1">★ P1</span><span class="kbd">1</span></button>
+            <button class="act" data-act="star2"><span data-star="2">★ P2</span><span class="kbd">2</span></button>
+            <button class="act" data-act="star3"><span data-star="3">★ P3</span><span class="kbd">3</span></button>
+          </div>
+        </div>
+        <div>
+          <div class="label">Hard / Sharp</div>
+          <div class="btns hs">
+            <button class="act" data-act="hard">Hard<span class="kbd">G</span></button>
+            <button class="act" data-act="sharp">Sharp<span class="kbd">H</span></button>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="box">
-      <div class="label">Word labels</div>
-      <div class="btns">
-        <button class="act" data-act="hard">Hard<span class="kbd">G</span></button>
-        <button class="act" data-act="sharp">Sharp<span class="kbd">H</span></button>
+      <div>
+        <div class="label">Word</div>
+        <div class="btns">
+          <button class="act" data-act="bookmark">Explore<span class="kbd">B</span></button>
+          <button class="act danger" data-act="hide">Hide<span class="kbd">4</span></button>
+          <button class="act" data-act="undo">Undo<span class="kbd">Z</span></button>
+          <button class="act" data-act="clear">Clear all<span class="kbd">X</span></button>
+        </div>
       </div>
-      <div class="btns three" style="margin-top:6px">
-        <button class="act" data-act="closed">Closed<span class="kbd">T</span></button>
-        <button class="act" data-act="slight">Slight<span class="kbd">Y</span></button>
-        <button class="act" data-act="open">Open<span class="kbd">U</span></button>
-      </div>
-      <div class="btns" style="margin-top:6px">
-        <button class="act" data-act="bookmark">Explore<span class="kbd">B</span></button>
-        <button class="act danger" data-act="hide">Hide word<span class="kbd">4</span></button>
-        <button class="act" data-act="clear">Clear all<span class="kbd">X</span></button>
-        <button class="act" data-act="undo">Undo<span class="kbd">Z</span></button>
+      <div class="more">
+        <div class="label">Mouth (whole vowel group)</div>
+        <div class="btns three">
+          <button class="act" data-act="closed">Closed<span class="kbd">T</span></button>
+          <button class="act" data-act="slight">Slight<span class="kbd">Y</span></button>
+          <button class="act" data-act="open">Open<span class="kbd">U</span></button>
+        </div>
       </div>
     </div>
     <div class="box settings">
@@ -243,10 +342,11 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
   <div class="help" role="dialog" aria-label="Keys">
     <h2>Keys</h2>
     <table>
-      <tr><td><span class="kbd">1</span> <span class="kbd">2</span> <span class="kbd">3</span></td><td>Star P1 / P2 / P3. Press the same key again to remove the star.</td></tr>
-      <tr><td><span class="kbd">4</span></td><td>Hide the word everywhere (Z brings it back)</td></tr>
+      <tr><td><span class="kbd">Enter</span></td><td>✓ Accept the computer's category guess</td></tr>
       <tr><td><span class="kbd">A</span> <span class="kbd">S</span> <span class="kbd">D</span> <span class="kbd">C</span></td><td>Twin / Near / Bend / Consonant. Each switches on or off, a pair can have several.</td></tr>
       <tr><td><span class="kbd">N</span></td><td>Not a rhyme (for this pair)</td></tr>
+      <tr><td><span class="kbd">1</span> <span class="kbd">2</span> <span class="kbd">3</span></td><td>Star P1 / P2 / P3. Press the same key again to remove the star.</td></tr>
+      <tr><td><span class="kbd">4</span></td><td>Hide the word everywhere (Z brings it back)</td></tr>
       <tr><td><span class="kbd">G</span> <span class="kbd">H</span></td><td>Hard / Sharp</td></tr>
       <tr><td><span class="kbd">T</span> <span class="kbd">Y</span> <span class="kbd">U</span></td><td>Mouth: Closed / Slight / Open (changes the whole vowel group)</td></tr>
       <tr><td><span class="kbd">B</span></td><td>Bookmark to Explore</td></tr>
@@ -257,7 +357,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); ou
       <tr><td><span class="kbd">F</span></td><td>Go to the search box (Enter searches, Esc leaves the box)</td></tr>
       <tr><td><span class="kbd">?</span></td><td>Show or close this list</td></tr>
     </table>
-    <p class="note">Keys do nothing while you are typing in the search box. Your labels are saved in Chrome after every change. Use Export labels now and then to keep a backup file.</p>
+    <p class="note">On the phone: tap a word to open the buttons. Tap Select to pick many words, or "select all" on a group. Tap ⋯ for the Mouth buttons.</p>
   </div>
 </div>
 
@@ -368,51 +468,151 @@ const POOLS = [
   { id: "consm", title: "Consonant match", hint: "other vowel, same consonants (one extra allowed)", toggle: "poolCons" },
 ];
 const GUESS_NAME = { twin: "Twin", near: "Near", bendc: "Bend candidate", close: "Close vowel", consm: "Consonant match" };
+// What "✓ Accept" turns each computer guess into (Close vowel has no obvious answer).
+const ACCEPT_AS = { twin: "twin", near: "near", bendc: "bend", consm: "consonant", close: null };
 const STAR_COLOR = S.starColours;
 const today = () => new Date().toISOString().slice(0, 10);
+const el = id => document.getElementById(id);
+const clone = o => JSON.parse(JSON.stringify(o));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-// ---- Saved state (your decisions) ----
-const STORE_KEY = "rhymeLab.labels.v1";
-const PREFS_KEY = "rhymeLab.prefs.v1";
+// ---- Your decisions ----
 const emptyState = () => ({ pairs: {}, words: {}, mouth: {}, lastExport: null, changedSinceExport: false });
 let state = emptyState();
-let storageOk = true;
-try { const raw = localStorage.getItem(STORE_KEY); if (raw) state = Object.assign(emptyState(), JSON.parse(raw)); } catch (e) { storageOk = false; }
+
+// ---- Saving: Claude storage when the page runs inside Claude, else this browser ----
+const LOCAL_KEY = "rhymeLab.labels.v1";
+const PREFS_KEY = "rhymeLab.prefs.v1";
+const BUCKETS = { pairs: 64, words: 16 };   // labels are kept in a fixed number of storage boxes
+const store = { mode: "loading", db: null, dirty: new Set(), inflight: new Set(), timer: null, error: null, waiting: 3 };
+
+function bucketOf(key, n) {
+  let h = 5381;
+  for (const ch of key) h = (((h * 33) >>> 0) ^ ch.codePointAt(0)) >>> 0;
+  return "b" + (h % n);
+}
+function changedKeys(a, b) {
+  const out = [];
+  for (const k of new Set([...Object.keys(a), ...Object.keys(b)])) if (JSON.stringify(a[k]) !== JSON.stringify(b[k])) out.push(k);
+  return out;
+}
+function commit(before) {
+  if (store.mode === "local") {
+    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); store.error = null; }
+    catch (e) { store.error = "This browser is not saving your labels. Use Export labels before you close the page."; }
+  } else if (store.mode === "claude") {
+    for (const kind of ["pairs", "words"]) changedKeys(before[kind], state[kind]).forEach(k => store.dirty.add(kind + "/" + bucketOf(k, BUCKETS[kind])));
+    if (JSON.stringify(before.mouth) !== JSON.stringify(state.mouth)) store.dirty.add("meta/mouth");
+    if (before.lastExport !== state.lastExport || before.changedSinceExport !== state.changedSinceExport) store.dirty.add("meta/info");
+    clearTimeout(store.timer);
+    store.timer = setTimeout(flush, 350);
+  }
+  renderStatus();
+}
+function bodyFor(path) {
+  const [kind, id] = path.split("/");
+  if (kind === "meta") return id === "mouth" ? { items: state.mouth } : { format: "rhyme-lab-labels", version: 1, lastExport: state.lastExport, changedSinceExport: state.changedSinceExport };
+  const items = {};
+  for (const [k, v] of Object.entries(state[kind])) if (bucketOf(k, BUCKETS[kind]) === id) items[k] = v;
+  return { items };
+}
+function flush() {
+  for (const path of [...store.dirty]) {
+    if (store.inflight.has(path)) continue;
+    store.dirty.delete(path);
+    store.inflight.add(path);
+    store.db.doc(path).set(bodyFor(path)).then(() => {
+      store.inflight.delete(path);
+      if (store.dirty.has(path)) flush();
+      renderStatus();
+    }, err => {
+      store.inflight.delete(path);
+      store.dirty.add(path);
+      const code = err && err.code;
+      if (code === "unavailable" || code === "resource_exhausted") { setTimeout(flush, 1500 + Math.random() * 1500); }
+      else if (code === "quota_exceeded") store.error = "Claude storage is full. Export labels now so nothing gets lost.";
+      else store.error = "Your last changes could not be saved in Claude (" + (code || "error") + "). Export labels to keep a copy.";
+      renderStatus();
+    });
+  }
+  renderStatus();
+}
+function applyRemote(kind, id, body) {
+  const path = kind + "/" + id;
+  if (store.dirty.has(path) || store.inflight.has(path)) return;   // our own newer change wins
+  if (kind === "meta") {
+    if (id === "mouth") state.mouth = (body && body.items) || {};
+    if (id === "info" && body) { state.lastExport = body.lastExport || null; state.changedSinceExport = !!body.changedSinceExport; }
+    return;
+  }
+  for (const k of Object.keys(state[kind])) if (bucketOf(k, BUCKETS[kind]) === id) delete state[kind][k];
+  Object.assign(state[kind], (body && body.items) || {});
+}
+function startLocal() {
+  store.mode = "local";
+  try { const raw = localStorage.getItem(LOCAL_KEY); if (raw) state = Object.assign(emptyState(), JSON.parse(raw)); }
+  catch (e) { store.error = "This browser is not saving your labels. Use Export labels before you close the page."; }
+  ready();
+}
+function startClaude(db) {
+  store.mode = "claude";
+  store.db = db;
+  let renderTimer = null;
+  const later = () => { clearTimeout(renderTimer); renderTimer = setTimeout(render, 60); };
+  for (const kind of ["pairs", "words", "meta"]) {
+    let first = true;
+    db.collection(kind).onSnapshot(snap => {
+      snap.docChanges().forEach(ch => applyRemote(kind, ch.doc.id, ch.type === "removed" ? null : ch.doc.data()));
+      if (first) { first = false; if (--store.waiting === 0) ready(); else return; }
+      later();
+    }, err => {
+      store.error = "Rhyme Lab lost its connection to Claude storage (" + (err && err.code) + "). Reload the page. Export labels if you made changes.";
+      renderStatus();
+    });
+  }
+  setTimeout(() => { if (store.waiting > 0) { store.error = "Your labels are taking long to load from Claude. Check your internet connection."; renderStatus(); } }, 10000);
+}
+function renderStatus() {
+  const s = el("status");
+  let text = "", cls = "";
+  if (store.mode === "loading" || (store.mode === "claude" && store.waiting > 0)) { text = "Loading your labels…"; cls = "busy"; }
+  else if (store.mode === "claude") {
+    const busy = store.dirty.size + store.inflight.size > 0;
+    text = busy ? "Saving…" : "Saved in Claude ✓"; cls = busy ? "busy" : "ok";
+  } else { text = "Saved in this browser"; cls = ""; }
+  if (store.error) cls = "bad";
+  s.textContent = text; s.className = "status " + cls;
+  el("banner").hidden = !store.error;
+  el("banner").textContent = store.error || "";
+}
+const isReady = () => store.mode === "local" || (store.mode === "claude" && store.waiting === 0);
 let prefs = {};
 try { prefs = JSON.parse(localStorage.getItem(PREFS_KEY) || "{}"); } catch (e) { prefs = {}; }
-
-function persist() {
-  try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); storageOk = true; } catch (e) { storageOk = false; }
-  document.getElementById("storageBanner").hidden = storageOk;
-}
 function savePrefs() {
-  prefs = {
-    start: start && start.label, rarity: +rarity.value, autoAdvance: el("autoAdvance").checked,
-    poolBend: el("poolBend").checked, poolClose: el("poolClose").checked, poolCons: el("poolCons").checked,
-  };
-  try { localStorage.setItem(PREFS_KEY, JSON.stringify(prefs)); } catch (e) { /* not critical */ }
+  prefs = { start: start && start.label, rarity: +rarity.value, autoAdvance: el("autoAdvance").checked, view,
+    poolBend: el("poolBend").checked, poolClose: el("poolClose").checked, poolCons: el("poolCons").checked };
+  try { localStorage.setItem(PREFS_KEY, JSON.stringify(prefs)); } catch (e) { /* only a convenience */ }
 }
 
+// ---- Page state ----
 let history = [];
 let start = null;        // the searched word (entry)
 let results = [];        // [{x, code, why}] for the searched word
 let current = null;      // selected label
 let multi = new Set();
+let selectMode = false;
+let view = "all";        // all | unreviewed | nostar
 const filters = { cat: "any", star: "any", hs: "any", mouth: "any", ends: "any" };
 let pending = null;      // in-page confirm action
-
-const el = id => document.getElementById(id);
 const rarity = el("rarity");
+
 const pk = (a, b) => [a, b].sort().join("|");
 const pair = w => state.pairs[pk(start.label, w)] || { cats: [], no: false };
 const word = w => state.words[w] || { star: 0, hs: null, bookmark: false, hidden: false };
 const mouthOf = v => state.mouth[v] ? state.mouth[v].mouth : R.mouthOfVowel[v];
 const isSharp = w => { const o = word(w).hs; return o ? o === "sharp" : BY[w].sharp; };
 const reviewed = w => pair(w).cats.length > 0 || pair(w).no;
-const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-function snapshot() { history.push(JSON.stringify(state)); if (history.length > 150) history.shift(); }
-function changed() { state.changedSinceExport = true; persist(); }
 function setPair(w, fn) {
   const key = pk(start.label, w);
   const p = { cats: [], no: false, ...(state.pairs[key] || {}) };
@@ -427,14 +627,27 @@ function setWord(w, fn) {
   o.date = today();
   if (!o.star && !o.hs && !o.bookmark && !o.hidden) delete state.words[w]; else state.words[w] = o;
 }
+// Every change goes through here: remember for Undo, save, redraw.
+function mutate(fn, advance) {
+  const before = clone(state);
+  fn();
+  state.changedSinceExport = true;
+  history.push(before);
+  if (history.length > 100) history.shift();
+  commit(before);
+  multi.clear();
+  afterChange(advance);
+}
 
 // ---- Search ----
 function search(q, pickLabel) {
   q = (q || "").trim().toLowerCase();
   const found = BY[q] ? [BY[q]] : (BY_WORD[q] || []);
+  closeDrawer();
   if (!found.length) {
-    start = null; results = [];
+    start = null; results = []; current = null; multi.clear();
     el("startHead").innerHTML = "";
+    el("viewbar").hidden = true;
     el("groups").innerHTML = `<p class="notfound">"${esc(q)}" is not in the word list. Version 1 only has common one-syllable words.</p>`;
     renderSide();
     return;
@@ -451,50 +664,53 @@ function search(q, pickLabel) {
   current = null;
   savePrefs();
   render();
-  if (!current && order.length) { current = order[0]; render(); }
+  if (!current && order.length && !isPhone()) { current = order[0]; render(); }
 }
 
 // ---- Rendering ----
+const isPhone = () => window.matchMedia("(max-width: 720px)").matches;
+
 function placements(r) {
   const p = pair(r.x.label);
   if (p.cats.length) return p.cats.map(c => ({ g: c, mine: true }));
   if (p.no) return [{ g: "no", mine: true }];
   return [{ g: r.code, mine: false }];
 }
-
 function passes(r) {
   const x = r.x, o = word(x.label);
   if (o.hidden) return false;
   if (x.rank > +rarity.value) return false;
+  if (view === "unreviewed" && reviewed(x.label)) return false;
+  if (view === "nostar" && o.star) return false;
   if (filters.star !== "any" && String(o.star || 0) !== filters.star) return false;
   if (filters.hs !== "any" && (isSharp(x.label) ? "sharp" : "hard") !== filters.hs) return false;
   if (filters.mouth !== "any" && mouthOf(x.v) !== filters.mouth) return false;
   if (filters.ends !== "any" && (x.vowelEnd ? "vowel" : "consonant") !== filters.ends) return false;
-  if (el("unreviewed").checked && reviewed(x.label)) return false;
   return true;
 }
-
 const sortWords = (a, b) => ((word(a.label).star || 9) - (word(b.label).star || 9)) || a.rank - b.rank;
 
 let order = [];
 let groupStarts = [];
+let groupMembers = {};
 
 function chip(x, mine) {
   const st = word(x.label).star;
   const cls = ["chip"];
   if (!mine) cls.push("guess");
-  if (x.label === current) cls.push("sel");
+  if (x.label === current && !multi.size) cls.push("sel");
   if (multi.has(x.label)) cls.push("multi");
   const star = st ? `<span class="star" style="color:${STAR_COLOR[st]}" aria-label="P${st}">★</span>` : "";
   return `<button class="${cls.join(" ")}" data-w="${esc(x.label)}" title="${esc(x.sounds)}"><span class="w">${star}${esc(x.label)}</span></button>`;
 }
-
 function renderGroup(id, title, color, hint, items, isPool) {
   const hard = items.filter(i => !isSharp(i.x.label)).sort((a, b) => sortWords(a.x, b.x));
   const sharp = items.filter(i => isSharp(i.x.label)).sort((a, b) => sortWords(a.x, b.x));
   groupStarts.push(order.length);
-  let html = `<section class="group${isPool ? " pool" : ""}"><h2>${color ? `<span class="dot" style="background:${color}"></span>` : ""}${title} <span class="count">${items.length}</span>${hint ? `<span class="hint">${hint}</span>` : ""}</h2>`;
-  if (!items.length) html += `<div class="empty-group">${id === "bend" || id === "consonant" ? "Empty until you assign words here" : "Nothing here with the current filters"}</div>`;
+  groupMembers[id] = items.map(i => i.x.label);
+  const selAll = items.length > 1 ? `<button class="selall" data-selall="${id}">select all</button>` : "";
+  let html = `<section class="group${isPool ? " pool" : ""}"><h2>${color ? `<span class="dot" style="background:${color}"></span>` : ""}${title} <span class="count">${items.length}</span>${hint ? `<span class="hint">${hint}</span>` : ""}${selAll}</h2>`;
+  if (!items.length) html += `<div class="empty-group">${id === "bend" || id === "consonant" ? "Empty until you assign words here" : "Nothing here with the current view and filters"}</div>`;
   for (const [side, list] of [["Hard", hard], ["Sharp", sharp]]) {
     if (!list.length) continue;
     list.forEach(i => { if (!order.includes(i.x.label)) order.push(i.x.label); });
@@ -502,21 +718,24 @@ function renderGroup(id, title, color, hint, items, isPool) {
   }
   return html + "</section>";
 }
-
 function renderHead() {
   const s = start;
   const prons = BY_WORD[s.word].length > 1
     ? `<div class="prons">${BY_WORD[s.word].map(e => `<button data-pron="${esc(e.label)}" aria-pressed="${e.label === s.label}">${esc(e.sounds)}</button>`).join("")}</div>` : "";
   const visible = results.filter(r => !word(r.x.label).hidden && r.x.rank <= +rarity.value);
   const done = visible.filter(r => reviewed(r.x.label)).length;
+  const starred = visible.filter(r => word(r.x.label).star).length;
   el("startHead").innerHTML = `
     <div class="head"><h1>${esc(s.word)}</h1><span class="mono">${esc(s.sounds)}</span></div>${prons}
-    <div class="tags"><span class="tag">${mouthOf(s.v)}</span><span class="tag">ends on ${s.vowelEnd ? "Vowel" : "Consonant"}</span><span class="tag">${isSharp(s.label) ? "Sharp" : "Hard"}</span><span class="tag">1 syllable</span><span class="tag">common rank ${s.rank}</span></div>
-    <div class="progress">Reviewed ${done} of ${visible.length} pairs for "${esc(s.word)}"</div>`;
+    <div class="tags"><span class="tag">${mouthOf(s.v)}</span><span class="tag">ends on ${s.vowelEnd ? "Vowel" : "Consonant"}</span><span class="tag">${isSharp(s.label) ? "Sharp" : "Hard"}</span><span class="tag">1 syllable</span><span class="tag">rank ${s.rank}</span></div>
+    <div class="progress">Reviewed ${done} of ${visible.length} · Starred ${starred} of ${visible.length}</div>`;
+  el("viewbar").hidden = false;
+  document.querySelectorAll("[data-view]").forEach(b => b.setAttribute("aria-pressed", b.dataset.view === view));
+  el("selectBtn").setAttribute("aria-pressed", selectMode);
+  el("selectBtn").textContent = selectMode ? (multi.size ? `Done (${multi.size})` : "Done") : "Select";
 }
-
 function render() {
-  order = []; groupStarts = [];
+  order = []; groupStarts = []; groupMembers = {};
   if (start) {
     const buckets = {};
     for (const r of results) {
@@ -536,26 +755,40 @@ function render() {
       if ((buckets.no || []).length) html += renderGroup("no", "Not a rhyme", "var(--no)", "you rejected these", buckets.no, true);
     }
     el("groups").innerHTML = html;
+    for (const w of [...multi]) if (!order.includes(w)) multi.delete(w);
     renderHead();
   }
   renderSide();
 }
-
 function renderSide() {
   const ex = Object.keys(state.words).filter(w => state.words[w].bookmark && BY[w]);
-  el("exploreList").innerHTML = ex.length ? ex.map(w => `<button data-explore="${esc(w)}">${esc(w)}</button>`).join("") : `<span class="empty">Press B on a word to save it here</span>`;
+  el("exploreList").innerHTML = ex.length ? ex.map(w => `<button data-explore="${esc(w)}">${esc(w)}</button>`).join("") : `<span class="empty">Bookmark a word (Explore) to save it here</span>`;
   const hid = Object.keys(state.words).filter(w => state.words[w].hidden && BY[w]);
   el("hiddenList").innerHTML = hid.length ? hid.map(w => `<button data-unhide="${esc(w)}">${esc(w)} <span style="color:var(--faint)">· bring back</span></button>`).join("") : `<span class="empty">None</span>`;
   renderDetail();
   renderFilters();
   renderExportInfo();
+  renderStatus();
   document.querySelectorAll("[data-star]").forEach(s => { s.style.color = STAR_COLOR[s.dataset.star]; });
 }
-
 function renderDetail() {
   const box = el("detail");
-  const x = current && BY[current];
-  if (!start || !x || !order.includes(current)) { box.innerHTML = `<div class="label">Selected</div><p class="verdict">Click a word, or press E to start at the top.</p>`; markButtons(null); return; }
+  const hasSel = !!start && (multi.size > 0 || (current && order.includes(current)));
+  document.body.classList.toggle("has-sel", hasSel || (selectMode && !!start));
+  const tools = `<div class="sheet-tools"><button id="moreBtn" aria-label="More buttons">⋯</button><button id="closeSheet" aria-label="Close">✕</button></div>`;
+  if (!hasSel) {
+    box.innerHTML = selectMode
+      ? `<div class="sel-line"><div class="sel-word" style="font-size:1.1rem">Tap words to select them</div>${tools}</div>`
+      : `<div class="label">Selected</div><p class="verdict">Click a word, or press E to start at the top.</p>`;
+    markButtons(null);
+    return sizeSheet();
+  }
+  if (multi.size > 1) {
+    box.innerHTML = `<div class="label">Selected</div><div class="sel-line"><div class="sel-word">${multi.size} words</div>${tools}</div><p class="verdict">Every button applies to all of them.</p>`;
+    markButtons(null);
+    return sizeSheet();
+  }
+  const x = BY[multi.size ? [...multi][0] : current];
   const o = word(x.label), p = pair(x.label);
   const r = results.find(r => r.x.label === x.label);
   const st = o.star ? `<span class="star" style="color:${STAR_COLOR[o.star]}">★</span>` : "";
@@ -563,12 +796,12 @@ function renderDetail() {
   let verdict;
   if (p.cats.length) verdict = `Your call: <b>${p.cats.map(c => CATS.find(k => k.id === c).title).join(" + ")}</b>`;
   else if (p.no) verdict = `Your call: <b>Not a rhyme</b>`;
-  else verdict = `Computer guess: ${GUESS_NAME[r.code]}`;
+  else verdict = `Guess: ${GUESS_NAME[r.code]}`;
   let warn = "";
   if (o.hs && (o.hs === "sharp") !== x.sharp) warn = `<div class="warn">⚠ You set ${hsLabel}, but the sounds say ${x.sharp ? "Sharp" : "Hard"}. Your choice is kept.</div>`;
   box.innerHTML = `
-    <div class="label">Selected${multi.size > 1 ? ` · ${multi.size} words picked` : ""}</div>
-    <div class="sel-word">${st}${esc(x.label)}</div>
+    <div class="label">Selected</div>
+    <div class="sel-line"><div class="sel-word">${st}${esc(x.label)}</div>${tools}</div>
     <dl class="facts">
       <dt>Sounds</dt><dd class="mono">${esc(x.sounds)}</dd>
       <dt>Mouth</dt><dd>${mouthOf(x.v)}</dd>
@@ -576,10 +809,16 @@ function renderDetail() {
       <dt>Hard/Sharp</dt><dd>${hsLabel}${o.hs ? " (your fix)" : ""}</dd>
       <dt>Common rank</dt><dd>${x.rank}</dd>
     </dl>
-    <p class="verdict">${verdict}<br>${esc(r.why)}</p>${warn}`;
+    <p class="verdict"><span class="mono">${esc(x.sounds)}</span> · ${verdict} · ${hsLabel}<br><span class="why">${esc(r.why)}</span></p>${warn}`;
   markButtons(x);
+  sizeSheet();
 }
-
+function sizeSheet() {
+  requestAnimationFrame(() => {
+    const h = isPhone() && document.body.classList.contains("has-sel") ? el("sheet").offsetHeight + 16 : 20;
+    document.documentElement.style.setProperty("--sheet-h", h + "px");
+  });
+}
 function markButtons(x) {
   const o = x ? word(x.label) : {}, p = x ? pair(x.label) : { cats: [] };
   const on = {
@@ -591,7 +830,6 @@ function markButtons(x) {
   };
   document.querySelectorAll("[data-act]").forEach(b => { if (b.dataset.act in on) b.setAttribute("aria-pressed", on[b.dataset.act] ? "true" : "false"); });
 }
-
 const FILTER_OPTS = {
   cat: [["any", "Any"], ["twin", "Twin"], ["near", "Near"], ["bend", "Bend"], ["consonant", "Consonant"]],
   star: [["any", "Any"], ["1", "★ P1"], ["2", "★ P2"], ["3", "★ P3"], ["0", "Unrated"]],
@@ -605,7 +843,6 @@ function renderFilters() {
     seg.innerHTML = FILTER_OPTS[f].map(([v, l]) => `<button data-fv="${v}" aria-pressed="${filters[f] === v}"${f === "star" && STAR_COLOR[v] ? ` style="color:${STAR_COLOR[v]}"` : ""}>${l}</button>`).join("");
   });
 }
-
 function renderExportInfo() {
   const box = el("lastExport");
   const last = state.lastExport;
@@ -639,77 +876,82 @@ function scrollToCurrent() {
   const c = [...document.querySelectorAll(".chip")].find(b => b.dataset.w === current);
   if (c) c.scrollIntoView({ block: "nearest" });
 }
-
 function afterChange(advance) {
   const idx = order.indexOf(current);
   render();
-  if (!order.includes(current)) { current = order[Math.min(Math.max(idx, 0), order.length - 1)] || null; render(); }
-  else if (advance && el("autoAdvance").checked && multi.size === 0) move(1);
+  if (current && !order.includes(current)) { current = isPhone() && selectMode ? null : (order[Math.min(Math.max(idx, 0), order.length - 1)] || null); render(); }
+  else if (advance && el("autoAdvance").checked && !selectMode) move(1);
 }
 
 function act(a) {
   if (!start) return;
+  if (!isReady()) return toast("Still loading your labels…");
   if (a === "undo") {
     if (!history.length) return toast("Nothing to undo");
-    state = JSON.parse(history.pop()); changed(); toast("Undone");
+    const before = clone(state);
+    state = history.pop();
+    commit(before);
+    toast("Undone");
     return afterChange(false);
   }
   const ts = targets();
-  if (!ts.length) return toast("Pick a word first");
+  if (!ts.length) return toast(selectMode ? "Tap words to select them first" : "Pick a word first");
   if (["open", "slight", "closed"].includes(a)) return askMouth(a[0].toUpperCase() + a.slice(1), BY[ts[0]].v);
-  snapshot();
-  if (a.startsWith("star")) {
-    const n = +a.slice(4);
-    ts.forEach(w => setWord(w, o => { o.star = o.star === n ? 0 : n; }));
-  } else if (["twin", "near", "bend", "consonant"].includes(a)) {
-    const turnOn = !ts.every(w => pair(w).cats.includes(a));
-    ts.forEach(w => setPair(w, p => { p.cats = p.cats.filter(c => c !== a); if (turnOn) p.cats.push(a); p.no = false; }));
-    changed();
-    return afterChange(true);
-  } else if (a === "no") {
-    const turnOn = !ts.every(w => pair(w).no);
-    ts.forEach(w => setPair(w, p => { p.no = turnOn; if (turnOn) p.cats = []; }));
-    changed();
-    return afterChange(true);
-  } else if (a === "hard" || a === "sharp") {
-    ts.forEach(w => setWord(w, o => { o.hs = (a === "sharp") === BY[w].sharp ? null : a; }));
-  } else if (a === "bookmark") {
-    const turnOn = !ts.every(w => word(w).bookmark);
-    ts.forEach(w => setWord(w, o => { o.bookmark = turnOn; }));
-    toast(turnOn ? `${ts.join(", ")} added to Explore` : "Removed from Explore");
-  } else if (a === "hide") {
-    ts.forEach(w => setWord(w, o => { o.hidden = true; }));
-    multi.clear();
-    toast(`${ts.join(", ")} hidden. Press Z to undo`);
-  } else if (a === "clear") {
-    ts.forEach(w => { delete state.words[w]; delete state.pairs[pk(start.label, w)]; });
-    toast(`Cleared everything for ${ts.join(", ")}`);
+  const n = ts.length > 1 ? `${ts.length} words` : ts[0];
+  if (a === "accept") {
+    const todo = ts.filter(w => !reviewed(w));
+    const ok = todo.filter(w => ACCEPT_AS[results.find(r => r.x.label === w).code]);
+    if (!todo.length) return toast("Already reviewed. Change it with the category buttons");
+    if (!ok.length) return toast("Close vowel: pick the category yourself");
+    mutate(() => ok.forEach(w => setPair(w, p => { p.cats = [ACCEPT_AS[results.find(r => r.x.label === w).code]]; p.no = false; })), true);
+    const skipped = todo.length - ok.length;
+    return toast(`Accepted ${ok.length}${skipped ? ` (${skipped} close-vowel left for you)` : ""}`);
   }
-  changed();
-  afterChange(false);
+  if (["twin", "near", "bend", "consonant"].includes(a)) {
+    const turnOn = !ts.every(w => pair(w).cats.includes(a));
+    return mutate(() => ts.forEach(w => setPair(w, p => { p.cats = p.cats.filter(c => c !== a); if (turnOn) p.cats.push(a); p.no = false; })), true);
+  }
+  if (a === "no") {
+    const turnOn = !ts.every(w => pair(w).no);
+    return mutate(() => ts.forEach(w => setPair(w, p => { p.no = turnOn; if (turnOn) p.cats = []; })), true);
+  }
+  if (a.startsWith("star")) {
+    const s = +a.slice(4);
+    const turnOn = !ts.every(w => word(w).star === s);
+    return mutate(() => ts.forEach(w => setWord(w, o => { o.star = turnOn ? s : 0; })), false);
+  }
+  if (a === "hard" || a === "sharp") return mutate(() => ts.forEach(w => setWord(w, o => { o.hs = (a === "sharp") === BY[w].sharp ? null : a; })), false);
+  if (a === "bookmark") {
+    const turnOn = !ts.every(w => word(w).bookmark);
+    mutate(() => ts.forEach(w => setWord(w, o => { o.bookmark = turnOn; })), false);
+    return toast(turnOn ? `${n} added to Explore` : "Removed from Explore");
+  }
+  if (a === "hide") {
+    mutate(() => ts.forEach(w => setWord(w, o => { o.hidden = true; })), false);
+    return toast(`${n} hidden. Undo brings it back`);
+  }
+  if (a === "clear") {
+    mutate(() => ts.forEach(w => { delete state.words[w]; delete state.pairs[pk(start.label, w)]; }), false);
+    return toast(`Cleared everything for ${n}`);
+  }
 }
 
 function confirmBox(html, yesLabel, onYes) {
   pending = onYes;
   const c = el("confirm");
-  c.innerHTML = `<span>${html}</span><button class="yes" id="cYes">${yesLabel} <span class="kbd">Enter</span></button><button id="cNo">Cancel <span class="kbd">Esc</span></button>`;
+  c.innerHTML = `<span>${html}</span><button class="yes" id="cYes">${yesLabel}</button><button id="cNo">Cancel</button>`;
   c.hidden = false;
   el("cYes").onclick = confirmYes;
   el("cNo").onclick = confirmNo;
 }
 function confirmYes() { const f = pending; confirmNo(); if (f) f(); }
 function confirmNo() { pending = null; el("confirm").hidden = true; }
-
 function askMouth(label, v) {
   const n = ENTRIES.filter(e => e.v === v).length;
   const ex = S.vowelExamples[v];
   confirmBox(`Change all ${n} words with the '${esc(ex)}' vowel to <b>${label}</b>?`, "Yes, change all", () => {
-    snapshot();
-    if (label === R.mouthOfVowel[v]) delete state.mouth[v];
-    else state.mouth[v] = { mouth: label, date: today() };
-    changed();
+    mutate(() => { if (label === R.mouthOfVowel[v]) delete state.mouth[v]; else state.mouth[v] = { mouth: label, date: today() }; }, false);
     toast(`The '${ex}' vowel is now ${label}`);
-    afterChange(false);
   });
 }
 
@@ -730,25 +972,36 @@ const ABOUT = {
   hidden: "Words removed from all lists.",
   syllables: "Version 1 has one-syllable words only.",
 };
-
-function exportLabels() {
+async function exportLabels() {
+  const stamp = new Date().toISOString();
   const out = {
-    format: "rhyme-lab-labels", version: 1, exported: new Date().toISOString(), about: ABOUT,
+    format: "rhyme-lab-labels", version: 1, exported: stamp, about: ABOUT,
     pairs: Object.entries(state.pairs).map(([k, p]) => ({ words: k.split("|"), categories: p.cats, not_a_rhyme: !!p.no, date: p.date })),
     words: Object.entries(state.words).map(([w, o]) => ({ word: w, star: o.star || null, hard_sharp: o.hs ? (o.hs === "sharp" ? "Sharp" : "Hard") : null, explore: !!o.bookmark, hidden: !!o.hidden, date: o.date })),
     vowel_mouth: Object.entries(state.mouth).map(([v, m]) => ({ vowel: v, example: S.vowelExamples[v], mouth: m.mouth, date: m.date })),
   };
-  const blob = new Blob([JSON.stringify(out, null, 2)], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "labels.json";
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-  state.lastExport = out.exported; state.changedSinceExport = false; persist();
-  renderExportInfo();
-  toast(`Exported labels.json (${out.pairs.length} pairs, ${out.words.length} words)`);
+  const text = JSON.stringify(out, null, 2);
+  let saved = false;
+  const dl = window.claude && typeof window.claude.use === "function" ? await window.claude.use("downloads").catch(() => null) : null;
+  if (dl) {
+    try { await dl.save({ filename: "labels.json", data: text }); saved = true; }
+    catch (e) { return toast(e && e.code === "declined" ? "Export cancelled" : "Export did not work here (" + ((e && e.code) || "error") + ")"); }
+  } else {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([text], { type: "application/json" }));
+    a.download = "labels.json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    saved = true;
+  }
+  if (saved) {
+    const before = clone(state);
+    state.lastExport = stamp; state.changedSinceExport = false;
+    commit(before);
+    renderExportInfo();
+    toast(`Exported labels.json (${out.pairs.length} pairs, ${out.words.length} words)`);
+  }
 }
-
 function importLabels(file) {
   const reader = new FileReader();
   reader.onload = () => {
@@ -756,33 +1009,39 @@ function importLabels(file) {
     try { d = JSON.parse(reader.result); } catch (e) { return toast("That file is not a labels.json file (it could not be read)"); }
     if (!d || d.format !== "rhyme-lab-labels") return toast("That file is not a Rhyme Lab labels.json file");
     confirmBox(`Replace your current labels with this file? It has ${(d.pairs || []).length} pairs and ${(d.words || []).length} words, exported ${esc((d.exported || "").slice(0, 10))}.`, "Replace", () => {
-      snapshot();
       const ns = emptyState();
       (d.pairs || []).forEach(p => { if (p.words && p.words.length === 2) ns.pairs[pk(p.words[0], p.words[1])] = { cats: p.categories || [], no: !!p.not_a_rhyme, date: p.date }; });
       (d.words || []).forEach(o => { ns.words[o.word] = { star: o.star || 0, hs: o.hard_sharp ? o.hard_sharp.toLowerCase() : null, bookmark: !!o.explore, hidden: !!o.hidden, date: o.date }; });
       (d.vowel_mouth || []).forEach(m => { ns.mouth[m.vowel] = { mouth: m.mouth, date: m.date }; });
-      ns.lastExport = d.exported || null;
-      state = ns; persist();
-      toast("Labels imported. Z undoes the import");
-      afterChange(false);
+      mutate(() => { state = ns; }, false);
+      const before = clone(state);
+      state.lastExport = d.exported || null; state.changedSinceExport = false;
+      commit(before);
+      toast("Labels imported. Undo takes the import back");
     });
   };
   reader.readAsText(file);
 }
 
 // ---- Events ----
+function openDrawer() { document.body.classList.add("drawer-open"); }
+function closeDrawer() { document.body.classList.remove("drawer-open"); }
+el("menuBtn").addEventListener("click", openDrawer);
+el("closeDrawer").addEventListener("click", closeDrawer);
 el("groups").addEventListener("click", e => {
   const b = e.target.closest(".chip"); if (!b) return;
   const w = b.dataset.w;
-  if (e.ctrlKey || e.metaKey) {
-    if (!multi.size && current && order.includes(current)) multi.add(current);
+  if (selectMode || e.ctrlKey || e.metaKey) {
+    if (!multi.size && current && order.includes(current) && !selectMode) multi.add(current);
     if (multi.has(w)) multi.delete(w); else multi.add(w);
     current = w;
   } else { multi.clear(); current = w; }
   render();
 });
+el("selectBtn").addEventListener("click", () => { selectMode = !selectMode; multi.clear(); if (selectMode) current = null; render(); });
+document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => { view = b.dataset.view; savePrefs(); render(); }));
 document.querySelectorAll("[data-act]").forEach(b => b.addEventListener("click", () => act(b.dataset.act)));
-el("addPairBtn").addEventListener("click", () => toast("Adding a pair by hand comes in Step 3"));
+el("addPairBtn").addEventListener("click", () => toast("Adding a pair by hand comes in the next step"));
 el("exportBtn").addEventListener("click", exportLabels);
 el("importBtn").addEventListener("click", () => el("importFile").click());
 el("importFile").addEventListener("change", e => { if (e.target.files[0]) importLabels(e.target.files[0]); e.target.value = ""; });
@@ -792,14 +1051,19 @@ document.addEventListener("click", e => {
   const ex = e.target.closest("[data-explore]");
   if (ex) search(BY[ex.dataset.explore].word, ex.dataset.explore);
   const uh = e.target.closest("[data-unhide]");
-  if (uh) { snapshot(); setWord(uh.dataset.unhide, o => { o.hidden = false; }); changed(); toast(`${uh.dataset.unhide} is back`); render(); }
+  if (uh) { if (!isReady()) return; mutate(() => setWord(uh.dataset.unhide, o => { o.hidden = false; }), false); toast(`${uh.dataset.unhide} is back`); }
   const pr = e.target.closest("[data-pron]");
   if (pr) search(start.word, pr.dataset.pron);
+  const sa = e.target.closest("[data-selall]");
+  if (sa) { selectMode = true; current = null; multi = new Set(groupMembers[sa.dataset.selall] || []); render(); }
+  if (e.target.closest("#moreBtn")) { el("sheet").classList.toggle("more-open"); sizeSheet(); }
+  if (e.target.closest("#closeSheet")) { multi.clear(); current = null; selectMode = false; render(); }
 });
-["poolBend", "poolClose", "poolCons", "unreviewed", "autoAdvance"].forEach(id => el(id).addEventListener("change", () => { savePrefs(); render(); }));
+["poolBend", "poolClose", "poolCons", "autoAdvance"].forEach(id => el(id).addEventListener("change", () => { savePrefs(); render(); }));
 rarity.addEventListener("input", () => { el("rarityOut").textContent = rarity.value; savePrefs(); render(); });
-el("helpBtn").addEventListener("click", () => { el("help").hidden = false; });
+el("helpBtn").addEventListener("click", () => { closeDrawer(); el("help").hidden = false; });
 el("help").addEventListener("click", e => { if (e.target.id === "help") e.currentTarget.hidden = true; });
+window.addEventListener("resize", sizeSheet);
 
 const KEYMAP = { "1": "star1", "2": "star2", "3": "star3", "4": "hide", a: "twin", s: "near", d: "bend", c: "consonant", n: "no", g: "hard", h: "sharp", t: "closed", y: "slight", u: "open", b: "bookmark", x: "clear", z: "undo" };
 document.addEventListener("keydown", e => {
@@ -817,6 +1081,7 @@ document.addEventListener("keydown", e => {
   if (e.ctrlKey && (k === "q" || k === "e")) { e.preventDefault(); return jumpGroup(k === "q" ? -1 : 1); }
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   if (e.key === "?") { e.preventDefault(); help.hidden = false; return; }
+  if (e.key === "Enter") { e.preventDefault(); return act("accept"); }
   if (k === "f") { e.preventDefault(); const s = el("search"); s.focus(); s.select(); return; }
   if (k === "q" || e.key === "ArrowUp") { e.preventDefault(); return move(-1); }
   if (k === "e" || e.key === "ArrowDown") { e.preventDefault(); return move(1); }
@@ -830,9 +1095,17 @@ rarity.value = prefs.rarity || S.commonCutoff;
 el("rarityOut").textContent = rarity.value;
 ["poolBend", "poolClose", "poolCons"].forEach(id => { if (id in prefs) el(id).checked = prefs[id]; });
 el("autoAdvance").checked = !!prefs.autoAdvance;
-document.getElementById("storageBanner").hidden = storageOk;
+if (["all", "unreviewed", "nostar"].includes(prefs.view)) view = prefs.view;
+
+function ready() { render(); }
 const first = prefs.start && BY[prefs.start] ? prefs.start : "god";
 search(BY[first] ? BY[first].word : ENTRIES[0].word, BY[first] ? first : null);
+renderStatus();
+if (window.claude && typeof window.claude.use === "function") {
+  window.claude.use("db").then(db => { if (db) startClaude(db); else startLocal(); }, () => startLocal());
+} else {
+  startLocal();
+}
 </script>
 </body>
 </html>

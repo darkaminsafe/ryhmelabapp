@@ -3,7 +3,8 @@ RHYME LAB - BUILD SCRIPT
 
 Downloads the two word lists (if not already downloaded), keeps the common
 one-syllable words, applies rules.py, and writes:
-    rhyme-lab.html         the page you open (made from page-template.html)
+    rhyme-lab.html         the page you open on a computer (made from page-template.html)
+    rhyme-lab-claude.html  the same page, shaped for publishing as a private Claude page
     word-list.txt          every word kept, with its labels
     test-results.txt       rhymes for the test words
     syllable-families.txt  all ending-sound families, biggest first
@@ -284,6 +285,14 @@ def write_page(words):
     with open(os.path.join(HERE, "rhyme-lab.html"), "w", encoding="utf-8") as f:
         f.write(page)
 
+    # The Claude version: Claude adds the outer page frame itself, so it gets
+    # only the title, the style and the body.
+    title = page[page.index("<title>"):page.index("</title>") + len("</title>")]
+    style = page[page.index("<style>"):page.index("</style>") + len("</style>")]
+    body = page[page.index("<body>") + len("<body>"):page.rindex("</body>")]
+    with open(os.path.join(HERE, "rhyme-lab-claude.html"), "w", encoding="utf-8") as f:
+        f.write(title + "\n" + style + "\n" + body)
+
 
 CODE_LETTER = {"twin": "T", "near": "N", "bendc": "B", "close": "C", "consm": "M", None: "-"}
 
@@ -348,7 +357,7 @@ def main():
     print("Symmetry check:", "OK" if problems == 0 else "%d PROBLEMS" % problems)
     check = cross_check(words)
     print("Page rules vs rules.py:", check)
-    print("Wrote rhyme-lab.html, word-list.txt, test-results.txt, syllable-families.txt")
+    print("Wrote rhyme-lab.html, rhyme-lab-claude.html, word-list.txt, test-results.txt, syllable-families.txt")
     if "PROBLEMS" in check:
         sys.exit("STOPPED: the page and rules.py disagree. Do not use this rhyme-lab.html.")
 

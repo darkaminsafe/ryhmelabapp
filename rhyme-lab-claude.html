@@ -100,7 +100,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .line { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 10px; align-items: start; margin-bottom: 8px; }
 .line .side { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); padding-top: 11px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { display: flex; align-items: center; background: var(--raise); border: 2px solid transparent; border-radius: 9px; padding: 6px 12px; -webkit-tap-highlight-color: transparent; }
+.chip { display: flex; align-items: center; background: var(--raise); border: 2px solid transparent; border-radius: 9px; padding: 6px 12px; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: manipulation; }
 .chip .w { font-size: 1.22rem; font-weight: 700; display: flex; align-items: center; gap: 5px; }
 .chip.guess { background: transparent; border-style: dashed; border-color: var(--line); }
 .chip.guess .w { font-weight: 400; color: #c7c8d6; }
@@ -114,6 +114,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .sel-line { display: flex; align-items: center; gap: 8px; }
 .sel-word { font-family: var(--display); font-size: 2rem; font-weight: 700; line-height: 1.1; display: flex; align-items: center; gap: 8px; overflow-wrap: anywhere; flex: 1; min-width: 0; }
 .sheet-tools { display: none; gap: 6px; }
+.donebtn { background: var(--accent); color: #121320; border: 0; border-radius: 8px; padding: 6px 14px; font-weight: 700; font-size: .95rem; flex: none; }
 .sheet-tools button { background: var(--raise); border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; font-size: .85rem; color: var(--muted); }
 .facts { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: .92rem; margin: 10px 0 4px; }
 .facts dt { color: var(--muted); }
@@ -337,10 +338,11 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
       <tr><td><span class="kbd">Ctrl+Q</span> <span class="kbd">Ctrl+E</span></td><td>Previous / next group</td></tr>
       <tr><td><span class="kbd">X</span></td><td>Clear everything for this word</td></tr>
       <tr><td><span class="kbd">Z</span></td><td>Undo</td></tr>
+      <tr><td><span class="kbd">Esc</span></td><td>Clear the selection</td></tr>
       <tr><td><span class="kbd">F</span></td><td>Go to the search box (Enter searches, Esc leaves the box)</td></tr>
       <tr><td><span class="kbd">?</span></td><td>Show or close this list</td></tr>
     </table>
-    <p class="note">On the phone: tap a word to open the buttons. Tap Select to pick many words, or "select all" on a group. Tap ⋯ for the Mouth buttons.</p>
+    <p class="note">On the phone: tap a word to open the buttons. Hold a word (or tap Select) to pick many words, or use "select all" on a group. Words stay selected after each button until you tap Done, so you can Accept and star them in one go. Tap ⋯ for the Mouth buttons. On the PC, Esc clears the selection.</p>
   </div>
 </div>
 
@@ -467,7 +469,8 @@ let state = emptyState();
 const LOCAL_KEY = "rhymeLab.labels.v1";
 const PREFS_KEY = "rhymeLab.prefs.v1";
 const BUCKETS = { pairs: 64, words: 16 };   // labels are kept in a fixed number of storage boxes
-const store = { mode: "loading", db: null, dirty: new Set(), inflight: new Set(), timer: null, error: null, waiting: 3 };
+const store = { mode: "loading", db: null, dirty: new Set(), inflight: new Set(), timer: null, error: null, waiting: 3, savedAt: {} };
+const IGNORE_REMOTE_MS = 20000;   // after saving a box, ignore older copies of it coming back for this long
 
 function bucketOf(key, n) {
   let h = 5381;
@@ -506,6 +509,7 @@ function flush() {
     store.inflight.add(path);
     store.db.doc(path).set(bodyFor(path)).then(() => {
       store.inflight.delete(path);
+      store.savedAt[path] = Date.now();
       if (store.dirty.has(path)) flush();
       renderStatus();
     }, err => {
@@ -523,6 +527,7 @@ function flush() {
 function applyRemote(kind, id, body) {
   const path = kind + "/" + id;
   if (store.dirty.has(path) || store.inflight.has(path)) return;   // our own newer change wins
+  if (Date.now() - (store.savedAt[path] || 0) < IGNORE_REMOTE_MS) return;
   if (kind === "meta") {
     if (id === "mouth") state.mouth = (body && body.items) || {};
     if (id === "info" && body) { state.lastExport = body.lastExport || null; state.changedSinceExport = !!body.changedSinceExport; }
@@ -618,7 +623,6 @@ function mutate(fn, advance) {
   history.push(before);
   if (history.length > 100) history.shift();
   commit(before);
-  multi.clear();
   afterChange(advance);
 }
 
@@ -663,8 +667,9 @@ function passes(r) {
   const x = r.x, o = word(x.label);
   if (o.hidden) return false;
   if (x.rank > +rarity.value) return false;
-  if (view === "unreviewed" && reviewed(x.label)) return false;
-  if (view === "nostar" && o.star) return false;
+  const sticky = multi.size ? multi.has(x.label) : x.label === current;   // selected words stay until you're done
+  if (view === "unreviewed" && reviewed(x.label) && !sticky) return false;
+  if (view === "nostar" && o.star && !sticky) return false;
   if (filters.star !== "any" && String(o.star || 0) !== filters.star) return false;
   if (filters.hs !== "any" && (isSharp(x.label) ? "sharp" : "hard") !== filters.hs) return false;
   if (filters.mouth !== "any" && mouthOf(x.v) !== filters.mouth) return false;
@@ -761,13 +766,13 @@ function renderDetail() {
   const tools = `<div class="sheet-tools"><button id="moreBtn" aria-label="More buttons">⋯</button><button id="closeSheet" aria-label="Close">✕</button></div>`;
   if (!hasSel) {
     box.innerHTML = selectMode
-      ? `<div class="sel-line"><div class="sel-word" style="font-size:1.1rem">Tap words to select them</div>${tools}</div>`
+      ? `<div class="sel-line"><div class="sel-word" style="font-size:1.1rem">Tap words to select them</div><button class="donebtn" id="doneSel">Done</button>${tools}</div>`
       : `<div class="label">Selected</div><p class="verdict">Click a word, or press E to start at the top.</p>`;
     markButtons(null);
     return sizeSheet();
   }
   if (multi.size > 1) {
-    box.innerHTML = `<div class="label">Selected</div><div class="sel-line"><div class="sel-word">${multi.size} words</div>${tools}</div><p class="verdict">Every button applies to all of them.</p>`;
+    box.innerHTML = `<div class="label">Selected</div><div class="sel-line"><div class="sel-word">${multi.size} selected</div><button class="donebtn" id="doneSel">Done</button>${tools}</div><p class="verdict">Every button applies to all of them. They stay selected until you tap Done.</p>`;
     markButtons(null);
     return sizeSheet();
   }
@@ -784,7 +789,7 @@ function renderDetail() {
   if (o.hs && (o.hs === "sharp") !== x.sharp) warn = `<div class="warn">⚠ You set ${hsLabel}, but the sounds say ${x.sharp ? "Sharp" : "Hard"}. Your choice is kept.</div>`;
   box.innerHTML = `
     <div class="label">Selected</div>
-    <div class="sel-line"><div class="sel-word">${st}${esc(x.label)}</div>${tools}</div>
+    <div class="sel-line"><div class="sel-word">${st}${esc(x.label)}</div>${selectMode ? `<button class="donebtn" id="doneSel">Done</button>` : ""}${tools}</div>
     <dl class="facts">
       <dt>Sounds</dt><dd class="mono">${esc(x.sounds)}</dd>
       <dt>Mouth</dt><dd>${mouthOf(x.v)}</dd>
@@ -1011,8 +1016,31 @@ function openDrawer() { document.body.classList.add("drawer-open"); }
 function closeDrawer() { document.body.classList.remove("drawer-open"); }
 el("menuBtn").addEventListener("click", openDrawer);
 el("closeDrawer").addEventListener("click", closeDrawer);
+// Long hold on a word (phone or mouse) switches on multi-select.
+let hold = null, swallowClick = false;
+el("groups").addEventListener("pointerdown", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  const x0 = e.clientX, y0 = e.clientY, w = b.dataset.w;
+  clearTimeout(hold && hold.t);
+  hold = { x0, y0, t: setTimeout(() => {
+    hold = null;
+    swallowClick = w;   // the click that ends this hold must not unselect the word again
+    selectMode = true;
+    if (!multi.size && current && order.includes(current) && current !== w) multi.add(current);
+    multi.add(w); current = w;
+    if (navigator.vibrate) { try { navigator.vibrate(30); } catch (err) { /* not supported */ } }
+    render();
+  }, 500) };
+});
+const cancelHold = () => { if (hold) { clearTimeout(hold.t); hold = null; } };
+el("groups").addEventListener("pointermove", e => { if (hold && Math.hypot(e.clientX - hold.x0, e.clientY - hold.y0) > 10) cancelHold(); });
+["pointerup", "pointercancel", "pointerleave"].forEach(n => el("groups").addEventListener(n, cancelHold));
+// Some phones send no click after a long hold, so only ignore a click that comes right away.
+el("groups").addEventListener("pointerup", () => { if (swallowClick) setTimeout(() => { swallowClick = false; }, 350); });
+el("groups").addEventListener("contextmenu", e => { if (e.target.closest(".chip")) e.preventDefault(); });
 el("groups").addEventListener("click", e => {
   const b = e.target.closest(".chip"); if (!b) return;
+  if (swallowClick) { const same = swallowClick === b.dataset.w; swallowClick = false; if (same) return; }
   const w = b.dataset.w;
   if (selectMode || e.ctrlKey || e.metaKey) {
     if (!multi.size && current && order.includes(current) && !selectMode) multi.add(current);
@@ -1021,7 +1049,8 @@ el("groups").addEventListener("click", e => {
   } else { multi.clear(); current = w; }
   render();
 });
-el("selectBtn").addEventListener("click", () => { selectMode = !selectMode; multi.clear(); if (selectMode) current = null; render(); });
+function clearSelection() { multi.clear(); current = null; selectMode = false; render(); }
+el("selectBtn").addEventListener("click", () => { if (selectMode) return clearSelection(); selectMode = true; multi.clear(); current = null; render(); });
 document.querySelectorAll("[data-view]").forEach(b => b.addEventListener("click", () => { view = b.dataset.view; savePrefs(); render(); }));
 document.querySelectorAll("[data-act]").forEach(b => b.addEventListener("click", () => act(b.dataset.act)));
 el("addPairBtn").addEventListener("click", () => toast("Adding a pair by hand comes in the next step"));
@@ -1040,7 +1069,7 @@ document.addEventListener("click", e => {
   const sa = e.target.closest("[data-selall]");
   if (sa) { selectMode = true; current = null; multi = new Set(groupMembers[sa.dataset.selall] || []); render(); }
   if (e.target.closest("#moreBtn")) { el("sheet").classList.toggle("more-open"); sizeSheet(); }
-  if (e.target.closest("#closeSheet")) { multi.clear(); current = null; selectMode = false; render(); }
+  if (e.target.closest("#closeSheet") || e.target.closest("#doneSel")) clearSelection();
 });
 ["poolBend", "poolClose", "poolCons", "autoAdvance"].forEach(id => el(id).addEventListener("change", () => { savePrefs(); render(); }));
 rarity.addEventListener("input", () => { el("rarityOut").textContent = rarity.value; savePrefs(); render(); });
@@ -1065,6 +1094,7 @@ document.addEventListener("keydown", e => {
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   if (e.key === "?") { e.preventDefault(); help.hidden = false; return; }
   if (e.key === "Enter") { e.preventDefault(); return act("accept"); }
+  if (e.key === "Escape") { e.preventDefault(); return clearSelection(); }
   if (k === "f") { e.preventDefault(); const s = el("search"); s.focus(); s.select(); return; }
   if (k === "q" || e.key === "ArrowUp") { e.preventDefault(); return move(-1); }
   if (k === "e" || e.key === "ArrowDown") { e.preventDefault(); return move(1); }

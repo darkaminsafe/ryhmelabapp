@@ -113,6 +113,8 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .group h2 .hint { font-family: var(--body); font-weight: 400; font-size: .78rem; color: var(--faint); }
 .group h2 .selall { margin-left: auto; font-family: var(--body); font-weight: 400; font-size: .82rem; background: transparent; border: 1px solid var(--line); border-radius: 7px; padding: 2px 9px; color: var(--muted); }
 .group.pool h2 { color: var(--muted); }
+h3.level { font-family: var(--display); font-size: 1.3rem; margin: 22px 0 4px; padding: 6px 0; border-bottom: 2px solid var(--accent); display: flex; gap: 10px; align-items: baseline; }
+h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; color: var(--muted); }
 .line { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 10px; align-items: start; margin-bottom: 8px; }
 .line .side { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); padding-top: 11px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -274,6 +276,8 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
       <div class="seg" data-filter="mouth"></div>
       <div class="label">Ends on</div>
       <div class="seg" data-filter="ends"></div>
+      <div class="label">Syllables</div>
+      <div class="seg" data-filter="syl"></div>
       <div class="label">Suggestion pools</div>
       <label class="check"><input type="checkbox" id="poolBend" checked> Bend candidates</label>
       <label class="check"><input type="checkbox" id="poolClose" checked> Close vowel</label>
@@ -408,6 +412,9 @@ function makeRules(S) {
   const pairSet = list => { const s = new Set(); list.forEach(([a, b]) => { s.add(a + "|" + b); s.add(b + "|" + a); }); return s; };
   const twinSet = pairSet(S.twins);
   const closeSet = pairSet(S.closeVowels);
+  const sameSet = pairSet(S.sameVowels);
+  const sameVowel = (a, b) => a === b || sameSet.has(a + "|" + b);
+  const closeVowel = (a, b) => closeSet.has(a + "|" + b);
   const famOf = {};
   for (const [name, members] of Object.entries(S.families)) members.forEach(m => { famOf[m] = name; });
   const sharpSet = new Set(S.sharpSounds);
@@ -417,10 +424,19 @@ function makeRules(S) {
   const show = e => e.length ? e.join(" ") : "(vowel)";
   const dropOne = (arr, i) => arr.slice(0, i).concat(arr.slice(i + 1));
 
+  // sounds come WITH stress numbers: "R EH1 M AH0 D IY0"
   function parse(sounds) {
-    const all = sounds.split(" ");
+    const raw = sounds.split(" ");
+    const all = raw.map(x => x.replace(/[012]$/, ""));
+    const vow = [];
+    let last = -1;
+    raw.forEach((x, i) => { if (VOW.has(all[i])) { vow.push([all[i], /[012]$/.test(x) ? x.slice(-1) : "0"]); last = i; } });
+    let main = vow.findIndex(([v, st]) => st === "1");
+    if (main < 0) main = 0;
     const i = all.findIndex(x => VOW.has(x));
-    return { all, start: all.slice(0, i), v: all[i], end: all.slice(i + 1) };
+    const rhyme = vow.slice(main);
+    return { all, start: all.slice(0, i), v: rhyme[0][0], end: all.slice(i + 1), syl: vow.length,
+             rhyme, ending: all.slice(last + 1), beforeLast: last > 0 ? all[last - 1] : null };
   }
 
   function endingMatch(ea, eb) {
@@ -453,15 +469,47 @@ function makeRules(S) {
     return null;
   }
 
-  // Returns [code, reason]. Codes: twin, near, bendc, close, consm, or null.
+  function classifyLong(A, B) {
+    const ra = A.rhyme, rb = B.rhyme;
+    let i = ra.length - 1, j = rb.length - 1;
+    if (!(sameVowel(ra[i][0], rb[j][0]) || closeVowel(ra[i][0], rb[j][0]))) return [null, null, 0];
+    let matched = 0, close = 0;
+    while (i >= 0 && j >= 0) {
+      const va = ra[i][0], vb = rb[j][0];
+      if (sameVowel(va, vb) || closeVowel(va, vb)) { matched++; if (!sameVowel(va, vb)) close++; i--; j--; }
+      else if (i < ra.length - 1 && va === S.skippable && ra[i][1] === "0") i--;
+      else if (j < rb.length - 1 && vb === S.skippable && rb[j][1] === "0") j--;
+      else break;
+    }
+    if (eq(A.all, B.all)) return ["twin", "sounds identical (same-sound word)", matched];
+    const [end, endWhy] = endingMatch(A.ending, B.ending);
+    const what = `${matched} syllable${matched === 1 ? "" : "s"} match`;
+    if (close === 0) {
+      if (end === "twin") return ["twin", `${what}, same end`, matched];
+      if (end === "near") return ["near", `${what}, ${endWhy}`, matched];
+      return ["bendc", `${what}, different end (${show(A.ending)} vs ${show(B.ending)})`, matched];
+    }
+    if (close === 1 && end) return ["close", `${what}, one vowel only close, ${endWhy}`, matched];
+    if (matched >= 2) return ["bendc", `${what}, vowels only close and different end`, matched];
+    return [null, null, 0];
+  }
+
+  // Returns [code, reason, matched]. Codes: twin, near, bendc, close, consm, or null.
+  // matched = how many syllables of word A's rhyme part were matched.
   function classify(A, B) {
-    if (A.v === B.v) {
+    if (A.syl > 1 || B.syl > 1) return classifyLong(A, B);
+    const [code, why] = classifyOne(A, B);
+    return [code, why, ["twin", "near", "bendc", "close"].includes(code) ? 1 : 0];
+  }
+
+  function classifyOne(A, B) {
+    if (sameVowel(A.v, B.v)) {
       if (eq(A.all, B.all)) return ["twin", "sounds identical (same-sound word)"];
       const [c, why] = endingMatch(A.end, B.end);
       if (c) return [c, `same vowel ${A.v}, ${why}`];
       return ["bendc", `same vowel ${A.v}, different ending (${show(A.end)} vs ${show(B.end)})`];
     }
-    if (closeSet.has(A.v + "|" + B.v)) {
+    if (closeVowel(A.v, B.v)) {
       const [c, why] = endingMatch(A.end, B.end);
       if (c) return ["close", `close vowels ${A.v} / ${B.v}, ${why}`];
     }
@@ -485,7 +533,7 @@ const S = DATA.settings;
 const R = makeRules(S);
 const ENTRIES = DATA.words.map(([label, word, sounds, rank]) => {
   const P = R.parse(sounds);
-  return { label, word, sounds, rank, P, v: P.v, sharp: R.isSharp(P), vowelEnd: P.end.length === 0 };
+  return { label, word, sounds, rank, P, v: P.v, sharp: R.isSharp(P), vowelEnd: P.ending.length === 0 };
 });
 const BY = Object.fromEntries(ENTRIES.map(e => [e.label, e]));
 const BY_WORD = {};
@@ -508,6 +556,7 @@ const GUESS_NAME = { twin: "Twin", near: "Near", bendc: "Bend candidate", close:
 const ACCEPT_AS = { twin: "twin", near: "near", bendc: "bend", consm: "consonant", close: null };
 const STAR_COLOR = S.starColours;
 const today = () => new Date().toISOString().slice(0, 10);
+const showSounds = s => s.replace(/[012]/g, "");
 const el = id => document.getElementById(id);
 const clone = o => JSON.parse(JSON.stringify(o));
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -518,7 +567,7 @@ let state = emptyState();
 
 // ---- Saving: Claude storage when the page runs inside Claude, else this browser ----
 const LOCAL_KEY = "rhymeLab.labels.v1";
-const PREFS_KEY = "rhymeLab.prefs.v1";
+const PREFS_KEY = "rhymeLab.prefs.v2";
 const BUCKETS = { pairs: 64, words: 16, added: 8 };   // labels are kept in a fixed number of storage boxes
 const store = { mode: "loading", db: null, dirty: new Set(), inflight: new Set(), timer: null, error: null, waiting: 4, savedAt: {} };
 const IGNORE_REMOTE_MS = 20000;   // after saving a box, ignore older copies of it coming back for this long
@@ -641,7 +690,9 @@ let current = null;      // selected label
 let multi = new Set();
 let selectMode = false;
 let view = "all";        // all | unreviewed | nostar
-const filters = { cat: "any", star: "any", hs: "any", mouth: "any", ends: "any" };
+const filters = { cat: "any", star: "any", hs: "any", mouth: "any", ends: "any", syl: "any" };
+let expanded = new Set();   // groups where you tapped "show all"
+const SHOW_FIRST = 200;     // words shown per group before "show all"
 let pending = null;      // in-page confirm action
 const rarity = el("rarity");
 
@@ -687,7 +738,7 @@ function search(q, pickLabel) {
     el("startHead").innerHTML = "";
     el("viewbar").hidden = true;
     el("fab").hidden = true;
-    el("groups").innerHTML = `<p class="notfound">"${esc(q)}" is not in the word list. Version 1 only has common one-syllable words.</p>`;
+    el("groups").innerHTML = `<p class="notfound">"${esc(q)}" is not in the word list (it may be too rare, a name, or missing from the dictionary). Use + Add to save it as your own idea.</p>`;
     renderSide();
     return;
   }
@@ -696,11 +747,12 @@ function search(q, pickLabel) {
   results = [];
   for (const x of ENTRIES) {
     if (x.word === start.word) continue;
-    const [code, why] = R.classify(start.P, x.P);
-    if (code) results.push({ x, code, why });
+    const [code, why, matched] = R.classify(start.P, x.P);
+    if (code) results.push({ x, code, why, matched });
   }
   multi.clear();
   current = null;
+  expanded = new Set();
   savePrefs();
   render();
   if (!current && order.length && !isPhone()) { current = order[0]; render(); }
@@ -727,9 +779,11 @@ function passes(r) {
   if (filters.hs !== "any" && (isSharp(x.label) ? "sharp" : "hard") !== filters.hs) return false;
   if (filters.mouth !== "any" && mouthOf(x.v) !== filters.mouth) return false;
   if (filters.ends !== "any" && (x.vowelEnd ? "vowel" : "consonant") !== filters.ends) return false;
+  if (filters.syl !== "any" && String(Math.min(x.P.syl, 4)) !== filters.syl) return false;
   return true;
 }
-const sortWords = (a, b) => ((word(a.label).star || 9) - (word(b.label).star || 9)) || a.rank - b.rank;
+const frontMatch = x => (start && x.P.beforeLast && x.P.beforeLast === start.P.beforeLast ? 0 : 1);
+const sortWords = (a, b) => ((word(a.label).star || 9) - (word(b.label).star || 9)) || (frontMatch(a) - frontMatch(b)) || a.rank - b.rank;
 
 let order = [];
 let groupStarts = [];
@@ -742,14 +796,17 @@ function chip(x, mine) {
   if (x.label === current && !multi.size) cls.push("sel");
   if (multi.has(x.label)) cls.push("multi");
   const star = st ? `<span class="star" style="color:${STAR_COLOR[st]}" aria-label="P${st}">★</span>` : "";
-  return `<button class="${cls.join(" ")}" data-w="${esc(x.label)}" title="${esc(x.sounds)}"><span class="w">${star}${esc(x.label)}</span></button>`;
+  return `<button class="${cls.join(" ")}" data-w="${esc(x.label)}" title="${esc(showSounds(x.sounds))}"><span class="w">${star}${esc(x.label)}</span></button>`;
 }
-function renderGroup(id, title, color, hint, items, isPool) {
-  const hard = items.filter(i => !isSharp(i.x.label)).sort((a, b) => sortWords(a.x, b.x));
-  const sharp = items.filter(i => isSharp(i.x.label)).sort((a, b) => sortWords(a.x, b.x));
+function renderGroup(id, title, color, hint, items, isPool, gid) {
+  gid = gid || id;
+  const all = items.slice().sort((a, b) => sortWords(a.x, b.x));
+  const cut = expanded.has(gid) ? all : all.slice(0, SHOW_FIRST);
+  const hard = cut.filter(i => !isSharp(i.x.label));
+  const sharp = cut.filter(i => isSharp(i.x.label));
   groupStarts.push(order.length);
-  groupMembers[id] = items.map(i => i.x.label);
-  const selAll = items.length > 1 ? `<button class="selall" data-selall="${id}">select all</button>` : "";
+  groupMembers[gid] = cut.map(i => i.x.label);
+  const selAll = items.length > 1 ? `<button class="selall" data-selall="${gid}">select all</button>` : "";
   let html = `<section class="group${isPool ? " pool" : ""}"><h2>${color ? `<span class="dot" style="background:${color}"></span>` : ""}${title} <span class="count">${items.length}</span>${hint ? `<span class="hint">${hint}</span>` : ""}${selAll}</h2>`;
   if (!items.length) html += `<div class="empty-group">${id === "bend" || id === "consonant" ? "Empty until you assign words here" : "Nothing here with the current view and filters"}</div>`;
   for (const [side, list] of [["Hard", hard], ["Sharp", sharp]]) {
@@ -757,18 +814,19 @@ function renderGroup(id, title, color, hint, items, isPool) {
     list.forEach(i => { if (!order.includes(i.x.label)) order.push(i.x.label); });
     html += `<div class="line"><div class="side">${side}</div><div class="chips">${list.map(i => chip(i.x, i.mine)).join("")}</div></div>`;
   }
+  if (cut.length < all.length) html += `<div class="empty-group"><button class="selall" data-showall="${gid}">show all ${all.length}</button></div>`;
   return html + "</section>";
 }
 function renderHead() {
   const s = start;
   const prons = BY_WORD[s.word].length > 1
-    ? `<div class="prons">${BY_WORD[s.word].map(e => `<button data-pron="${esc(e.label)}" aria-pressed="${e.label === s.label}">${esc(e.sounds)}</button>`).join("")}</div>` : "";
+    ? `<div class="prons">${BY_WORD[s.word].map(e => `<button data-pron="${esc(e.label)}" aria-pressed="${e.label === s.label}">${esc(showSounds(e.sounds))}</button>`).join("")}</div>` : "";
   const visible = results.filter(r => !word(r.x.label).hidden && r.x.rank <= +rarity.value);
   const done = visible.filter(r => reviewed(r.x.label)).length;
   const starred = visible.filter(r => word(r.x.label).star).length;
   el("startHead").innerHTML = `
-    <div class="head"><h1>${esc(s.word)}</h1><span class="mono">${esc(s.sounds)}</span></div>${prons}
-    <div class="tags"><span class="tag">${mouthOf(s.v)}</span><span class="tag">ends on ${s.vowelEnd ? "Vowel" : "Consonant"}</span><span class="tag">${isSharp(s.label) ? "Sharp" : "Hard"}</span><span class="tag">1 syllable</span><span class="tag">rank ${s.rank}</span></div>
+    <div class="head"><h1>${esc(s.word)}</h1><span class="mono">${esc(showSounds(s.sounds))}</span></div>${prons}
+    <div class="tags"><span class="tag">${mouthOf(s.v)}</span><span class="tag">ends on ${s.vowelEnd ? "Vowel" : "Consonant"}</span><span class="tag">${isSharp(s.label) ? "Sharp" : "Hard"}</span><span class="tag">${s.P.syl} syllable${s.P.syl === 1 ? "" : "s"}</span><span class="tag">rank ${s.rank}</span></div>
     <div class="progress">Reviewed ${done} of ${visible.length} · Starred ${starred} of ${visible.length}</div>`;
   el("viewbar").hidden = false;
   el("fab").hidden = !el("qa").hidden;
@@ -781,7 +839,7 @@ function addHandAddedResults() {
     if (!p.added) continue;
     const [a, b] = k.split("|");
     const other = a === start.label ? b : b === start.label ? a : null;
-    if (other && BY[other] && !results.some(r => r.x.label === other)) results.push({ x: BY[other], code: null, why: "added by you" });
+    if (other && BY[other] && !results.some(r => r.x.label === other)) results.push({ x: BY[other], code: null, why: "added by you", matched: 0 });
   }
 }
 const addedFor = () => Object.entries(state.added).filter(([k, a]) => a.start === start.label);
@@ -795,23 +853,40 @@ function render() {
   order = []; groupStarts = []; groupMembers = {};
   if (start) {
     addHandAddedResults();
+    const n = start.P.rhyme.length;            // syllables of the searched word to match
+    const levelOf = r => Math.max(1, Math.min(n, r.matched || 1));
     const buckets = {};
     for (const r of results) {
       if (!passes(r)) continue;
-      for (const pl of placements(r)) (buckets[pl.g] = buckets[pl.g] || []).push({ x: r.x, mine: pl.mine });
+      for (const pl of placements(r)) {
+        const key = ["added", "no"].includes(pl.g) ? pl.g : pl.g + "@" + levelOf(r);
+        (buckets[key] = buckets[key] || []).push({ x: r.x, mine: pl.mine });
+      }
     }
     let html = "";
-    for (const c of CATS) {
-      if (filters.cat !== "any" && filters.cat !== c.id) continue;
-      html += renderGroup(c.id, c.title, c.color, "", buckets[c.id] || [], false);
+    for (let L = n; L >= 1; L--) {
+      if (n > 1) {
+        const count = Object.keys(buckets).filter(k => k.endsWith("@" + L)).reduce((t, k) => t + buckets[k].length, 0);
+        html += `<h3 class="level">${L} of ${n} syllable${n === 1 ? "" : "s"} matched <span class="count">${count}</span></h3>`;
+      }
+      for (const c of CATS) {
+        if (filters.cat !== "any" && filters.cat !== c.id) continue;
+        const items = buckets[c.id + "@" + L] || [];
+        if (n > 1 && !items.length) continue;
+        html += renderGroup(c.id, c.title, c.color, "", items, false, c.id + "@" + L);
+      }
+      if (filters.cat === "any") {
+        for (const p of POOLS) {
+          if (!el(p.toggle).checked) continue;
+          const items = buckets[p.id + "@" + L] || [];
+          if (n > 1 && !items.length) continue;
+          html += renderGroup(p.id, p.title, "", p.hint + " · suggestions", items, true, p.id + "@" + L);
+        }
+      }
     }
     if (filters.cat === "any") {
       if ((buckets.added || []).length) html += renderGroup("added", "Added by you", "var(--accent)", "no category yet", buckets.added, false);
       html += renderAddedPhrases();
-      for (const p of POOLS) {
-        if (!el(p.toggle).checked) continue;
-        html += renderGroup(p.id, p.title, "", p.hint + " · suggestions", buckets[p.id] || [], true);
-      }
       if ((buckets.no || []).length) html += renderGroup("no", "Not a rhyme", "var(--no)", "you rejected these", buckets.no, true);
     }
     el("groups").innerHTML = html;
@@ -863,13 +938,14 @@ function renderDetail() {
     <div class="label">Selected</div>
     <div class="sel-line"><div class="sel-word">${st}${esc(x.label)}</div>${selectMode ? `<button class="donebtn" id="doneSel">Done</button>` : ""}${tools}</div>
     <dl class="facts">
-      <dt>Sounds</dt><dd class="mono">${esc(x.sounds)}</dd>
+      <dt>Sounds</dt><dd class="mono">${esc(showSounds(x.sounds))}</dd>
       <dt>Mouth</dt><dd>${mouthOf(x.v)}</dd>
       <dt>Ends on</dt><dd>${x.vowelEnd ? "Vowel" : "Consonant"}</dd>
       <dt>Hard/Sharp</dt><dd>${hsLabel}${o.hs ? " (your fix)" : ""}</dd>
+      <dt>Syllables</dt><dd>${x.P.syl}</dd>
       <dt>Common rank</dt><dd>${x.rank}</dd>
     </dl>
-    <p class="verdict"><span class="mono">${esc(x.sounds)}</span> · ${verdict} · ${hsLabel}<br><span class="why">${esc(r.why)}</span></p>${warn}`;
+    <p class="verdict"><span class="mono">${esc(showSounds(x.sounds))}</span> · ${verdict} · ${hsLabel}<br><span class="why">${esc(r.why)}</span></p>${warn}`;
   markButtons(x);
   sizeSheet();
 }
@@ -896,6 +972,7 @@ const FILTER_OPTS = {
   hs: [["any", "Any"], ["hard", "Hard"], ["sharp", "Sharp"]],
   mouth: [["any", "Any"], ["Open", "Open"], ["Slight", "Slight"], ["Closed", "Closed"]],
   ends: [["any", "Any"], ["vowel", "Vowel"], ["consonant", "Consonant"]],
+  syl: [["any", "Any"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4+"]],
 };
 function renderFilters() {
   document.querySelectorAll("[data-filter]").forEach(seg => {
@@ -1031,7 +1108,7 @@ const ABOUT = {
   explore: "Words bookmarked to study further.",
   hidden: "Words removed from all lists.",
   added_by_hand: "Pairs and phrases the songwriter added personally. Phrases may be several words or longer words that are not in the one-syllable list.",
-  syllables: "Version 1 has one-syllable words only.",
+  syllables: "Rhymes are matched syllable by syllable from the end of the word. Only vowels count; the consonants between them do not.",
 };
 async function exportLabels() {
   const stamp = new Date().toISOString();
@@ -1211,6 +1288,8 @@ document.addEventListener("click", e => {
   if (uh) { if (!isReady()) return; mutate(() => setWord(uh.dataset.unhide, o => { o.hidden = false; }), false); toast(`${uh.dataset.unhide} is back`); }
   const pr = e.target.closest("[data-pron]");
   if (pr) search(start.word, pr.dataset.pron);
+  const sh = e.target.closest("[data-showall]");
+  if (sh) { expanded.add(sh.dataset.showall); render(); }
   const sa = e.target.closest("[data-selall]");
   if (sa) { selectMode = true; current = null; multi = new Set(groupMembers[sa.dataset.selall] || []); render(); }
   if (e.target.closest("#moreBtn")) { el("sheet").classList.toggle("more-open"); sizeSheet(); }
@@ -1254,7 +1333,7 @@ document.addEventListener("keydown", e => {
 // ---- Start ----
 rarity.min = 500;
 rarity.max = Math.ceil(MAX_RANK / 100) * 100;
-rarity.value = prefs.rarity || S.commonCutoff;
+rarity.value = prefs.rarity || rarity.max;
 el("rarityOut").textContent = rarity.value;
 ["poolBend", "poolClose", "poolCons"].forEach(id => { if (id in prefs) el(id).checked = prefs[id]; });
 el("autoAdvance").checked = !!prefs.autoAdvance;

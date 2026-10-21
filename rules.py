@@ -38,7 +38,7 @@ COMMON_CUTOFF = 3000
 # How many words the web page holds, so the "how rare" slider can go
 # above the cutoff. (If fewer one-syllable words exist, it holds all of them.)
 # The slider starts at COMMON_CUTOFF.
-PAGE_MAX_WORDS = 10000
+PAGE_MAX_WORDS = 50000
 
 # How many suggestions (Bend candidates, Close vowel, Consonant match)
 # to list per word in test-results.txt. The web page shows all of them.
@@ -154,13 +154,19 @@ EXTRA_SOUNDS_THAT_MAKE_BEND = ["R"]
 # accents. A pair shows up here when the vowels are listed together below
 # AND the endings are Twin- or Near-close (god / dog, sheep / ship).
 CLOSE_VOWELS = [
-    ("AA", "AO"),   # god / law      (boss / loss)
     ("IY", "IH"),   # need / sit     (sheep / ship)
     ("UW", "UH"),   # you / book     (pool / pull)
     ("EH", "AE"),   # bed / cat      (bed / bad)
 ]
 
-# CONSONANT MATCH (a suggestion pool): DIFFERENT vowel, but the same
+# SAME VOWEL: vowels the dictionary writes differently but that sound the
+# same to you. They count as ONE vowel everywhere (Twin, Near, Bend).
+# You chose: god / flawed, boss / loss, cot / caught.
+SAME_VOWELS = [
+    ("AA", "AO"),   # god / law
+]
+
+# CONSONANT MATCH (a suggestion pool, one-syllable words only): DIFFERENT vowel, but the same
 # consonant sounds before and after it ("the consonant frame").
 #   god (G . D)  ->  good (G . D), guide (G . D)
 # At least this many consonants must be shared:
@@ -266,6 +272,35 @@ DROP_WEAK_FORMS = True
 
 
 # ---------------------------------------------------------------------------
+# 6b. LONGER WORDS (more than one syllable)
+# ---------------------------------------------------------------------------
+# The rhyme part of a word starts at its main stress and runs to the end:
+#     REM-e-dy   ->  EH . uh . ee        (3 syllables to match)
+#     key        ->  ee                  (1 syllable to match)
+#
+# Two words are compared syllable by syllable FROM THE END:
+#   - Only the VOWELS count. The consonants between them do not.
+#       remedy / Kennedy / melody / serenity = all 3 syllables match.
+#   - The stress of the other word does not matter: key / monkey / happy.
+#   - A quick, unstressed "uh" in the middle may be skipped:
+#       remedy (EH . uh . ee) / belly (EH . ee) = 2 syllables match.
+#   - "Close" vowels (see CLOSE_VOWELS) count as a loose match.
+#
+# The page groups rhymes by how many syllables OF THE SEARCHED WORD match
+# (3 matched, 2 matched, 1 matched), each with Twin / Near / Bend:
+#   TWIN            matched vowels the same, the very end the same
+#   NEAR            matched vowels the same, the very end slightly different
+#                   (same Near rules as for one-syllable words)
+#   BEND CANDIDATE  matched vowels the same, the very end different;
+#                   or (2+ syllables matched) a close vowel AND a different end
+#   CLOSE VOWEL     one vowel only close, the very end the same or Near
+# One-syllable pairs keep their own rules above (incl. Consonant match).
+
+# The quick unstressed vowel that may be skipped in the middle of a word:
+SKIPPABLE_WEAK_VOWEL = "AH"
+
+
+# ---------------------------------------------------------------------------
 # 7. THE MACHINERY (you don't need to read below this line)
 # ---------------------------------------------------------------------------
 
@@ -348,6 +383,14 @@ def _ending_match(ea, eb):
     return None, None
 
 
+def same_vowel(a, b):
+    return a == b or (a, b) in SAME_VOWELS or (b, a) in SAME_VOWELS
+
+
+def close_vowel(a, b):
+    return (a, b) in CLOSE_VOWELS or (b, a) in CLOSE_VOWELS
+
+
 def compare(sounds_a, sounds_b):
     """
     Judge one pair with the SAME-VOWEL rules. Returns (category, reason),
@@ -356,7 +399,7 @@ def compare(sounds_a, sounds_b):
     """
     _, va, ea = split_word(sounds_a)
     _, vb, eb = split_word(sounds_b)
-    if va != vb:
+    if not same_vowel(va, vb):
         return None, "different vowel"
     if ea == eb and plain(sounds_a) == plain(sounds_b):
         return "Twin", "sounds identical (same-sound word)"
@@ -385,13 +428,16 @@ def classify(sounds_a, sounds_b):
     "twin", "near", "bendc" (Bend candidate), "close" (Close vowel),
     "consm" (Consonant match) or None (not shown).
     """
+    if count_vowels(sounds_a) > 1 or count_vowels(sounds_b) > 1:
+        code, why, _ = classify_long(sounds_a, sounds_b)
+        return code, why
     sa, va, ea = split_word(sounds_a)
     sb, vb, eb = split_word(sounds_b)
-    if va == vb:
+    if same_vowel(va, vb):
         cat, why = compare(sounds_a, sounds_b)
         return {"Twin": "twin", "Near": "near", "Bend candidate": "bendc"}[cat], why
 
-    if (va, vb) in CLOSE_VOWELS or (vb, va) in CLOSE_VOWELS:
+    if close_vowel(va, vb):
         cat, why = _ending_match(ea, eb)
         if cat:
             return "close", "close vowels %s / %s, %s" % (va, vb, why)
@@ -406,3 +452,71 @@ def classify(sounds_a, sounds_b):
             return "consm", "different vowel, consonants %s vs %s . %s, one extra" % (
                 frame, " ".join(sb) or "-", " ".join(eb) or "-")
     return None, None
+
+
+def parse_long(sounds):
+    """
+    Split a word (sounds WITH stress numbers) into its rhyme part:
+    a list of (vowel, stress) from the main stress to the end, and the
+    ending (sounds after the last vowel).
+    """
+    vowels, last = [], -1
+    for i, s in enumerate(sounds):
+        if s.rstrip("012") in VOWELS:
+            vowels.append((s.rstrip("012"), s[-1] if s[-1] in "012" else "0"))
+            last = i
+    main = next((i for i, (v, st) in enumerate(vowels) if st == "1"), 0)
+    return vowels[main:], plain(sounds[last + 1:])
+
+
+def syllables_to_match(sounds):
+    return len(parse_long(sounds)[0])
+
+
+def classify_long(sounds_a, sounds_b):
+    """
+    Judge a pair where at least one word is longer than one syllable.
+    Returns (code, reason, matched), where matched = how many syllables of
+    word A's rhyme part were matched.
+    """
+    ra, ea = parse_long(sounds_a)
+    rb, eb = parse_long(sounds_b)
+    i, j = len(ra) - 1, len(rb) - 1
+    if not (same_vowel(ra[i][0], rb[j][0]) or close_vowel(ra[i][0], rb[j][0])):
+        return None, None, 0
+    matched, close = 0, 0
+    while i >= 0 and j >= 0:
+        va, vb = ra[i][0], rb[j][0]
+        if same_vowel(va, vb) or close_vowel(va, vb):
+            matched += 1
+            close += 0 if same_vowel(va, vb) else 1
+            i, j = i - 1, j - 1
+        elif i < len(ra) - 1 and ra[i] == (SKIPPABLE_WEAK_VOWEL, "0"):
+            i -= 1
+        elif j < len(rb) - 1 and rb[j] == (SKIPPABLE_WEAK_VOWEL, "0"):
+            j -= 1
+        else:
+            break
+    end, end_why = _ending_match(ea, eb)
+    if plain(sounds_a) == plain(sounds_b):
+        return "twin", "sounds identical (same-sound word)", matched
+    what = "%d syllable%s match" % (matched, "" if matched == 1 else "s")
+    if close == 0:
+        if end == "Twin":
+            return "twin", "%s, same end" % what, matched
+        if end == "Near":
+            return "near", "%s, %s" % (what, end_why), matched
+        return "bendc", "%s, different end (%s vs %s)" % (what, _show(ea), _show(eb)), matched
+    if close == 1 and end:
+        return "close", "%s, one vowel only close, %s" % (what, end_why), matched
+    if matched >= 2:
+        return "bendc", "%s, vowels only close and different end" % what, matched
+    return None, None, 0
+
+
+def classify_full(sounds_a, sounds_b):
+    """classify() plus how many syllables of word A matched (for the page)."""
+    if count_vowels(sounds_a) > 1 or count_vowels(sounds_b) > 1:
+        return classify_long(sounds_a, sounds_b)
+    code, why = classify(sounds_a, sounds_b)
+    return code, why, (1 if code in ("twin", "near", "bendc", "close") else 0)

@@ -1,27 +1,27 @@
 RHYME LAB - SYLLABLE FAMILIES
-Total families: 643   (from 3013 one-syllable words)
+Total families: 636   (from 3013 one-syllable words)
 A family = the vowel + everything after it. All words in a family are Twins.
 Biggest first.  Sounds / most common example / number of words
 
-UW             you            51
+UW             you            52
 OW             no             36
 AY             i              33
 EY             a              32
 IY             we             28
-EH R           there          26
+EH R           there          27
 AO R           for            24
 EY L           they'll        23
 EY N           pain           22
 IY Z           he's           21
 AY T           right          20
 AE K           back           19
+IY D           he'd           19
 AY D           i'd            19
 EY T           wait           19
 AY Z           guys           19
 IH N           in             18
 AH M           come           18
 IH L           will           18
-IY D           he'd           18
 OW Z           those          18
 OW N           own            18
 AA             ah             18
@@ -43,64 +43,65 @@ EY K           take           16
 AA K           rock           16
 EH T           get            15
 EH L           well           15
+IH NG          thing          15
 IY P           keep           15
 IH T           it             14
 IY N           mean           14
-IH NG          thing          14
 EY M           name           14
 EY S           place          14
 IY K           week           14
 AE T           that           13
-UW L           you'll         13
 AH N           one            13
 AE M           am             13
 AA P           stop           13
 EY Z           days           13
 OW K           broke          13
+AE SH          cash           13
 AO L           all            12
-AY L           i'll           12
 IH NG K        think          12
 AY N           fine           12
 EH N T         went           12
 AH K           fuck           12
 AA K S         box            12
-AE SH          cash           12
 AE K S         max            12
 AY T S         lights         12
+AW             now            11
 AE D           had            11
+AE NG K        thank          11
 OW L D         told           11
 EH K           check          11
-AO R D         lord           11
 IH K S         six            11
 UW T           shoot          11
 AE N D         and            10
-AW             now            10
+AY L           i'll           10
+UW L           you'll         10
 IH D           did            10
+EH N           when           10
 UW D           who'd          10
-AE NG K        thank          10
 IH NG Z        things         10
 IH CH          which          10
 AY S           nice           10
 UW M           room           10
 EY K S         makes          10
 IY M           team           10
+AO R D         lord           10
 AE NG          hang           10
+AO R N         born           10
 AH G           drug           10
 IH P T         script         10
 AH T           what           9
 EY V           they've        9
 EH T S         let's          9
 EH S           yes            9
-EH N           when           9
 AY N D         find           9
 AW N D         found          9
 EH N D         friend         9
 AA R T         start          9
 IY CH          each           9
 AE S           ass            9
-AO R N         born           9
 OW T           boat           9
 AA P S         cops           9
+EY S T         waste          9
 EH L Z         tells          9
 EY T S         states         9
 AO R Z         doors          9
@@ -112,22 +113,22 @@ AH S T         just           8
 IH R Z         here's         8
 AY K           like           8
 IH M           him            8
+ER             her            8
+UH K           look           8
 OW P           hope           8
 AE K T         fact           8
+IY K S         weeks          8
 OW D           road           8
 AA R K         dark           8
 AE G           bag            8
 IH S T         list           8
 IY L Z         feels          8
 AH NG K        drunk          8
-EY S T         waste          8
 IY T S         streets        8
 EY L Z         sales          8
 AH T S         what's         7
 IH S           this           7
-ER             her            7
 UH D           good           7
-UH K           look           7
 EH R D         there'd        7
 AW N           down           7
 AE S T         last           7
@@ -139,7 +140,6 @@ UW N           soon           7
 AH NG          young          7
 AO R T         sort           7
 AE CH          catch          7
-IY K S         weeks          7
 AH N Z         ones           7
 IY F           chief          7
 EY JH          age            7
@@ -147,6 +147,7 @@ AH B           club           7
 UW P           group          7
 AH M P         jump           7
 OW N Z         groans         7
+AE M P         camp           7
 IH P S         lips           7
 IH L Z         pills          7
 UH R           you're         6
@@ -165,13 +166,12 @@ IY N Z         means          6
 AH D           blood          6
 AH N T         front          6
 IY D Z         needs          6
+EH N S         sense          6
 IY S           piece          6
 AH N CH        lunch          6
 AE B           grab           6
 AA T S         lots           6
 AO S           cross          6
-AE M P         camp           6
-AA R Z         stars          6
 EY P           tape           6
 OW T S         notes          6
 UW T S         boots          6
@@ -195,15 +195,14 @@ AE N S         chance         5
 IY S T         least          5
 ER T           hurt           5
 AY L D         child          5
-EH N S         sense          5
 ER S           worse          5
 AO L Z         calls          5
 IY L D         field          5
 IH F T         gift           5
-UW L Z         rules          5
 AA R T S       starts         5
 AO R M         form           5
 EH G           leg            5
+AA R Z         stars          5
 AH K S         bucks          5
 AE TH          path           5
 AH SH          rush           5
@@ -211,6 +210,7 @@ AA R K S       marks          5
 AE P T         trapped        5
 AO R T S       sports         5
 AO Z           laws           5
+IH N T         print          5
 AA N D         bond           5
 EY V Z         waves          5
 AE F T         laughed        5
@@ -220,10 +220,10 @@ IY R           we're          4
 IH F           if             4
 IY V           we've          4
 EH M           them           4
-AW R           our            4
 AH CH          much           4
 ER K           work           4
 AW S           house          4
+AA B           job            4
 AA R D         hard           4
 UH K S         looks          4
 EH N D Z       friends        4
@@ -239,7 +239,6 @@ AW N D Z       sounds         4
 EH K S         sex            4
 EH L T         felt           4
 UH K T         looked         4
-ER N T         weren't        4
 AO L T         fault          4
 ER N D         turned         4
 EH P           step           4
@@ -247,8 +246,8 @@ IH R D         weird          4
 EH P T         kept           4
 IH NG K S      thinks         4
 AA R JH        charge         4
-AY L Z         miles          4
 AA P T         stopped        4
+UW L Z         rules          4
 AY P           type           4
 EY M D         named          4
 IH K T         picked         4
@@ -256,7 +255,6 @@ EY M Z         names          4
 AA R M         arm            4
 AA K T         locked         4
 IY P S         keeps          4
-AO R D Z       towards        4
 OY L           oil            4
 AY N Z         lines          4
 EY L D         failed         4
@@ -266,9 +264,9 @@ ER M           firm           4
 UW P S         troops         4
 IH N Z         wins           4
 AH M P T       jumped         4
-IH N T         print          4
 EH CH          fetch          4
 AE D Z         lads           4
+OW D Z         roads          4
 IH N CH        inch           4
 AE P S         snaps          4
 OW N T         don't          3
@@ -281,7 +279,6 @@ AO K           talk           3
 AH Z           does           3
 ER L           girl           3
 AE S K         ask            3
-AA B           job            3
 OW TH          both           3
 AA CH          watch          3
 EH TH          death          3
@@ -290,15 +287,17 @@ AY M Z         times          3
 OW S           close (K L OW S) 3
 AH M Z         comes          3
 IH SH          wish           3
-AY R           fire           3
 OY Z           boys           3
 AO G           dog            3
 ER TH          earth          3
+ER K S         works          3
 AA L           ya'll          3
 OY N           join           3
+AY L Z         miles          3
 EH N CH        french         3
 AY K S         likes          3
 AO R TH        north          3
+AY S T         christ         3
 AA R M Z       arms           3
 ER N Z         turns          3
 AH G Z         drugs          3
@@ -307,6 +306,7 @@ IY M D         seemed         3
 AE N Z         plans          3
 AE N T S       pants          3
 OW K S         folks          3
+IY V Z         leaves         3
 EH L D         held           3
 IH JH          bridge         3
 ER V           serve          3
@@ -314,21 +314,22 @@ EH D Z         heads          3
 AA R D Z       cards          3
 AA SH          wash           3
 UW F           proof          3
+EH F           chef           3
 EH S T S       guests         3
 AE G Z         bags           3
 AY D Z         sides          3
 EH L F         self           3
 AH L           skull          3
 AY B           tribe          3
-OW D Z         roads          3
+AA M Z         bombs          3
 OW N D         owned          3
-AW L           towel          3
 AW T S         shouts         3
 AY P S         types          3
 EY P S         tapes          3
 AA G           frog           3
 IH M P         shrimp         3
 OW K T         smoked         3
+AO R D Z       swords         3
 AE NG Z        hangs          3
 OW B           globe          3
 AE CH T        matched        3
@@ -346,7 +347,6 @@ IH V Z         lives (L IH V Z) 2
 ER D Z         words          2
 OY S           voice          2
 AH V D         loved          2
-ER K S         works          2
 EH             eh             2
 AW TH          mouth          2
 AO K T         talked         2
@@ -359,19 +359,17 @@ AH V Z         loves          2
 UW JH          huge           2
 UH SH          push           2
 IH N D         wind (W IH N D) 2
-AY S T         christ         2
 EH G Z         legs           2
 EH SH          fresh          2
 IH L T         built          2
 AA G Z         dogs           2
-IY V Z         leaves         2
 EH L TH        health         2
 IH L K         milk           2
 EH NG K TH     strength       2
 EH K T         checked        2
 ER T S         hurts          2
 AH K T         fucked         2
-EH F           chef           2
+OY N T S       points         2
 AA B Z         jobs           2
 UH D Z         woods          2
 IY Z D         pleased        2
@@ -383,6 +381,7 @@ UW V Z         moves          2
 AA D Z         gods           2
 EH JH          edge           2
 AO F S         scoffs         2
+UH L F         wolf           2
 AA R M D       armed          2
 AO K S         talks          2
 AE K T S       facts          2
@@ -398,19 +397,19 @@ OW P S         hopes          2
 IH F T S       gifts          2
 AW D Z         clouds         2
 AE B D         grabbed        2
-AA M Z         bombs          2
 AO R M Z       forms          2
 ER V Z         nerves         2
-AW L Z         growls         2
+ER N T         burnt          2
 AO D           fraud          2
 AE N CH        branch         2
 UW B           tube           2
 AO R K         pork           2
 AA R N         barn           2
-AY R Z         fires          2
+EH N T S       cents          2
 AH N D         fund           2
 AH NG Z        lungs          2
 AA R K T       parked         2
+AW L           foul           2
 EH TH S        deaths         2
 UW L D         fooled         2
 AA R SH        harsh          2
@@ -444,25 +443,21 @@ EH N Z         lens           2
 AA R V D       carved         2
 IH B           rib            2
 EH NG          feng           2
+UW N Z         tunes          2
 AE V           have           1
 IH DH          with           1
-IH T L         it'll          1
 AE             yeah           1
 EH R V         there've       1
-IH D N T       didn't         1
 AO F           off            1
 EH L P         help           1
 ER L D         world          1
 EH L S         else           1
-AY NG          trying         1
 AH N S         once           1
 UW Z D         used           1
 AA N T S       wants          1
 EH Z           says           1
 IH D Z         kids           1
-AA R N T       aren't         1
 AE S K T       asked          1
-AW R Z         hours          1
 UH R Z         yours          1
 AH N TH S      months         1
 AA S           boss           1
@@ -492,7 +487,6 @@ EY B           babe           1
 AA F T         soft           1
 AO T S         thoughts       1
 AA Z D         caused         1
-OY N T S       points         1
 IY CH T        reached        1
 EY Z D         raised         1
 AA CH T        watched        1
@@ -500,7 +494,6 @@ AH CH T        touched        1
 AO NG Z        songs          1
 AA L V         solve          1
 AO L S         false          1
-UH L F         wolf           1
 UW M Z         rooms          1
 EH P S         steps          1
 ER V D         served         1
@@ -535,9 +528,9 @@ AE G D         dragged        1
 AA SH T        washed         1
 AA L V D       solved         1
 AW N T S       counts         1
+AW L Z         growls         1
 AE JH          badge          1
 ER CH T        searched       1
-EH N T S       cents          1
 EH B           web            1
 ER L D Z       worlds         1
 IH K S TH      sixth          1
@@ -591,7 +584,6 @@ IY DH Z        breathes       1
 AO R P         warp           1
 IH L M D       filmed         1
 EY N T S       saints         1
-AY R D         wired          1
 AO R M TH      warmth         1
 AE S T S       lasts          1
 EY JH D        aged           1
@@ -630,7 +622,6 @@ AO F T         loft           1
 AA N Z         bronze         1
 EH F S         chefs          1
 IH G D         rigged         1
-AO R SH        porsche        1
 EH L T S       belts          1
 IH M Z         limbs          1
 EY DH          bathe          1
@@ -642,7 +633,9 @@ EH V Z         revs           1
 ER B Z         herbs          1
 AA M D         bombed         1
 UW NG          cheung         1
-UW N Z         tunes          1
 OW F           loaf           1
 UH S           puss           1
 EY B Z         babes          1
+AE TH S        baths          1
+IH L D Z       builds         1
+AA NG K S      bronx          1

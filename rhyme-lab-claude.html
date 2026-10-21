@@ -89,6 +89,8 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .views button[aria-pressed="true"] { background: var(--accent); color: #121320; font-weight: 700; }
 .selbtn { background: var(--raise); border: 1px solid var(--line); border-radius: 10px; padding: 7px 14px; font-size: .95rem; color: var(--muted); }
 .selbtn[aria-pressed="true"] { border-color: var(--accent); color: var(--fg); }
+.sortbox { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: .9rem; }
+.sortbox select { background: var(--raise); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 7px 8px; font: inherit; font-size: .95rem; }
 .notfound { color: var(--muted); font-size: 1.05rem; padding: 20px 0; }
 .group { border-top: 1px solid var(--line); padding-block: 12px 6px; }
 .group h2 { font-family: var(--display); font-weight: 700; font-size: 1.15rem; margin: 0 0 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -285,6 +287,14 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
         <button data-view="nostar">No star</button>
       </div>
       <button class="selbtn" id="selectBtn">Select</button>
+      <label class="sortbox">Sort
+        <select id="sortSel">
+          <option value="best">Best match</option>
+          <option value="az">A–Z</option>
+          <option value="short">Shortest first</option>
+          <option value="common">Most common</option>
+        </select>
+      </label>
     </div>
     <div id="groups"></div>
   </main>
@@ -660,7 +670,7 @@ const isReady = () => store.mode === "local" || (store.mode === "claude" && stor
 let prefs = {};
 try { prefs = JSON.parse(localStorage.getItem(PREFS_KEY) || "{}"); } catch (e) { prefs = {}; }
 function savePrefs() {
-  prefs = { start: start && start.label, rarity: +rarity.value, autoAdvance: el("autoAdvance").checked, view,
+  prefs = { start: start && start.label, rarity: +rarity.value, autoAdvance: el("autoAdvance").checked, view, sort: sortMode,
     poolBend: el("poolBend").checked, poolClose: el("poolClose").checked, poolCons: el("poolCons").checked };
   try { localStorage.setItem(PREFS_KEY, JSON.stringify(prefs)); } catch (e) { /* only a convenience */ }
 }
@@ -766,7 +776,16 @@ function passes(r) {
   return true;
 }
 const frontMatch = x => (start && x.P.beforeLast && x.P.beforeLast === start.P.beforeLast ? 0 : 1);
-const sortWords = (a, b) => ((word(a.label).star || 9) - (word(b.label).star || 9)) || (frontMatch(a) - frontMatch(b)) || a.rank - b.rank;
+// Stars always come first (★1, ★2, ★3, then no star); the Sort switch orders the words inside each of those.
+let sortMode = "best";      // best | az | short | common
+const byName = (a, b) => a.label.localeCompare(b.label);
+const SORTS = {
+  best: (a, b) => (frontMatch(a) - frontMatch(b)) || a.rank - b.rank,
+  az: byName,
+  short: (a, b) => (a.P.syl - b.P.syl) || byName(a, b),
+  common: (a, b) => a.rank - b.rank,
+};
+const sortWords = (a, b) => ((word(a.label).star || 9) - (word(b.label).star || 9)) || SORTS[sortMode](a, b);
 
 let order = [];
 let groupStarts = [];
@@ -1321,6 +1340,9 @@ el("rarityOut").textContent = rarity.value;
 ["poolBend", "poolClose", "poolCons"].forEach(id => { if (id in prefs) el(id).checked = prefs[id]; });
 el("autoAdvance").checked = !!prefs.autoAdvance;
 if (["all", "unreviewed", "nostar"].includes(prefs.view)) view = prefs.view;
+if (prefs.sort in SORTS) sortMode = prefs.sort;
+el("sortSel").value = sortMode;
+el("sortSel").addEventListener("change", () => { sortMode = el("sortSel").value; savePrefs(); render(); });
 
 function ready() { render(); }
 const first = prefs.start && BY[prefs.start] ? prefs.start : "god";

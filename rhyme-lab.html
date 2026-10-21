@@ -107,6 +107,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .selbtn[aria-pressed="true"] { border-color: var(--accent); color: var(--fg); }
 .sortbox { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: .9rem; }
 .sortbox select { background: var(--raise); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 7px 8px; font: inherit; font-size: .95rem; }
+.cleanchip { display: inline-flex; gap: 8px; align-items: center; background: #2f3858; color: var(--fg); border: 1px solid var(--accent); border-radius: 99px; padding: 5px 14px; font-size: .88rem; margin-bottom: 10px; }
 .notfound { color: var(--muted); font-size: 1.05rem; padding: 20px 0; }
 .group { border-top: 1px solid var(--line); padding-block: 12px 6px; }
 .group h2 { font-family: var(--display); font-weight: 700; font-size: 1.15rem; margin: 0 0 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -289,6 +290,8 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
       <label class="check"><input type="checkbox" id="poolCons" checked> Consonant match</label>
       <div class="label" style="margin-top:10px">Layout</div>
       <label class="check"><input type="checkbox" id="splitLonger" checked> Longer words after a divider</label>
+      <label class="check"><input type="checkbox" id="onlyMine"> Only my approved words</label>
+      <label class="check"><input type="checkbox" id="onlyStarred"> Only starred words</label>
     </div>
     <div class="box">
       <div class="label">Explore (bookmarked)</div>
@@ -318,6 +321,7 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
         </select>
       </label>
     </div>
+    <button class="cleanchip" id="cleanChip" hidden></button>
     <div id="groups"></div>
   </main>
 
@@ -693,7 +697,7 @@ let prefs = {};
 try { prefs = JSON.parse(localStorage.getItem(PREFS_KEY) || "{}"); } catch (e) { prefs = {}; }
 function savePrefs() {
   prefs = { start: start && start.label, rarity: +rarity.value, autoAdvance: el("autoAdvance").checked, view, sort: sortMode,
-    poolBend: el("poolBend").checked, poolClose: el("poolClose").checked, poolCons: el("poolCons").checked, splitLonger: el("splitLonger").checked };
+    poolBend: el("poolBend").checked, poolClose: el("poolClose").checked, poolCons: el("poolCons").checked, splitLonger: el("splitLonger").checked, onlyMine: el("onlyMine").checked, onlyStarred: el("onlyStarred").checked };
   try { localStorage.setItem(PREFS_KEY, JSON.stringify(prefs)); } catch (e) { /* only a convenience */ }
 }
 
@@ -788,6 +792,8 @@ function passes(r) {
   if (o.hidden) return false;
   if (x.rank > +rarity.value) return false;
   const sticky = multi.size ? multi.has(x.label) : x.label === current;   // selected words stay until you're done
+  if (el("onlyMine").checked && !pair(x.label).cats.length && !sticky) return false;
+  if (el("onlyStarred").checked && !o.star && !sticky) return false;
   if (view === "unreviewed" && reviewed(x.label) && !sticky) return false;
   if (view === "nostar" && o.star && !sticky) return false;
   if (filters.star !== "any" && String(o.star || 0) !== filters.star) return false;
@@ -874,8 +880,9 @@ function addHandAddedResults() {
   }
 }
 const addedFor = () => Object.entries(state.added).filter(([k, a]) => a.start === start.label);
+const cleanView = () => el("onlyMine").checked || el("onlyStarred").checked;
 function renderAddedPhrases() {
-  const list = addedFor().filter(([k, a]) => !(view === "unreviewed" && a.cats.length));
+  const list = addedFor().filter(([k, a]) => !(view === "unreviewed" && a.cats.length) && !(el("onlyMine").checked && !a.cats.length) && !el("onlyStarred").checked);
   if (!list.length) return "";
   const chips = list.map(([k, a]) => `<button class="chip added" data-added="${esc(k)}" title="${esc(a.cats.map(c => CATS.find(x => x.id === c).title).join(" + ") || "idea, not sorted yet")}"><span class="w">${esc(a.text)}</span></button>`).join("");
   return `<section class="group"><h2><span class="dot" style="background:var(--accent)"></span>Your phrases <span class="count">${list.length}</span><span class="hint">words and phrases not in the list · tap to edit</span></h2><div class="line"><div class="side">Ideas</div><div class="chips">${chips}</div></div></section>`;
@@ -897,20 +904,21 @@ function render() {
     let html = "";
     for (let L = n; L >= 1; L--) {
       if (n > 1) {
+        if (cleanView() && !Object.keys(buckets).some(k => k.endsWith("@" + L))) continue;
         const count = Object.keys(buckets).filter(k => k.endsWith("@" + L)).reduce((t, k) => t + buckets[k].length, 0);
         html += `<h3 class="level">${L} of ${n} syllable${n === 1 ? "" : "s"} matched <span class="count">${count}</span></h3>`;
       }
       for (const c of CATS) {
         if (filters.cat !== "any" && filters.cat !== c.id) continue;
         const items = buckets[c.id + "@" + L] || [];
-        if (n > 1 && !items.length) continue;
+        if ((n > 1 || cleanView()) && !items.length) continue;
         html += renderGroup(c.id, c.title, c.color, "", items, false, c.id + "@" + L);
       }
       if (filters.cat === "any") {
         for (const p of POOLS) {
           if (!el(p.toggle).checked) continue;
           const items = buckets[p.id + "@" + L] || [];
-          if (n > 1 && !items.length) continue;
+          if ((n > 1 || cleanView()) && !items.length) continue;
           html += renderGroup(p.id, p.title, "", p.hint + " · suggestions", items, true, p.id + "@" + L);
         }
       }
@@ -920,7 +928,11 @@ function render() {
       html += renderAddedPhrases();
       if ((buckets.no || []).length) html += renderGroup("no", "Not a rhyme", "var(--no)", "you rejected these", buckets.no, true);
     }
+    if (cleanView() && !order.length && !html.includes('data-added')) html = `<p class="notfound">Nothing ${el("onlyStarred").checked ? "starred" : "approved"} yet for "${esc(start.word)}". Switch the clean view off to see all suggestions.</p>`;
     el("groups").innerHTML = html;
+    const chipText = [el("onlyMine").checked && "approved", el("onlyStarred").checked && "starred"].filter(Boolean).join(" + ");
+    el("cleanChip").hidden = !chipText;
+    el("cleanChip").textContent = chipText ? `Showing only ${chipText} words  ✕` : "";
     for (const w of [...multi]) if (!order.includes(w)) multi.delete(w);
     renderHead();
   }
@@ -1326,7 +1338,8 @@ document.addEventListener("click", e => {
   if (e.target.closest("#moreBtn")) { el("sheet").classList.toggle("more-open"); sizeSheet(); }
   if (e.target.closest("#closeSheet") || e.target.closest("#doneSel")) clearSelection();
 });
-["poolBend", "poolClose", "poolCons", "autoAdvance", "splitLonger"].forEach(id => el(id).addEventListener("change", () => { savePrefs(); render(); }));
+["poolBend", "poolClose", "poolCons", "autoAdvance", "splitLonger", "onlyMine", "onlyStarred"].forEach(id => el(id).addEventListener("change", () => { savePrefs(); render(); }));
+el("cleanChip").addEventListener("click", () => { el("onlyMine").checked = false; el("onlyStarred").checked = false; savePrefs(); render(); });
 rarity.addEventListener("input", () => { el("rarityOut").textContent = rarity.value; savePrefs(); render(); });
 el("helpBtn").addEventListener("click", () => { closeDrawer(); el("help").hidden = false; });
 el("help").addEventListener("click", e => { if (e.target.id === "help") e.currentTarget.hidden = true; });
@@ -1366,7 +1379,7 @@ rarity.min = 500;
 rarity.max = Math.ceil(MAX_RANK / 100) * 100;
 rarity.value = prefs.rarity || rarity.max;
 el("rarityOut").textContent = rarity.value;
-["poolBend", "poolClose", "poolCons", "splitLonger"].forEach(id => { if (id in prefs) el(id).checked = prefs[id]; });
+["poolBend", "poolClose", "poolCons", "splitLonger", "onlyMine", "onlyStarred"].forEach(id => { if (id in prefs) el(id).checked = prefs[id]; });
 el("autoAdvance").checked = !!prefs.autoAdvance;
 if (["all", "unreviewed", "nostar"].includes(prefs.view)) view = prefs.view;
 if (prefs.sort in SORTS) sortMode = prefs.sort;

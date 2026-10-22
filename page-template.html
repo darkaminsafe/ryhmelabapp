@@ -128,9 +128,6 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
 .chip.sel { border-color: var(--accent); border-style: solid; box-shadow: 0 0 0 3px rgba(142,166,255,.18); }
 .chip.multi { border-color: var(--accent); border-style: solid; background: #2f3858; }
 .star { font-size: 1rem; line-height: 1; }
-.longer-div { flex-basis: 100%; display: flex; align-items: center; gap: 8px; color: var(--faint); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; margin: 4px 0 2px; }
-.longer-div::before, .longer-div::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-.chips > .longer-div:first-child { margin-top: 0; }
 .empty-group { color: var(--faint); font-size: .9rem; padding: 2px 0 8px 68px; }
 
 /* Right panel (PC) / bottom sheet (phone) */
@@ -169,6 +166,7 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
 .qa-cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
 .qa-cats button { background: var(--raise); border: 1px solid var(--line); border-radius: 8px; padding: 8px 4px; font-size: .92rem; -webkit-tap-highlight-color: transparent; }
 .qa-cats button[aria-pressed="true"] { border-color: currentColor; background: #2f3858; }
+.qa-stars { grid-template-columns: repeat(3, 1fr); }
 .qa-row { display: flex; gap: 8px; align-items: center; }
 .qa-row .donebtn { padding: 10px 22px; font-size: 1rem; }
 .qa-hint { margin: 0; color: var(--faint); font-size: .82rem; }
@@ -289,7 +287,6 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
       <label class="check"><input type="checkbox" id="poolClose" checked> Close vowel</label>
       <label class="check"><input type="checkbox" id="poolCons" checked> Consonant match</label>
       <div class="label" style="margin-top:10px">Layout</div>
-      <label class="check"><input type="checkbox" id="splitLonger" checked> Longer words after a divider</label>
       <label class="check"><input type="checkbox" id="onlyMine"> Only my approved words</label>
       <label class="check"><input type="checkbox" id="onlyStarred"> Only starred words</label>
     </div>
@@ -390,6 +387,11 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
     <button data-qcat="near" style="color:var(--near)">Near</button>
     <button data-qcat="bend" style="color:var(--bend)">Bend</button>
     <button data-qcat="consonant" style="color:var(--cons)">Consonant</button>
+  </div>
+  <div class="qa-cats qa-stars">
+    <button data-qstar="1"><span data-star="1">★ P1</span></button>
+    <button data-qstar="2"><span data-star="2">★ P2</span></button>
+    <button data-qstar="3"><span data-star="3">★ P3</span></button>
   </div>
   <div class="qa-row"><button class="donebtn" id="qaAdd">Add</button><button class="ghost" id="qaDelete" style="color:#ff8c8c" hidden>Delete</button></div>
   <p class="qa-hint" id="qaHint">Enter adds it and keeps this box open for your next idea. No category = an idea to sort later.</p>
@@ -697,7 +699,7 @@ let prefs = {};
 try { prefs = JSON.parse(localStorage.getItem(PREFS_KEY) || "{}"); } catch (e) { prefs = {}; }
 function savePrefs() {
   prefs = { start: start && start.label, rarity: +rarity.value, autoAdvance: el("autoAdvance").checked, view, sort: sortMode,
-    poolBend: el("poolBend").checked, poolClose: el("poolClose").checked, poolCons: el("poolCons").checked, splitLonger: el("splitLonger").checked, onlyMine: el("onlyMine").checked, onlyStarred: el("onlyStarred").checked };
+    poolBend: el("poolBend").checked, poolClose: el("poolClose").checked, poolCons: el("poolCons").checked, onlyMine: el("onlyMine").checked, onlyStarred: el("onlyStarred").checked };
   try { localStorage.setItem(PREFS_KEY, JSON.stringify(prefs)); } catch (e) { /* only a convenience */ }
 }
 
@@ -830,8 +832,7 @@ function chip(x, mine) {
 }
 function renderGroup(id, title, color, hint, items, isPool, gid) {
   gid = gid || id;
-  const isLonger = x => (el("splitLonger").checked && x.P.syl > start.P.syl ? 1 : 0);
-  const all = items.slice().sort((a, b) => (isLonger(a.x) - isLonger(b.x)) || sortWords(a.x, b.x));
+  const all = items.slice().sort((a, b) => sortWords(a.x, b.x));
   const cut = expanded.has(gid) ? all : all.slice(0, SHOW_FIRST);
   const hard = cut.filter(i => !isSharp(i.x.label));
   const sharp = cut.filter(i => isSharp(i.x.label));
@@ -840,16 +841,10 @@ function renderGroup(id, title, color, hint, items, isPool, gid) {
   const selAll = items.length > 1 ? `<button class="selall" data-selall="${gid}">select all</button>` : "";
   let html = `<section class="group${isPool ? " pool" : ""}"><h2>${color ? `<span class="dot" style="background:${color}"></span>` : ""}${title} <span class="count">${items.length}</span>${hint ? `<span class="hint">${hint}</span>` : ""}${selAll}</h2>`;
   if (!items.length) html += `<div class="empty-group">${id === "bend" || id === "consonant" ? "Empty until you assign words here" : "Nothing here with the current view and filters"}</div>`;
-  for (const [side, all] of [["Hard", hard], ["Sharp", sharp]]) {
-    if (!all.length) continue;
-    // Words longer than the searched word go behind a "longer" divider (switch in the menu).
-    const split = el("splitLonger").checked;
-    const fits = split ? all.filter(i => i.x.P.syl <= start.P.syl) : all;
-    const longer = split ? all.filter(i => i.x.P.syl > start.P.syl) : [];
-    const list = fits.concat(longer);
+  for (const [side, list] of [["Hard", hard], ["Sharp", sharp]]) {
+    if (!list.length) continue;
     list.forEach(i => { if (!order.includes(i.x.label)) order.push(i.x.label); });
-    const divider = longer.length ? `<div class="longer-div">longer words</div>` : "";
-    html += `<div class="line"><div class="side">${side}</div><div class="chips">${fits.map(i => chip(i.x, i.mine)).join("")}${divider}${longer.map(i => chip(i.x, i.mine)).join("")}</div></div>`;
+    html += `<div class="line"><div class="side">${side}</div><div class="chips">${list.map(i => chip(i.x, i.mine)).join("")}</div></div>`;
   }
   if (cut.length < all.length) html += `<div class="empty-group"><button class="selall" data-showall="${gid}">show all ${all.length}</button></div>`;
   return html + "</section>";
@@ -882,9 +877,10 @@ function addHandAddedResults() {
 const addedFor = () => Object.entries(state.added).filter(([k, a]) => a.start === start.label);
 const cleanView = () => el("onlyMine").checked || el("onlyStarred").checked;
 function renderAddedPhrases() {
-  const list = addedFor().filter(([k, a]) => !(view === "unreviewed" && a.cats.length) && !(el("onlyMine").checked && !a.cats.length) && !el("onlyStarred").checked);
+  const list = addedFor().filter(([k, a]) => !(view === "unreviewed" && a.cats.length) && !(view === "nostar" && a.star) && !(el("onlyMine").checked && !a.cats.length) && !(el("onlyStarred").checked && !a.star))
+    .sort((x, y) => ((x[1].star || 9) - (y[1].star || 9)) || x[1].text.localeCompare(y[1].text));
   if (!list.length) return "";
-  const chips = list.map(([k, a]) => `<button class="chip added" data-added="${esc(k)}" title="${esc(a.cats.map(c => CATS.find(x => x.id === c).title).join(" + ") || "idea, not sorted yet")}"><span class="w">${esc(a.text)}</span></button>`).join("");
+  const chips = list.map(([k, a]) => `<button class="chip added" data-added="${esc(k)}" title="${esc(a.cats.map(c => CATS.find(x => x.id === c).title).join(" + ") || "idea, not sorted yet")}"><span class="w">${a.star ? `<span class="star" style="color:${STAR_COLOR[a.star]}">★</span>` : ""}${esc(a.text)}</span></button>`).join("");
   return `<section class="group"><h2><span class="dot" style="background:var(--accent)"></span>Your phrases <span class="count">${list.length}</span><span class="hint">words and phrases not in the list · tap to edit</span></h2><div class="line"><div class="side">Ideas</div><div class="chips">${chips}</div></div></section>`;
 }
 function render() {
@@ -1159,7 +1155,7 @@ async function exportLabels() {
     format: "rhyme-lab-labels", version: 1, exported: stamp, about: ABOUT,
     pairs: Object.entries(state.pairs).map(([k, p]) => ({ words: k.split("|"), categories: p.cats, not_a_rhyme: !!p.no, added_by_hand: !!p.added, date: p.date })),
     words: Object.entries(state.words).map(([w, o]) => ({ word: w, star: o.star || null, hard_sharp: o.hs ? (o.hs === "sharp" ? "Sharp" : "Hard") : null, explore: !!o.bookmark, hidden: !!o.hidden, date: o.date })),
-    added_phrases: Object.values(state.added).map(a => ({ word: a.start, rhyme: a.text, categories: a.cats, date: a.date })),
+    added_phrases: Object.values(state.added).map(a => ({ word: a.start, rhyme: a.text, categories: a.cats, star: a.star || null, date: a.date })),
     vowel_mouth: Object.entries(state.mouth).map(([v, m]) => ({ vowel: v, example: S.vowelExamples[v], mouth: m.mouth, date: m.date })),
   };
   const text = JSON.stringify(out, null, 2);
@@ -1193,7 +1189,7 @@ function importLabels(file) {
     confirmBox(`Replace your current labels with this file? It has ${(d.pairs || []).length} pairs and ${(d.words || []).length} words, exported ${esc((d.exported || "").slice(0, 10))}.`, "Replace", () => {
       const ns = emptyState();
       (d.pairs || []).forEach(p => { if (p.words && p.words.length === 2) ns.pairs[pk(p.words[0], p.words[1])] = { cats: p.categories || [], no: !!p.not_a_rhyme, ...(p.added_by_hand ? { added: true } : {}), date: p.date }; });
-      (d.added_phrases || []).forEach(a => { if (a.word && a.rhyme) ns.added[a.word + "|" + a.rhyme] = { start: a.word, text: a.rhyme, cats: a.categories || [], date: a.date }; });
+      (d.added_phrases || []).forEach(a => { if (a.word && a.rhyme) ns.added[a.word + "|" + a.rhyme] = { start: a.word, text: a.rhyme, cats: a.categories || [], ...(a.star ? { star: a.star } : {}), date: a.date }; });
       (d.words || []).forEach(o => { ns.words[o.word] = { star: o.star || 0, hs: o.hard_sharp ? o.hard_sharp.toLowerCase() : null, bookmark: !!o.explore, hidden: !!o.hidden, date: o.date }; });
       (d.vowel_mouth || []).forEach(m => { ns.mouth[m.vowel] = { mouth: m.mouth, date: m.date }; });
       mutate(() => { state = ns; }, false);
@@ -1208,6 +1204,7 @@ function importLabels(file) {
 
 // ---- Quick add ----
 let qaCats = new Set();     // stays chosen between ideas
+let qaStar = 0;             // also stays chosen between ideas
 let qaEditKey = null;       // editing an added phrase
 function openQuickAdd(editKey) {
   if (!start) return;
@@ -1219,7 +1216,7 @@ function openQuickAdd(editKey) {
   el("qaAdd").textContent = a ? "Done" : "Add";
   el("qaDelete").hidden = !a;
   el("qaHint").hidden = !!a;
-  if (a) qaCats = new Set(a.cats);
+  if (a) { qaCats = new Set(a.cats); qaStar = a.star || 0; }
   markQaCats();
   el("qa").hidden = false;
   el("fab").hidden = true;
@@ -1230,27 +1227,33 @@ function openQuickAdd(editKey) {
 function closeQuickAdd() {
   el("qa").hidden = true;
   document.body.classList.remove("qa-open");
-  if (qaEditKey) qaCats = new Set();
+  if (qaEditKey) { qaCats = new Set(); qaStar = 0; }
   qaEditKey = null;
   el("fab").hidden = !start;
   el("qaInput").blur();
 }
-function markQaCats() { document.querySelectorAll("[data-qcat]").forEach(b => b.setAttribute("aria-pressed", qaCats.has(b.dataset.qcat))); }
+function markQaCats() {
+  document.querySelectorAll("[data-qcat]").forEach(b => b.setAttribute("aria-pressed", qaCats.has(b.dataset.qcat)));
+  document.querySelectorAll("[data-qstar]").forEach(b => b.setAttribute("aria-pressed", +b.dataset.qstar === qaStar));
+}
 function quickAdd() {
   if (!isReady()) return toast("Still loading your labels…");
   if (qaEditKey) return closeQuickAdd();
   const text = el("qaInput").value.trim().toLowerCase().replace(/\s+/g, " ");
   if (!text) return;
   const cats = [...qaCats];
-  const catText = cats.length ? cats.map(c => CATS.find(x => x.id === c).title).join(" + ") : "idea";
+  const catText = (cats.length ? cats.map(c => CATS.find(x => x.id === c).title).join(" + ") : "idea") + (qaStar ? `, ★${qaStar}` : "");
   if (text === start.word) return toast("That is the word itself");
   const known = BY[text] || (BY_WORD[text] || [])[0];
   if (known) {
-    mutate(() => setPair(known.label, p => { p.added = true; cats.forEach(c => { if (!p.cats.includes(c)) p.cats.push(c); }); if (cats.length) p.no = false; }), false);
+    mutate(() => {
+      setPair(known.label, p => { p.added = true; cats.forEach(c => { if (!p.cats.includes(c)) p.cats.push(c); }); if (cats.length) p.no = false; });
+      if (qaStar) setWord(known.label, o => { o.star = qaStar; });
+    }, false);
   } else {
     const key = start.label + "|" + text;
     if (state.added[key]) return toast(`"${text}" is already added`);
-    mutate(() => { state.added[key] = { start: start.label, text, cats, date: today() }; }, false);
+    mutate(() => { state.added[key] = { start: start.label, text, cats, ...(qaStar ? { star: qaStar } : {}), date: today() }; }, false);
   }
   el("qaInput").value = "";
   el("qaInput").focus();
@@ -1271,6 +1274,13 @@ document.querySelectorAll("[data-qcat]").forEach(b => b.addEventListener("click"
   if (qaCats.has(c)) qaCats.delete(c); else qaCats.add(c);
   markQaCats();
   if (qaEditKey && state.added[qaEditKey]) mutate(() => { state.added[qaEditKey] = { ...state.added[qaEditKey], cats: [...qaCats], date: today() }; }, false);
+  else el("qaInput").focus();
+}));
+document.querySelectorAll("[data-qstar]").forEach(b => b.addEventListener("click", () => {
+  const n = +b.dataset.qstar;
+  qaStar = qaStar === n ? 0 : n;
+  markQaCats();
+  if (qaEditKey && state.added[qaEditKey]) mutate(() => { const a = { ...state.added[qaEditKey], date: today() }; if (qaStar) a.star = qaStar; else delete a.star; state.added[qaEditKey] = a; }, false);
   else el("qaInput").focus();
 }));
 
@@ -1338,7 +1348,7 @@ document.addEventListener("click", e => {
   if (e.target.closest("#moreBtn")) { el("sheet").classList.toggle("more-open"); sizeSheet(); }
   if (e.target.closest("#closeSheet") || e.target.closest("#doneSel")) clearSelection();
 });
-["poolBend", "poolClose", "poolCons", "autoAdvance", "splitLonger", "onlyMine", "onlyStarred"].forEach(id => el(id).addEventListener("change", () => { savePrefs(); render(); }));
+["poolBend", "poolClose", "poolCons", "autoAdvance", "onlyMine", "onlyStarred"].forEach(id => el(id).addEventListener("change", () => { savePrefs(); render(); }));
 el("cleanChip").addEventListener("click", () => { el("onlyMine").checked = false; el("onlyStarred").checked = false; savePrefs(); render(); });
 rarity.addEventListener("input", () => { el("rarityOut").textContent = rarity.value; savePrefs(); render(); });
 el("helpBtn").addEventListener("click", () => { closeDrawer(); el("help").hidden = false; });
@@ -1379,7 +1389,7 @@ rarity.min = 500;
 rarity.max = Math.ceil(MAX_RANK / 100) * 100;
 rarity.value = prefs.rarity || rarity.max;
 el("rarityOut").textContent = rarity.value;
-["poolBend", "poolClose", "poolCons", "splitLonger", "onlyMine", "onlyStarred"].forEach(id => { if (id in prefs) el(id).checked = prefs[id]; });
+["poolBend", "poolClose", "poolCons", "onlyMine", "onlyStarred"].forEach(id => { if (id in prefs) el(id).checked = prefs[id]; });
 el("autoAdvance").checked = !!prefs.autoAdvance;
 if (["all", "unreviewed", "nostar"].includes(prefs.view)) view = prefs.view;
 if (prefs.sort in SORTS) sortMode = prefs.sort;

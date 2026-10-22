@@ -432,10 +432,17 @@ function makeRules(S) {
   const VOW = new Set(S.vowels);
   const pairSet = list => { const s = new Set(); list.forEach(([a, b]) => { s.add(a + "|" + b); s.add(b + "|" + a); }); return s; };
   const twinSet = pairSet(S.twins);
-  const closeSet = pairSet(S.closeVowels);
-  const sameSet = pairSet(S.sameVowels);
-  const sameVowel = (a, b) => a === b || sameSet.has(a + "|" + b);
-  const closeVowel = (a, b) => closeSet.has(a + "|" + b);
+  const closeSet = pairSet(S.closeColours);
+  const colour = v => S.vowelColours[v];
+  const sameVowel = (a, b) => colour(a) === colour(b);
+  const closeVowel = (a, b) => closeSet.has(colour(a) + "|" + colour(b));
+  // inside longer words: the quick "uh" is its own thing, and some colours merge
+  const longColour = (v, st, merge) => {
+    if (v === S.skippable && st === "0") return "weak";
+    const c = colour(v);
+    if (merge) for (const [keep, also] of S.longerSame) if (c === also) return keep;
+    return c;
+  };
   const famOf = {};
   for (const [name, members] of Object.entries(S.families)) members.forEach(m => { famOf[m] = name; });
   const sharpSet = new Set(S.sharpSounds);
@@ -491,15 +498,16 @@ function makeRules(S) {
   }
 
   function classifyLong(A, B) {
-    const ra = A.rhyme, rb = B.rhyme;
-    let i = ra.length - 1, j = rb.length - 1;
-    if (!(sameVowel(ra[i][0], rb[j][0]) || closeVowel(ra[i][0], rb[j][0]))) return [null, null, 0];
+    const merge = A.syl > 1 && B.syl > 1;   // long and short a merge only when both words are longer
+    const ca = A.rhyme.map(([v, st]) => longColour(v, st, merge)), cb = B.rhyme.map(([v, st]) => longColour(v, st, merge));
+    const close2 = (x, y) => closeSet.has(x + "|" + y);
+    let i = ca.length - 1, j = cb.length - 1;
+    if (!(ca[i] === cb[j] || close2(ca[i], cb[j]))) return [null, null, 0];
     let matched = 0, close = 0;
     while (i >= 0 && j >= 0) {
-      const va = ra[i][0], vb = rb[j][0];
-      if (sameVowel(va, vb) || closeVowel(va, vb)) { matched++; if (!sameVowel(va, vb)) close++; i--; j--; }
-      else if (i < ra.length - 1 && va === S.skippable && ra[i][1] === "0") i--;
-      else if (j < rb.length - 1 && vb === S.skippable && rb[j][1] === "0") j--;
+      if (ca[i] === cb[j] || close2(ca[i], cb[j])) { matched++; if (ca[i] !== cb[j]) close++; i--; j--; }
+      else if (i < ca.length - 1 && ca[i] === "weak") i--;
+      else if (j < cb.length - 1 && cb[j] === "weak") j--;
       else break;
     }
     if (eq(A.all, B.all)) return ["twin", "sounds identical (same-sound word)", matched];

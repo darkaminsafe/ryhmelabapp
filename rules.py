@@ -150,20 +150,39 @@ NEAR_ALLOWS_ADDING_TO_OPEN_ENDING = False
 # You chose: an extra R is a Bend candidate (god / guard, god / card).
 EXTRA_SOUNDS_THAT_MAKE_BEND = ["R"]
 
-# CLOSE VOWEL (a suggestion pool): two vowels that sound alike in many
-# accents. A pair shows up here when the vowels are listed together below
-# AND the endings are Twin- or Near-close (god / dog, sheep / ship).
-CLOSE_VOWELS = [
-    ("IY", "IH"),   # need / sit     (sheep / ship)
-    ("UW", "UH"),   # you / book     (pool / pull)
-    ("EH", "AE"),   # bed / cat      (bed / bad)
+# VOWEL COLOURS: how YOU hear the vowels (a Latvian ear: A E I O U, long
+# and short). Rhymes compare COLOURS, not the dictionary's 15 vowels.
+# Two vowels with the same colour count as the same vowel everywhere.
+VOWEL_COLOURS = {
+    "AA": "Ā",   # long open a:  god = "gād", hot, father
+    "AE": "Ā",   #               mad = "mād", cat, happy
+    "AO": "Ā",   #               law, flawed, caught
+    "AH": "A",   # short a:      mud = "mad", cup, sun, money = "manī"
+    "EH": "E",   # bed, dead
+    "ER": "E",   # bird, her
+    "IY": "I",   # key, see, need
+    "IH": "I",   # sit, big
+    "OW": "O",   # go, hope, hold
+    "UW": "U",   # you, blue
+    "UH": "U",   # book, good
+    "AY": "AI",  # glide a > i: life, my, pride
+    "AW": "AU",  # glide a > u: down, now, proud
+    "EY": "EI",  # glide e > i: day, say, pain
+    "OY": "OI",  # glide o > i: boy, voice
+}
+
+# When BOTH words are longer than one syllable, these colours count as the
+# same (money "manī" / happy "hapī"). As soon as one of the two words has
+# one syllable, they stay different (god "gād" / mud "mad" / nomad).
+LONGER_WORDS_SAME_COLOURS = [
+    ("Ā", "A"),
 ]
 
-# SAME VOWEL: vowels the dictionary writes differently but that sound the
-# same to you. They count as ONE vowel everywhere (Twin, Near, Bend).
-# You chose: god / flawed, boss / loss, cot / caught.
-SAME_VOWELS = [
-    ("AA", "AO"),   # god / law
+# CLOSE VOWEL (a suggestion pool): colours that are close but not the same.
+# A pair shows up there when the colours are listed together below AND the
+# endings are Twin- or Near-close (god / mud).
+CLOSE_COLOURS = [
+    ("Ā", "A"),
 ]
 
 # CONSONANT MATCH (a suggestion pool, one-syllable words only): DIFFERENT vowel, but the same
@@ -282,9 +301,12 @@ DROP_WEAK_FORMS = True
 #   - Only the VOWELS count. The consonants between them do not.
 #       remedy / Kennedy / melody / serenity = all 3 syllables match.
 #   - The stress of the other word does not matter: key / monkey / happy.
-#   - A quick, unstressed "uh" in the middle may be skipped:
+#   - Vowels are compared by COLOUR (see VOWEL_COLOURS), and in longer
+#     words long ā and short a count the same (money / happy).
+#   - The quick, unstressed "uh" (le-ga-lly, immu-ni-ty) is NOT a real A.
+#     It only matches another quick "uh", and it may be skipped:
 #       remedy (EH . uh . ee) / belly (EH . ee) = 2 syllables match.
-#   - "Close" vowels (see CLOSE_VOWELS) count as a loose match.
+#   - "Close" colours (see CLOSE_COLOURS) count as a loose match.
 #
 # The page groups rhymes by how many syllables OF THE SEARCHED WORD match
 # (3 matched, 2 matched, 1 matched), each with Twin / Near / Bend:
@@ -383,12 +405,34 @@ def _ending_match(ea, eb):
     return None, None
 
 
+def colour(v):
+    return VOWEL_COLOURS[v]
+
+
 def same_vowel(a, b):
-    return a == b or (a, b) in SAME_VOWELS or (b, a) in SAME_VOWELS
+    """Same colour (one-syllable words)."""
+    return colour(a) == colour(b)
 
 
 def close_vowel(a, b):
-    return (a, b) in CLOSE_VOWELS or (b, a) in CLOSE_VOWELS
+    ca, cb = colour(a), colour(b)
+    return (ca, cb) in CLOSE_COLOURS or (cb, ca) in CLOSE_COLOURS
+
+
+def _long_colour(v, stress, merge):
+    """Colour of a vowel inside a longer word: the quick "uh" is its own thing."""
+    if v == SKIPPABLE_WEAK_VOWEL and stress == "0":
+        return "weak"
+    c = colour(v)
+    if merge:
+        for keep, also in LONGER_WORDS_SAME_COLOURS:
+            if c == also:
+                return keep
+    return c
+
+
+def _long_close(ca, cb):
+    return (ca, cb) in CLOSE_COLOURS or (cb, ca) in CLOSE_COLOURS
 
 
 def compare(sounds_a, sounds_b):
@@ -481,19 +525,21 @@ def classify_long(sounds_a, sounds_b):
     """
     ra, ea = parse_long(sounds_a)
     rb, eb = parse_long(sounds_b)
-    i, j = len(ra) - 1, len(rb) - 1
-    if not (same_vowel(ra[i][0], rb[j][0]) or close_vowel(ra[i][0], rb[j][0])):
+    merge = count_vowels(sounds_a) > 1 and count_vowels(sounds_b) > 1
+    ca = [_long_colour(v, st, merge) for v, st in ra]
+    cb = [_long_colour(v, st, merge) for v, st in rb]
+    i, j = len(ca) - 1, len(cb) - 1
+    if not (ca[i] == cb[j] or _long_close(ca[i], cb[j])):
         return None, None, 0
     matched, close = 0, 0
     while i >= 0 and j >= 0:
-        va, vb = ra[i][0], rb[j][0]
-        if same_vowel(va, vb) or close_vowel(va, vb):
+        if ca[i] == cb[j] or _long_close(ca[i], cb[j]):
             matched += 1
-            close += 0 if same_vowel(va, vb) else 1
+            close += 0 if ca[i] == cb[j] else 1
             i, j = i - 1, j - 1
-        elif i < len(ra) - 1 and ra[i] == (SKIPPABLE_WEAK_VOWEL, "0"):
+        elif i < len(ca) - 1 and ca[i] == "weak":
             i -= 1
-        elif j < len(rb) - 1 and rb[j] == (SKIPPABLE_WEAK_VOWEL, "0"):
+        elif j < len(cb) - 1 and cb[j] == "weak":
             j -= 1
         else:
             break

@@ -139,11 +139,13 @@ SOUND_FAMILIES = {
 # BEND CANDIDATE: same vowel, any other ending. Only a suggestion for you.
 # BEND: starts empty. Only pairs YOU choose (comes in Step 3).
 
-# Rule (c) also applies when one word ends on the vowel and the other
-# has one consonant after it (die / dine, god / ma).
-# Set to True if you want those to be Near.
-# You chose False: they are Bend candidates.
-NEAR_ALLOWS_ADDING_TO_OPEN_ENDING = False
+# OPEN ENDINGS: a word that ends on the vowel (cry, lie, ma) is Near to
+# every word with the same vowel colour plus ANY consonants after it:
+#   cry / crime (+M), line (+N), times (+MZ), grind (+ND), light (+T)
+#   ma / god (+D)
+# You chose True. Set to False to make those Bend candidates instead.
+# (An ending that starts with R stays a Bend candidate, see below.)
+NEAR_ALLOWS_ADDING_TO_OPEN_ENDING = True
 
 # If the one added or dropped sound (rule c) is one of these, the pair is
 # a Bend candidate instead of Near.
@@ -402,6 +404,12 @@ def _ending_match(ea, eb):
             for i in range(len(longer)):
                 if longer[:i] + longer[i + 1:] == shorter and longer[i] not in EXTRA_SOUNDS_THAT_MAKE_BEND:
                     return "Near", "ending %s vs %s, one extra sound %s" % (_show(ea), _show(eb), longer[i])
+
+    # OPEN ENDING: one word ends on the vowel, the other adds any consonants
+    if NEAR_ALLOWS_ADDING_TO_OPEN_ENDING and bool(ea) != bool(eb):
+        added = ea or eb
+        if added[0] not in EXTRA_SOUNDS_THAT_MAKE_BEND:
+            return "Near", "one ends on the vowel, the other adds %s" % " ".join(added)
     return None, None
 
 

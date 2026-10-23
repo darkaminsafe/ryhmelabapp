@@ -486,6 +486,11 @@ function makeRules(S) {
         }
       }
     }
+    // open ending: one word ends on the vowel, the other adds any consonants
+    if (S.nearAllowsOpen && (ea.length === 0) !== (eb.length === 0)) {
+      const added = ea.length ? ea : eb;
+      if (!S.extraBend.includes(added[0])) return ["near", `one ends on the vowel, the other adds ${added.join(" ")}`];
+    }
     return [null, null];
   }
 

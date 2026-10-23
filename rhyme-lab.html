@@ -1107,7 +1107,16 @@ function act(a) {
   if (a.startsWith("star")) {
     const s = +a.slice(4);
     const turnOn = !ts.every(w => word(w).star === s);
-    return mutate(() => ts.forEach(w => setWord(w, o => { o.star = turnOn ? s : 0; })), false);
+    // Giving a star also accepts the computer's guess for words not reviewed yet
+    // (not for "Not a rhyme" pairs, Close vowel suggestions or your own additions).
+    const guessOf = w => { const r = results.find(r => r.x.label === w); return r && ACCEPT_AS[r.code]; };
+    const accept = turnOn ? ts.filter(w => !reviewed(w) && guessOf(w)) : [];
+    mutate(() => ts.forEach(w => {
+      setWord(w, o => { o.star = turnOn ? s : 0; });
+      if (accept.includes(w)) setPair(w, p => { p.cats = [guessOf(w)]; p.no = false; });
+    }), false);
+    if (accept.length) toast(`★${s} added, and ${accept.length > 1 ? accept.length + " guesses" : "the guess"} accepted`);
+    return;
   }
   if (a === "hard" || a === "sharp") return mutate(() => ts.forEach(w => setWord(w, o => { o.hs = (a === "sharp") === BY[w].sharp ? null : a; })), false);
   if (a === "bookmark") {

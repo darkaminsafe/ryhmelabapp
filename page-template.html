@@ -135,6 +135,8 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
 .sel-line { display: flex; align-items: center; gap: 8px; }
 .sel-word { font-family: var(--display); font-size: 2rem; font-weight: 700; line-height: 1.1; display: flex; align-items: center; gap: 8px; overflow-wrap: anywhere; flex: 1; min-width: 0; }
 .sheet-tools { display: none; gap: 6px; }
+.linkline { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; font-size: .82rem; color: var(--muted); }
+.linkbtn { background: var(--raise); border: 1px solid var(--accent); border-radius: 8px; padding: 5px 10px; font-size: .85rem; color: var(--fg); }
 .donebtn { background: var(--accent); color: #121320; border: 0; border-radius: 8px; padding: 6px 14px; font-weight: 700; font-size: .95rem; flex: none; }
 .sheet-tools button { background: var(--raise); border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; font-size: .85rem; color: var(--muted); }
 .facts { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: .92rem; margin: 10px 0 4px; }
@@ -177,6 +179,7 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
 .toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 10px 18px; border-radius: 10px; font-weight: 700; font-size: .98rem; max-width: calc(100% - 32px); z-index: 40; }
 .confirm { position: fixed; left: 50%; top: calc(18px + env(safe-area-inset-top, 0px)); transform: translateX(-50%); background: var(--panel); border: 1px solid var(--accent); border-radius: 12px; padding: 14px 16px; z-index: 41; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; width: max-content; max-width: calc(100% - 32px); }
 .confirm button { background: var(--raise); border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; }
+.linkchoices { display: flex; flex-wrap: wrap; gap: 6px; }
 .confirm .yes { border-color: var(--accent); }
 .help-wrap { position: fixed; inset: 0; background: rgba(8,8,12,.72); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px; }
 .help { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; max-width: 640px; width: 100%; max-height: 90%; overflow: auto; }
@@ -295,6 +298,10 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
       <div class="mini-list" id="exploreList"></div>
     </div>
     <div class="box">
+      <div class="label">Linked clusters</div>
+      <div class="mini-list" id="linkList"></div>
+    </div>
+    <div class="box">
       <div class="label">Hidden words</div>
       <div class="mini-list" id="hiddenList"></div>
     </div>
@@ -410,6 +417,7 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
       <tr><td><span class="kbd">G</span> <span class="kbd">H</span></td><td>Hard / Sharp</td></tr>
       <tr><td><span class="kbd">T</span> <span class="kbd">Y</span> <span class="kbd">U</span></td><td>Mouth: Closed / Slight / Open (changes the whole vowel group)</td></tr>
       <tr><td><span class="kbd">B</span></td><td>Bookmark to Explore</td></tr>
+      <tr><td><span class="kbd">L</span></td><td>Link clusters: one decision for every word of both clusters</td></tr>
       <tr><td><span class="kbd">Q</span> <span class="kbd">E</span></td><td>Up / down (arrow keys work too)</td></tr>
       <tr><td><span class="kbd">Ctrl+Q</span> <span class="kbd">Ctrl+E</span></td><td>Previous / next group</td></tr>
       <tr><td><span class="kbd">X</span></td><td>Clear everything for this word</td></tr>
@@ -464,10 +472,13 @@ function makeRules(S) {
     const i = all.findIndex(x => VOW.has(x));
     const rhyme = vow.slice(main);
     return { all, start: all.slice(0, i), v: rhyme[0][0], end: all.slice(i + 1), syl: vow.length,
+             lastStressed: vow.length ? vow[vow.length - 1][1] !== "0" : false,
              rhyme, ending: all.slice(last + 1), beforeLast: last > 0 ? all[last - 1] : null };
   }
 
-  function endingMatch(ea, eb) {
+  // sa / sb: is that word's last vowel stressed? The open-ending rule needs a stressed end vowel.
+  function endingMatch(ea, eb, sa = true, sb = true) {
+    const openOk = S.nearAllowsOpen && ((!ea.length && sa) || (!eb.length && sb));
     if (eq(ea, eb)) return ea.length ? ["twin", "same ending " + show(ea)] : ["twin", "both end on the vowel"];
     if (ea.length === eb.length) {
       const d = [];
@@ -480,14 +491,14 @@ function makeRules(S) {
     }
     if (Math.abs(ea.length - eb.length) === 1) {
       const [L, Sh] = ea.length > eb.length ? [ea, eb] : [eb, ea];
-      if (Sh.length || S.nearAllowsOpen) {
+      if (Sh.length || openOk) {
         for (let i = 0; i < L.length; i++) {
           if (eq(dropOne(L, i), Sh) && !S.extraBend.includes(L[i])) return ["near", `ending ${show(ea)} vs ${show(eb)}, one extra sound ${L[i]}`];
         }
       }
     }
     // open ending: one word ends on the vowel, the other adds any consonants
-    if (S.nearAllowsOpen && (ea.length === 0) !== (eb.length === 0)) {
+    if (openOk && (ea.length === 0) !== (eb.length === 0)) {
       const added = ea.length ? ea : eb;
       if (!S.extraBend.includes(added[0])) return ["near", `one ends on the vowel, the other adds ${added.join(" ")}`];
     }
@@ -516,7 +527,7 @@ function makeRules(S) {
       else break;
     }
     if (eq(A.all, B.all)) return ["twin", "sounds identical (same-sound word)", matched];
-    const [end, endWhy] = endingMatch(A.ending, B.ending);
+    const [end, endWhy] = endingMatch(A.ending, B.ending, A.lastStressed, B.lastStressed);
     const what = `${matched} syllable${matched === 1 ? "" : "s"} match`;
     if (close === 0) {
       if (end === "twin") return ["twin", `${what}, same end`, matched];
@@ -539,12 +550,12 @@ function makeRules(S) {
   function classifyOne(A, B) {
     if (sameVowel(A.v, B.v)) {
       if (eq(A.all, B.all)) return ["twin", "sounds identical (same-sound word)"];
-      const [c, why] = endingMatch(A.end, B.end);
+      const [c, why] = endingMatch(A.end, B.end, A.lastStressed, B.lastStressed);
       if (c) return [c, `same vowel ${A.v}, ${why}`];
       return ["bendc", `same vowel ${A.v}, different ending (${show(A.end)} vs ${show(B.end)})`];
     }
     if (closeVowel(A.v, B.v)) {
-      const [c, why] = endingMatch(A.end, B.end);
+      const [c, why] = endingMatch(A.end, B.end, A.lastStressed, B.lastStressed);
       if (c) return ["close", `close vowels ${A.v} / ${B.v}, ${why}`];
     }
     const x = extraCount(A.start, B.start), y = extraCount(A.end, B.end);
@@ -558,8 +569,13 @@ function makeRules(S) {
     return [null, null];
   }
 
+  // A word's cluster: the colours of its rhyme part plus its ending ("I + L", "E·ə·I").
+  function clusterOf(P) {
+    const colours = P.rhyme.map(([v, st]) => (v === S.skippable && st === "0" && P.syl > 1 ? "ə" : colour(v)));
+    return colours.join("·") + (P.ending.length ? " + " + P.ending.join(" ") : "");
+  }
   const isSharp = P => P.all.some(x => sharpSet.has(x));
-  return { parse, classify, isSharp, mouthOfVowel };
+  return { parse, classify, isSharp, mouthOfVowel, clusterOf };
 }
 // RULES-END
 
@@ -596,14 +612,14 @@ const clone = o => JSON.parse(JSON.stringify(o));
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 // ---- Your decisions ----
-const emptyState = () => ({ pairs: {}, words: {}, added: {}, mouth: {}, lastExport: null, changedSinceExport: false });
+const emptyState = () => ({ pairs: {}, words: {}, added: {}, links: {}, mouth: {}, lastExport: null, changedSinceExport: false });
 let state = emptyState();
 
 // ---- Saving: Claude storage when the page runs inside Claude, else this browser ----
 const LOCAL_KEY = "rhymeLab.labels.v1";
 const PREFS_KEY = "rhymeLab.prefs.v2";
-const BUCKETS = { pairs: 64, words: 16, added: 8 };   // labels are kept in a fixed number of storage boxes
-const store = { mode: "loading", db: null, dirty: new Set(), inflight: new Set(), timer: null, error: null, waiting: 4, savedAt: {} };
+const BUCKETS = { pairs: 64, words: 16, added: 8, links: 8 };   // labels are kept in a fixed number of storage boxes
+const store = { mode: "loading", db: null, dirty: new Set(), inflight: new Set(), timer: null, error: null, waiting: 5, savedAt: {} };
 const IGNORE_REMOTE_MS = 20000;   // after saving a box, ignore older copies of it coming back for this long
 
 function bucketOf(key, n) {
@@ -621,7 +637,7 @@ function commit(before) {
     try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); store.error = null; }
     catch (e) { store.error = "This browser is not saving your labels. Use Export labels before you close the page."; }
   } else if (store.mode === "claude") {
-    for (const kind of ["pairs", "words", "added"]) changedKeys(before[kind] || {}, state[kind]).forEach(k => store.dirty.add(kind + "/" + bucketOf(k, BUCKETS[kind])));
+    for (const kind of ["pairs", "words", "added", "links"]) changedKeys(before[kind] || {}, state[kind]).forEach(k => store.dirty.add(kind + "/" + bucketOf(k, BUCKETS[kind])));
     if (JSON.stringify(before.mouth) !== JSON.stringify(state.mouth)) store.dirty.add("meta/mouth");
     if (before.lastExport !== state.lastExport || before.changedSinceExport !== state.changedSinceExport) store.dirty.add("meta/info");
     clearTimeout(store.timer);
@@ -681,7 +697,7 @@ function startClaude(db) {
   store.db = db;
   let renderTimer = null;
   const later = () => { clearTimeout(renderTimer); renderTimer = setTimeout(render, 60); };
-  for (const kind of ["pairs", "words", "added", "meta"]) {
+  for (const kind of ["pairs", "words", "added", "links", "meta"]) {
     let first = true;
     db.collection(kind).onSnapshot(snap => {
       snap.docChanges().forEach(ch => applyRemote(kind, ch.doc.id, ch.type === "removed" ? null : ch.doc.data()));
@@ -735,7 +751,20 @@ const pair = w => state.pairs[pk(start.label, w)] || { cats: [], no: false };
 const word = w => state.words[w] || { star: 0, hs: null, bookmark: false, hidden: false };
 const mouthOf = v => state.mouth[v] ? state.mouth[v].mouth : R.mouthOfVowel[v];
 const isSharp = w => { const o = word(w).hs; return o ? o === "sharp" : BY[w].sharp; };
-const reviewed = w => pair(w).cats.length > 0 || pair(w).no;
+// Cluster links: one decision for every word of one cluster with every word of another.
+const clusterOfLabel = w => BY[w].cluster || (BY[w].cluster = R.clusterOf(BY[w].P));
+const linkKey = (a, b) => [a, b].sort().join(" <> ");
+const linkFor = w => (start ? state.links[linkKey(clusterOfLabel(start.label), clusterOfLabel(w))] : null);
+// Your decision for a pair: your own pair choice wins, then a cluster link.
+function decision(w) {
+  const p = pair(w);
+  if (p.cats.length || p.no) return { cats: p.cats, no: !!p.no, via: "pair" };
+  const l = linkFor(w);
+  if (l) return { cats: l.cat === "no" ? [] : [l.cat], no: l.cat === "no", via: "link" };
+  return { cats: [], no: false, via: null };
+}
+const reviewed = w => decision(w).cats.length > 0 || decision(w).no;
+let recentlyAdded = new Set();   // words you just added with + Add stay visible in every view
 
 function setPair(w, fn) {
   const key = pk(start.label, w);
@@ -787,6 +816,7 @@ function search(q, pickLabel) {
   multi.clear();
   current = null;
   expanded = new Set();
+  recentlyAdded = new Set();
   savePrefs();
   render();
   if (!current && order.length && !isPhone()) { current = order[0]; render(); }
@@ -796,9 +826,9 @@ function search(q, pickLabel) {
 const isPhone = () => window.matchMedia("(max-width: 720px)").matches;
 
 function placements(r) {
-  const p = pair(r.x.label);
-  if (p.cats.length) return p.cats.map(c => ({ g: c, mine: true }));
-  if (p.no) return [{ g: "no", mine: true }];
+  const p = pair(r.x.label), d = decision(r.x.label);
+  if (d.cats.length) return d.cats.map(c => ({ g: c, mine: true }));
+  if (d.no) return [{ g: "no", mine: true }];
   if (p.added) return [{ g: "added", mine: true }];
   return [{ g: r.code, mine: false }];
 }
@@ -806,8 +836,8 @@ function passes(r) {
   const x = r.x, o = word(x.label);
   if (o.hidden) return false;
   if (x.rank > +rarity.value) return false;
-  const sticky = multi.size ? multi.has(x.label) : x.label === current;   // selected words stay until you're done
-  if (el("onlyMine").checked && !pair(x.label).cats.length && !sticky) return false;
+  const sticky = (multi.size ? multi.has(x.label) : x.label === current) || recentlyAdded.has(x.label);   // selected / just-added words stay
+  if (el("onlyMine").checked && !decision(x.label).cats.length && !sticky) return false;
   if (el("onlyStarred").checked && !o.star && !sticky) return false;
   if (view === "unreviewed" && reviewed(x.label) && !sticky) return false;
   if (view === "nostar" && o.star && !sticky) return false;
@@ -947,7 +977,14 @@ function render() {
   }
   renderSide();
 }
+function renderLinks() {
+  const name = c => (c === "no" ? "Not a rhyme" : CATS.find(k => k.id === c).title);
+  const ls = Object.entries(state.links);
+  el("linkList").innerHTML = ls.length ? ls.map(([k, l]) => `<button data-unlink="${esc(k)}">${esc(l.clusters[0])} ↔ ${esc(l.clusters[1])} · ${name(l.cat)} <span style="color:var(--faint)">· remove</span></button>`).join("")
+    : `<span class="empty">Select a word and tap 🔗 Link clusters</span>`;
+}
 function renderSide() {
+  renderLinks();
   const ex = Object.keys(state.words).filter(w => state.words[w].bookmark && BY[w]);
   el("exploreList").innerHTML = ex.length ? ex.map(w => `<button data-explore="${esc(w)}">${esc(w)}</button>`).join("") : `<span class="empty">Bookmark a word (Explore) to save it here</span>`;
   const hid = Object.keys(state.words).filter(w => state.words[w].hidden && BY[w]);
@@ -981,9 +1018,13 @@ function renderDetail() {
   const st = o.star ? `<span class="star" style="color:${STAR_COLOR[o.star]}">★</span>` : "";
   const hsLabel = isSharp(x.label) ? "Sharp" : "Hard";
   let verdict;
-  if (p.cats.length) verdict = `Your call: <b>${p.cats.map(c => CATS.find(k => k.id === c).title).join(" + ")}</b>`;
-  else if (p.no) verdict = `Your call: <b>Not a rhyme</b>`;
+  const d = decision(x.label);
+  const catName = c => CATS.find(k => k.id === c).title;
+  if (d.via === "pair") verdict = d.no ? `Your call: <b>Not a rhyme</b>` : `Your call: <b>${d.cats.map(catName).join(" + ")}</b>`;
+  else if (d.via === "link") verdict = `Cluster link: <b>${d.no ? "Not a rhyme" : catName(d.cats[0])}</b>`;
   else verdict = r.code ? `Guess: ${GUESS_NAME[r.code]}` : "Added by you, no category yet";
+  const ca = clusterOfLabel(start.label), cb = clusterOfLabel(x.label);
+  const linkLine = ca === cb ? "" : `<div class="linkline"><span>${esc(cb)} ↔ ${esc(ca)}</span><button class="linkbtn">${linkFor(x.label) ? "Change link" : "🔗 Link clusters"} <span class="kbd">L</span></button></div>`;
   let warn = "";
   if (o.hs && (o.hs === "sharp") !== x.sharp) warn = `<div class="warn">⚠ You set ${hsLabel}, but the sounds say ${x.sharp ? "Sharp" : "Hard"}. Your choice is kept.</div>`;
   box.innerHTML = `
@@ -997,7 +1038,7 @@ function renderDetail() {
       <dt>Syllables</dt><dd>${x.P.syl}</dd>
       <dt>Common rank</dt><dd>${x.rank}</dd>
     </dl>
-    <p class="verdict"><span class="mono">${esc(showSounds(x.sounds))}</span> · ${verdict} · ${hsLabel}<br><span class="why">${esc(r.why)}</span></p>${warn}`;
+    <p class="verdict"><span class="mono">${esc(showSounds(x.sounds))}</span> · ${verdict} · ${hsLabel}<br><span class="why">${esc(r.why)}</span></p>${linkLine}${warn}`;
   markButtons(x);
   sizeSheet();
 }
@@ -1075,6 +1116,7 @@ function afterChange(advance) {
 function act(a) {
   if (!start) return;
   if (!isReady()) return toast("Still loading your labels…");
+  if (a === "link") return askLink();
   if (a === "undo") {
     if (!history.length) return toast("Nothing to undo");
     const before = clone(state);
@@ -1144,6 +1186,33 @@ function confirmBox(html, yesLabel, onYes) {
 }
 function confirmYes() { const f = pending; confirmNo(); if (f) f(); }
 function confirmNo() { pending = null; el("confirm").hidden = true; }
+// Link the searched word's cluster with the selected word's cluster, using that pair's category.
+function askLink() {
+  const ts = targets();
+  if (!ts.length) return toast("Pick a word first");
+  const w = ts[0];
+  const ca = clusterOfLabel(start.label), cb = clusterOfLabel(w);
+  if (ca === cb) return toast("Same cluster: these words are already Twins");
+  const key = linkKey(ca, cb), existing = state.links[key];
+  const p = pair(w), r = results.find(r => r.x.label === w);
+  const cat = p.no ? "no" : (p.cats[0] || (existing && existing.cat) || (r && ACCEPT_AS[r.code]));
+  const name = c => (c === "no" ? "Not a rhyme" : CATS.find(k => k.id === c).title);
+  const examples = c => ENTRIES.filter(e => clusterOfLabel(e.label) === c && !word(e.label).hidden).slice(0, 4).map(e => e.word).join(", ");
+  const choices = ["twin", "near", "bend", "consonant", "no"];
+  const box = el("confirm");
+  box.innerHTML = `<span>Link every <b>${esc(ca)}</b> word (${esc(examples(ca))}…) with every <b>${esc(cb)}</b> word (${esc(examples(cb))}…) as:</span>
+    <span class="linkchoices">${choices.map(c => `<button data-linkcat="${c}" class="${c === cat ? "yes" : ""}">${name(c)}</button>`).join("")}${existing ? `<button data-linkcat="remove">Remove link</button>` : ""}</span>
+    <button id="cNo">Cancel</button>`;
+  box.hidden = false;
+  el("cNo").onclick = confirmNo;
+  box.querySelectorAll("[data-linkcat]").forEach(b => b.onclick = () => {
+    const c = b.dataset.linkcat;
+    confirmNo();
+    mutate(() => { if (c === "remove") delete state.links[key]; else state.links[key] = { clusters: [ca, cb], cat: c, date: today() }; }, false);
+    toast(c === "remove" ? "Link removed" : `Linked: ${ca} ↔ ${cb} = ${name(c)}`);
+  });
+  pending = () => { const y = box.querySelector(".yes"); if (y) y.click(); };
+}
 function askMouth(label, v) {
   const n = ENTRIES.filter(e => e.v === v).length;
   const ex = S.vowelExamples[v];
@@ -1168,6 +1237,7 @@ const ABOUT = {
   mouth: "Mouth comes from the stressed vowel: Open (wide), Slight, Closed (narrow). Listed here only when the songwriter changed a vowel group.",
   explore: "Words bookmarked to study further.",
   hidden: "Words removed from all lists.",
+  cluster_links: "A cluster is a vowel-colour pattern plus an ending (for example 'I + L': real, feel, deal). A link means every word of one cluster rhymes with every word of the other in that category. Single pair choices override links.",
   added_by_hand: "Pairs and phrases the songwriter added personally. Phrases may be several words or longer words that are not in the one-syllable list.",
   syllables: "Rhymes are matched syllable by syllable from the end of the word. Only vowels count; the consonants between them do not.",
 };
@@ -1177,6 +1247,7 @@ async function exportLabels() {
     format: "rhyme-lab-labels", version: 1, exported: stamp, about: ABOUT,
     pairs: Object.entries(state.pairs).map(([k, p]) => ({ words: k.split("|"), categories: p.cats, not_a_rhyme: !!p.no, added_by_hand: !!p.added, date: p.date })),
     words: Object.entries(state.words).map(([w, o]) => ({ word: w, star: o.star || null, hard_sharp: o.hs ? (o.hs === "sharp" ? "Sharp" : "Hard") : null, explore: !!o.bookmark, hidden: !!o.hidden, date: o.date })),
+    cluster_links: Object.values(state.links).map(l => ({ clusters: l.clusters, category: l.cat === "no" ? "not_a_rhyme" : l.cat, date: l.date })),
     added_phrases: Object.values(state.added).map(a => ({ word: a.start, rhyme: a.text, categories: a.cats, star: a.star || null, date: a.date })),
     vowel_mouth: Object.entries(state.mouth).map(([v, m]) => ({ vowel: v, example: S.vowelExamples[v], mouth: m.mouth, date: m.date })),
   };
@@ -1211,6 +1282,7 @@ function importLabels(file) {
     confirmBox(`Replace your current labels with this file? It has ${(d.pairs || []).length} pairs and ${(d.words || []).length} words, exported ${esc((d.exported || "").slice(0, 10))}.`, "Replace", () => {
       const ns = emptyState();
       (d.pairs || []).forEach(p => { if (p.words && p.words.length === 2) ns.pairs[pk(p.words[0], p.words[1])] = { cats: p.categories || [], no: !!p.not_a_rhyme, ...(p.added_by_hand ? { added: true } : {}), date: p.date }; });
+      (d.cluster_links || []).forEach(l => { if (l.clusters && l.clusters.length === 2) ns.links[linkKey(l.clusters[0], l.clusters[1])] = { clusters: l.clusters, cat: l.category === "not_a_rhyme" ? "no" : l.category, date: l.date }; });
       (d.added_phrases || []).forEach(a => { if (a.word && a.rhyme) ns.added[a.word + "|" + a.rhyme] = { start: a.word, text: a.rhyme, cats: a.categories || [], ...(a.star ? { star: a.star } : {}), date: a.date }; });
       (d.words || []).forEach(o => { ns.words[o.word] = { star: o.star || 0, hs: o.hard_sharp ? o.hard_sharp.toLowerCase() : null, bookmark: !!o.explore, hidden: !!o.hidden, date: o.date }; });
       (d.vowel_mouth || []).forEach(m => { ns.mouth[m.vowel] = { mouth: m.mouth, date: m.date }; });
@@ -1269,6 +1341,7 @@ function quickAdd() {
   const known = BY[text] || (BY_WORD[text] || [])[0];
   if (known) {
     mutate(() => {
+      recentlyAdded.add(known.label);
       setPair(known.label, p => { p.added = true; cats.forEach(c => { if (!p.cats.includes(c)) p.cats.push(c); }); if (cats.length) p.no = false; });
       if (qaStar) setWord(known.label, o => { o.star = qaStar; });
     }, false);
@@ -1361,6 +1434,9 @@ document.addEventListener("click", e => {
   if (ex) search(BY[ex.dataset.explore].word, ex.dataset.explore);
   const uh = e.target.closest("[data-unhide]");
   if (uh) { if (!isReady()) return; mutate(() => setWord(uh.dataset.unhide, o => { o.hidden = false; }), false); toast(`${uh.dataset.unhide} is back`); }
+  if (e.target.closest(".linkbtn")) act("link");
+  const ul = e.target.closest("[data-unlink]");
+  if (ul && isReady()) { const k = ul.dataset.unlink; mutate(() => { delete state.links[k]; }, false); toast("Link removed. Undo brings it back"); }
   const pr = e.target.closest("[data-pron]");
   if (pr) search(start.word, pr.dataset.pron);
   const sh = e.target.closest("[data-showall]");
@@ -1377,7 +1453,7 @@ el("helpBtn").addEventListener("click", () => { closeDrawer(); el("help").hidden
 el("help").addEventListener("click", e => { if (e.target.id === "help") e.currentTarget.hidden = true; });
 window.addEventListener("resize", sizeSheet);
 
-const KEYMAP = { "1": "star1", "2": "star2", "3": "star3", "4": "hide", a: "twin", s: "near", d: "bend", c: "consonant", n: "no", g: "hard", h: "sharp", t: "closed", y: "slight", u: "open", b: "bookmark", x: "clear", z: "undo" };
+const KEYMAP = { "1": "star1", "2": "star2", "3": "star3", "4": "hide", a: "twin", s: "near", d: "bend", c: "consonant", n: "no", g: "hard", h: "sharp", t: "closed", y: "slight", u: "open", b: "bookmark", x: "clear", z: "undo", l: "link" };
 document.addEventListener("keydown", e => {
   const help = el("help");
   if (!help.hidden) { if (e.key === "Escape" || e.key === "?") { help.hidden = true; e.preventDefault(); } return; }

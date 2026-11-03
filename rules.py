@@ -145,6 +145,9 @@ SOUND_FAMILIES = {
 #   ma / god (+D)
 # You chose True. Set to False to make those Bend candidates instead.
 # (An ending that starts with R stays a Bend candidate, see below.)
+# This only counts when the end vowel is STRESSED (cry, me, go, day). A weak,
+# unstressed ending like the "-y" in happy, grumpy, family or money does not:
+# happy / real is a Bend candidate, not Near.
 NEAR_ALLOWS_ADDING_TO_OPEN_ENDING = True
 
 # If the one added or dropped sound (rule c) is one of these, the pair is
@@ -376,11 +379,22 @@ def _show(ending):
     return " ".join(ending) if ending else "(vowel)"
 
 
-def _ending_match(ea, eb):
+def last_vowel_stressed(sounds):
+    """True if the word's last vowel is stressed (cry, me, go), False for a weak end (happy)."""
+    for s in reversed(sounds):
+        if s.rstrip("012") in VOWELS:
+            return s[-1] in "12"
+    return False
+
+
+def _ending_match(ea, eb, stressed_a=True, stressed_b=True):
     """
     Compare two endings (the sounds after the vowel).
     Returns ("Twin", reason), ("Near", reason) or (None, None).
+    stressed_a / stressed_b: is that word's last vowel stressed? The open-ending
+    rule only counts for a stressed end vowel (cry, me), not a weak one (happy).
     """
+    open_ok = NEAR_ALLOWS_ADDING_TO_OPEN_ENDING and ((not ea and stressed_a) or (not eb and stressed_b))
     if ea == eb:
         if not ea:
             return "Twin", "both end on the vowel"
@@ -400,13 +414,13 @@ def _ending_match(ea, eb):
     # NEAR (c): one sound added or dropped
     if abs(len(ea) - len(eb)) == 1:
         longer, shorter = (ea, eb) if len(ea) > len(eb) else (eb, ea)
-        if shorter or NEAR_ALLOWS_ADDING_TO_OPEN_ENDING:
+        if shorter or open_ok:
             for i in range(len(longer)):
                 if longer[:i] + longer[i + 1:] == shorter and longer[i] not in EXTRA_SOUNDS_THAT_MAKE_BEND:
                     return "Near", "ending %s vs %s, one extra sound %s" % (_show(ea), _show(eb), longer[i])
 
     # OPEN ENDING: one word ends on the vowel, the other adds any consonants
-    if NEAR_ALLOWS_ADDING_TO_OPEN_ENDING and bool(ea) != bool(eb):
+    if open_ok and bool(ea) != bool(eb):
         added = ea or eb
         if added[0] not in EXTRA_SOUNDS_THAT_MAKE_BEND:
             return "Near", "one ends on the vowel, the other adds %s" % " ".join(added)
@@ -455,7 +469,7 @@ def compare(sounds_a, sounds_b):
         return None, "different vowel"
     if ea == eb and plain(sounds_a) == plain(sounds_b):
         return "Twin", "sounds identical (same-sound word)"
-    cat, why = _ending_match(ea, eb)
+    cat, why = _ending_match(ea, eb, last_vowel_stressed(sounds_a), last_vowel_stressed(sounds_b))
     if cat:
         return cat, "same vowel %s, %s" % (va, why)
     return "Bend candidate", "same vowel %s, different ending (%s vs %s)" % (va, _show(ea), _show(eb))
@@ -490,7 +504,7 @@ def classify(sounds_a, sounds_b):
         return {"Twin": "twin", "Near": "near", "Bend candidate": "bendc"}[cat], why
 
     if close_vowel(va, vb):
-        cat, why = _ending_match(ea, eb)
+        cat, why = _ending_match(ea, eb, last_vowel_stressed(sounds_a), last_vowel_stressed(sounds_b))
         if cat:
             return "close", "close vowels %s / %s, %s" % (va, vb, why)
 
@@ -551,7 +565,7 @@ def classify_long(sounds_a, sounds_b):
             j -= 1
         else:
             break
-    end, end_why = _ending_match(ea, eb)
+    end, end_why = _ending_match(ea, eb, ra[-1][1] in "12", rb[-1][1] in "12")
     if plain(sounds_a) == plain(sounds_b):
         return "twin", "sounds identical (same-sound word)", matched
     what = "%d syllable%s match" % (matched, "" if matched == 1 else "s")

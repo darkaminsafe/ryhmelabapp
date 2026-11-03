@@ -155,6 +155,8 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
 .qa-stars { grid-template-columns: repeat(3, 1fr); }
 .qa-row { display: flex; gap: 8px; align-items: center; }
 .qa-row .donebtn { padding: 10px 22px; font-size: 1rem; }
+.qa-recent { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: .9rem; color: var(--muted); }
+.qa-recent button { background: var(--raise); border: 1px solid var(--line); border-radius: 99px; padding: 3px 10px; color: var(--fg); font-size: .92rem; }
 .qa-hint { margin: 0; color: var(--faint); font-size: .82rem; }
 .chip.added { border-style: dotted; border-color: var(--accent); background: transparent; }
 .chip.added .w { font-weight: 400; font-style: italic; }
@@ -371,7 +373,7 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
 <button class="fab" id="fab" hidden>+ Add</button>
 <div class="qa" id="qa" hidden>
   <div class="qa-head"><b id="qaTitle">Add a rhyme</b><button class="ghost" id="qaClose">Close</button></div>
-  <input id="qaInput" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="done" placeholder="Type a word or phrase">
+  <input id="qaInput" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="done" placeholder="Type a word or phrase">
   <div class="qa-cats">
     <button data-qcat="twin" style="color:var(--twin)">Twin</button>
     <button data-qcat="near" style="color:var(--near)">Near</button>
@@ -384,6 +386,7 @@ h3.level .count { font-family: var(--body); font-weight: 400; font-size: .9rem; 
     <button data-qstar="3"><span data-star="3">★ P3</span></button>
   </div>
   <div class="qa-row"><button class="donebtn" id="qaAdd">Add</button><button class="ghost" id="qaDelete" style="color:#ff8c8c" hidden>Delete</button></div>
+  <div class="qa-recent" id="qaRecent" hidden></div>
   <p class="qa-hint" id="qaHint">Enter adds it and keeps this box open for your next idea. No category = an idea to sort later.</p>
 </div>
 <div class="toast" id="toast" hidden></div>
@@ -1282,6 +1285,7 @@ function importLabels(file) {
 // ---- Quick add ----
 let qaCats = new Set();     // stays chosen between ideas
 let qaStar = 0;             // also stays chosen between ideas
+let qaRecent = [];          // what this box added, so typos and autocorrect are easy to spot and undo
 let qaEditKey = null;       // editing an added phrase
 function openQuickAdd(editKey) {
   if (!start) return;
@@ -1294,7 +1298,9 @@ function openQuickAdd(editKey) {
   el("qaDelete").hidden = !a;
   el("qaHint").hidden = !!a;
   if (a) { qaCats = new Set(a.cats); qaStar = a.star || 0; }
+  else qaRecent = [];
   markQaCats();
+  renderQaRecent();
   el("qa").hidden = false;
   el("fab").hidden = true;
   document.body.classList.add("qa-open");
@@ -1309,6 +1315,26 @@ function closeQuickAdd() {
   el("fab").hidden = !start;
   el("qaInput").blur();
 }
+function renderQaRecent() {
+  const box = el("qaRecent");
+  qaRecent = qaRecent.slice(0, 6);
+  box.hidden = !qaRecent.length || !!qaEditKey;
+  box.innerHTML = qaRecent.length ? `Just added: ${qaRecent.map((r, i) => `<button data-qundo="${i}" title="Remove">${esc(r.text)} ✕</button>`).join("")}` : "";
+}
+// ✕ on the newest addition restores the labels from just before it was added.
+el("qaRecent").addEventListener("click", e => {
+  const b = e.target.closest("[data-qundo]"); if (!b) return;
+  const i = +b.dataset.qundo, item = qaRecent[i];
+  if (i !== 0) return toast(`Remove "${qaRecent[0].text}" first (newest first)`);
+  const before = clone(state);
+  state = item.undo;
+  history.push(before);
+  commit(before);
+  qaRecent.shift();
+  renderQaRecent();
+  toast(`Removed "${item.text}"`);
+  render();
+});
 function markQaCats() {
   document.querySelectorAll("[data-qcat]").forEach(b => b.setAttribute("aria-pressed", qaCats.has(b.dataset.qcat)));
   document.querySelectorAll("[data-qstar]").forEach(b => b.setAttribute("aria-pressed", +b.dataset.qstar === qaStar));
@@ -1323,6 +1349,7 @@ function quickAdd() {
   if (text === start.word) return toast("That is the word itself");
   const known = BY[text] || (BY_WORD[text] || [])[0];
   if (known) {
+    qaRecent.unshift({ text, undo: clone(state) });
     mutate(() => {
       recentlyAdded.add(known.label);
       setPair(known.label, p => { p.added = true; cats.forEach(c => { if (!p.cats.includes(c)) p.cats.push(c); }); if (cats.length) p.no = false; });
@@ -1331,10 +1358,12 @@ function quickAdd() {
   } else {
     const key = start.label + "|" + text;
     if (state.added[key]) return toast(`"${text}" is already added`);
+    qaRecent.unshift({ text, undo: clone(state) });
     mutate(() => { state.added[key] = { start: start.label, text, cats, ...(qaStar ? { star: qaStar } : {}), date: today() }; }, false);
   }
   el("qaInput").value = "";
   el("qaInput").focus();
+  renderQaRecent();
   toast(`Added "${text}" (${catText})`);
 }
 el("fab").addEventListener("click", () => openQuickAdd());

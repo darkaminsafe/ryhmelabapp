@@ -906,11 +906,14 @@ function addHandAddedResults() {
 const addedFor = () => Object.entries(state.added).filter(([k, a]) => a.start === start.label);
 const cleanView = () => el("onlyMine").checked || el("onlyStarred").checked;
 function renderAddedPhrases() {
-  const list = addedFor().filter(([k, a]) => !(view === "unreviewed" && a.cats.length) && !(view === "nostar" && a.star) && !(el("onlyMine").checked && !a.cats.length) && !(el("onlyStarred").checked && !a.star))
+  // Your own phrases are always yours, so "Only my approved words" keeps them; the star view still filters.
+  const list = addedFor().filter(([k, a]) => !(view === "nostar" && a.star) && !(el("onlyStarred").checked && !a.star))
     .sort((x, y) => ((x[1].star || 9) - (y[1].star || 9)) || x[1].text.localeCompare(y[1].text));
   if (!list.length) return "";
-  const chips = list.map(([k, a]) => `<button class="chip added" data-added="${esc(k)}" title="${esc(a.cats.map(c => CATS.find(x => x.id === c).title).join(" + ") || "idea, not sorted yet")}"><span class="w">${a.star ? `<span class="star" style="color:${STAR_COLOR[a.star]}">★</span>` : ""}${esc(a.text)}</span></button>`).join("");
-  return `<section class="group"><h2><span class="dot" style="background:var(--accent)"></span>Your phrases <span class="count">${list.length}</span><span class="hint">words and phrases not in the list · tap to edit</span></h2><div class="line"><div class="side">Ideas</div><div class="chips">${chips}</div></div></section>`;
+  const chip = ([k, a]) => `<button class="chip added" data-added="${esc(k)}" title="tap to edit"><span class="w">${a.star ? `<span class="star" style="color:${STAR_COLOR[a.star]}">★</span>` : ""}${esc(a.text)}</span></button>`;
+  const lines = [...CATS.map(c => [c.title, list.filter(([k, a]) => a.cats.includes(c.id))]), ["Ideas", list.filter(([k, a]) => !a.cats.length)]];
+  return `<section class="group"><h2><span class="dot" style="background:var(--accent)"></span>Your phrases <span class="count">${list.length}</span><span class="hint">your own words and phrases · tap to edit</span></h2>`
+    + lines.filter(([t, l]) => l.length).map(([t, l]) => `<div class="line"><div class="side">${t}</div><div class="chips">${l.map(chip).join("")}</div></div>`).join("") + `</section>`;
 }
 function render() {
   order = []; groupStarts = []; groupMembers = {};
@@ -927,6 +930,10 @@ function render() {
       }
     }
     let html = "";
+    if (filters.cat === "any") {   // your own additions first, so they are never buried under suggestions
+      html += renderAddedPhrases();
+      if ((buckets.added || []).length) html += renderGroup("added", "Added by you", "var(--accent)", "no category yet", buckets.added, false);
+    }
     for (let L = n; L >= 1; L--) {
       if (n > 1) {
         if (cleanView() && !Object.keys(buckets).some(k => k.endsWith("@" + L))) continue;
@@ -949,8 +956,6 @@ function render() {
       }
     }
     if (filters.cat === "any") {
-      if ((buckets.added || []).length) html += renderGroup("added", "Added by you", "var(--accent)", "no category yet", buckets.added, false);
-      html += renderAddedPhrases();
       if ((buckets.no || []).length) html += renderGroup("no", "Not a rhyme", "var(--no)", "you rejected these", buckets.no, true);
     }
     if (cleanView() && !order.length && !html.includes('data-added')) html = `<p class="notfound">Nothing ${el("onlyStarred").checked ? "starred" : "approved"} yet for "${esc(start.word)}". Switch the clean view off to see all suggestions.</p>`;
